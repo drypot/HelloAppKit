@@ -7,6 +7,7 @@
 
 import AppKit
 
+@MainActor
 func addStackView(to parentView: NSView, addSubviews: (NSStackView) -> Void) {
     let stackView = NSStackView()
     stackView.translatesAutoresizingMaskIntoConstraints = false

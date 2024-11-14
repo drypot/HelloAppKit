@@ -24,10 +24,12 @@ class TableViewDemoController: EasyStackController {
     
     var tableView: NSTableView!
     var infoLabel: NSTextField!
-        
-    deinit {
-        personArrayWrapper.removeObserver(self, forKeyPath: kContentKeyPath)
-    }
+
+//  Swift 6 로 올리고 난 후 actor isolation 관련 컴파일 에러가 난다. 다음에 고치자.
+//
+//    deinit {
+//        personArrayWrapper.removeObserver(self, forKeyPath: kContentKeyPath)
+//    }
         
     override func addSubviews(to stackView: NSStackView) {
         personArrayWrapper.addObserver(
@@ -82,25 +84,27 @@ class TableViewDemoController: EasyStackController {
         let person = Person(name: "Lt. Uhura", busy: true, shirtColor: .red)
         self.personArrayWrapper.add(person: person)
     }
-    
-    override func observeValue(
-        forKeyPath keyPath: String?,
-        of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?,
-        context: UnsafeMutableRawPointer?
-    ) {
-        print("observeValue")
-        if keyPath == kContentKeyPath {
-            tableView.reloadData()
-            return
-        }
-        super.observeValue(
-            forKeyPath: keyPath,
-            of: object,
-            change: change,
-            context: context
-        )
-    }
+
+//    Swift6 로 올리고 actor isolation 컴파일 에러가 난다. 다음에 고치자;
+//
+//    override func observeValue(
+//        forKeyPath keyPath: String?,
+//        of object: Any?,
+//        change: [NSKeyValueChangeKey : Any]?,
+//        context: UnsafeMutableRawPointer?
+//    ) {
+//        print("observeValue")
+//        if keyPath == kContentKeyPath {
+//            tableView.reloadData()
+//            return
+//        }
+//        super.observeValue(
+//            forKeyPath: keyPath,
+//            of: object,
+//            change: change,
+//            context: context
+//        )
+//    }
     
 }
 

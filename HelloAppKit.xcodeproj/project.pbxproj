@@ -226,7 +226,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.drypot.HelloAppKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloAppKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HelloAppKit";
 			};
 			name = Debug;
@@ -244,7 +244,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.drypot.HelloAppKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloAppKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HelloAppKit";
 			};
 			name = Dev;
@@ -262,7 +262,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.drypot.HelloAppKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HelloAppKit.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/HelloAppKit";
 			};
 			name = Release;
@@ -356,7 +356,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.drypot.HelloAppKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Dev;
 		};
@@ -506,7 +506,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.drypot.HelloAppKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -534,7 +534,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.drypot.HelloAppKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};

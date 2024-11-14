@@ -10,6 +10,7 @@ import AppKit
 // 사용하는 쪽에선 SubRunner 오브젝트 생성 후, run() 실행한 다음, 리테인하지 않고 버린다.
 // WindowController 등 리테인이 필요한 오브젝트들은 스스로 문제를 해결해야 한다.
 
+@MainActor
 class SubRunner: NSObject {
 
     static let moduleName: String = Bundle.main.infoDictionary!["CFBundleName"] as! String

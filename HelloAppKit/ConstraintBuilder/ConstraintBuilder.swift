@@ -6,6 +6,7 @@
 
 import Cocoa
 
+@MainActor
 class ConstraintBuilder {
     
     private var constraints: [NSLayoutConstraint] = []

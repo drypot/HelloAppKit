@@ -7,6 +7,7 @@
 
 import AppKit
 
+@MainActor
 struct WindowBuilder {
     
     private static var windows = [NSWindow]()
