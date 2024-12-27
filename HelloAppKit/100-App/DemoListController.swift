@@ -42,9 +42,7 @@ class DemoListController: NSViewController {
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
         ])
     }
-    
-    
-    
+
     private func addSubviews(to stackView: NSStackView) {
         var constraints: [NSLayoutConstraint] = []
 
@@ -92,8 +90,6 @@ class DemoListController: NSViewController {
         NSLayoutConstraint.activate(constraints)
     }
         
-    
-    
     @objc func buttonClicked(_ sender: NSButton) {
         let subRunnerType = subRunnerTypes[sender.title]!
         subRunnerType.init().run()

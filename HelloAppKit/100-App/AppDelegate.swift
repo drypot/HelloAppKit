@@ -9,7 +9,7 @@ import Cocoa
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+
     func applicationWillFinishLaunching(_ notification: Notification) {
         print("AppDelegate applicationWillFinishLaunching")
 #if DEV
@@ -21,7 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         print("AppDelegate applicationDidFinishLaunching")
-        DemoListRunner().run()
+        //DemoListRunner().run()
+        DemoNavigatorLauncher().run()
    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
