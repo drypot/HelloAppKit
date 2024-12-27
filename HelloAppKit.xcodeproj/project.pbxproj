@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 74;
+	objectVersion = 76;
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
@@ -27,7 +27,7 @@
 		001132002C999F2E0099CB9B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				/Localized/Main.storyboard,
+				"/Localized/100-App/Main.storyboard",
 			);
 			target = 00F8324B2C7DEDE400742EF4 /* HelloAppKit */;
 		};
@@ -38,7 +38,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 00F8324A2C7DEDE400742EF4 /* Resources */;
 			membershipExceptions = (
-				Base.lproj/Main.storyboard,
+				"100-App/Base.lproj/Main.storyboard",
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
