@@ -10,6 +10,7 @@ import Cocoa
 @main @MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    let windowFrameKey = "MainWindowFrame"
     var window: NSWindow!
 
     func applicationWillFinishLaunching(_ notification: Notification) {
@@ -38,11 +39,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.contentViewController = NavigatorController()
         window.layoutIfNeeded()
         window.center()
+        restoreWindowPosition()
         window.makeKeyAndOrderFront(nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         print("ApplicationWillTerminate")
+        saveWindowPosition()
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
@@ -51,6 +54,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
+    }
+
+    private func saveWindowPosition() {
+        let frameString = NSStringFromRect(window.frame)
+        UserDefaults.standard.set(frameString, forKey: windowFrameKey)
+    }
+
+    private func restoreWindowPosition() {
+        if let frameString = UserDefaults.standard.string(forKey: windowFrameKey) {
+            let frame = NSRectFromString(frameString)
+            window.setFrame(frame, display: true)
+        }
     }
 
 }

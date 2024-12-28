@@ -91,14 +91,14 @@ class NavigatorController: NSSplitViewController {
         do {
             sectionListController.navigatorController = self
             let splitViewItem = NSSplitViewItem(sidebarWithViewController: sectionListController)
-            splitViewItem.titlebarSeparatorStyle = .line
+            splitViewItem.canCollapse = false
             addSplitViewItem(splitViewItem)
         }
 
         do {
             subSectionListController.navigatorController = self
             let splitViewItem = NSSplitViewItem(sidebarWithViewController: subSectionListController)
-            splitViewItem.titlebarSeparatorStyle = .line
+            splitViewItem.canCollapse = false
             addSplitViewItem(splitViewItem)
         }
 
@@ -107,6 +107,10 @@ class NavigatorController: NSSplitViewController {
             let splitViewItem = NSSplitViewItem(viewController: contentController)
             addSplitViewItem(splitViewItem)
         }
+
+        NSLayoutConstraint.activate([
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+        ])
     }
 
     override func viewWillAppear() {
