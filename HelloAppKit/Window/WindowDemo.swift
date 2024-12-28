@@ -21,6 +21,19 @@ class WindowDemoController: NSViewController {
         stackView.alignment = .leading
         view.addSubview(stackView)
 
+        addStackItems(stackView)
+
+        let padding = 20.0
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            //stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+        ])
+    }
+
+    func addStackItems(_ stackView: NSStackView) {
         do {
             let button = NSButton(title: "Open Window", target: self, action: #selector(openWindow))
             stackView.addArrangedSubview(button)
@@ -35,15 +48,6 @@ class WindowDemoController: NSViewController {
             let button = NSButton(title: "Test WindowBuilder showAtAbsoluteCenter", target: self, action: #selector(testWindowBuilderShowAtAbsoluteCenter))
             stackView.addArrangedSubview(button)
         }
-
-        let padding = 20.0
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-//            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-//            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-        ])
     }
 
     @objc func openWindow() {

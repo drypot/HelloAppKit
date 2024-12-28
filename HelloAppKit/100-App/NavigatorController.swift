@@ -30,7 +30,6 @@ class NavigatorController: NSSplitViewController {
         ]),
         DemoSection(label: "Stack", demoList: [
             Demo(label: "StackView", controllerType: StackViewDemoController.self),
-            Demo(label: "EasyStackController", controllerType: EasyStackControllerDemoController.self),
         ]),
         DemoSection(label: "View", demoList: [
             Demo(label: "View", controllerType: ViewDemoController.self),
@@ -145,11 +144,11 @@ class NavigatorController: NSSplitViewController {
             view.addSubview(scrollView)
 
             NSLayoutConstraint.activate([
-                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
                 scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-                scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
             ])
         }
 
@@ -174,7 +173,7 @@ class NavigatorController: NSSplitViewController {
             NSLayoutConstraint.activate([
                 textField.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 10),
                 textField.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -10),
-                textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
+                textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
             ])
 
             return cell
@@ -214,11 +213,11 @@ class NavigatorController: NSSplitViewController {
             view.addSubview(scrollView)
 
             NSLayoutConstraint.activate([
-                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
                 scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-                scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
             ])
         }
 
@@ -254,7 +253,7 @@ class NavigatorController: NSSplitViewController {
             NSLayoutConstraint.activate([
                 textField.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 10),
                 textField.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -10),
-                textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
+                textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
             ])
 
             return cell
@@ -287,10 +286,10 @@ class NavigatorController: NSSplitViewController {
             view.subviews = [subview]
 
             NSLayoutConstraint.activate([
-                subview.topAnchor.constraint(equalTo: view.topAnchor),
-                subview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 subview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 subview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                subview.topAnchor.constraint(equalTo: view.topAnchor),
+                subview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
         }
     }

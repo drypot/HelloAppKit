@@ -55,16 +55,24 @@ class CustomCompositeView: NSView {
     }
 }
 
-class CustomCompositeViewDemoController: EasyStackController {
+class CustomCompositeViewDemoController: NSViewController {
 
-    override func addStckItems(_ stackView: NSStackView) {
-        stackView.distribution = .fillEqually
+    override func loadView() {
+        view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
 
-        let customView = CustomCompositeView()
-        stackView.addArrangedSubview(customView)
+        let childView = CustomCompositeView()
+        childView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(childView)
 
+        let padding = 20.0
         NSLayoutConstraint.activate([
-            customView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+            childView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            childView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            childView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            childView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            childView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            childView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
 

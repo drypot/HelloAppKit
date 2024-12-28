@@ -23,20 +23,21 @@ class SubRunnerDemoController: NSViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         let stackView = NSStackView()
-        stackView.orientation = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.orientation = .vertical
+        stackView.alignment = .leading
         view.addSubview(stackView)
         
         addStackItems(stackView)
 
         let padding: CGFloat = 20.0
         NSLayoutConstraint.activate([
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+//            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+//            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
+//            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
         ])
     }
 

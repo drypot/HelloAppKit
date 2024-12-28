@@ -12,21 +12,28 @@ import AppKit
 class TextViewDemoRunner: SubRunner {
 }
 
-class TextViewDemoController: EasyStackController {
+class TextViewDemoController: NSViewController {
 
-    override func addStckItems(_ stackView: NSStackView) {
+    override func loadView() {
+        view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackView = NSStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
         stackView.distribution = .fillEqually
-        
+        stackView.alignment = .leading
+        view.addSubview(stackView)
+
         do {
             let textView = NSTextView()
             textView.string = "Hello, World!"
             textView.font = NSFont(name: "Helvetica", size: 24.0)
-            
+
             textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 600).isActive = true
             stackView.addArrangedSubview(textView)
         }
-        
+
         do {
             let str1 = NSMutableAttributedString(string: "Hello attributions!\n")
             str1.addAttribute(.foregroundColor, value: NSColor.brown, range: NSRange(location: 6, length: 12))
@@ -38,11 +45,11 @@ class TextViewDemoController: EasyStackController {
             ]
             let str2 = NSMutableAttributedString(string: "Great to be here\n", attributes: attributes)
             str1.append(str2)
-            
+
             let linkAttributes: [NSAttributedString.Key: Any] = [.link: "http://www.grimshaw.de"]
             let str3 = NSMutableAttributedString(string: "Click me\n", attributes: linkAttributes)
             str1.append(str3)
-            
+
             let emphasisTextAttributes: [NSAttributedString.Key: Any] = [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle,
@@ -52,7 +59,7 @@ class TextViewDemoController: EasyStackController {
             let str4 = NSMutableAttributedString(string: "Great to be here\n")
             str4.addAttributes(emphasisTextAttributes, range: NSRange(location: 9, length: 2))
             str1.append(str4)
-            
+
             let str5 = NSMutableAttributedString(string: "Great to be here\n")
             let myShadow = NSShadow()
             myShadow.shadowBlurRadius = 1
@@ -62,13 +69,23 @@ class TextViewDemoController: EasyStackController {
             str1.append(str5)
 
             str1.addAttribute(.font, value: NSFont.systemFont(ofSize: 32), range: NSRange(location: 0, length: str1.length))
-            
+
             let textView = NSTextView()
             textView.textStorage?.setAttributedString(str1)
-            
+
             textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 600).isActive = true
             stackView.addArrangedSubview(textView)
         }
+
+        let padding = 20.0
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            //stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            //stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+        ])
     }
     
 }
