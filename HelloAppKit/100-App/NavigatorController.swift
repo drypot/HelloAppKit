@@ -29,24 +29,32 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "StackView", controllerType: StackViewDemoController.self),
             Demo(label: "EasyStackController", controllerType: EasyStackControllerDemoController.self),
         ]),
-//        DemoSection(label: "", demoList: [
-//            Demo(label: "", controllerType: .self),
-//            Demo(label: "", controllerType: .self),
-//        ]),
-//        DemoSection(label: "", demoList: [
-//            Demo(label: "", controllerType: .self),
-//            Demo(label: "", controllerType: .self),
-//        ]),
-//        DemoSection(label: "", demoList: [
-//            Demo(label: "", controllerType: .self),
-//            Demo(label: "", controllerType: .self),
-//        ]),
+        DemoSection(label: "Gesture", demoList: [
+            Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemoController.self),
+        ]),
         DemoSection(label: "Graphics", demoList: [
-            Demo(label: "Graphics", controllerType: GraphicsDemoController.self),
+            Demo(label: "GraphicButton", controllerType: GraphicButtonDemoController.self),
+            Demo(label: "DialClock", controllerType: DialClockController.self),
+            Demo(label: "PieClock", controllerType: PieClockController.self),
             //            Demo(label: "DialClock", controllerType: AddStackDemoController.self),
             //            Demo(label: "GraphicButton", controllerType: EasyStackControllerDemoController.self),
             //            Demo(label: "PieClock", controllerType: EasyStackControllerDemoController.self),
         ]),
+        DemoSection(label: "Animation", demoList: [
+            Demo(label: "Mastering macOS 11", controllerType: AnimationDemoController.self),
+        ]),
+//        DemoSection(label: "", demoList: [
+//            Demo(label: "", controllerType: .self),
+//            Demo(label: "", controllerType: .self),
+//        ]),
+//        DemoSection(label: "", demoList: [
+//            Demo(label: "", controllerType: .self),
+//            Demo(label: "", controllerType: .self),
+//        ]),
+//        DemoSection(label: "", demoList: [
+//            Demo(label: "", controllerType: .self),
+//            Demo(label: "", controllerType: .self),
+//        ]),
     ]
 
     enum UserDefaultKeys: String {

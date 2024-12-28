@@ -72,7 +72,6 @@ class SubRunnerDemoController: NSViewController {
         addSubRunner(CustomTextViewDemoRunner.self)
         addSubRunner(TableViewDemoRunner.self)
         addSubRunner(GestureRecognizerDemoRunner.self)
-        addSubRunner(GraphicsDemoRunner.self)
         addSubRunner(AnimationDemoRunner.self)
 
         addSubRunner(SubclassesTestRunner.self)

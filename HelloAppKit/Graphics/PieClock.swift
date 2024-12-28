@@ -140,3 +140,23 @@ class PieClock: NSView {
         return textAttributes
     }
 }
+
+class PieClockController: NSViewController {
+
+    override func loadView() {
+        view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        let clock = PieClock()
+        clock.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(clock)
+
+        NSLayoutConstraint.activate([
+            clock.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            clock.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            clock.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            clock.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
+    }
+
+}

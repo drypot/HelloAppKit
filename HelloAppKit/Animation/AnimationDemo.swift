@@ -45,7 +45,8 @@ class AnimationDemoController: NSViewController {
     let unlockedString = "Unlocked"
     
     override func loadView() {
-        self.view = NSView()
+        view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
         view.wantsLayer = true
         customView = view // 책에선 view, customView 별도로 만들었는데, 귀찮으니 일단 하나로 해보자;
         

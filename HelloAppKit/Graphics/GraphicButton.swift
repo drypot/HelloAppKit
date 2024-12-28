@@ -74,3 +74,33 @@ class GraphicButton: NSButton {
     }
     
 }
+
+class GraphicButtonDemoController: EasyStackController {
+
+    override func addStckItems(_ stackView: NSStackView) {
+        stackView.orientation = .horizontal
+        do {
+            let button = GraphicButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            stackView.addArrangedSubview(button)
+
+            NSLayoutConstraint.activate([
+                button.widthAnchor.constraint(equalToConstant: 200),
+                button.heightAnchor.constraint(equalToConstant: 200),
+            ])
+        }
+
+        do {
+            let button = GraphicButton()
+            button.roundIcon = false
+            button.translatesAutoresizingMaskIntoConstraints = false
+            stackView.addArrangedSubview(button)
+
+            NSLayoutConstraint.activate([
+                button.widthAnchor.constraint(equalToConstant: 200),
+                button.heightAnchor.constraint(equalToConstant: 200),
+            ])
+        }
+
+    }
+}
