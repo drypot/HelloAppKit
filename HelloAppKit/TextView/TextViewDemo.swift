@@ -43,7 +43,6 @@ class TextViewDemoController: EasyStackController {
             let str3 = NSMutableAttributedString(string: "Click me\n", attributes: linkAttributes)
             str1.append(str3)
             
-            
             let emphasisTextAttributes: [NSAttributedString.Key: Any] = [
                 .underlineStyle: NSUnderlineStyle.single.rawValue,
                 .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle,

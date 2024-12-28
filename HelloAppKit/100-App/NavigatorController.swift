@@ -29,6 +29,18 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "StackView", controllerType: StackViewDemoController.self),
             Demo(label: "EasyStackController", controllerType: EasyStackControllerDemoController.self),
         ]),
+        DemoSection(label: "View", demoList: [
+            Demo(label: "View", controllerType: ViewDemoController.self),
+            Demo(label: "CustomView", controllerType: CustomViewDemoController.self),
+            Demo(label: "CustomCompositeView", controllerType: CustomCompositeViewDemoController.self),
+        ]),
+        DemoSection(label: "Text", demoList: [
+            Demo(label: "TextView", controllerType: TextViewDemoController.self),
+            Demo(label: "CustomTextView", controllerType: CustomTextViewDemoController.self),
+        ]),
+        DemoSection(label: "Table", demoList: [
+            Demo(label: "TableView", controllerType: TableViewDemoController.self),
+        ]),
         DemoSection(label: "Gesture", demoList: [
             Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemoController.self),
         ]),

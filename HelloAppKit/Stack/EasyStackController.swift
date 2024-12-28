@@ -7,6 +7,7 @@
 
 import AppKit
 
+@MainActor
 class EasyStackController: NSViewController {
     
     let padding: CGFloat = 20.0

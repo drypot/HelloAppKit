@@ -39,3 +39,18 @@ class CustomView: NSView {
     }
     
 }
+
+class CustomViewDemoController: EasyStackController {
+
+    override func addStckItems(_ stackView: NSStackView) {
+        stackView.distribution = .fillEqually
+
+        let customView = CustomView(frame: .zero, color: .green)
+        stackView.addArrangedSubview(customView)
+
+        NSLayoutConstraint.activate([
+            customView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+        ])
+    }
+
+}

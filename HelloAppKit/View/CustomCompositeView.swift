@@ -54,3 +54,18 @@ class CustomCompositeView: NSView {
         print("Mouse clicked at: \(locationInView)")
     }
 }
+
+class CustomCompositeViewDemoController: EasyStackController {
+
+    override func addStckItems(_ stackView: NSStackView) {
+        stackView.distribution = .fillEqually
+
+        let customView = CustomCompositeView()
+        stackView.addArrangedSubview(customView)
+
+        NSLayoutConstraint.activate([
+            customView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+        ])
+    }
+
+}

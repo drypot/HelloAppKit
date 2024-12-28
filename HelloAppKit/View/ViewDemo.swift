@@ -14,34 +14,15 @@ class ViewDemoController: EasyStackController {
         
     override func addStckItems(_ stackView: NSStackView) {
         stackView.distribution = .fillEqually
-        do {
-            let customView = CustomView(frame: .zero, color: .green)
-            stackView.addArrangedSubview(customView)
-            
-            NSLayoutConstraint.activate([
-                customView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
-            ])
-        }
-        
-        do {
-            let customView = CustomCompositeView()
-            stackView.addArrangedSubview(customView)
 
-            NSLayoutConstraint.activate([
-                customView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
-            ])
-        }
-        
-        do {
-            let childView = NSView()
-            childView.wantsLayer = true
-            childView.layer?.backgroundColor = NSColor.red.cgColor
-            stackView.addArrangedSubview(childView)
-            
-            NSLayoutConstraint.activate([
-                childView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
-            ])
-        }
+        let childView = NSView()
+        childView.wantsLayer = true
+        childView.layer?.backgroundColor = NSColor.red.cgColor
+        stackView.addArrangedSubview(childView)
+
+        NSLayoutConstraint.activate([
+            childView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
+        ])
     }
     
 }
