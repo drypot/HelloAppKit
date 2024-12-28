@@ -25,6 +25,9 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "SubRunner", controllerType: SubRunnerDemoController.self),
             Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemoController.self),
         ]),
+        DemoSection(label: "Window", demoList: [
+            Demo(label: "Window", controllerType: WindowDemoController.self),
+        ]),
         DemoSection(label: "Stack", demoList: [
             Demo(label: "StackView", controllerType: StackViewDemoController.self),
             Demo(label: "EasyStackController", controllerType: EasyStackControllerDemoController.self),

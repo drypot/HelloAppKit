@@ -62,7 +62,6 @@ class SubRunnerDemoController: NSViewController {
             ])
         }
 
-        addSubRunner(WindowDemoRunner.self)
         addSubRunner(WindowBuilderDemoRunner.self)
         addSubRunner(ViewDemoRunner.self)
         addSubRunner(StackViewDemoRunner.self)
