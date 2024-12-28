@@ -14,7 +14,7 @@ class TextViewDemoRunner: SubRunner {
 
 class TextViewDemoController: EasyStackController {
 
-    override func addSubviews(to stackView: NSStackView) {
+    override func addStckItems(_ stackView: NSStackView) {
         stackView.orientation = .vertical
         stackView.distribution = .fillEqually
         

@@ -12,7 +12,7 @@ class GestureRecognizerDemoRunner: SubRunner {
 
 class GestureRecognizerDemoController: EasyStackController {
     
-    override func addSubviews(to stackView: NSStackView) {
+    override func addStckItems(_ stackView: NSStackView) {
         let childView1 = NSView()
         childView1.wantsLayer = true
         childView1.layer?.backgroundColor = NSColor.red.cgColor

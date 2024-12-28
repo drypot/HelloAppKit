@@ -13,22 +13,18 @@ class EasyStackController: NSViewController {
     let spacing: CGFloat = 8.0
     
     override func loadView() {
-        self.view = NSView()
-//        view.wantsLayer = true
-//        view.layer?.backgroundColor = .white
-        
+        view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
         let stackView = NSStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
         stackView.spacing = spacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         
-        addSubviews(to: stackView)
+        addStckItems(stackView)
         
         NSLayoutConstraint.activate([
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 700),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 500),
-            
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
@@ -36,7 +32,7 @@ class EasyStackController: NSViewController {
         ])
     }
     
-    func addSubviews(to stackView: NSStackView) {
+    func addStckItems(_ stackView: NSStackView) {
         fatalError("Implement \(#function)")
     }
     

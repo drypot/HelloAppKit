@@ -19,7 +19,7 @@ class CustomTextViewDemoController: EasyStackController {
     
     var customTextStorage: CustomTextStorage?
     
-    override func addSubviews(to stackView: NSStackView) {
+    override func addStckItems(_ stackView: NSStackView) {
         let container = NSTextContainer()
         container.widthTracksTextView = true
         

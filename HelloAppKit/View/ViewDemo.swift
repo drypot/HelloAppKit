@@ -12,7 +12,7 @@ class ViewDemoRunner: SubRunner {
 
 class ViewDemoController: EasyStackController {
         
-    override func addSubviews(to stackView: NSStackView) {
+    override func addStckItems(_ stackView: NSStackView) {
         stackView.distribution = .fillEqually
         do {
             let customView = CustomView(frame: .zero, color: .green)

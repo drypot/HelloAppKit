@@ -1,5 +1,5 @@
 //
-//  DemoNavigatorController.swift
+//  NavigatorController.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 12/27/24.
@@ -8,7 +8,7 @@
 import AppKit
 
 @MainActor
-class DemoNavigatorController: NSSplitViewController {
+class NavigatorController: NSSplitViewController {
 
     struct Demo {
         let label: String
@@ -22,9 +22,25 @@ class DemoNavigatorController: NSSplitViewController {
 
     static let sections = [
         DemoSection(label: "Stack", demoList: [
-            Demo(label: "AddStack", controllerType: AddStackDemoController.self),
-            Demo(label: "EasyStack", controllerType: EasyStackControllerDemoController.self),
+            Demo(label: "StackView", controllerType: StackViewDemoController.self),
+            Demo(label: "EasyStackController", controllerType: EasyStackControllerDemoController.self),
         ]),
+        DemoSection(label: "Utility", demoList: [
+            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemoController.self),
+            Demo(label: "SubRunner", controllerType: SubRunnerDemoController.self),
+        ]),
+//        DemoSection(label: "", demoList: [
+//            Demo(label: "", controllerType: .self),
+//            Demo(label: "", controllerType: .self),
+//        ]),
+//        DemoSection(label: "", demoList: [
+//            Demo(label: "", controllerType: .self),
+//            Demo(label: "", controllerType: .self),
+//        ]),
+//        DemoSection(label: "", demoList: [
+//            Demo(label: "", controllerType: .self),
+//            Demo(label: "", controllerType: .self),
+//        ]),
         DemoSection(label: "Graphics", demoList: [
             Demo(label: "Graphics", controllerType: GraphicsDemoController.self),
             //            Demo(label: "DialClock", controllerType: AddStackDemoController.self),
@@ -33,8 +49,13 @@ class DemoNavigatorController: NSSplitViewController {
         ]),
     ]
 
-    var firstListController = FirstListController()
-    var secondListController = SecondListController()
+    enum UserDefaultKeys: String {
+        case sectionIndex
+        case subSectionIndex
+    }
+
+    var sectionListController = SectionListController()
+    var subSectionListController = SubSectionListController()
     var contentController = ContentController()
 
     // loadView() 를 오버라이드해도 되는 경우가 있지만
@@ -45,31 +66,39 @@ class DemoNavigatorController: NSSplitViewController {
         super.viewDidLoad()
 
         do {
-            firstListController.parentController = self
-            let splitViewItem = NSSplitViewItem(sidebarWithViewController: firstListController)
+            sectionListController.navigatorController = self
+            let splitViewItem = NSSplitViewItem(sidebarWithViewController: sectionListController)
             splitViewItem.titlebarSeparatorStyle = .line
             addSplitViewItem(splitViewItem)
         }
 
         do {
-            secondListController.parentController = self
-            let splitViewItem = NSSplitViewItem(sidebarWithViewController: secondListController)
+            subSectionListController.navigatorController = self
+            let splitViewItem = NSSplitViewItem(sidebarWithViewController: subSectionListController)
             splitViewItem.titlebarSeparatorStyle = .line
             addSplitViewItem(splitViewItem)
         }
 
         do {
-            contentController.parentController = self
+            contentController.navigatorController = self
             let splitViewItem = NSSplitViewItem(viewController: contentController)
             addSplitViewItem(splitViewItem)
         }
+    }
 
-        firstListController.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+    override func viewWillAppear() {
+        // viewDidLoad 에서 tableView.selectRowIndexes 하면 tableViewSelectionDidChange 가 두 번 발생한다.
+        // tableView.selectRowIndexes 는 가급적 viewWillAppear 에서 실행한다.
+        let userDefaults = UserDefaults.standard
+        let sectionIndex = userDefaults.integer(forKey: UserDefaultKeys.sectionIndex.rawValue)
+        let subSectionIndex = userDefaults.integer(forKey: UserDefaultKeys.subSectionIndex.rawValue)
+        sectionListController.tableView.selectRowIndexes(IndexSet(integer: sectionIndex), byExtendingSelection: false)
+        subSectionListController.tableView.selectRowIndexes(IndexSet(integer: subSectionIndex), byExtendingSelection: false)
     }
 
     @MainActor
-    class FirstListController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-        weak var parentController: DemoNavigatorController!
+    class SectionListController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+        weak var navigatorController: NavigatorController!
         let tableView: NSTableView = NSTableView()
 
         override func loadView() {
@@ -131,13 +160,14 @@ class DemoNavigatorController: NSSplitViewController {
         func tableViewSelectionDidChange(_ notification: Notification) {
             let selectedRow = tableView.selectedRow
             if selectedRow >= 0 {
-                parentController.secondListController.tableView.reloadData()
+                navigatorController.subSectionListController.tableView.reloadData()
+                UserDefaults.standard.set(selectedRow, forKey: UserDefaultKeys.sectionIndex.rawValue)
             }
         }
     }
 
-    class SecondListController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-        weak var parentController: DemoNavigatorController!
+    class SubSectionListController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+        weak var navigatorController: NavigatorController!
         let tableView: NSTableView = NSTableView()
 
         override func loadView() {
@@ -170,7 +200,7 @@ class DemoNavigatorController: NSSplitViewController {
         }
 
         var section: DemoSection? {
-            let selectedRow = parentController.firstListController.tableView.selectedRow
+            let selectedRow = navigatorController.sectionListController.tableView.selectedRow
             if selectedRow >= 0 {
                 return sections[selectedRow]
             }
@@ -213,32 +243,32 @@ class DemoNavigatorController: NSSplitViewController {
             let selectedRow = tableView.selectedRow
             if selectedRow >= 0 {
                 let demo = section.demoList[selectedRow]
-                parentController.contentController.use(controller: demo.controllerType.init())
+                navigatorController.contentController.use(controller: demo.controllerType.init())
+                UserDefaults.standard.set(selectedRow, forKey: UserDefaultKeys.subSectionIndex.rawValue)
             }
         }
     }
 
     class ContentController: NSViewController {
-        weak var parentController: DemoNavigatorController!
+        weak var navigatorController: NavigatorController!
         var controller: NSViewController!
 
         override func loadView() {
             view = NSView()
             view.translatesAutoresizingMaskIntoConstraints = false
-//            view.wantsLayer = true
-//            view.layer?.backgroundColor = NSColor.white.cgColor
-            NSLayoutConstraint.activate([
-                view.widthAnchor.constraint(greaterThanOrEqualToConstant: 960),
-                view.heightAnchor.constraint(greaterThanOrEqualToConstant: 800),
-            ])
         }
 
         func use(controller: NSViewController) {
-            view.subviews.forEach { $0.removeFromSuperview() }
-
             self.controller = controller
-            controller.view.frame = view.bounds
-            view.addSubview(controller.view)
+            let subview = controller.view
+            view.subviews = [subview]
+
+            NSLayoutConstraint.activate([
+                subview.topAnchor.constraint(equalTo: view.topAnchor),
+                subview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                subview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                subview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ])
         }
     }
 }

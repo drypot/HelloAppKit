@@ -12,7 +12,7 @@ class EasyStackControllerDemoRunner: SubRunner {
 
 class EasyStackControllerDemoController: EasyStackController {
 
-    override func addSubviews(to stackView: NSStackView) {
+    override func addStckItems(_ stackView: NSStackView) {
         stackView.distribution = .fillEqually
         do {
             let textView = NSTextView()
@@ -26,6 +26,14 @@ class EasyStackControllerDemoController: EasyStackController {
             textView.font = NSFont(name: "Helvetica", size: 24.0)
             stackView.addArrangedSubview(textView)
         }
+    }
+
+    override func viewDidLoad() {
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            ]
+        )
     }
     
 }

@@ -31,7 +31,7 @@ class TableViewDemoController: EasyStackController {
 //        personArrayWrapper.removeObserver(self, forKeyPath: kContentKeyPath)
 //    }
         
-    override func addSubviews(to stackView: NSStackView) {
+    override func addStckItems(_ stackView: NSStackView) {
         personArrayWrapper.addObserver(
             self,
             forKeyPath: kContentKeyPath,

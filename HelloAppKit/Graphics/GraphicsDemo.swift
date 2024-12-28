@@ -12,7 +12,7 @@ class GraphicsDemoRunner: SubRunner {
 
 class GraphicsDemoController: EasyStackController {
         
-    override func addSubviews(to stackView: NSStackView) {
+    override func addStckItems(_ stackView: NSStackView) {
         stackView.orientation = .horizontal
         do {
             let button = GraphicButton()

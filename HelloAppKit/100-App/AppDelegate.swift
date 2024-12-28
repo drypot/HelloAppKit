@@ -7,11 +7,13 @@
 
 import Cocoa
 
-@main
+@main @MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    var window: NSWindow!
+
     func applicationWillFinishLaunching(_ notification: Notification) {
-        print("AppDelegate applicationWillFinishLaunching")
+        print("ApplicationWillFinishLaunching")
 #if DEV
         print("Compiler flag DEV defined")
 #else
@@ -20,19 +22,34 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        print("AppDelegate applicationDidFinishLaunching")
-        //DemoListRunner().run()
-        DemoNavigatorLauncher().run()
-   }
+        print("ApplicationDidFinishLaunching")
+        setupWindow()
+        //SubRunnerDemoRunner().run()
+    }
+
+    func setupWindow() {
+        window = NSWindow(
+            contentRect: .zero,
+            styleMask: [.titled, .closable, .resizable],
+            backing: .buffered,
+            defer: false
+        )
+
+        window.title = "AppKit Demo"
+        window.contentViewController = NavigatorController()
+        window.layoutIfNeeded()
+        window.center()
+        window.makeKeyAndOrderFront(nil)
+    }
 
     func applicationWillTerminate(_ aNotification: Notification) {
-        print("AppDelegate applicationWillTerminate")
+        print("ApplicationWillTerminate")
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
         return true
     }
-    
+
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
     }

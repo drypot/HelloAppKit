@@ -1,5 +1,5 @@
 //
-//  CodeListController.swift
+//  SubRunnerDemoController.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 8/27/24.
@@ -11,10 +11,10 @@ import Cocoa
 // 나중에 AppKit 가이드 쓸 때나 다른 사람들이 학습용도로 보기엔 이게 나을 듯.
 // 파일에 반복적으로 중복된 코드가 나타나도 나중에 한눈에 쭉 읽기 편하게 그대로 두는 것도 괜찮은 듯.
 
-class DemoListRunner: SubRunner {
+class SubRunnerDemoRunner: SubRunner {
 }
 
-class DemoListController: NSViewController {
+class SubRunnerDemoController: NSViewController {
 
     let padding: CGFloat = 20.0
     let spacing: CGFloat = 8.0
@@ -75,7 +75,7 @@ class DemoListController: NSViewController {
         addSubRunner(WindowDemoRunner.self)
         addSubRunner(WindowBuilderDemoRunner.self)
         addSubRunner(ViewDemoRunner.self)
-        addSubRunner(AddStackDemoRunner.self)
+        addSubRunner(StackViewDemoRunner.self)
         addSubRunner(EasyStackControllerDemoRunner.self)
         addSubRunner(ConstraintBuilderDemoRunner.self)
         addSubRunner(TextViewDemoRunner.self)
