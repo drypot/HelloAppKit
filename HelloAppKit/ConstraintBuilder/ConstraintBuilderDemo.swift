@@ -13,18 +13,14 @@ class ConstraintBuilderDemoRunner: SubRunner {
 class ConstraintBuilderDemoController: NSViewController {
 
     override func loadView() {
-        self.view = NSView()
-
-        let constraints = ConstraintBuilder()
+        view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
 
         let stackView = NSStackView()
         stackView.orientation = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
-        
-        constraints.stickEdges(of: stackView, to: view)
-        constraints.setMinSize(of: stackView, width: 600, height: 400)
-        
+
         do {
             let button = NSButton(title: "Button 1", target: nil, action: nil)
             stackView.addArrangedSubview(button)
@@ -39,7 +35,10 @@ class ConstraintBuilderDemoController: NSViewController {
             let button = NSButton(title: "Button 3", target: nil, action: nil)
             stackView.addArrangedSubview(button)
         }
-        
+
+        let constraints = ConstraintBuilder()
+        constraints.stickEdges(of: stackView, to: view)
+        constraints.setMinSize(of: stackView, width: 400, height: 400)
         constraints.activate()
     }
     

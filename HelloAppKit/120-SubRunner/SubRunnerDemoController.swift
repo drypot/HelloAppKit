@@ -16,26 +16,23 @@ class SubRunnerDemoRunner: SubRunner {
 
 class SubRunnerDemoController: NSViewController {
 
-    let padding: CGFloat = 20.0
-    let spacing: CGFloat = 8.0
-
     var subRunnerTypes = [String: SubRunner.Type]()
     
     override func loadView() {
         self.view = NSView()
-        
+        view.translatesAutoresizingMaskIntoConstraints = false
+
         let stackView = NSStackView()
         stackView.orientation = .vertical
-        stackView.spacing = spacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         
-        addSubviews(to: stackView)
-        
+        addStackItems(stackView)
+
+        let padding: CGFloat = 20.0
         NSLayoutConstraint.activate([
             stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
             stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
-            
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
@@ -43,7 +40,8 @@ class SubRunnerDemoController: NSViewController {
         ])
     }
 
-    private func addSubviews(to stackView: NSStackView) {
+    private func addStackItems(_ stackView: NSStackView) {
+
         var constraints: [NSLayoutConstraint] = []
 
         func addSubRunner(_ subRunnerType: SubRunner.Type) {
@@ -56,21 +54,13 @@ class SubRunnerDemoController: NSViewController {
         
         func addButton(_ title: String) {
             let button: NSButton = NSButton(title: title, target: self, action: #selector(buttonClicked))
+            button.translatesAutoresizingMaskIntoConstraints = false
             stackView.addArrangedSubview(button)
             constraints.append(contentsOf: [
                 button.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
                 button.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             ])
         }
-
-//        subclasses(of: SubRunner.self)
-//            .filter {
-//                $0 != DemoListRunner.self
-//            }
-//            .sorted {
-//                $0.className() < $1.className()
-//            }
-//            .forEach(addSubRunner)
 
         addSubRunner(WindowDemoRunner.self)
         addSubRunner(WindowBuilderDemoRunner.self)
@@ -86,6 +76,15 @@ class SubRunnerDemoController: NSViewController {
         addSubRunner(AnimationDemoRunner.self)
 
         addSubRunner(SubclassesTestRunner.self)
+
+        //        subclasses(of: SubRunner.self)
+        //            .filter {
+        //                $0 != DemoListRunner.self
+        //            }
+        //            .sorted {
+        //                $0.className() < $1.className()
+        //            }
+        //            .forEach(addSubRunner)
 
         NSLayoutConstraint.activate(constraints)
     }

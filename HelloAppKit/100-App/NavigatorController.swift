@@ -21,13 +21,13 @@ class NavigatorController: NSSplitViewController {
     }
 
     static let sections = [
+        DemoSection(label: "Utility", demoList: [
+            Demo(label: "SubRunner", controllerType: SubRunnerDemoController.self),
+            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemoController.self),
+        ]),
         DemoSection(label: "Stack", demoList: [
             Demo(label: "StackView", controllerType: StackViewDemoController.self),
             Demo(label: "EasyStackController", controllerType: EasyStackControllerDemoController.self),
-        ]),
-        DemoSection(label: "Utility", demoList: [
-            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemoController.self),
-            Demo(label: "SubRunner", controllerType: SubRunnerDemoController.self),
         ]),
 //        DemoSection(label: "", demoList: [
 //            Demo(label: "", controllerType: .self),
@@ -201,7 +201,7 @@ class NavigatorController: NSSplitViewController {
 
         var section: DemoSection? {
             let selectedRow = navigatorController.sectionListController.tableView.selectedRow
-            if selectedRow >= 0 {
+            if selectedRow >= 0 && selectedRow < sections.count {
                 return sections[selectedRow]
             }
             return nil
@@ -241,7 +241,7 @@ class NavigatorController: NSSplitViewController {
             guard let section else { return }
 
             let selectedRow = tableView.selectedRow
-            if selectedRow >= 0 {
+            if selectedRow >= 0 && selectedRow < section.demoList.count {
                 let demo = section.demoList[selectedRow]
                 navigatorController.contentController.use(controller: demo.controllerType.init())
                 UserDefaults.standard.set(selectedRow, forKey: UserDefaultKeys.subSectionIndex.rawValue)
