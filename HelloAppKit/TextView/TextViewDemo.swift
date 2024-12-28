@@ -22,13 +22,29 @@ class TextViewDemoController: NSViewController {
         stackView.alignment = .leading
         view.addSubview(stackView)
 
+        addStackItems(stackView)
+
+        let padding = 20.0
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+        ])
+    }
+
+    func addStackItems(_ stackView: NSStackView) {
         do {
             let textView = NSTextView()
             textView.string = "Hello, World!"
             textView.font = NSFont(name: "Helvetica", size: 24.0)
-
-            textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 600).isActive = true
             stackView.addArrangedSubview(textView)
+
+            NSLayoutConstraint.activate([
+                textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400)
+            ])
         }
 
         do {
@@ -69,20 +85,11 @@ class TextViewDemoController: NSViewController {
 
             let textView = NSTextView()
             textView.textStorage?.setAttributedString(str1)
-
-            textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 600).isActive = true
             stackView.addArrangedSubview(textView)
-        }
 
-        let padding = 20.0
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            //stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            //stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-        ])
+            NSLayoutConstraint.activate([
+                textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400)
+            ])
+        }
     }
-    
 }

@@ -33,9 +33,9 @@ class CustomTextViewDemoController: NSViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            //stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            //stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
 
@@ -56,9 +56,9 @@ class CustomTextViewDemoController: NSViewController {
         customTextStorage.addLayoutManager(layoutManager)
         
         let textView = NSTextView(frame: .zero, textContainer: container)
+        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = NSFont.systemFont(ofSize: 24)
         textView.delegate = self
-        textView.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(textView)
     }
         

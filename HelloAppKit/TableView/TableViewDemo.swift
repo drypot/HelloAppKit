@@ -7,6 +7,8 @@
 
 import Cocoa
 
+// TableView 데모는 완전 다시 만들어야 할 듯;
+
 // Mastering macOS programming, Packt Publishing (2017), 7 장 참고
 
 class TableViewDemoController: NSViewController {
@@ -43,9 +45,9 @@ class TableViewDemoController: NSViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            //stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            //stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
 

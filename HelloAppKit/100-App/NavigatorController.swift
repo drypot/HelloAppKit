@@ -153,7 +153,7 @@ class NavigatorController: NSSplitViewController {
                 scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 scrollView.topAnchor.constraint(equalTo: view.topAnchor),
                 scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
+                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 180),
             ])
         }
 
@@ -222,7 +222,7 @@ class NavigatorController: NSSplitViewController {
                 scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 scrollView.topAnchor.constraint(equalTo: view.topAnchor),
                 scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
+                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 180),
             ])
         }
 
