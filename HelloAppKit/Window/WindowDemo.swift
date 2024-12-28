@@ -18,22 +18,34 @@ class WindowDemoController: NSViewController {
         let stackView = NSStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
+        stackView.alignment = .leading
         view.addSubview(stackView)
 
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.title = "Open Window"
-        button.target = self
-        button.action = #selector(buttonClicked)
-        stackView.addArrangedSubview(button)
+        do {
+            let button = NSButton(title: "Open Window", target: self, action: #selector(openWindow))
+            stackView.addArrangedSubview(button)
+        }
+
+        do {
+            let button = NSButton(title: "Test WindowBuilder showAtCenter", target: self, action: #selector(testWindowBuilderShowAtCenter))
+            stackView.addArrangedSubview(button)
+        }
+
+        do {
+            let button = NSButton(title: "Test WindowBuilder showAtAbsoluteCenter", target: self, action: #selector(testWindowBuilderShowAtAbsoluteCenter))
+            stackView.addArrangedSubview(button)
+        }
 
         let padding = 20.0
         NSLayoutConstraint.activate([
+            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding),
         ])
     }
 
-    @objc func buttonClicked() {
+    @objc func openWindow() {
         let window = NSWindow(
             contentRect: .zero,
             styleMask: [.titled, .closable, .resizable, /* .miniaturizable */],
@@ -47,6 +59,33 @@ class WindowDemoController: NSViewController {
         windowController.window?.center()
         windowController.showWindow(nil)
     }
+
+    @objc func testWindowBuilderShowAtCenter() {
+        let window = NSWindow(
+            contentRect: .zero,
+            styleMask: [.titled, .closable, .resizable, /* .miniaturizable */],
+            backing: .buffered,
+            defer: false
+        )
+        WindowBuilder(title: "WindowBuilder / Center", window: window)
+            .setSize(NSSize(width: 600, height: 700))
+            .showAtCenter()
+            .retainWindow()
+    }
+
+    @objc func testWindowBuilderShowAtAbsoluteCenter() {
+        let window = NSWindow(
+            contentRect: .zero,
+            styleMask: [.titled, .closable, .resizable, /* .miniaturizable */],
+            backing: .buffered,
+            defer: false
+        )
+        WindowBuilder(title: "WindowBuilder / Absolute Center", window: window)
+            .setSize(NSSize(width: 400, height: 150))
+            .showAtAbsoluteCenter()
+            .retainWindow()
+    }
+
 }
 
 class DemoWindowController: NSWindowController, NSWindowDelegate {
