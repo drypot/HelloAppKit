@@ -83,8 +83,7 @@ class GraphicButtonDemoController: NSViewController {
 
         let stackView = NSStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.alignment = .leading
+        stackView.orientation = .horizontal
         view.addSubview(stackView)
 
         addStckItems(stackView)
@@ -94,14 +93,13 @@ class GraphicButtonDemoController: NSViewController {
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            //stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            //stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
 
     func addStckItems(_ stackView: NSStackView) {
-        stackView.orientation = .horizontal
         do {
             let button = GraphicButton()
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -124,6 +122,5 @@ class GraphicButtonDemoController: NSViewController {
                 button.heightAnchor.constraint(equalToConstant: 200),
             ])
         }
-
     }
 }

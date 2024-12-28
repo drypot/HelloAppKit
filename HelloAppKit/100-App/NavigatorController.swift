@@ -187,7 +187,9 @@ class NavigatorController: NSSplitViewController {
         func tableViewSelectionDidChange(_ notification: Notification) {
             let selectedRow = tableView.selectedRow
             if selectedRow >= 0 {
-                navigatorController.subSectionListController.tableView.reloadData()
+                let subSectionListController = navigatorController.subSectionListController
+                subSectionListController.tableView.reloadData()
+                subSectionListController.tableView.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                 UserDefaults.standard.set(selectedRow, forKey: UserDefaultKeys.sectionIndex.rawValue)
             }
         }
