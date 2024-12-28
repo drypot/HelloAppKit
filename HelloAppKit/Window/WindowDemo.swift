@@ -38,10 +38,11 @@ class WindowDemoController: NSViewController {
 
         let padding = 20.0
         NSLayoutConstraint.activate([
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+//            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+//            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
 

@@ -19,12 +19,17 @@ class StackViewDemoController: NSViewController {
         let stackView = NSStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
+        stackView.alignment = .leading
+        stackView.wantsLayer = true
+        stackView.layer?.backgroundColor = CGColor.gray9
         view.addSubview(stackView)
 
         do {
             let stackView2 = NSStackView()
             stackView2.translatesAutoresizingMaskIntoConstraints = false
             stackView2.orientation = .vertical
+            stackView2.wantsLayer = true
+            stackView2.layer?.backgroundColor = CGColor.gray8
 
             let button1 = NSButton(title: "Button 1", target: nil, action: nil)
             stackView2.addArrangedSubview(button1)
@@ -42,6 +47,8 @@ class StackViewDemoController: NSViewController {
             let stackView2 = NSStackView()
             stackView2.translatesAutoresizingMaskIntoConstraints = false
             stackView2.orientation = .horizontal
+            stackView2.wantsLayer = true
+            stackView2.layer?.backgroundColor = CGColor.gray8
 
             let button4 = NSButton(title: "Button 4", target: nil, action: nil)
             stackView2.addArrangedSubview(button4)
@@ -55,13 +62,14 @@ class StackViewDemoController: NSViewController {
             stackView.addArrangedSubview(stackView2)
         }
 
+        let padding = 20.0
         NSLayoutConstraint.activate([
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+//            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+//            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+//            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
     

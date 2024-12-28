@@ -64,7 +64,6 @@ class SubRunnerDemoController: NSViewController {
 
         addSubRunner(ViewDemoRunner.self)
         addSubRunner(StackViewDemoRunner.self)
-        addSubRunner(EasyStackControllerDemoRunner.self)
         addSubRunner(ConstraintBuilderDemoRunner.self)
         addSubRunner(TextViewDemoRunner.self)
         addSubRunner(CustomTextViewDemoRunner.self)

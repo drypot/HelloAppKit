@@ -40,15 +40,29 @@ class CustomView: NSView {
     
 }
 
-class CustomViewDemoController: EasyStackController {
+class CustomViewDemoController: NSViewController {
 
-    override func addStckItems(_ stackView: NSStackView) {
-        stackView.distribution = .fillEqually
+    override func loadView() {
+        view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        let stackView = NSStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.orientation = .vertical
+        stackView.alignment = .leading
+        view.addSubview(stackView)
 
         let customView = CustomView(frame: .zero, color: .green)
         stackView.addArrangedSubview(customView)
 
+        let padding = 20.0
         NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            customView.widthAnchor.constraint(greaterThanOrEqualToConstant: 100),
             customView.heightAnchor.constraint(greaterThanOrEqualToConstant: 100),
         ])
     }
