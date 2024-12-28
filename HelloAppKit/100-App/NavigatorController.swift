@@ -21,10 +21,6 @@ class NavigatorController: NSSplitViewController {
     }
 
     static let sections = [
-        DemoSection(label: "Utility", demoList: [
-            Demo(label: "SubRunner", controllerType: SubRunnerDemoController.self),
-            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemoController.self),
-        ]),
         DemoSection(label: "Window", demoList: [
             Demo(label: "Window", controllerType: WindowDemoController.self),
         ]),
@@ -69,6 +65,11 @@ class NavigatorController: NSSplitViewController {
 //            Demo(label: "", controllerType: .self),
 //            Demo(label: "", controllerType: .self),
 //        ]),
+        DemoSection(label: "Utility", demoList: [
+            Demo(label: "SubRunner", controllerType: SubRunnerDemoController.self),
+            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemoController.self),
+        ]),
+
     ]
 
     enum UserDefaultKeys: String {

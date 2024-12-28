@@ -1,5 +1,5 @@
 //
-//  ViewDemo.swift
+//  SubRunnerSample1.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 9/30/24.
@@ -7,7 +7,10 @@
 
 import AppKit
 
-class ViewDemoController: NSViewController {
+class SubRunnerSample1Runner: SubRunner {
+}
+
+class SubRunnerSample1Controller: NSViewController {
 
     override func loadView() {
         view = NSView()
@@ -18,7 +21,7 @@ class ViewDemoController: NSViewController {
         childView.wantsLayer = true
         childView.layer?.backgroundColor = NSColor.red.cgColor
         view.addSubview(childView)
-
+        
         let padding = 20.0
         NSLayoutConstraint.activate([
             childView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),

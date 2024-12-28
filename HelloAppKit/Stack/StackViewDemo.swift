@@ -7,9 +7,6 @@
 
 import AppKit
 
-class StackViewDemoRunner: SubRunner {
-}
-
 class StackViewDemoController: NSViewController {
 
     override func loadView() {
@@ -24,6 +21,20 @@ class StackViewDemoController: NSViewController {
         stackView.layer?.backgroundColor = CGColor.gray9
         view.addSubview(stackView)
 
+        addStackItems(stackView)
+
+        let padding = 20.0
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+        ])
+    }
+
+    func addStackItems(_ stackView: NSStackView) {
         do {
             let stackView2 = NSStackView()
             stackView2.translatesAutoresizingMaskIntoConstraints = false
@@ -61,16 +72,6 @@ class StackViewDemoController: NSViewController {
 
             stackView.addArrangedSubview(stackView2)
         }
-
-        let padding = 20.0
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            //stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            //stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            //stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-        ])
     }
-    
+
 }

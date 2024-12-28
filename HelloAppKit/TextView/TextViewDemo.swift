@@ -9,9 +9,6 @@ import AppKit
 
 // Mastering macOS programming-Packt Publishing (2017), 209p
 
-class TextViewDemoRunner: SubRunner {
-}
-
 class TextViewDemoController: NSViewController {
 
     override func loadView() {

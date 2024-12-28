@@ -7,9 +7,6 @@
 
 import AppKit
 
-class GestureRecognizerDemoRunner: SubRunner {
-}
-
 class GestureRecognizerDemoController: NSViewController {
 
     override func loadView() {

@@ -9,15 +9,6 @@ import Foundation
 
 // https://stackoverflow.com/questions/42746981/list-all-subclasses-of-one-class
 
-class SubclassesTestRunner: SubRunner {
-    override func run() {
-        let seconds = interval {
-            subclasses(of: SubRunner.self).forEach { print($0.className()) }
-        }
-        print("\(seconds) seconds")
-    }
-}
-
 public func subclasses<T>(of theClass: T) -> [T] {
     var count: UInt32 = 0
     var result: [T] = []

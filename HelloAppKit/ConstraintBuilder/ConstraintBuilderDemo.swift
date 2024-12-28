@@ -7,9 +7,6 @@
 
 import AppKit
 
-class ConstraintBuilderDemoRunner: SubRunner {
-}
-
 class ConstraintBuilderDemoController: NSViewController {
 
     override func loadView() {

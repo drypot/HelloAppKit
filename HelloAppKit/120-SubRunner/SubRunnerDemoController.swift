@@ -5,14 +5,7 @@
 //  Created by Kyuhyun Park on 8/27/24.
 //
 
-import Cocoa
-
-// 수제 라이브러리 대신 AppKit 기본만 쓰기로 한다.
-// 나중에 AppKit 가이드 쓸 때나 다른 사람들이 학습용도로 보기엔 이게 나을 듯.
-// 파일에 반복적으로 중복된 코드가 나타나도 나중에 한눈에 쭉 읽기 편하게 그대로 두는 것도 괜찮은 듯.
-
-class SubRunnerDemoRunner: SubRunner {
-}
+import AppKit
 
 class SubRunnerDemoController: NSViewController {
 
@@ -63,16 +56,8 @@ class SubRunnerDemoController: NSViewController {
             ])
         }
 
-        addSubRunner(ViewDemoRunner.self)
-        addSubRunner(StackViewDemoRunner.self)
-        addSubRunner(ConstraintBuilderDemoRunner.self)
-        addSubRunner(TextViewDemoRunner.self)
-        addSubRunner(CustomTextViewDemoRunner.self)
-        addSubRunner(TableViewDemoRunner.self)
-        addSubRunner(GestureRecognizerDemoRunner.self)
-        addSubRunner(AnimationDemoRunner.self)
-
-        addSubRunner(SubclassesTestRunner.self)
+        addSubRunner(SubRunnerSample1Runner.self)
+        addSubRunner(SubRunnerSample2Runner.self)
 
         //        subclasses(of: SubRunner.self)
         //            .filter {

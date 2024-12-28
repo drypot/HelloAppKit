@@ -12,9 +12,6 @@ import AppKit
 
 // 커서가 워프하는 등, 먼가 버그 스럽게 동작하는데, 일단 대강 구경만 하는 것으로.
 
-class CustomTextViewDemoRunner: SubRunner {
-}
-
 class CustomTextViewDemoController: NSViewController {
 
     var customTextStorage: CustomTextStorage?

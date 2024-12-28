@@ -9,9 +9,6 @@ import Cocoa
 
 // Mastering macOS programming, Packt Publishing (2017), 7 장 참고
 
-class TableViewDemoRunner: SubRunner {
-}
-
 class TableViewDemoController: NSViewController {
 
     var personArrayWrapper = PersonArrayWrapper(content: [
