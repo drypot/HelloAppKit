@@ -17,8 +17,6 @@ class StackViewDemoController: NSViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
         stackView.alignment = .leading
-        stackView.wantsLayer = true
-        stackView.layer?.backgroundColor = CGColor.gray9
         view.addSubview(stackView)
 
         addStackItems(stackView)
@@ -35,43 +33,26 @@ class StackViewDemoController: NSViewController {
     }
 
     func addStackItems(_ stackView: NSStackView) {
-        do {
-            let stackView2 = NSStackView()
-            stackView2.translatesAutoresizingMaskIntoConstraints = false
-            stackView2.orientation = .vertical
-            stackView2.wantsLayer = true
-            stackView2.layer?.backgroundColor = CGColor.gray8
+        let button1 = NSButton(title: "Button 1", target: self, action: #selector(button1Clicked))
+        stackView.addArrangedSubview(button1)
 
-            let button1 = NSButton(title: "Button 1", target: nil, action: nil)
-            stackView2.addArrangedSubview(button1)
+        let button2 = NSButton(title: "Button 2", target: self, action: #selector(button2Clicked))
+        stackView.addArrangedSubview(button2)
 
-            let button2 = NSButton(title: "Button 2", target: nil, action: nil)
-            stackView2.addArrangedSubview(button2)
+        let button3 = NSButton(title: "Button 3", target: self, action: #selector(button3Clicked))
+        stackView.addArrangedSubview(button3)
+    }
 
-            let button3 = NSButton(title: "Button 3", target: nil, action: nil)
-            stackView2.addArrangedSubview(button3)
+    @objc func button1Clicked(_ sender: NSButton) {
+        print("button1 clicked")
+    }
 
-            stackView.addArrangedSubview(stackView2)
-        }
+    @objc func button2Clicked(_ sender: NSButton) {
+        print("button2 clicked")
+    }
 
-        do {
-            let stackView2 = NSStackView()
-            stackView2.translatesAutoresizingMaskIntoConstraints = false
-            stackView2.orientation = .horizontal
-            stackView2.wantsLayer = true
-            stackView2.layer?.backgroundColor = CGColor.gray8
-
-            let button4 = NSButton(title: "Button 4", target: nil, action: nil)
-            stackView2.addArrangedSubview(button4)
-
-            let button5 = NSButton(title: "Button 5", target: nil, action: nil)
-            stackView2.addArrangedSubview(button5)
-
-            let button6 = NSButton(title: "Button 6", target: nil, action: nil)
-            stackView2.addArrangedSubview(button6)
-
-            stackView.addArrangedSubview(stackView2)
-        }
+    @objc func button3Clicked(_ sender: NSButton) {
+        print("button3 clicked")
     }
 
 }
