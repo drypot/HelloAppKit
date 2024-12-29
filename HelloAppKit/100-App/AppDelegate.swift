@@ -7,10 +7,11 @@
 
 import Cocoa
 
-@main @MainActor
+@MainActor @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     let windowFrameKey = "MainWindowFrame"
+
     var window: NSWindow!
 
     func applicationWillFinishLaunching(_ notification: Notification) {
@@ -38,7 +39,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.title = "AppKit Demo"
         window.contentViewController = NavigatorController()
         window.layoutIfNeeded()
-        window.center()
         restoreWindowPosition()
         window.makeKeyAndOrderFront(nil)
     }
@@ -65,6 +65,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let frameString = UserDefaults.standard.string(forKey: windowFrameKey) {
             let frame = NSRectFromString(frameString)
             window.setFrame(frame, display: true)
+        } else {
+            window.center()
         }
     }
 
