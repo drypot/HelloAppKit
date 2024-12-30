@@ -108,7 +108,6 @@ class TextViewController: NSViewController {
             scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
-
     }
 
     override func viewDidLoad() {

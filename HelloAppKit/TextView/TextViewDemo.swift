@@ -13,34 +13,32 @@ class TextViewDemoController: NSViewController {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackView = NSStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.distribution = .fillEqually
-        stackView.alignment = .leading
-        view.addSubview(stackView)
+        let textView = NSTextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.string = "Hello, World!"
+        textView.font = NSFont.systemFont(ofSize: 24.0)
 
-        addStackItems(stackView)
+        let scrollView = NSScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = true
+        scrollView.documentView = textView
+
+        view.addSubview(scrollView)
 
         let padding = 20.0
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            textView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            textView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            textView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            textView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
 
-    func addStackItems(_ stackView: NSStackView) {
-        let textView = NSTextView()
-        textView.string = "Hello, World!"
-        textView.font = NSFont(name: "Helvetica", size: 24.0)
-        stackView.addArrangedSubview(textView)
-
-        NSLayoutConstraint.activate([
-            textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400)
-        ])
-    }
 }
