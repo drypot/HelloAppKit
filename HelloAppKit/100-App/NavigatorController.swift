@@ -21,8 +21,11 @@ class NavigatorController: NSSplitViewController {
     }
 
     static let sections = [
+        DemoSection(label: "Document", demoList: [
+            Demo(label: "-", controllerType: DocumentDemoController.self),
+        ]),
         DemoSection(label: "Window", demoList: [
-            Demo(label: "Window", controllerType: WindowDemoController.self),
+            Demo(label: "-", controllerType: WindowDemoController.self),
         ]),
         DemoSection(label: "Stack", demoList: [
             Demo(label: "StackView", controllerType: StackViewDemoController.self),
@@ -34,6 +37,8 @@ class NavigatorController: NSSplitViewController {
         ]),
         DemoSection(label: "Text", demoList: [
             Demo(label: "TextView", controllerType: TextViewDemoController.self),
+            Demo(label: "Attributed TextView", controllerType: AttributedTextViewDemoController.self),
+            //Demo(label: "TextStorage", controllerType: TextStorageDemoController.self),
             Demo(label: "CustomTextView", controllerType: CustomTextViewDemoController.self),
         ]),
         DemoSection(label: "Table", demoList: [
