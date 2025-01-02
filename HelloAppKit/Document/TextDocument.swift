@@ -9,19 +9,6 @@ import AppKit
 
 // The Cocoa document architecture uses the Objective-C runtime
 
-// Properties should be declared dynamic in Swift,
-// which tells the compiler to use dynamic dispatch to access that attribute.
-
-class TextData: NSObject {
-
-    @objc dynamic var content = ""
-
-    public init(content: String) {
-        self.content = content
-    }
-
-}
-
 class TextDocument: NSDocument {
 
     nonisolated(unsafe) var content: String = ""
@@ -31,7 +18,7 @@ class TextDocument: NSDocument {
     }
 
     override func makeWindowControllers() {
-        let viewController = TextViewController()
+        let viewController = TextDocumentViewController()
         viewController.document = self
         viewController.representedObject = self
 
@@ -63,6 +50,11 @@ class TextDocument: NSDocument {
         return data
     }
 
+    // You should disable undo registration during document reading.
+
+//    override func read(from fileWrapper: FileWrapper, ofType typeName: String) throws {
+//    }
+
     override func read(from data: Data, ofType typeName: String) throws {
         guard let content = String(data: data, encoding: .utf8) else {
             throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
@@ -72,53 +64,3 @@ class TextDocument: NSDocument {
 
 }
 
-class TextViewController: NSViewController {
-    weak var document: TextDocument?
-    private var textView = NSTextView()
-
-    override func loadView() {
-        view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.font = NSFont.systemFont(ofSize: 24.0)
-
-        //        NSLayoutConstraint.activate([
-        //            textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400)
-        //        ])
-
-        let scrollView = NSScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = true
-        scrollView.documentView = textView
-
-        view.addSubview(scrollView)
-
-        let padding = 20.0
-        NSLayoutConstraint.activate([
-            textView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            textView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            textView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            textView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-        ])
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        guard let document else { return }
-        textView.string = document.content
-    }
-
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        guard let document else { return }
-        document.content = textView.string
-    }
-}

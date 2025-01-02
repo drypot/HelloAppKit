@@ -47,8 +47,8 @@ class DocumentDemoController: NSViewController {
         let sampleString = "In an age of endless noise and fleeting moments, the rarest treasures are found in the quiet places where we reconnect with ourselves."
         let document = TextDocument()
         document.content = sampleString
+        NSDocumentController.shared.addDocument(document)
         document.makeWindowControllers()
-        
         document.showWindows()
     }
 

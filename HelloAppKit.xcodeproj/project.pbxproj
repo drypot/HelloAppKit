@@ -31,6 +31,22 @@
 			);
 			target = 00F8324B2C7DEDE400742EF4 /* HelloAppKit */;
 		};
+		00A6F97D2D26D1DA00DA414C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"10-AppStructure/10-App/AppKit.md",
+				"10-AppStructure/10-App/NSApplication.md",
+				"10-AppStructure/20-Documents/iCloud.md",
+				"10-AppStructure/20-Documents/NSDocument.md",
+				"10-AppStructure/20-Documents/NSDocumentController.md",
+				"10-AppStructure/20-Documents/NSWindowController.md",
+				"10-AppStructure/20-Documents/Security.md",
+				"40-Window/Window.md",
+				"50-View/NSViewController.md",
+				"50-View/View.md",
+			);
+			target = 00F8324B2C7DEDE400742EF4 /* HelloAppKit */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -46,6 +62,7 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		001131F32C999F2E0099CB9B /* HelloAppKit */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (001132002C999F2E0099CB9B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 001132012C999F2E0099CB9B /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = HelloAppKit; sourceTree = "<group>"; };
 		0030B94E2CACF79F00C847E2 /* HelloAppKitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = HelloAppKitTests; sourceTree = "<group>"; };
+		00A6F9792D26D1DA00DA414C /* Memo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (00A6F97D2D26D1DA00DA414C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Memo; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +88,7 @@
 			children = (
 				006BC3A82CBC4850005D5E31 /* LICENSE */,
 				006BC3A92CBC4850005D5E31 /* README.md */,
+				00A6F9792D26D1DA00DA414C /* Memo */,
 				001131F32C999F2E0099CB9B /* HelloAppKit */,
 				0030B94E2CACF79F00C847E2 /* HelloAppKitTests */,
 				00F8324D2C7DEDE400742EF4 /* Products */,
@@ -126,6 +144,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				001131F32C999F2E0099CB9B /* HelloAppKit */,
+				00A6F9792D26D1DA00DA414C /* Memo */,
 			);
 			name = HelloAppKit;
 			productName = HelloAppKit;
