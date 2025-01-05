@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import UniformTypeIdentifiers
 
 class DocumentDemoController: NSViewController {
 
@@ -33,7 +34,7 @@ class DocumentDemoController: NSViewController {
     }
 
     func addStackItems(_ stackView: NSStackView) {
-        let button1 = NSButton(title: "Open TextDocument", target: self, action: #selector(button1Clicked))
+        let button1 = NSButton(title: "New TextDocument", target: self, action: #selector(button1Clicked))
         stackView.addArrangedSubview(button1)
 
 //        let button2 = NSButton(title: "Open JsonDocument", target: self, action: #selector(button2Clicked))
@@ -45,9 +46,22 @@ class DocumentDemoController: NSViewController {
 
     @objc func button1Clicked(_ sender: NSButton) {
         let sampleString = "In an age of endless noise and fleeting moments, the rarest treasures are found in the quiet places where we reconnect with ourselves."
-        let document = TextDocument()
+        let docController = NSDocumentController.shared
+
+//        print(docController.defaultType!)
+//        print(docController.documentClass(forType: UTType.plainText.identifier)!)
+
+        guard let document = try? docController.makeUntitledDocument(ofType: UTType.plainText.identifier) as? TextDocument else {
+            print("makeUntitledDocument failed")
+            return
+        }
+//        let document = TextDocument()
+
         document.content = sampleString
-        NSDocumentController.shared.addDocument(document)
+
+        // makeUntitledDocument 한다고 자동으로 윈도우 띄우지 않는다.
+        // 수작업 해줘야 하는 것 같다.
+        docController.addDocument(document)
         document.makeWindowControllers()
         document.showWindows()
     }

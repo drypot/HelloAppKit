@@ -9,9 +9,22 @@ import AppKit
 
 // The Cocoa document architecture uses the Objective-C runtime
 
+// Plain Text 용 Info.plist 세팅,
+//
+// Name: 공란으로 둬도 상관없다.
+// Identifier: public.plain-text
+// Class: $(PRODUCT_MODULE_NAME).TextDocument
+//
+// 나머지는 적당히
+// Class 프리픽스로 $(PRODUCT_MODULE_NAME) 안 달아주니 클래스를 찾지 못한다.
+
 class TextDocument: NSDocument {
 
     nonisolated(unsafe) var content: String = ""
+
+//    override init() {
+//        super.init()
+//    }
 
     override class var autosavesInPlace: Bool {
         return true

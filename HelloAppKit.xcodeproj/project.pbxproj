@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 76;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
@@ -24,23 +24,29 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		001132002C999F2E0099CB9B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		001132002C999F2E0099CB9B /* Exceptions for "HelloAppKit" folder in "HelloAppKit" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"/Localized/100-App/Main.storyboard",
+				"/Localized: 100-App/Main.storyboard",
+				Info.plist,
 			);
 			target = 00F8324B2C7DEDE400742EF4 /* HelloAppKit */;
 		};
-		00A6F97D2D26D1DA00DA414C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		00A6F97D2D26D1DA00DA414C /* Exceptions for "Memo" folder in "HelloAppKit" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"10-AppStructure/10-App/AppKit.md",
 				"10-AppStructure/10-App/NSApplication.md",
-				"10-AppStructure/20-Documents/iCloud.md",
+				"10-AppStructure/20-Documents/00-DocAppGuide.md",
+				"10-AppStructure/20-Documents/01-DocAppGuide2.md",
 				"10-AppStructure/20-Documents/NSDocument.md",
 				"10-AppStructure/20-Documents/NSDocumentController.md",
 				"10-AppStructure/20-Documents/NSWindowController.md",
-				"10-AppStructure/20-Documents/Security.md",
+				"10-AppStructure/20-Documents/Parts/iCloud.md",
+				"10-AppStructure/20-Documents/Parts/Menu.md",
+				"10-AppStructure/20-Documents/Parts/ResponderChain.md",
+				"10-AppStructure/20-Documents/Parts/Security.md",
+				"10-AppStructure/20-Documents/Parts/UniformTypeIdentifier.md",
 				"40-Window/Window.md",
 				"50-View/NSViewController.md",
 				"50-View/View.md",
@@ -50,7 +56,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		001132012C999F2E0099CB9B /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+		001132012C999F2E0099CB9B /* Exceptions for "HelloAppKit" folder in "Copy Bundle Resources" phase from "HelloAppKit" target */ = {
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 00F8324A2C7DEDE400742EF4 /* Resources */;
 			membershipExceptions = (
@@ -60,9 +66,28 @@
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		001131F32C999F2E0099CB9B /* HelloAppKit */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (001132002C999F2E0099CB9B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 001132012C999F2E0099CB9B /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = HelloAppKit; sourceTree = "<group>"; };
-		0030B94E2CACF79F00C847E2 /* HelloAppKitTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = HelloAppKitTests; sourceTree = "<group>"; };
-		00A6F9792D26D1DA00DA414C /* Memo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (00A6F97D2D26D1DA00DA414C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Memo; sourceTree = "<group>"; };
+		001131F32C999F2E0099CB9B /* HelloAppKit */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				001132002C999F2E0099CB9B /* Exceptions for "HelloAppKit" folder in "HelloAppKit" target */,
+				001132012C999F2E0099CB9B /* Exceptions for "HelloAppKit" folder in "Copy Bundle Resources" phase from "HelloAppKit" target */,
+			);
+			path = HelloAppKit;
+			sourceTree = "<group>";
+		};
+		0030B94E2CACF79F00C847E2 /* HelloAppKitTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = HelloAppKitTests;
+			sourceTree = "<group>";
+		};
+		00A6F9792D26D1DA00DA414C /* Memo */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				00A6F97D2D26D1DA00DA414C /* Exceptions for "Memo" folder in "HelloAppKit" target */,
+			);
+			path = Memo;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +203,7 @@
 				Base,
 			);
 			mainGroup = 00F832432C7DEDE400742EF4;
-			preferredProjectObjectVersion = 56;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 00F8324D2C7DEDE400742EF4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -364,6 +389,7 @@
 				DEVELOPMENT_TEAM = XFTC3W2MNQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HelloAppKit/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -514,6 +540,7 @@
 				DEVELOPMENT_TEAM = XFTC3W2MNQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HelloAppKit/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -542,6 +569,7 @@
 				DEVELOPMENT_TEAM = XFTC3W2MNQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HelloAppKit/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
