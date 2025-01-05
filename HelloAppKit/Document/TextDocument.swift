@@ -44,8 +44,8 @@ class TextDocument: NSDocument {
         window.title = "Text Document"
         window.center()
 
-        // contentViewController 를 세팅하면
-        // contentView 는 contentViewController.view 로 자동 설정된다고 한다.
+        // window.contentViewController 를 세팅하면
+        // window.contentView 는 contentViewController.view 로 자동 설정된다고 한다.
 
         window.contentViewController = viewController
 
@@ -64,9 +64,6 @@ class TextDocument: NSDocument {
     }
 
     // You should disable undo registration during document reading.
-
-//    override func read(from fileWrapper: FileWrapper, ofType typeName: String) throws {
-//    }
 
     override func read(from data: Data, ofType typeName: String) throws {
         guard let content = String(data: data, encoding: .utf8) else {
