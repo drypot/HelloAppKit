@@ -45,22 +45,28 @@ class DocumentDemoController: NSViewController {
     }
 
     @objc func button1Clicked(_ sender: NSButton) {
-        let sampleString = "In an age of endless noise and fleeting moments, the rarest treasures are found in the quiet places where we reconnect with ourselves."
         let docController = NSDocumentController.shared
+
+//        print(docController.documentClassNames) // ["HelloAppKit.TextDocument"]
 
 //        print(docController.defaultType!)
 //        print(docController.documentClass(forType: UTType.plainText.identifier)!)
+
+//        print(docController.displayName(forType: UTType.plainText.identifier)!) // Plain Text Doucment
+
+//        let document = TextDocument()
+
+        // https://developer.apple.com/documentation/appkit/nsdocumentcontroller/makeuntitleddocument(oftype:)
 
         guard let document = try? docController.makeUntitledDocument(ofType: UTType.plainText.identifier) as? TextDocument else {
             print("makeUntitledDocument failed")
             return
         }
-//        let document = TextDocument()
 
+        //let sampleString = "In an age of endless noise and fleeting moments, the rarest treasures are found in the quiet places where we reconnect with ourselves."
+        let sampleString = ""
         document.content = sampleString
 
-        // makeUntitledDocument 한다고 자동으로 윈도우 띄우지 않는다.
-        // 수작업 해줘야 하는 것 같다.
         docController.addDocument(document)
         document.makeWindowControllers()
         document.showWindows()

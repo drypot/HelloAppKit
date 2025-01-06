@@ -11,7 +11,7 @@ import AppKit
 
 // Plain Text 용 Info.plist 세팅,
 //
-// Name: 공란으로 둬도 상관없다.
+// Name: Plain Text Doucment      // Save As dialog 의 팝업 메뉴에 사용된다.
 // Identifier: public.plain-text
 // Class: $(PRODUCT_MODULE_NAME).TextDocument
 //
