@@ -20,21 +20,19 @@ import AppKit
 
 class TextDocument: NSDocument {
 
-    nonisolated(unsafe) var content: String = ""
+//    nonisolated(unsafe) var content: String = ""
 
 //    override init() {
 //        super.init()
 //    }
+
+    var viewController : TextDocumentViewController!
 
     override class var autosavesInPlace: Bool {
         return true
     }
 
     override func makeWindowControllers() {
-        let viewController = TextDocumentViewController()
-        viewController.document = self
-        viewController.representedObject = self
-
         let window = NSWindow(
             contentRect: .zero,
             styleMask: [.titled, .closable, .resizable, .miniaturizable],
@@ -47,6 +45,9 @@ class TextDocument: NSDocument {
         // window.contentViewController 를 세팅하면
         // window.contentView 는 contentViewController.view 로 자동 설정된다고 한다.
 
+        viewController = TextDocumentViewController()
+        viewController.representedObject = self
+
         window.contentViewController = viewController
 
         // windowController.contentViewController 대신
@@ -57,6 +58,7 @@ class TextDocument: NSDocument {
     }
 
     override func data(ofType typeName: String) throws -> Data {
+        let content = self.viewController.textView.string
         guard let data = content.data(using: .utf8) else {
             throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
         }
@@ -69,8 +71,16 @@ class TextDocument: NSDocument {
         guard let content = String(data: data, encoding: .utf8) else {
             throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
         }
-        self.content = content
+        Task {
+            await MainActor.run {
+                setContent(content)
+            }
+        }
     }
 
+    @MainActor
+    func setContent(_ content: String) {
+        self.viewController.textView.string = content
+    }
 }
 

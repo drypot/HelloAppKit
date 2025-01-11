@@ -8,8 +8,8 @@
 import AppKit
 
 class TextDocumentViewController: NSViewController {
-    weak var document: TextDocument?
-    private var textView = NSTextView()
+
+    var textView = NSTextView()
 
     override func loadView() {
         view = NSView()
@@ -43,14 +43,10 @@ class TextDocumentViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let document else { return }
-        textView.string = document.content
     }
 
     override func viewWillDisappear() {
         super.viewWillDisappear()
-        guard let document else { return }
-        document.content = textView.string
     }
 
 //    override var representedObject: Any? {
