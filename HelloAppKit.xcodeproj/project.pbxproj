@@ -28,28 +28,22 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"/Localized: 100-App/Main.storyboard",
+				"100-App/Memo/AppKit.md",
+				"100-App/Memo/NSApplication.md",
+				"120-Documents/Memo/00-DocAppGuide.md",
+				"120-Documents/Memo/01-DocAppGuide2.md",
+				"120-Documents/Memo/NSDocument.md",
+				"120-Documents/Memo/NSDocumentController.md",
+				"120-Documents/Memo/NSWindowController.md",
+				"120-Documents/Memo2/iCloud.md",
+				"120-Documents/Memo2/Menu.md",
+				"120-Documents/Memo2/ResponderChain.md",
+				"120-Documents/Memo2/Security.md",
+				"120-Documents/Memo2/UniformTypeIdentifier.md",
+				"400-Window/Window.md",
+				"500-View/NSViewController.md",
+				"500-View/View.md",
 				Info.plist,
-			);
-			target = 00F8324B2C7DEDE400742EF4 /* HelloAppKit */;
-		};
-		00A6F97D2D26D1DA00DA414C /* Exceptions for "Memo" folder in "HelloAppKit" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				"10-AppStructure/10-App/AppKit.md",
-				"10-AppStructure/10-App/NSApplication.md",
-				"10-AppStructure/20-Documents/00-DocAppGuide.md",
-				"10-AppStructure/20-Documents/01-DocAppGuide2.md",
-				"10-AppStructure/20-Documents/NSDocument.md",
-				"10-AppStructure/20-Documents/NSDocumentController.md",
-				"10-AppStructure/20-Documents/NSWindowController.md",
-				"10-AppStructure/20-Documents/Parts/iCloud.md",
-				"10-AppStructure/20-Documents/Parts/Menu.md",
-				"10-AppStructure/20-Documents/Parts/ResponderChain.md",
-				"10-AppStructure/20-Documents/Parts/Security.md",
-				"10-AppStructure/20-Documents/Parts/UniformTypeIdentifier.md",
-				"40-Window/Window.md",
-				"50-View/NSViewController.md",
-				"50-View/View.md",
 			);
 			target = 00F8324B2C7DEDE400742EF4 /* HelloAppKit */;
 		};
@@ -80,14 +74,6 @@
 			path = HelloAppKitTests;
 			sourceTree = "<group>";
 		};
-		00A6F9792D26D1DA00DA414C /* Memo */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				00A6F97D2D26D1DA00DA414C /* Exceptions for "Memo" folder in "HelloAppKit" target */,
-			);
-			path = Memo;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +99,6 @@
 			children = (
 				006BC3A82CBC4850005D5E31 /* LICENSE */,
 				006BC3A92CBC4850005D5E31 /* README.md */,
-				00A6F9792D26D1DA00DA414C /* Memo */,
 				001131F32C999F2E0099CB9B /* HelloAppKit */,
 				0030B94E2CACF79F00C847E2 /* HelloAppKitTests */,
 				00F8324D2C7DEDE400742EF4 /* Products */,
@@ -169,7 +154,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				001131F32C999F2E0099CB9B /* HelloAppKit */,
-				00A6F9792D26D1DA00DA414C /* Memo */,
 			);
 			name = HelloAppKit;
 			productName = HelloAppKit;
