@@ -17,37 +17,37 @@ class NavigatorController: NSSplitViewController {
 
     struct DemoSection {
         let label: String
-        let demoList: [Demo]
+        let demos: [Demo]
     }
 
     static let sections = [
-        DemoSection(label: "Document", demoList: [
+        DemoSection(label: "Document", demos: [
             Demo(label: "-", controllerType: DocumentDemoController.self),
         ]),
-        DemoSection(label: "Window", demoList: [
+        DemoSection(label: "Window", demos: [
             Demo(label: "-", controllerType: WindowDemoController.self),
         ]),
-        DemoSection(label: "Stack", demoList: [
+        DemoSection(label: "Stack", demos: [
             Demo(label: "StackView", controllerType: StackViewDemoController.self),
         ]),
-        DemoSection(label: "View", demoList: [
+        DemoSection(label: "View", demos: [
             Demo(label: "View", controllerType: ViewDemoController.self),
             Demo(label: "CustomView", controllerType: CustomViewDemoController.self),
             Demo(label: "CustomCompositeView", controllerType: CustomCompositeViewDemoController.self),
         ]),
-        DemoSection(label: "Text", demoList: [
+        DemoSection(label: "Text", demos: [
             Demo(label: "TextView", controllerType: TextViewDemoController.self),
             Demo(label: "Attributed TextView", controllerType: AttributedTextViewDemoController.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemoController.self),
             Demo(label: "CustomTextView", controllerType: CustomTextViewDemoController.self),
         ]),
-        DemoSection(label: "Table", demoList: [
+        DemoSection(label: "Table", demos: [
             Demo(label: "TableView", controllerType: TableViewDemoController.self),
         ]),
-        DemoSection(label: "Gesture", demoList: [
+        DemoSection(label: "Gesture", demos: [
             Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemoController.self),
         ]),
-        DemoSection(label: "Graphics", demoList: [
+        DemoSection(label: "Graphics", demos: [
             Demo(label: "GraphicButton", controllerType: GraphicButtonDemoController.self),
             Demo(label: "DialClock", controllerType: DialClockController.self),
             Demo(label: "PieClock", controllerType: PieClockController.self),
@@ -55,7 +55,7 @@ class NavigatorController: NSSplitViewController {
             //            Demo(label: "GraphicButton", controllerType: EasyStackControllerDemoController.self),
             //            Demo(label: "PieClock", controllerType: EasyStackControllerDemoController.self),
         ]),
-        DemoSection(label: "Animation", demoList: [
+        DemoSection(label: "Animation", demos: [
             Demo(label: "Mastering macOS 11", controllerType: AnimationDemoController.self),
         ]),
 //        DemoSection(label: "", demoList: [
@@ -70,7 +70,7 @@ class NavigatorController: NSSplitViewController {
 //            Demo(label: "", controllerType: .self),
 //            Demo(label: "", controllerType: .self),
 //        ]),
-        DemoSection(label: "Utility", demoList: [
+        DemoSection(label: "Utility", demos: [
             Demo(label: "SubRunner", controllerType: SubRunnerDemoController.self),
             Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemoController.self),
         ]),
@@ -242,12 +242,12 @@ class NavigatorController: NSSplitViewController {
         }
 
         func numberOfRows(in tableView: NSTableView) -> Int {
-            return section?.demoList.count ?? 0
+            return section?.demos.count ?? 0
         }
 
         func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
             guard let section else { return nil }
-            let demo = section.demoList[row]
+            let demo = section.demos[row]
 
             let cellIdentifier = NSUserInterfaceItemIdentifier("Cell")
             if let cell = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView {
@@ -275,8 +275,8 @@ class NavigatorController: NSSplitViewController {
             guard let section else { return }
 
             let selectedRow = tableView.selectedRow
-            if selectedRow >= 0 && selectedRow < section.demoList.count {
-                let demo = section.demoList[selectedRow]
+            if selectedRow >= 0 && selectedRow < section.demos.count {
+                let demo = section.demos[selectedRow]
                 navigatorController.contentController.use(controller: demo.controllerType.init())
                 UserDefaults.standard.set(selectedRow, forKey: UserDefaultKeys.subSectionIndex.rawValue)
             }

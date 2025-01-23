@@ -10,8 +10,6 @@ import Cocoa
 @MainActor @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    let windowFrameKey = "MainWindowFrame"
-
     var window: NSWindow!
 
     func applicationWillFinishLaunching(_ notification: Notification) {
@@ -58,11 +56,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func saveWindowPosition() {
         let frameString = NSStringFromRect(window.frame)
-        UserDefaults.standard.set(frameString, forKey: windowFrameKey)
+        UserDefaults.standard.set(frameString, forKey: "MainWindowFrame")
     }
 
     private func restoreWindowPosition() {
-        if let frameString = UserDefaults.standard.string(forKey: windowFrameKey) {
+        if let frameString = UserDefaults.standard.string(forKey: "MainWindowFrame") {
             let frame = NSRectFromString(frameString)
             window.setFrame(frame, display: true)
         } else {
