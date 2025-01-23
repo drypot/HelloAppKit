@@ -41,6 +41,7 @@
 				"120-Documents/Memo2/Security.md",
 				"120-Documents/Memo2/UniformTypeIdentifier.md",
 				"400-Window/Window.md",
+				"500-View/Layout.md",
 				"500-View/NSViewController.md",
 				"500-View/View.md",
 				Info.plist,
