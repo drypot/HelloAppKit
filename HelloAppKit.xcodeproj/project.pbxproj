@@ -40,6 +40,8 @@
 				"120-Documents/Memo2/ResponderChain.md",
 				"120-Documents/Memo2/Security.md",
 				"120-Documents/Memo2/UniformTypeIdentifier.md",
+				"130-CocoaBinding/Memo/CocoaBinding.md",
+				"130-CocoaBinding/Memo/KeyValueCoding.md",
 				"400-Window/Memo/Window.md",
 				"500-View/Memo/Layout.md",
 				"500-View/Memo/NSViewController.md",

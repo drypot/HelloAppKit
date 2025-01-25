@@ -24,6 +24,9 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Document", demos: [
             Demo(label: "-", controllerType: DocumentDemoController.self),
         ]),
+        DemoSection(label: "Cocoa Bindings", demos: [
+            Demo(label: "-", controllerType: CocoaBindingDemoController.self),
+        ]),
         DemoSection(label: "Window", demos: [
             Demo(label: "-", controllerType: WindowDemoController.self),
         ]),
