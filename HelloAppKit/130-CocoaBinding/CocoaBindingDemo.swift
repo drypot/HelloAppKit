@@ -1,8 +1,8 @@
 //
-//  ViewDemo.swift
+//  CocoaBindingDemoController.swift
 //  HelloAppKit
 //
-//  Created by Kyuhyun Park on 9/30/24.
+//  Created by Kyuhyun Park on 1/26/25.
 //
 
 import AppKit

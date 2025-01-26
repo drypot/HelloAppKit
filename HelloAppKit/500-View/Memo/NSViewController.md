@@ -19,8 +19,10 @@
 
  https://www.cocoawithlove.com/2008/07/better-integration-for-nsviewcontroller.html
 
- From Mac OS X 10.5 Leopard (2007년 10월), NSViewController began offering similar from-NIB loading convenience for NSViews.
+ From Mac OS X 10.5 Leopard (2007년 10월), 
+ NSViewController began offering similar from-NIB loading convenience for NSViews.
  This allows higher level context and dynamic configuration of regions of a window,
  rather than purely at the coarse level of the whole window.
+
 
 
