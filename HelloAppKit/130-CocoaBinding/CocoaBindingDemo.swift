@@ -1,5 +1,5 @@
 //
-//  CocoaBindingDemoController.swift
+//  CocoaBindingDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 1/26/25.
@@ -7,7 +7,7 @@
 
 import AppKit
 
-class CocoaBindingDemoController: NSViewController {
+class CocoaBindingDemo: NSViewController {
 
     @objc class Person: NSObject {
         @objc dynamic var name: String

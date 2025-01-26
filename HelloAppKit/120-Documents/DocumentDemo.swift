@@ -8,7 +8,7 @@
 import AppKit
 import UniformTypeIdentifiers
 
-class DocumentDemoController: NSViewController {
+class DocumentDemo: NSViewController {
 
     override func loadView() {
         view = NSView()

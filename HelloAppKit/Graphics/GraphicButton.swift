@@ -75,7 +75,7 @@ class GraphicButton: NSButton {
     
 }
 
-class GraphicButtonDemoController: NSViewController {
+class GraphicButtonDemo: NSViewController {
 
     override func loadView() {
         view = NSView()

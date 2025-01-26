@@ -22,44 +22,45 @@ class NavigatorController: NSSplitViewController {
 
     static let sections = [
         DemoSection(label: "Document", demos: [
-            Demo(label: "-", controllerType: DocumentDemoController.self),
+            Demo(label: "-", controllerType: DocumentDemo.self),
         ]),
         DemoSection(label: "Cocoa Bindings", demos: [
-            Demo(label: "-", controllerType: CocoaBindingDemoController.self),
+            Demo(label: "-", controllerType: CocoaBindingDemo.self),
+            Demo(label: "Slider Binding", controllerType: SliderBindingDemo.self),
         ]),
         DemoSection(label: "Window", demos: [
-            Demo(label: "-", controllerType: WindowDemoController.self),
+            Demo(label: "-", controllerType: WindowDemo.self),
         ]),
         DemoSection(label: "Stack", demos: [
-            Demo(label: "StackView", controllerType: StackViewDemoController.self),
+            Demo(label: "StackView", controllerType: StackViewDemo.self),
         ]),
         DemoSection(label: "View", demos: [
-            Demo(label: "View", controllerType: ViewDemoController.self),
-            Demo(label: "CustomView", controllerType: CustomViewDemoController.self),
-            Demo(label: "CustomCompositeView", controllerType: CustomCompositeViewDemoController.self),
+            Demo(label: "View", controllerType: ViewDemo.self),
+            Demo(label: "CustomView", controllerType: CustomViewDemo.self),
+            Demo(label: "CustomCompositeView", controllerType: CustomCompositeViewDemo.self),
         ]),
         DemoSection(label: "Text", demos: [
-            Demo(label: "TextView", controllerType: TextViewDemoController.self),
-            Demo(label: "Attributed TextView", controllerType: AttributedTextViewDemoController.self),
-            //Demo(label: "TextStorage", controllerType: TextStorageDemoController.self),
-            Demo(label: "CustomTextView", controllerType: CustomTextViewDemoController.self),
+            Demo(label: "TextView", controllerType: TextViewDemo.self),
+            Demo(label: "Attributed TextView", controllerType: AttributedTextViewDemo.self),
+            //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
+            Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
         ]),
         DemoSection(label: "Table", demos: [
-            Demo(label: "TableView", controllerType: TableViewDemoController.self),
+            Demo(label: "TableView", controllerType: TableViewDemo.self),
         ]),
         DemoSection(label: "Gesture", demos: [
-            Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemoController.self),
+            Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),
         ]),
         DemoSection(label: "Graphics", demos: [
-            Demo(label: "GraphicButton", controllerType: GraphicButtonDemoController.self),
+            Demo(label: "GraphicButton", controllerType: GraphicButtonDemo.self),
             Demo(label: "DialClock", controllerType: DialClockController.self),
             Demo(label: "PieClock", controllerType: PieClockController.self),
-            //            Demo(label: "DialClock", controllerType: AddStackDemoController.self),
-            //            Demo(label: "GraphicButton", controllerType: EasyStackControllerDemoController.self),
-            //            Demo(label: "PieClock", controllerType: EasyStackControllerDemoController.self),
+            //            Demo(label: "DialClock", controllerType: AddStackDemo.self),
+            //            Demo(label: "GraphicButton", controllerType: EasyStackControllerDemo.self),
+            //            Demo(label: "PieClock", controllerType: EasyStackControllerDemo.self),
         ]),
         DemoSection(label: "Animation", demos: [
-            Demo(label: "Mastering macOS 11", controllerType: AnimationDemoController.self),
+            Demo(label: "Mastering macOS 11", controllerType: AnimationDemo.self),
         ]),
 //        DemoSection(label: "", demoList: [
 //            Demo(label: "", controllerType: .self),
@@ -74,8 +75,8 @@ class NavigatorController: NSSplitViewController {
 //            Demo(label: "", controllerType: .self),
 //        ]),
         DemoSection(label: "Utility", demos: [
-            Demo(label: "SubRunner", controllerType: SubRunnerDemoController.self),
-            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemoController.self),
+            Demo(label: "SubRunner", controllerType: SubRunnerDemo.self),
+            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemo.self),
         ]),
 
     ]

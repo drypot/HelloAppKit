@@ -7,7 +7,7 @@
 
 import AppKit
 
-class TextViewDemoController: NSViewController {
+class TextViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()

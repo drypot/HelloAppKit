@@ -7,7 +7,7 @@
 
 import AppKit
 
-class StackViewDemoController: NSViewController {
+class StackViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()

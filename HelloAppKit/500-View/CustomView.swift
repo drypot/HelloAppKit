@@ -40,7 +40,7 @@ class CustomView: NSView {
     
 }
 
-class CustomViewDemoController: NSViewController {
+class CustomViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()

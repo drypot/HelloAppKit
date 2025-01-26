@@ -1,5 +1,5 @@
 //
-//  SubRunnerDemoController.swift
+//  SubRunnerDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 8/27/24.
@@ -7,7 +7,7 @@
 
 import AppKit
 
-class SubRunnerDemoController: NSViewController {
+class SubRunnerDemo: NSViewController {
 
     var subRunnerTypes = [String: SubRunner.Type]()
     

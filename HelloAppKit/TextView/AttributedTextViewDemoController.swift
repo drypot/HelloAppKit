@@ -1,5 +1,5 @@
 //
-//  AttributedTextViewDemoController.swift
+//  AttributedTextViewDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 9/21/24.
@@ -9,7 +9,7 @@ import AppKit
 
 // Mastering macOS programming-Packt Publishing (2017), 209p
 
-class AttributedTextViewDemoController: NSViewController {
+class AttributedTextViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()

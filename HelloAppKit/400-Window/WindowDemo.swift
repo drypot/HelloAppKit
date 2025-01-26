@@ -7,7 +7,7 @@
 
 import AppKit
 
-class WindowDemoController: NSViewController {
+class WindowDemo: NSViewController {
 
     let button = NSButton()
 

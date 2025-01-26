@@ -11,7 +11,7 @@ import Cocoa
 
 // Mastering macOS programming, Packt Publishing (2017), 7 장 참고
 
-class TableViewDemoController: NSViewController {
+class TableViewDemo: NSViewController {
 
     var personArrayWrapper = PersonArrayWrapper(content: [
         Person(name: "Kirk", busy: true, shirtColor: .blue),
@@ -128,7 +128,7 @@ class TableViewDemoController: NSViewController {
     
 }
 
-extension TableViewDemoController: NSTableViewDataSource {
+extension TableViewDemo: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return self.personArrayWrapper.count
@@ -136,7 +136,7 @@ extension TableViewDemoController: NSTableViewDataSource {
     
 }
 
-extension TableViewDemoController: NSTableViewDelegate {
+extension TableViewDemo: NSTableViewDelegate {
     
     func tableView(
         _ tableView: NSTableView,

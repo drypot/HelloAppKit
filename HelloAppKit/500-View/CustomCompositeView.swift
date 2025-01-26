@@ -55,7 +55,7 @@ class CustomCompositeView: NSView {
     }
 }
 
-class CustomCompositeViewDemoController: NSViewController {
+class CustomCompositeViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()

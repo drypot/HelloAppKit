@@ -7,7 +7,7 @@
 
 import AppKit
 
-class TextStorageDemoController: NSViewController {
+class TextStorageDemo: NSViewController {
 
     var textStorage = NSTextStorage()
     var layoutManager = NSLayoutManager()

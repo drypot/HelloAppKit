@@ -10,7 +10,7 @@ import AppKit
 // Mastering macOS programming-Packt Publishing (2017), Chapter 11,
 // 딱히 당장 쓸 일이 없을 것 같아서 챕터 후반은 스킵.
 
-class AnimationDemoController: NSViewController {
+class AnimationDemo: NSViewController {
     
     var customView: NSView!
     
