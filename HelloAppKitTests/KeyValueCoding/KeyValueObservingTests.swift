@@ -14,42 +14,18 @@ import Testing
 
 struct KeyValueObservingTests {
 
-    // Use @objc and dynamic to make the property observable
-
-    class BankAccount: NSObject {
-        @objc dynamic var balance: Double
-
-        init(balance: Double) {
-            self.balance = balance
-        }
-    }
-
-    @Test func testObservationWithNew() throws {
+    @Test func testObservation() throws {
         let logger = SimpleLogger<String>()
 
-        let account = BankAccount(balance: 1000.0)
+        // Use @objc and dynamic to make the property observable
 
-        let observation = account.observe(\.balance, options: .new) { account, change in
-            if let newValue = change.newValue {
-                logger.append("changed to \(newValue)")
+        class BankAccount: NSObject {
+            @objc dynamic var balance: Double
+
+            init(balance: Double) {
+                self.balance = balance
             }
         }
-
-        // Change the balance
-        account.balance += 500.0 // This will trigger the observation
-        account.balance -= 300.0 // This will also trigger the observation
-
-        // Cleanup
-        observation.invalidate()
-
-        #expect(logger.log() == [
-            "changed to 1500.0",
-            "changed to 1200.0",
-        ])
-    }
-
-    @Test func testObservationWithOld() throws {
-        let logger = SimpleLogger<String>()
 
         let account = BankAccount(balance: 1000.0)
 
@@ -72,4 +48,45 @@ struct KeyValueObservingTests {
         ])
     }
 
+    @Test func testObservationParentChild() throws {
+
+        class Parent: NSObject, @unchecked Sendable {
+            @objc dynamic var name: String
+
+            init(name: String) {
+                self.name = name
+            }
+        }
+
+        class Child: NSObject, @unchecked Sendable {
+            @objc dynamic var parentName: String = ""
+            private var observer: NSKeyValueObservation?
+
+            init(parent: Parent) {
+                super.init()
+                parentName = parent.name
+
+                // Bind child's name to parent's name
+                observer = parent.observe(\.name, options: [.new]) { [weak self] _, change in
+                    if let newName = change.newValue {
+                        self?.parentName = newName
+                    }
+                }
+            }
+
+            deinit {
+                observer?.invalidate()
+            }
+        }
+
+        let parent = Parent(name: "Alice")
+        let child = Child(parent: parent)
+
+        #expect(child.parentName == "Alice")
+
+        parent.name = "Bob"
+
+        #expect(child.parentName == "Bob")
+    }
+    
 }

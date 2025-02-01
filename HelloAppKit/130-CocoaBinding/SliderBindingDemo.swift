@@ -41,6 +41,7 @@ class SliderBindingDemo: NSViewController {
     }
 
     class TargetActionDemo: NSViewController {
+        let label = NSTextField(labelWithString: "Target Action")
         let slider = NSSlider(value: 50.0, minValue: 0.0, maxValue: 100.0, target: nil, action: nil)
         let textField = NSTextField(string: "50.0")
 
@@ -48,9 +49,12 @@ class SliderBindingDemo: NSViewController {
             view = NSView()
             view.translatesAutoresizingMaskIntoConstraints = false
 
+            // target: The object that should respond to the event.
+            // action: The method (selector) that gets called on the target when the event occurs.
+
             // slider.target 에 textField 를
             // slider.action 에 #selector(textField.takeFloatValueFrom) 을 바로 연결해도 동작한다.
-            // 좀 일반화를 위해서 일단 action 을 컨트롤러 메서드에 연결하는 방식을 그대로 뒀다.
+            // 일반적인 경우를 위해 controller를 target으로 하는 방식을 썼다.
 
             slider.target = self
             slider.action = #selector(sliderValueChanged)
@@ -59,7 +63,7 @@ class SliderBindingDemo: NSViewController {
             textField.target = self
             textField.action = #selector(textFieldValueChanged)
 
-            let stackView = NSStackView(views: [slider, textField])
+            let stackView = NSStackView(views: [label, slider, textField])
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.orientation = .vertical
             stackView.spacing = 10
@@ -92,6 +96,7 @@ class SliderBindingDemo: NSViewController {
 
         @objc dynamic var sliderValue = 50.0
 
+        let label = NSTextField(labelWithString: "Key Value Binding")
         let slider = NSSlider(value: 50.0, minValue: 0.0, maxValue: 100.0, target: nil, action: nil)
         let textField = NSTextField(string: "50.0")
 
@@ -99,7 +104,7 @@ class SliderBindingDemo: NSViewController {
             view = NSView()
             view.translatesAutoresizingMaskIntoConstraints = false
 
-            let stackView = NSStackView(views: [slider, textField])
+            let stackView = NSStackView(views: [label, slider, textField])
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.orientation = .vertical
             stackView.spacing = 10
