@@ -7,21 +7,21 @@
 
 import AppKit
 
-class SliderBindingDemo: NSViewController {
+class ViewControllerStackDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let targetActionDemo = TargetActionDemo()
-        let keyValueBindingDemo = KeyValueBindingDemo()
+        let controller1 = Controller1()
+        let controller2 = Controller2()
 
-        addChild(targetActionDemo)
-        addChild(keyValueBindingDemo)
+        addChild(controller1)
+        addChild(controller2)
 
         let stackView = NSStackView(views: [
-            targetActionDemo.view,
-            keyValueBindingDemo.view
+            controller1.view,
+            controller2.view
         ])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
@@ -40,30 +40,14 @@ class SliderBindingDemo: NSViewController {
         ])
     }
 
-    class TargetActionDemo: NSViewController {
-        let label = NSTextField(labelWithString: "Target Action")
-        let slider = NSSlider(value: 50.0, minValue: 0.0, maxValue: 100.0, target: nil, action: nil)
-        let textField = NSTextField(string: "50.0")
+    class Controller1: NSViewController {
+        let label = NSTextField(labelWithString: "Controller1")
 
         override func loadView() {
             view = NSView()
             view.translatesAutoresizingMaskIntoConstraints = false
 
-            // target: The object that should respond to the event.
-            // action: The method (selector) that gets called on the target when the event occurs.
-
-            // slider.target 에 textField 를
-            // slider.action 에 #selector(textField.takeFloatValueFrom) 을 바로 연결해도 동작한다.
-            // 일반적인 경우를 위해 controller를 target으로 하는 방식을 썼다.
-
-            slider.target = self
-            slider.action = #selector(sliderValueChanged)
-
-            textField.isEditable = true
-            textField.target = self
-            textField.action = #selector(textFieldValueChanged)
-
-            let stackView = NSStackView(views: [label, slider, textField])
+            let stackView = NSStackView(views: [label])
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.orientation = .vertical
             stackView.spacing = 10
@@ -79,32 +63,18 @@ class SliderBindingDemo: NSViewController {
                 stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
 //                stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
             ])
-        }
-
-        @objc func sliderValueChanged(_ sender: NSSlider) {
-            // Update the text field to reflect the slider value
-            textField.takeFloatValueFrom(sender)
-        }
-
-        @objc func textFieldValueChanged(_ sender: NSTextField) {
-            // Update the slider to reflect the text field value
-            slider.takeFloatValueFrom(sender)
         }
     }
 
-    class KeyValueBindingDemo: NSViewController {
+    class Controller2: NSViewController {
 
-        @objc dynamic var sliderValue = 50.0
-
-        let label = NSTextField(labelWithString: "Key Value Binding")
-        let slider = NSSlider(value: 50.0, minValue: 0.0, maxValue: 100.0, target: nil, action: nil)
-        let textField = NSTextField(string: "50.0")
+        let label = NSTextField(labelWithString: "Controller2")
 
         override func loadView() {
             view = NSView()
             view.translatesAutoresizingMaskIntoConstraints = false
 
-            let stackView = NSStackView(views: [label, slider, textField])
+            let stackView = NSStackView(views: [label])
             stackView.translatesAutoresizingMaskIntoConstraints = false
             stackView.orientation = .vertical
             stackView.spacing = 10
@@ -120,12 +90,6 @@ class SliderBindingDemo: NSViewController {
                 stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
 //                stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
             ])
-
-            // Bind the slider's value to `sliderValue`
-            slider.bind(.value, to: self, withKeyPath: #keyPath(sliderValue), options: nil)
-
-            // Bind the text field's value to `sliderValue`
-            textField.bind(.value, to: self, withKeyPath: #keyPath(sliderValue), options: nil)
         }
     }
 
