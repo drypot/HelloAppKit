@@ -14,7 +14,7 @@ import Testing
 
 struct KeyValueObservingTests {
 
-    @Test func testObservation() throws {
+    @Test func testObserve() throws {
         let logger = SimpleLogger<String>()
 
         // Use @objc and dynamic to make the property observable
@@ -48,7 +48,7 @@ struct KeyValueObservingTests {
         ])
     }
 
-    @Test func testObservationParentChild() throws {
+    @Test func testParentChild() throws {
 
         class Parent: NSObject, @unchecked Sendable {
             @objc dynamic var name: String
