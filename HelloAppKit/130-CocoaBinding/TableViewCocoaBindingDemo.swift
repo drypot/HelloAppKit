@@ -1,5 +1,5 @@
 //
-//  ArrayControllerDemo.swift
+//  TableViewCocoaBindingDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 2/8/25.
@@ -29,9 +29,12 @@ import Cocoa
 //
 // 2025-02-09 아침 7시.
 
-class ArrayControllerDemo: NSViewController {
+// 다시 한번 도전해서 성공.
+// 2025-02-09 밤 11시.
 
-    @objc class Person: NSObject {
+class TableViewCocoaBindingDemo: NSViewController {
+
+    class Person: NSObject {
         @objc dynamic var name: String
         @objc dynamic var age: Int
 
@@ -44,13 +47,19 @@ class ArrayControllerDemo: NSViewController {
     let padding = 20.0
     let interPadding = 8.0
 
-    private var arrayController = NSArrayController()
-    private var scrollView = NSScrollView()
-    private var tableView = NSTableView()
-    private var nameField = NSTextField()
-    private var ageField = NSTextField()
-    private var addButton = NSButton()
-    private var removeButton = NSButton()
+    let arrayController = NSArrayController()
+    let scrollView = NSScrollView()
+    let tableView = NSTableView()
+    let nameField = NSTextField()
+    let ageField = NSTextField()
+    let addButton = NSButton()
+    let removeButton = NSButton()
+
+    @objc private var people: [Person] = [] {
+        didSet {
+            arrayController.content = people
+        }
+    }
 
     override func loadView() {
         view = NSView()
@@ -60,6 +69,14 @@ class ArrayControllerDemo: NSViewController {
         setupTable()
         setupFields()
         loadSampleData()
+    }
+
+    private func loadSampleData() {
+        people = [
+            Person(name: "Alice", age: 25),
+            Person(name: "Bob", age: 30),
+            Person(name: "Charlie", age: 22)
+        ]
     }
 
     private func setupScrollView() {
@@ -78,10 +95,7 @@ class ArrayControllerDemo: NSViewController {
     }
 
     private func setupTable() {
-
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        //        tableView.delegate = self
-        //        tableView.headerView = nil
         tableView.usesAutomaticRowHeights = true
 
 //        tableView.dataSource = self
@@ -89,42 +103,34 @@ class ArrayControllerDemo: NSViewController {
 
         let nameColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("name"))
         nameColumn.title = "Name"
-        //        nameColumn.width = 180
+        nameColumn.width = 180
         tableView.addTableColumn(nameColumn)
 
         let ageColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("age"))
         ageColumn.title = "Age"
-        //        ageColumn.width = 100
+        ageColumn.width = 100
         tableView.addTableColumn(ageColumn)
 
         arrayController.bind(.contentArray, to: self, withKeyPath: "people", options: nil)
-        //        arrayController.bind(.selectionIndexes, to: tableView, withKeyPath: "selectedRowIndexes", options: nil)
+        //arrayController.bind(.selectionIndexes, to: tableView, withKeyPath: "selectedRowIndexes", options: nil)
 
         tableView.bind(.content, to: arrayController, withKeyPath: "arrangedObjects", options: nil)
-        //        tableView.bind(.selectionIndexes, to: arrayController, withKeyPath: "selectionIndexes", options: nil)
-        //        tableView.bind(.sortDescriptors, to: arrayController, withKeyPath: "sortDescriptors", options: nil)
+        tableView.bind(.selectionIndexes, to: arrayController, withKeyPath: "selectionIndexes", options: nil)
+        tableView.bind(.sortDescriptors, to: arrayController, withKeyPath: "sortDescriptors", options: nil)
 
-        //        tableView.bind(.content, to: arrayController, withKeyPath: "arrangedObjects", options: nil)
-        //        tableView.bind(.selectionIndexes, to: arrayController, withKeyPath: "selectionIndexes", options: nil)
-        //        tableView.bind(.sortDescriptors, to: arrayController, withKeyPath: "sortDescriptors", options: nil)
+//        nameColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.name", options: nil)
+//        ageColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.age", options: nil)
 
-        nameColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.name", options: nil)
-        ageColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.age", options: nil)
-        //        nameColumn.bind(.value, to: arrayController, withKeyPath: "objectValue.name", options: nil)
-        //        ageColumn.bind(.value, to: arrayController, withKeyPath: "objectValue.age", options: nil)
-
-        //        for column in tableView.tableColumns {
-        //            let keyPath = column.identifier.rawValue
-        //            column.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.\(keyPath)", options: nil)
-        //        }
+        for column in tableView.tableColumns {
+            let keyPath = column.identifier.rawValue
+            column.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.\(keyPath)", options: nil)
+        }
 
     }
 
     private func setupFields() {
-
-        // Name Field (Detail)
         nameField.translatesAutoresizingMaskIntoConstraints = false
-        nameField.isEditable = false
+        nameField.isEditable = true
         view.addSubview(nameField)
 
         nameField.bind(.value, to: arrayController, withKeyPath: "selection.name", options: nil)
@@ -135,9 +141,8 @@ class ArrayControllerDemo: NSViewController {
             nameField.widthAnchor.constraint(equalToConstant: 200),
         ])
 
-        // Age Field (Detail)
         ageField.translatesAutoresizingMaskIntoConstraints = false
-        ageField.isEditable = false
+        ageField.isEditable = true
         view.addSubview(ageField)
 
         ageField.bind(.value, to: arrayController, withKeyPath: "selection.age", options: nil)
@@ -148,7 +153,6 @@ class ArrayControllerDemo: NSViewController {
             ageField.widthAnchor.constraint(equalToConstant: 200),
         ])
 
-        // Add Button
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.title = "Add"
         addButton.target = self
@@ -160,7 +164,6 @@ class ArrayControllerDemo: NSViewController {
             addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
         ])
 
-        // Remove Button
         removeButton.translatesAutoresizingMaskIntoConstraints = false
         removeButton.title = "Remove"
         removeButton.target = self
@@ -174,20 +177,6 @@ class ArrayControllerDemo: NSViewController {
 
     }
 
-    @objc private var people: [Person] = [] {
-        didSet {
-            arrayController.content = people
-        }
-    }
-
-    private func loadSampleData() {
-        people = [
-            Person(name: "Alice", age: 25),
-            Person(name: "Bob", age: 30),
-            Person(name: "Charlie", age: 22)
-        ]
-    }
-
     @objc private func addPerson() {
         let newPerson = Person(name: "New Person", age: Int.random(in: 20...40))
         arrayController.addObject(newPerson)
@@ -199,56 +188,45 @@ class ArrayControllerDemo: NSViewController {
 
 }
 
-//extension ArrayControllerDemo: NSTableViewDataSource {
-//
-//    func numberOfRows(in tableView: NSTableView) -> Int {
-//        return people.count
-//    }
-//
-//}
+extension TableViewCocoaBindingDemo: NSTableViewDelegate {
 
-extension ArrayControllerDemo: NSTableViewDelegate {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let tableColumn else { return nil }
 
-    func tableView(_ tableView: NSTableView, viewFor column: NSTableColumn?, row: Int) -> NSView? {
+        let id = tableColumn.identifier
 
-        func makeCellView(withIdentifier id: NSUserInterfaceItemIdentifier) -> NSTableCellView {
-            guard let cachedView = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView else {
-                let textField = NSTextField()
-                textField.translatesAutoresizingMaskIntoConstraints = false
-                textField.isEditable = false
-                textField.isBordered = false
-                textField.controlSize = .regular
-
-                let cellView = NSTableCellView()
-                cellView.identifier = id
-                cellView.addSubview(textField)
-                cellView.textField = textField
-
-                NSLayoutConstraint.activate([
-                    textField.leadingAnchor.constraint(equalTo: cellView.leadingAnchor),
-                    textField.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
-                    textField.topAnchor.constraint(equalTo: cellView.topAnchor),
-                    textField.bottomAnchor.constraint(equalTo: cellView.bottomAnchor),
-                ])
-
-                return cellView
+        let cellView = {
+            if let cachedView = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+                return cachedView
             }
-            return cachedView
-        }
 
-        let id = column!.identifier
-        let cellView = makeCellView(withIdentifier: id)
+            let textField = NSTextField()
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.isEditable = false
+            textField.isBordered = false
+            textField.backgroundColor = .clear // 이거 안 하면 행이 선택되었을 때 배경색이 바뀌지 않는다;
 
-//        cellView.textField!.stringValue = "Hey"
+            let cellView = NSTableCellView()
+            cellView.identifier = id
 
-        //
-        //
-        ////            // Create a text field for the cell
-        ////            let textField = NSTextField()
-        ////            textField.backgroundColor = NSColor.clearColor()
-        ////            textField.translatesAutoresizingMaskIntoConstraints = false
-        ////            textField.bordered = false
-        ////            textField.controlSize = NSControlSize.SmallControlSize
+            cellView.addSubview(textField)
+            cellView.textField = textField
+
+            // NSTableView 에 NSArrayController 연결하는 거 이틀 삽질했는데
+            // 아래 바인딩 코드가 핵심이었다.
+            textField.bind(.value, to: cellView, withKeyPath: "objectValue.\(id.rawValue)", options: nil)
+
+            NSLayoutConstraint.activate([
+                textField.leadingAnchor.constraint(equalTo: cellView.leadingAnchor),
+                textField.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
+                textField.topAnchor.constraint(equalTo: cellView.topAnchor),
+                textField.bottomAnchor.constraint(equalTo: cellView.bottomAnchor),
+            ])
+
+            return cellView
+        }()
+
+        // ...
 
         return cellView
     }
