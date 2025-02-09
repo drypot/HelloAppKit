@@ -25,8 +25,9 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "-", controllerType: DocumentDemo.self),
         ]),
         DemoSection(label: "Cocoa Bindings", demos: [
-            Demo(label: "Target Action", controllerType: TargetActionDemo.self),
-            Demo(label: "Key Value Binding", controllerType: KeyValueBindingDemo.self),
+            Demo(label: "TargetAction", controllerType: TargetActionDemo.self),
+            Demo(label: "KeyValueBinding", controllerType: KeyValueBindingDemo.self),
+            //Demo(label: "ArrayController", controllerType: ArrayControllerDemo.self),
             Demo(label: "-", controllerType: CocoaBindingDemo.self),
         ]),
         DemoSection(label: "Window", demos: [
@@ -39,11 +40,11 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "View", controllerType: ViewDemo.self),
             Demo(label: "CustomView", controllerType: CustomViewDemo.self),
             Demo(label: "CustomCompositeView", controllerType: CustomCompositeViewDemo.self),
-            Demo(label: "ViewController Stack", controllerType: ViewControllerStackDemo.self),
+            Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
         ]),
         DemoSection(label: "Text", demos: [
             Demo(label: "TextView", controllerType: TextViewDemo.self),
-            Demo(label: "Attributed TextView", controllerType: AttributedTextViewDemo.self),
+            Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
             Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
         ]),
