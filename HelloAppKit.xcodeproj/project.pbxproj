@@ -42,10 +42,10 @@
 				"120-Documents/Memo2/UniformTypeIdentifier.md",
 				"130-CocoaBinding/Memo/CocoaBinding.md",
 				"130-CocoaBinding/Memo/KeyValueCoding.md",
+				"200-View/Memo/Layout.md",
+				"200-View/Memo/NSViewController.md",
+				"200-View/Memo/View.md",
 				"400-Window/Memo/Window.md",
-				"500-View/Memo/Layout.md",
-				"500-View/Memo/NSViewController.md",
-				"500-View/Memo/View.md",
 				Info.plist,
 			);
 			target = 00F8324B2C7DEDE400742EF4 /* HelloAppKit */;
