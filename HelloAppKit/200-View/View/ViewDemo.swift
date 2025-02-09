@@ -9,17 +9,22 @@ import AppKit
 
 class ViewDemo: NSViewController {
 
+    let padding = 20.0
+
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
+        setupChildView()
+    }
+
+    private func setupChildView() {
         let childView = NSView()
         childView.translatesAutoresizingMaskIntoConstraints = false
         childView.wantsLayer = true
         childView.layer?.backgroundColor = NSColor.red.cgColor
         view.addSubview(childView)
 
-        let padding = 20.0
         NSLayoutConstraint.activate([
             childView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             childView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
