@@ -7,187 +7,181 @@
 
 import Cocoa
 
-// TableView 데모는 완전 다시 만들어야 할 듯;
-
-// Mastering macOS programming, Packt Publishing (2017), 7 장 참고
-
 class TableViewDemo: NSViewController {
 
-    var personArrayWrapper = PersonArrayWrapper(content: [
-        Person(name: "Kirk", busy: true, shirtColor: .blue),
-        Person(name: "Scottie", busy: false, shirtColor: .red),
-    ])
+    class Person {
+        var name: String
+        var age: Int
 
-    let kContentKeyPath = "content"
-    private var personArrayWrapperContext = 0
-    
-    nonisolated(unsafe) var tableView: NSTableView!
-    var infoLabel: NSTextField!
+        init(name: String, age: Int) {
+            self.name = name
+            self.age = age
+        }
+    }
 
-//    deinit {
-//        personArrayWrapper.removeObserver(self, forKeyPath: kContentKeyPath)
-//    }
+    let padding = 20.0
+    let interPadding = 8.0
+
+    let scrollView = NSScrollView()
+    let tableView = NSTableView()
+    let nameField = NSTextField()
+    let ageField = NSTextField()
+    let addButton = NSButton()
+
+    var people = [Person]()
 
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackView = NSStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.alignment = .leading
-        view.addSubview(stackView)
+        // StackView 를 썼더니 NSTextField에서 다음 NSTextField로 Tab 키로 이동할 수가 없다;
+        // 수작업 레이아웃해야 한다;
 
-        addStckItems(stackView)
+        setupScrollView()
+        setupTable()
+        setupFields()
+        loadData()
+    }
 
-        let padding = 20.0
+    private func loadData() {
+        people = [
+            Person(name: "Alice", age: 25),
+            Person(name: "Bob", age: 30),
+            Person(name: "Charlie", age: 22)
+        ]
+        tableView.reloadData()
+    }
+
+    private func setupScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.documentView = tableView
+        scrollView.hasVerticalScroller = true
+
+        view.addSubview(scrollView)
+
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            scrollView.widthAnchor.constraint(equalToConstant: 400),
+            scrollView.heightAnchor.constraint(equalToConstant: 200),
         ])
     }
 
-    func addStckItems(_ stackView: NSStackView) {
-        personArrayWrapper.addObserver(
-            self,
-            forKeyPath: kContentKeyPath,
-            options:[.new, .old],
-            context: &personArrayWrapperContext
-        )
+    private func setupTable() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.usesAutomaticRowHeights = true
+        tableView.selectionHighlightStyle = .regular
 
-        // Add TextField
-        let infoLabel = NSTextField()
-        infoLabel.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(infoLabel)
-        self.infoLabel = infoLabel
-        
-        // Add Add Button
-        let addButton = NSButton()
-        addButton.bezelStyle = .rounded
-        addButton.title = "Add"
-        addButton.target = self
-        addButton.action = #selector(addButtonClicked)
-        stackView.addArrangedSubview(addButton)
-
-        // Add table
-        let tableRect = CGRect(x: 20, y: 115, width: 240, height: 135)
-        self.tableView = NSTableView(frame: tableRect)
         tableView.dataSource = self
         tableView.delegate = self
-        
-        let tableScrollView = NSScrollView(frame: tableRect)
-        tableScrollView.documentView = tableView
-        //tableScrollView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.addArrangedSubview(tableScrollView)
-                
-        // Configure table
-        let nameColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "nameColumn"))
+
+        let nameColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("name"))
         nameColumn.title = "Name"
-        nameColumn.minWidth = 100
+        nameColumn.width = 180
         tableView.addTableColumn(nameColumn)
-        
-        let statusColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier(rawValue: "statusColumn"))
-        statusColumn.title = "Status"
-        statusColumn.minWidth = 130
-        tableView.addTableColumn(statusColumn)
-        
-        tableView.intercellSpacing = CGSize(width: 5.0, height: 5.0)
-        tableView.usesAlternatingRowBackgroundColors = true
-    }
-    
-    @objc func addButtonClicked() {
-        print("addButtonClicked")
-        let person = Person(name: "Lt. Uhura", busy: true, shirtColor: .red)
-        self.personArrayWrapper.add(person: person)
+
+        let ageColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("age"))
+        ageColumn.title = "Age"
+        ageColumn.width = 180
+        tableView.addTableColumn(ageColumn)
     }
 
-    override func observeValue(
-        forKeyPath keyPath: String?,
-        of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?,
-        context: UnsafeMutableRawPointer?
-    ) {
-        print("observeValue")
-        Task { @MainActor in
-            if keyPath == kContentKeyPath {
-                tableView.reloadData()
-                return
-            }
-        }
-        super.observeValue(
-            forKeyPath: keyPath,
-            of: object,
-            change: change,
-            context: context
-        )
+    private func setupFields() {
+        nameField.translatesAutoresizingMaskIntoConstraints = false
+        nameField.placeholderString = "Enter name"
+        view.addSubview(nameField)
+
+        NSLayoutConstraint.activate([
+            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: interPadding),
+            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            nameField.widthAnchor.constraint(equalToConstant: 200),
+        ])
+
+        ageField.translatesAutoresizingMaskIntoConstraints = false
+        ageField.placeholderString = "Age"
+        view.addSubview(ageField)
+
+        NSLayoutConstraint.activate([
+            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: interPadding),
+            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            ageField.widthAnchor.constraint(equalToConstant: 200),
+        ])
+
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.title = "Add"
+        addButton.target = self
+        addButton.action = #selector(addPerson)
+        view.addSubview(addButton)
+
+        NSLayoutConstraint.activate([
+            addButton.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: interPadding),
+            addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+        ])
     }
-    
+
+    @objc func addPerson() {
+        let name = nameField.stringValue
+        guard let age = Int(ageField.stringValue) else { return }
+
+        let person = Person(name: name, age: age)
+        people.append(person)
+        tableView.reloadData()
+
+        nameField.stringValue = ""
+        ageField.stringValue = ""
+    }
+
 }
 
 extension TableViewDemo: NSTableViewDataSource {
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return self.personArrayWrapper.count
+        return people.count
     }
-    
+
 }
 
 extension TableViewDemo: NSTableViewDelegate {
-    
-    func tableView(
-        _ tableView: NSTableView,
-        viewFor tableColumn: NSTableColumn?,
-        row: Int) -> NSView? {
-            
-        if tableColumn == tableView.tableColumns[0] {
-            let cellIdentifier = NSUserInterfaceItemIdentifier("NameCellID")
-            var cell = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTextField
-            if cell == nil {
-                cell = NSTextField(frame: NSRect( x: 0, y: 0, width: tableView.frame.size.width, height: 0))
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        guard let tableColumn else { return nil }
+
+        let id = tableColumn.identifier
+        let person = people[row]
+
+        let cellView = {
+            if let cachedView = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+                return cachedView
             }
-            if let cell {
-                cell.identifier = cellIdentifier
-                cell.stringValue = personArrayWrapper.content[row].name
-                cell.textColor = personArrayWrapper.content[row].shirtColor
-                cell.backgroundColor = .clear
-                cell.isBezeled = false
-                cell.isEditable = false
-            }
-            return cell
+
+            let textField = NSTextField()
+            textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.isEditable = false
+            textField.isBordered = false
+            textField.backgroundColor = .clear // 이거 안 하면 행이 선택되었을 때 배경색이 바뀌지 않는다;
+
+            let cellView = NSTableCellView()
+            cellView.identifier = id
+
+            cellView.addSubview(textField)
+            cellView.textField = textField
+
+            NSLayoutConstraint.activate([
+                textField.leadingAnchor.constraint(equalTo: cellView.leadingAnchor),
+                textField.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
+                textField.topAnchor.constraint(equalTo: cellView.topAnchor),
+                textField.bottomAnchor.constraint(equalTo: cellView.bottomAnchor),
+            ])
+
+            return cellView
+        }()
+
+        if id.rawValue == "name" {
+            cellView.textField?.stringValue = person.name
+        } else if id.rawValue == "age" {
+            cellView.textField?.stringValue = "\(person.age)"
         }
-            
-        if tableColumn == tableView.tableColumns[1] {
-            let cellIdentifier = NSUserInterfaceItemIdentifier("StatusCellID")
-            var cell = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTextField
-            if cell == nil {
-                cell = NSTextField(frame: NSRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0))
-            }
-            if let cell {
-                cell.identifier = cellIdentifier
-                cell.stringValue = personArrayWrapper.content[row].busy ? "Busy" : "Not busy"
-                cell.backgroundColor = .clear
-                cell.isBezeled = false
-                cell.isEditable = false
-            }
-            return cell
-        }
-        return nil
+
+        return cellView
     }
-    
-    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 22.0
-    }
-    
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        let tableView = notification.object as! NSTableView
-        let indexes = tableView.selectedRowIndexes
-        if let index = indexes.first {
-            self.infoLabel.stringValue = personArrayWrapper.content[index].name
-        }
-    }
-    
 }

@@ -9,19 +9,23 @@ import AppKit
 
 class StackViewDemo: NSViewController {
 
+    let padding = 20.0
+    let stackView = NSStackView()
+
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackView = NSStackView()
+        setupStackView()
+        setupStackItems()
+    }
+
+    private func setupStackView() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
         stackView.alignment = .leading
         view.addSubview(stackView)
 
-        addStackItems(stackView)
-
-        let padding = 20.0
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
@@ -32,7 +36,7 @@ class StackViewDemo: NSViewController {
         ])
     }
 
-    func addStackItems(_ stackView: NSStackView) {
+    func setupStackItems() {
         let button1 = NSButton(title: "Button 1", target: self, action: #selector(button1Clicked))
         stackView.addArrangedSubview(button1)
 
