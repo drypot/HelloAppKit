@@ -121,10 +121,10 @@ class TableViewCocoaBindingDemo: NSViewController {
 //        nameColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.name", options: nil)
 //        ageColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.age", options: nil)
 
-        for column in tableView.tableColumns {
-            let keyPath = column.identifier.rawValue
-            column.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.\(keyPath)", options: nil)
-        }
+//        for column in tableView.tableColumns {
+//            let keyPath = column.identifier.rawValue
+//            column.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.\(keyPath)", options: nil)
+//        }
 
     }
 
