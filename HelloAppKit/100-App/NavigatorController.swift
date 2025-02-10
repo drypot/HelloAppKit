@@ -26,7 +26,6 @@ class NavigatorController: NSSplitViewController {
         ]),
         DemoSection(label: "Cocoa Bindings", demos: [
             Demo(label: "CocoaBinding", controllerType: CocoaBindingDemo.self),
-            Demo(label: "TableViewCocoaBinding", controllerType: TableViewCocoaBindingDemo.self),
             Demo(label: "TargetAction", controllerType: TargetActionDemo.self),
             Demo(label: "KeyValueBinding", controllerType: KeyValueBindingDemo.self),
         ]),
@@ -42,6 +41,7 @@ class NavigatorController: NSSplitViewController {
         ]),
         DemoSection(label: "Table", demos: [
             Demo(label: "TableView", controllerType: TableViewDemo.self),
+            Demo(label: "TableViewCocoaBinding", controllerType: TableViewCocoaBindingDemo.self),
         ]),
         DemoSection(label: "ViewManagement", demos: [
             Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
@@ -176,24 +176,36 @@ class NavigatorController: NSSplitViewController {
         }
 
         func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-            let cellIdentifier = NSUserInterfaceItemIdentifier("Cell")
-            if let cell = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView {
-                cell.textField!.stringValue = sections[row].label
-                return cell
-            }
+            guard let tableColumn else { return nil }
+            let id = tableColumn.identifier
 
-            let cell = NSTableCellView()
-            cell.identifier = cellIdentifier
-            let textField = NSTextField(labelWithString: sections[row].label)
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            cell.addSubview(textField)
-            cell.textField = textField
+            let cell = {
+                if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+                    return cachedCell
+                }
 
-            NSLayoutConstraint.activate([
-                textField.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 10),
-                textField.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -10),
-                textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
-            ])
+                let newCell = NSTableCellView()
+                newCell.identifier = id
+
+                let textField = NSTextField()
+                textField.translatesAutoresizingMaskIntoConstraints = false
+                textField.isEditable = false
+                textField.isBordered = false
+                textField.backgroundColor = .clear
+
+                newCell.addSubview(textField)
+                newCell.textField = textField
+
+                NSLayoutConstraint.activate([
+                    textField.leadingAnchor.constraint(equalTo: newCell.leadingAnchor),
+                    textField.trailingAnchor.constraint(equalTo: newCell.trailingAnchor),
+                    textField.centerYAnchor.constraint(equalTo: newCell.centerYAnchor),
+                ])
+
+                return newCell
+            }()
+
+            cell.textField!.stringValue = sections[row].label
 
             return cell
         }
@@ -255,27 +267,39 @@ class NavigatorController: NSSplitViewController {
         }
 
         func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+            guard let tableColumn else { return nil }
+            let id = tableColumn.identifier
+
             guard let section else { return nil }
             let demo = section.demos[row]
 
-            let cellIdentifier = NSUserInterfaceItemIdentifier("Cell")
-            if let cell = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView {
-                cell.textField!.stringValue = demo.label
-                return cell
-            }
+            let cell = {
+                if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+                    return cachedCell
+                }
 
-            let cell = NSTableCellView()
-            cell.identifier = cellIdentifier
-            let textField = NSTextField(labelWithString: demo.label)
-            textField.translatesAutoresizingMaskIntoConstraints = false
-            cell.addSubview(textField)
-            cell.textField = textField
+                let newCell = NSTableCellView()
+                newCell.identifier = id
 
-            NSLayoutConstraint.activate([
-                textField.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: 10),
-                textField.trailingAnchor.constraint(equalTo: cell.trailingAnchor, constant: -10),
-                textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
-            ])
+                let textField = NSTextField()
+                textField.translatesAutoresizingMaskIntoConstraints = false
+                textField.isEditable = false
+                textField.isBordered = false
+                textField.backgroundColor = .clear
+
+                newCell.addSubview(textField)
+                newCell.textField = textField
+
+                NSLayoutConstraint.activate([
+                    textField.leadingAnchor.constraint(equalTo: newCell.leadingAnchor),
+                    textField.trailingAnchor.constraint(equalTo: newCell.trailingAnchor),
+                    textField.centerYAnchor.constraint(equalTo: newCell.centerYAnchor),
+                ])
+
+                return newCell
+            }()
+
+            cell.textField!.stringValue = demo.label
 
             return cell
         }

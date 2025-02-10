@@ -121,7 +121,10 @@ class TableViewDemo: NSViewController {
 
     @objc func addPerson() {
         let name = nameField.stringValue
-        guard let age = Int(ageField.stringValue) else { return }
+        guard let age = Int(ageField.stringValue) else {
+            print("Invalid age")
+            return
+        }
 
         let person = Person(name: name, age: age)
         people.append(person)
@@ -145,14 +148,15 @@ extension TableViewDemo: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let tableColumn else { return nil }
-
         let id = tableColumn.identifier
-        let person = people[row]
 
-        let cellView = {
-            if let cachedView = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
-                return cachedView
+        let cell = {
+            if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+                return cachedCell
             }
+
+            let newCell = NSTableCellView()
+            newCell.identifier = id
 
             let textField = NSTextField()
             textField.translatesAutoresizingMaskIntoConstraints = false
@@ -160,28 +164,26 @@ extension TableViewDemo: NSTableViewDelegate {
             textField.isBordered = false
             textField.backgroundColor = .clear // 이거 안 하면 행이 선택되었을 때 배경색이 바뀌지 않는다;
 
-            let cellView = NSTableCellView()
-            cellView.identifier = id
-
-            cellView.addSubview(textField)
-            cellView.textField = textField
+            newCell.addSubview(textField)
+            newCell.textField = textField
 
             NSLayoutConstraint.activate([
-                textField.leadingAnchor.constraint(equalTo: cellView.leadingAnchor),
-                textField.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
-                textField.topAnchor.constraint(equalTo: cellView.topAnchor),
-                textField.bottomAnchor.constraint(equalTo: cellView.bottomAnchor),
+                textField.leadingAnchor.constraint(equalTo: newCell.leadingAnchor),
+                textField.trailingAnchor.constraint(equalTo: newCell.trailingAnchor),
+                textField.centerYAnchor.constraint(equalTo: newCell.centerYAnchor),
             ])
 
-            return cellView
+            return newCell
         }()
 
+        let person = people[row]
+
         if id.rawValue == "name" {
-            cellView.textField?.stringValue = person.name
+            cell.textField?.stringValue = person.name
         } else if id.rawValue == "age" {
-            cellView.textField?.stringValue = "\(person.age)"
+            cell.textField?.stringValue = "\(person.age)"
         }
 
-        return cellView
+        return cell
     }
 }

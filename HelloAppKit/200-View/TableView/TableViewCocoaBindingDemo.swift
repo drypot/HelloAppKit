@@ -192,13 +192,15 @@ extension TableViewCocoaBindingDemo: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let tableColumn else { return nil }
-
         let id = tableColumn.identifier
 
-        let cellView = {
-            if let cachedView = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
-                return cachedView
+        let cell = {
+            if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+                return cachedCell
             }
+
+            let newCell = NSTableCellView()
+            newCell.identifier = id
 
             let textField = NSTextField()
             textField.translatesAutoresizingMaskIntoConstraints = false
@@ -206,28 +208,24 @@ extension TableViewCocoaBindingDemo: NSTableViewDelegate {
             textField.isBordered = false
             textField.backgroundColor = .clear // 이거 안 하면 행이 선택되었을 때 배경색이 바뀌지 않는다;
 
-            let cellView = NSTableCellView()
-            cellView.identifier = id
-
-            cellView.addSubview(textField)
-            cellView.textField = textField
+            newCell.addSubview(textField)
+            newCell.textField = textField
 
             // NSTableView 에 NSArrayController 연결하는 거 이틀 삽질했는데
             // 아래 바인딩 코드가 핵심이었다.
-            textField.bind(.value, to: cellView, withKeyPath: "objectValue.\(id.rawValue)", options: nil)
+            textField.bind(.value, to: newCell, withKeyPath: "objectValue.\(id.rawValue)", options: nil)
 
             NSLayoutConstraint.activate([
-                textField.leadingAnchor.constraint(equalTo: cellView.leadingAnchor),
-                textField.trailingAnchor.constraint(equalTo: cellView.trailingAnchor),
-                textField.topAnchor.constraint(equalTo: cellView.topAnchor),
-                textField.bottomAnchor.constraint(equalTo: cellView.bottomAnchor),
+                textField.leadingAnchor.constraint(equalTo: newCell.leadingAnchor),
+                textField.trailingAnchor.constraint(equalTo: newCell.trailingAnchor),
+                textField.centerYAnchor.constraint(equalTo: newCell.centerYAnchor),
             ])
 
-            return cellView
+            return newCell
         }()
 
         // ...
 
-        return cellView
+        return cell
     }
 }
