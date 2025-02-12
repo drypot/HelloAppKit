@@ -28,6 +28,7 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "CocoaBinding", controllerType: CocoaBindingDemo.self),
             Demo(label: "TargetAction", controllerType: TargetActionDemo.self),
             Demo(label: "KeyValueBinding", controllerType: KeyValueBindingDemo.self),
+            Demo(label: "NSEditor", controllerType: NSEditorDemo.self),
         ]),
         DemoSection(label: "View", demos: [
             Demo(label: "View", controllerType: ViewDemo.self),
