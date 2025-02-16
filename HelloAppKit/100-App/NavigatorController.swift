@@ -68,10 +68,9 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Animation", demos: [
             Demo(label: "Mastering macOS 11", controllerType: AnimationDemo.self),
         ]),
-//        DemoSection(label: "", demoList: [
-//            Demo(label: "", controllerType: .self),
-//            Demo(label: "", controllerType: .self),
-//        ]),
+        DemoSection(label: "NotificationCenter", demos: [
+            Demo(label: "NotificationCenter", controllerType: NotificationCenterDemo.self),
+        ]),
 //        DemoSection(label: "", demoList: [
 //            Demo(label: "", controllerType: .self),
 //            Demo(label: "", controllerType: .self),
