@@ -53,6 +53,7 @@ class WindowControllerDemo: NSViewController {
     class CustomWindowController: NSWindowController, NSWindowDelegate {
 
         init() {
+            // window 는 windowController 가 retain 하므로 따로 retain 하지 않아도 된다.
             let window = NSWindow(
                 contentRect: .zero,
                 styleMask: [.titled, .closable, .resizable, .miniaturizable],
