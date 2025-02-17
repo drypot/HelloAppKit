@@ -52,7 +52,8 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "StackView", controllerType: StackViewDemo.self),
         ]),
         DemoSection(label: "Window", demos: [
-            Demo(label: "-", controllerType: WindowDemo.self),
+            Demo(label: "Window", controllerType: WindowDemo.self),
+            Demo(label: "WindowController", controllerType: WindowControllerDemo.self),
         ]),
         DemoSection(label: "Gesture", demos: [
             Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),

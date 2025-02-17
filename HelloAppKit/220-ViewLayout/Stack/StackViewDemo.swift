@@ -10,7 +10,6 @@ import AppKit
 class StackViewDemo: NSViewController {
 
     let padding = 20.0
-
     let stackView = NSStackView()
 
     override func loadView() {
