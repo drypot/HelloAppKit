@@ -36,14 +36,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         window.title = "AppKit Demo"
         window.contentViewController = NavigatorController()
+        window.setFrameAutosaveName("MainWindowFrame")
         window.layoutIfNeeded()
-        restoreWindowPosition()
         window.makeKeyAndOrderFront(nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         print("ApplicationWillTerminate")
-        saveWindowPosition()
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
@@ -52,20 +51,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true
-    }
-
-    private func saveWindowPosition() {
-        let frameString = NSStringFromRect(window.frame)
-        UserDefaults.standard.set(frameString, forKey: "MainWindowFrame")
-    }
-
-    private func restoreWindowPosition() {
-        if let frameString = UserDefaults.standard.string(forKey: "MainWindowFrame") {
-            let frame = NSRectFromString(frameString)
-            window.setFrame(frame, display: true)
-        } else {
-            window.center()
-        }
     }
 
 }
