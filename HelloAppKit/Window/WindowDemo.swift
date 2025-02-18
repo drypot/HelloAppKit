@@ -9,9 +9,6 @@ import AppKit
 
 class WindowDemo: NSViewController {
 
-    let padding = 20.0
-    let interPadding = 8.0
-
     let stackView = NSStackView()
 
     var blankWindow: NSWindow?
@@ -33,10 +30,10 @@ class WindowDemo: NSViewController {
         view.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
@@ -68,9 +65,11 @@ class WindowDemo: NSViewController {
         }
 
         let window = blankWindow!
+
         window.title = "Blank Window"
         window.isReleasedWhenClosed = false // 이거 안 하고 윈도우 닫았다가 다시 Open 버튼 누르면 크래쉬난다.
         window.contentViewController = NSViewController()
+
         window.center()
         window.makeKeyAndOrderFront(nil)
     }
@@ -86,36 +85,34 @@ class WindowDemo: NSViewController {
         }
 
         let window = windowWithSomeControls!
+
         window.title = "Window with Controls"
         window.isReleasedWhenClosed = false
 
-        let view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        window.contentView = view
-
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-        ])
+        let contentView = NSView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        window.contentView = contentView
 
         let label = NSTextField(labelWithString: "Hello!")
         label.translatesAutoresizingMaskIntoConstraints = false
 //        label.font = NSFont.systemFont(ofSize: 24.0)
         label.sizeToFit()
-        view.addSubview(label)
+        contentView.addSubview(label)
         
-        NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            label.topAnchor.constraint(equalTo: view.topAnchor, constant: padding)
-        ])
-
         let closeButton = NSButton(title: "Close", target: self, action: #selector(closeWindowWithSomeControls))
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(closeButton)
+        closeButton.keyEquivalent = "\r"
+        contentView.addSubview(closeButton)
 
         NSLayoutConstraint.activate([
-            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            closeButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: interPadding),
+            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
+            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+
+            closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            closeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
         ])
 
         window.center()

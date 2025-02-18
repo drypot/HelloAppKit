@@ -65,12 +65,11 @@ class CustomCompositeViewDemo: NSViewController {
         childView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(childView)
 
-        let padding = 20.0
         NSLayoutConstraint.activate([
-            childView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            childView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            childView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            childView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            childView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            childView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            childView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            childView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             childView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             childView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])

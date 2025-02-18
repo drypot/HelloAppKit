@@ -44,9 +44,6 @@ class TableViewCocoaBindingDemo: NSViewController {
         }
     }
 
-    let padding = 20.0
-    let interPadding = 8.0
-
     let arrayController = NSArrayController()
     let scrollView = NSScrollView()
     let tableView = NSTableView()
@@ -87,8 +84,8 @@ class TableViewCocoaBindingDemo: NSViewController {
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             scrollView.widthAnchor.constraint(equalToConstant: 400),
             scrollView.heightAnchor.constraint(equalToConstant: 200),
         ])
@@ -136,8 +133,8 @@ class TableViewCocoaBindingDemo: NSViewController {
         nameField.bind(.value, to: arrayController, withKeyPath: "selection.name", options: nil)
 
         NSLayoutConstraint.activate([
-            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: interPadding),
-            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
+            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             nameField.widthAnchor.constraint(equalToConstant: 200),
         ])
 
@@ -148,8 +145,8 @@ class TableViewCocoaBindingDemo: NSViewController {
         ageField.bind(.value, to: arrayController, withKeyPath: "selection.age", options: nil)
 
         NSLayoutConstraint.activate([
-            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: interPadding),
-            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 8),
+            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             ageField.widthAnchor.constraint(equalToConstant: 200),
         ])
 
@@ -160,8 +157,8 @@ class TableViewCocoaBindingDemo: NSViewController {
         view.addSubview(addButton)
 
         NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: interPadding),
-            addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            addButton.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: 8),
+            addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
         ])
 
         removeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -172,7 +169,7 @@ class TableViewCocoaBindingDemo: NSViewController {
 
         NSLayoutConstraint.activate([
             removeButton.topAnchor.constraint(equalTo: addButton.topAnchor),
-            removeButton.leftAnchor.constraint(equalTo: addButton.rightAnchor, constant: interPadding),
+            removeButton.leftAnchor.constraint(equalTo: addButton.rightAnchor, constant: 8),
         ])
 
     }

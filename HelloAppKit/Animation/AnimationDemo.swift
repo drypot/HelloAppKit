@@ -56,10 +56,10 @@ class AnimationDemo: NSViewController {
 //            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 700),
 //            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 500),
             
-//            view.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-//            view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-//            view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-//            view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+//            view.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+//            view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+//            view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
     }
 

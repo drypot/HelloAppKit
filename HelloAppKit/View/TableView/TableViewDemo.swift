@@ -19,9 +19,6 @@ class TableViewDemo: NSViewController {
         }
     }
 
-    let padding = 20.0
-    let interPadding = 8.0
-
     let scrollView = NSScrollView()
     let tableView = NSTableView()
     let nameField = NSTextField()
@@ -60,8 +57,8 @@ class TableViewDemo: NSViewController {
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             scrollView.widthAnchor.constraint(equalToConstant: 400),
             scrollView.heightAnchor.constraint(equalToConstant: 200),
         ])
@@ -92,8 +89,8 @@ class TableViewDemo: NSViewController {
         view.addSubview(nameField)
 
         NSLayoutConstraint.activate([
-            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: interPadding),
-            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
+            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             nameField.widthAnchor.constraint(equalToConstant: 200),
         ])
 
@@ -102,8 +99,8 @@ class TableViewDemo: NSViewController {
         view.addSubview(ageField)
 
         NSLayoutConstraint.activate([
-            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: interPadding),
-            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 8),
+            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             ageField.widthAnchor.constraint(equalToConstant: 200),
         ])
 
@@ -114,8 +111,8 @@ class TableViewDemo: NSViewController {
         view.addSubview(addButton)
 
         NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: interPadding),
-            addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: padding),
+            addButton.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: 8),
+            addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
         ])
     }
 

@@ -42,15 +42,15 @@ class ConstraintBuilder {
     }
     
     func stickEdges(of view: NSView, to parent: NSView, padding: CGFloat = 20) {
-        view.topAnchor.constraint(equalTo: parent.topAnchor, constant: padding).isActive = true
-        view.bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: -padding).isActive = true
-        view.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: padding).isActive = true
-        view.trailingAnchor.constraint(equalTo: parent.trailingAnchor, constant: -padding).isActive = true
+        view.topAnchor.constraint(equalTo: parent.topAnchor, constant: 20).isActive = true
+        view.bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: -20).isActive = true
+        view.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: 20).isActive = true
+        view.trailingAnchor.constraint(equalTo: parent.trailingAnchor, constant: -20).isActive = true
     }
 
     /*
     func stickTopTo(_ other: NSView, padding: CGFloat) {
-        view.topAnchor.constraint(equalTo: other.topAnchor, constant: padding).isActive = true
+        view.topAnchor.constraint(equalTo: other.topAnchor, constant: 20).isActive = true
     }
     
     func alignXCenterTo(_ other: NSView) {

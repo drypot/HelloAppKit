@@ -9,8 +9,6 @@ import AppKit
 
 class CustomViewDemo: NSViewController {
 
-    let padding = 20.0
-
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -25,10 +23,10 @@ class CustomViewDemo: NSViewController {
         view.addSubview(customView)
 
         NSLayoutConstraint.activate([
-            customView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            customView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            customView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            customView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            customView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            customView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            customView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            customView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             customView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             customView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])

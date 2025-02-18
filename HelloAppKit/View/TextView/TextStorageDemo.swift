@@ -34,16 +34,15 @@ class TextStorageDemo: NSViewController {
 
         view.addSubview(scrollView)
 
-        let padding = 20.0
         NSLayoutConstraint.activate([
 //            textView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
 //            textView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
 //            textView.topAnchor.constraint(equalTo: scrollView.topAnchor),
 //            textView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
