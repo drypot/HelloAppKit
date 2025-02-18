@@ -49,11 +49,22 @@ class SheetWindowDemo: NSViewController {
         if sheetWindowController == nil {
             sheetWindowController = SheetWindowController()
         }
-
-        if let sheetWindow = sheetWindowController?.window {
-            self.view.window?.beginSheet(sheetWindow) { response in
-                print("Sheet dismissed")
+        guard let window = self.view.window else {
+            fatalError()
+        }
+        guard let sheetWindow = sheetWindowController?.window else {
+            fatalError()
+        }
+        window.beginSheet(sheetWindow) { response in
+            switch response {
+            case .OK:
+                print("OK")
+            case .cancel:
+                print("Cancel")
+            default:
+                fatalError()
             }
+            print("sheet response: \(response)")
         }
     }
 
@@ -113,8 +124,10 @@ class SheetWindowDemo: NSViewController {
         }
 
         func setupStackItems() {
-            let button1 = NSButton(title: "Close", target: self, action: #selector(closeSheet))
-            stackView.addArrangedSubview(button1)
+            do {
+                let button1 = NSButton(title: "Close", target: self, action: #selector(closeSheet))
+                stackView.addArrangedSubview(button1)
+            }
         }
 
         @objc private func closeSheet(_ sender: NSButton) {

@@ -10,12 +10,13 @@ import AppKit
 class WindowDemo: NSViewController {
 
     let padding = 20.0
+    let interPadding = 8.0
+
     let stackView = NSStackView()
 
-    var window1: NSWindow?
-    var window2: NSWindow?
-
-    let button = NSButton()
+    var blankWindow: NSWindow?
+    var windowWithSomeControls: NSWindow?
+    var windowAtAbsoluteCenter: NSWindow?
 
     override func loadView() {
         view = NSView()
@@ -43,7 +44,11 @@ class WindowDemo: NSViewController {
 
     func setupStackItems() {
         do {
-            let button = NSButton(title: "Open window at center", target: self, action: #selector(openWindow))
+            let button = NSButton(title: "Open window", target: self, action: #selector(openWindow))
+            stackView.addArrangedSubview(button)
+        }
+        do {
+            let button = NSButton(title: "Open window with some controls", target: self, action: #selector(openWindowWithSomeControls))
             stackView.addArrangedSubview(button)
         }
         do {
@@ -53,35 +58,90 @@ class WindowDemo: NSViewController {
     }
 
     @objc func openWindow() {
-        if window1 == nil {
-            window1 = NSWindow(
+        if blankWindow == nil {
+            blankWindow = NSWindow(
                 contentRect: .zero,
                 styleMask: [.titled, .closable, .resizable, .miniaturizable],
                 backing: .buffered,
                 defer: false
             )
         }
-        window1!.title = "Window Demo / Center"
-        window1!.isReleasedWhenClosed = false // 이거 안 하고 윈도우 닫았다가 다시 Open 버튼 누르면 크래쉬난다.
-        window1!.contentViewController = NSViewController()
-        window1!.center()
-        window1!.makeKeyAndOrderFront(nil)
+
+        let window = blankWindow!
+        window.title = "Blank Window"
+        window.isReleasedWhenClosed = false // 이거 안 하고 윈도우 닫았다가 다시 Open 버튼 누르면 크래쉬난다.
+        window.contentViewController = NSViewController()
+        window.center()
+        window.makeKeyAndOrderFront(nil)
+    }
+
+    @objc func openWindowWithSomeControls() {
+        if windowWithSomeControls == nil {
+            windowWithSomeControls = NSWindow(
+                contentRect: .zero,
+                styleMask: [.titled, .closable, .resizable, .miniaturizable],
+                backing: .buffered,
+                defer: false
+            )
+        }
+
+        let window = windowWithSomeControls!
+        window.title = "Window with Controls"
+        window.isReleasedWhenClosed = false
+
+        let view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        window.contentView = view
+
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+        ])
+
+        let label = NSTextField(labelWithString: "Hello!")
+        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = NSFont.systemFont(ofSize: 24.0)
+        label.sizeToFit()
+        view.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: padding)
+        ])
+
+        let closeButton = NSButton(title: "Close", target: self, action: #selector(closeWindowWithSomeControls))
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(closeButton)
+
+        NSLayoutConstraint.activate([
+            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            closeButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: interPadding),
+        ])
+
+        window.center()
+        window.makeKeyAndOrderFront(nil)
+    }
+
+    @objc func closeWindowWithSomeControls(_ sender: NSButton) {
+        windowWithSomeControls!.close()
     }
 
     @objc func openWindowAtAbsoluteCenter() {
-        if window2 == nil {
-            window2 = NSWindow(
+        if windowAtAbsoluteCenter == nil {
+            windowAtAbsoluteCenter = NSWindow(
                 contentRect: .zero,
                 styleMask: [.titled, .closable, .resizable, .miniaturizable],
                 backing: .buffered,
                 defer: false
             )
         }
-        window2!.title = "Window Demo / Absolute Center"
-        window2!.isReleasedWhenClosed = false // 이거 안 하고 윈도우 닫았다가 다시 Open 버튼 누르면 크래쉬난다.
-        window2!.contentViewController = NSViewController()
-        moveWindowToAbsoluteCenter(window2!)
-        window2!.makeKeyAndOrderFront(nil)
+
+        let window = windowAtAbsoluteCenter!
+        window.title = "Window at Absolute Center"
+        window.isReleasedWhenClosed = false // 이거 안 하고 윈도우 닫았다가 다시 Open 버튼 누르면 크래쉬난다.
+        window.contentViewController = NSViewController()
+        moveWindowToAbsoluteCenter(window)
+        window.makeKeyAndOrderFront(nil)
     }
 
     private func moveWindowToAbsoluteCenter(_ window: NSWindow) {
