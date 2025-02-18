@@ -12,7 +12,7 @@ class SheetWindowDemo: NSViewController {
     let padding = 20.0
     let stackView = NSStackView()
 
-    var sheetWindowController: SheetWindowController? = nil
+    var sheetWindow: NSWindow? = nil
 
     override func loadView() {
         view = NSView()
@@ -46,95 +46,82 @@ class SheetWindowDemo: NSViewController {
     }
 
     @objc func openSheet() {
-        if sheetWindowController == nil {
-            sheetWindowController = SheetWindowController()
+        if sheetWindow == nil {
+            sheetWindow = SheetWindow()
         }
+
         guard let window = self.view.window else {
             fatalError()
         }
-        guard let sheetWindow = sheetWindowController?.window else {
+        guard let sheetWindow else {
             fatalError()
         }
+
         window.beginSheet(sheetWindow) { response in
             switch response {
             case .OK:
-                print("OK")
+                print("sheet response: ok")
             case .cancel:
-                print("Cancel")
+                print("sheet response: cancel")
             default:
-                fatalError()
+                print("sheet response: etc")
             }
-            print("sheet response: \(response)")
         }
     }
 
-    class SheetWindowController: NSWindowController {
-
+    class SheetWindow: NSWindow {
         init() {
-            // window 는 windowController 가 retain 하므로 따로 retain 하지 않아도 된다.
-            let sheetWindow = NSWindow(
+            super.init(
                 contentRect: .zero,
-                styleMask: [.titled, .closable /*, .resizable, .miniaturizable*/],
+                styleMask: [.titled, .closable],
                 backing: .buffered,
                 defer: false
             )
 
-            // 쉬트 닫았다가 다시 열 때 터지지 않게 하려면,
-            sheetWindow.isReleasedWhenClosed = false
+            self.isReleasedWhenClosed = false
 
-            super.init(window: sheetWindow)
+            let contentView = NSView()
+            contentView.translatesAutoresizingMaskIntoConstraints = false
 
-            sheetWindow.title = "Sheet Window"
-            sheetWindow.contentViewController = SheetViewController()
-        }
+            self.contentView = contentView
 
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+            let textField = NSTextField(labelWithString: "Sheet Window Demo")
+            textField.translatesAutoresizingMaskIntoConstraints = false
+//            textField.font = NSFont.systemFont(ofSize: 24.0)
+            textField.sizeToFit()
+            contentView.addSubview(textField)
 
-    }
+            let cancelButton = NSButton(title: "Cancel", target: self, action: #selector(cancelAction))
+            cancelButton.translatesAutoresizingMaskIntoConstraints = false
+            contentView.addSubview(cancelButton)
 
-    class SheetViewController: NSViewController {
-
-        let padding = 20.0
-        let stackView = NSStackView()
-
-        override func loadView() {
-            view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-
-            setupStackView()
-            setupStackItems()
-        }
-
-        private func setupStackView() {
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.orientation = .vertical
-            stackView.alignment = .leading
-            view.addSubview(stackView)
+            let okButton = NSButton(title: "OK", target: self, action: #selector(okAction))
+            okButton.translatesAutoresizingMaskIntoConstraints = false
+            okButton.bezelStyle = .rounded
+            okButton.keyEquivalent = "\r"
+            contentView.addSubview(okButton)
 
             NSLayoutConstraint.activate([
-                stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
-                stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
-                stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: padding),
-                stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -padding),
-                stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
-                stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
+                contentView.widthAnchor.constraint(equalToConstant: 400),
+                contentView.heightAnchor.constraint(equalToConstant: 200),
+
+                textField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                textField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
+
+                okButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+                okButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+
+                cancelButton.trailingAnchor.constraint(equalTo: okButton.leadingAnchor, constant: -8),
+                cancelButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             ])
         }
 
-        func setupStackItems() {
-            do {
-                let button1 = NSButton(title: "Close", target: self, action: #selector(closeSheet))
-                stackView.addArrangedSubview(button1)
-            }
+        @objc private func cancelAction(_ sender: NSButton) {
+            self.sheetParent?.endSheet(self, returnCode: .cancel)
         }
 
-        @objc private func closeSheet(_ sender: NSButton) {
-            guard let window = self.view.window else {
-                fatalError()
-            }
-            window.sheetParent?.endSheet(window)
+        @objc private func okAction(_ sender: NSButton) {
+            self.sheetParent?.endSheet(self, returnCode: .OK)
         }
     }
 
