@@ -21,18 +21,22 @@ class NavigatorController: NSSplitViewController {
     }
 
     static let sections = [
-        DemoSection(label: "Document", demos: [
-            Demo(label: "-", controllerType: DocumentDemo.self),
-        ]),
-        DemoSection(label: "CocoaBinding", demos: [
-            Demo(label: "CocoaBinding", controllerType: CocoaBindingDemo.self),
-            Demo(label: "TargetAction", controllerType: TargetActionDemo.self),
-            Demo(label: "KeyValueBinding", controllerType: KeyValueBindingDemo.self),
-            Demo(label: "NSEditor", controllerType: NSEditorDemo.self),
+        DemoSection(label: "Window", demos: [
+            Demo(label: "Window", controllerType: WindowDemo.self),
+            Demo(label: "WindowController", controllerType: WindowControllerDemo.self),
+            Demo(label: "SheetWindow", controllerType: SheetWindowDemo.self),
         ]),
         DemoSection(label: "View", demos: [
             Demo(label: "View", controllerType: ViewDemo.self),
             Demo(label: "CustomView", controllerType: CustomViewDemo.self),
+        ]),
+        DemoSection(label: "ViewManagement", demos: [
+            Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
+            Demo(label: "CustomCompositeView", controllerType: CustomCompositeViewDemo.self),
+        ]),
+        DemoSection(label: "ViewLayout", demos: [
+            Demo(label: "StackView", controllerType: StackViewDemo.self),
+            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemo.self),
         ]),
         DemoSection(label: "Text", demos: [
             Demo(label: "TextView", controllerType: TextViewDemo.self),
@@ -44,18 +48,16 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "TableView", controllerType: TableViewDemo.self),
             Demo(label: "TableViewCocoaBinding", controllerType: TableViewCocoaBindingDemo.self),
         ]),
-        DemoSection(label: "ViewManagement", demos: [
-            Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
-            Demo(label: "CustomCompositeView", controllerType: CustomCompositeViewDemo.self),
+        DemoSection(label: "Document", demos: [
+            Demo(label: "-", controllerType: DocumentDemo.self),
         ]),
-        DemoSection(label: "Stack", demos: [
-            Demo(label: "StackView", controllerType: StackViewDemo.self),
+        DemoSection(label: "CocoaBinding", demos: [
+            Demo(label: "CocoaBinding", controllerType: CocoaBindingDemo.self),
+            Demo(label: "TargetAction", controllerType: TargetActionDemo.self),
+            Demo(label: "KeyValueBinding", controllerType: KeyValueBindingDemo.self),
+            Demo(label: "NSEditor", controllerType: NSEditorDemo.self),
         ]),
-        DemoSection(label: "Window", demos: [
-            Demo(label: "Window", controllerType: WindowDemo.self),
-            Demo(label: "WindowController", controllerType: WindowControllerDemo.self),
-            Demo(label: "SheetWindow", controllerType: SheetWindowDemo.self),
-        ]),
+
         DemoSection(label: "Gesture", demos: [
             Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),
         ]),
@@ -83,7 +85,6 @@ class NavigatorController: NSSplitViewController {
 //        ]),
         DemoSection(label: "Utility", demos: [
             Demo(label: "SubRunner", controllerType: SubRunnerDemo.self),
-            Demo(label: "ConstraintBuilder", controllerType: ConstraintBuilderDemo.self),
         ]),
 
     ]
