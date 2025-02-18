@@ -9,54 +9,36 @@ import AppKit
 
 class WindowDemo: NSViewController {
 
-    let stackView = NSStackView()
-
-    var blankWindow: NSWindow?
-    var windowWithSomeControls: NSWindow?
+    var window: NSWindow?
     var windowAtAbsoluteCenter: NSWindow?
 
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        setupStackView()
-        setupStackItems()
-    }
+        let button1 = NSButton(title: "Open window", target: self, action: #selector(openWindow))
+        button1.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button1)
 
-    private func setupStackView() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.alignment = .leading
-        view.addSubview(stackView)
+        let button2 = NSButton(title: "Open window at absolute center", target: self, action: #selector(openWindowAtAbsoluteCenter))
+        button2.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button2)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+
+            button2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            button2.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 8),
         ])
     }
 
-    func setupStackItems() {
-        do {
-            let button = NSButton(title: "Open window", target: self, action: #selector(openWindow))
-            stackView.addArrangedSubview(button)
-        }
-        do {
-            let button = NSButton(title: "Open window with some controls", target: self, action: #selector(openWindowWithSomeControls))
-            stackView.addArrangedSubview(button)
-        }
-        do {
-            let button = NSButton(title: "Open window at absolute center", target: self, action: #selector(openWindowAtAbsoluteCenter))
-            stackView.addArrangedSubview(button)
-        }
-    }
-
     @objc func openWindow() {
-        if blankWindow == nil {
-            blankWindow = NSWindow(
+        if window == nil {
+            window = NSWindow(
                 contentRect: .zero,
                 styleMask: [.titled, .closable, .resizable, .miniaturizable],
                 backing: .buffered,
@@ -64,33 +46,14 @@ class WindowDemo: NSViewController {
             )
         }
 
-        let window = blankWindow!
+        let window = window!
 
-        window.title = "Blank Window"
-        window.isReleasedWhenClosed = false // 이거 안 하고 윈도우 닫았다가 다시 Open 버튼 누르면 크래쉬난다.
-        window.contentViewController = NSViewController()
-
-        window.center()
-        window.makeKeyAndOrderFront(nil)
-    }
-
-    @objc func openWindowWithSomeControls() {
-        if windowWithSomeControls == nil {
-            windowWithSomeControls = NSWindow(
-                contentRect: .zero,
-                styleMask: [.titled, .closable, .resizable, .miniaturizable],
-                backing: .buffered,
-                defer: false
-            )
-        }
-
-        let window = windowWithSomeControls!
-
-        window.title = "Window with Controls"
-        window.isReleasedWhenClosed = false
+        window.title = "Window Demo"
+        window.isReleasedWhenClosed = false // 윈도우 닫았다가 다시 Open 할 때 크래쉬를 방지.
 
         let contentView = NSView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
+
         window.contentView = contentView
 
         let label = NSTextField(labelWithString: "Hello!")
@@ -99,7 +62,7 @@ class WindowDemo: NSViewController {
         label.sizeToFit()
         contentView.addSubview(label)
         
-        let closeButton = NSButton(title: "Close", target: self, action: #selector(closeWindowWithSomeControls))
+        let closeButton = NSButton(title: "Close", target: self, action: #selector(closeAction))
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.keyEquivalent = "\r"
         contentView.addSubview(closeButton)
@@ -119,8 +82,8 @@ class WindowDemo: NSViewController {
         window.makeKeyAndOrderFront(nil)
     }
 
-    @objc func closeWindowWithSomeControls(_ sender: NSButton) {
-        windowWithSomeControls!.close()
+    @objc func closeAction(_ sender: NSButton) {
+        window!.close()
     }
 
     @objc func openWindowAtAbsoluteCenter() {
@@ -134,10 +97,12 @@ class WindowDemo: NSViewController {
         }
 
         let window = windowAtAbsoluteCenter!
+        
         window.title = "Window at Absolute Center"
         window.isReleasedWhenClosed = false // 이거 안 하고 윈도우 닫았다가 다시 Open 버튼 누르면 크래쉬난다.
         window.contentViewController = NSViewController()
         moveWindowToAbsoluteCenter(window)
+
         window.makeKeyAndOrderFront(nil)
     }
 

@@ -36,26 +36,18 @@ class StackViewDemo: NSViewController {
     }
 
     func setupStackItems() {
-        let button1 = NSButton(title: "Button 1", target: self, action: #selector(button1Clicked))
+        let button1 = NSButton(title: "Button 1", target: self, action: #selector(buttonAction))
         stackView.addArrangedSubview(button1)
 
-        let button2 = NSButton(title: "Button 2", target: self, action: #selector(button2Clicked))
+        let button2 = NSButton(title: "Button 2", target: self, action: #selector(buttonAction))
         stackView.addArrangedSubview(button2)
 
-        let button3 = NSButton(title: "Button 3", target: self, action: #selector(button3Clicked))
+        let button3 = NSButton(title: "Button 3", target: self, action: #selector(buttonAction))
         stackView.addArrangedSubview(button3)
     }
 
-    @objc func button1Clicked(_ sender: NSButton) {
-        print("button1 clicked")
-    }
-
-    @objc func button2Clicked(_ sender: NSButton) {
-        print("button2 clicked")
-    }
-
-    @objc func button3Clicked(_ sender: NSButton) {
-        print("button3 clicked")
+    @objc func buttonAction(_ sender: NSButton) {
+        print("button clicked")
     }
 
 }

@@ -9,53 +9,27 @@ import Cocoa
 
 class SheetWindowDemo: NSViewController {
 
-    let stackView = NSStackView()
-    var sheetWindow: NSWindow? = nil
+    var sheetWindow = SheetWindow()
 
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        setupStackView()
-        setupStackItems()
-    }
-
-    private func setupStackView() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.alignment = .leading
-        view.addSubview(stackView)
+        let button1 = NSButton(title: "Open sheet", target: self, action: #selector(openSheet))
+        button1.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button1)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
         ])
     }
 
-    func setupStackItems() {
-        do {
-            let button = NSButton(title: "Open sheet", target: self, action: #selector(openSheet))
-            stackView.addArrangedSubview(button)
-        }
-    }
-
     @objc func openSheet() {
-        if sheetWindow == nil {
-            sheetWindow = SheetWindow()
-        }
-
-        guard let window = self.view.window else {
-            fatalError()
-        }
-        guard let sheetWindow else {
-            fatalError()
-        }
-
-        window.beginSheet(sheetWindow) { response in
+        self.view.window?.beginSheet(sheetWindow) { response in
             switch response {
             case .OK:
                 print("sheet response: ok")

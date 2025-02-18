@@ -9,43 +9,28 @@ import Cocoa
 
 class WindowControllerDemo: NSViewController {
 
-    let stackView = NSStackView()
-    let windowController1 = CustomWindowController()
+    let windowController = CustomWindowController()
 
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        setupStackView()
-        setupStackItems()
-    }
-
-    private func setupStackView() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.alignment = .leading
-        view.addSubview(stackView)
+        let button1 = NSButton(title: "Open window", target: self, action: #selector(openWindow))
+        button1.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button1)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
         ])
     }
 
-    func setupStackItems() {
-        do {
-            let button = NSButton(title: "Open window by NSWindowController", target: self, action: #selector(openWindow))
-            stackView.addArrangedSubview(button)
-        }
-    }
-
     @objc func openWindow() {
-        windowController1.window?.center()
-        windowController1.showWindow(nil)
+        windowController.window?.center()
+        windowController.showWindow(nil)
     }
 
     class CustomWindowController: NSWindowController, NSWindowDelegate {
