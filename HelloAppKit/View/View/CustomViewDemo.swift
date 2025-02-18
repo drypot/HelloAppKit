@@ -66,7 +66,9 @@ class CustomView: NSView {
     }
     
     override func mouseDown(with event: NSEvent) {
-        print("CustomView \(color) clicked")
+        let locationInWindow = event.locationInWindow
+        let locationInView = convert(locationInWindow, from: nil)
+        print("clicked at: \(locationInView)")
     }
     
 }
