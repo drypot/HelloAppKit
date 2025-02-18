@@ -1,5 +1,5 @@
 //
-//  CustomView.swift
+//  CustomViewDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 9/30/24.
@@ -13,22 +13,18 @@ class CustomViewDemo: NSViewController {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        setupCustomView()
-    }
-
-    private func setupCustomView() {
         let customView = CustomView(frame: .zero, color: .green)
         customView.translatesAutoresizingMaskIntoConstraints = false
-
         view.addSubview(customView)
 
         NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
             customView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             customView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             customView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             customView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            customView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            customView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
 }
