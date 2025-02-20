@@ -132,34 +132,17 @@ class TableViewCocoaBindingDemo: NSViewController {
 
         nameField.bind(.value, to: arrayController, withKeyPath: "selection.name", options: nil)
 
-        NSLayoutConstraint.activate([
-            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
-            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            nameField.widthAnchor.constraint(equalToConstant: 200),
-        ])
-
         ageField.translatesAutoresizingMaskIntoConstraints = false
         ageField.isEditable = true
         view.addSubview(ageField)
 
         ageField.bind(.value, to: arrayController, withKeyPath: "selection.age", options: nil)
 
-        NSLayoutConstraint.activate([
-            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 8),
-            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            ageField.widthAnchor.constraint(equalToConstant: 200),
-        ])
-
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.title = "Add"
         addButton.target = self
         addButton.action = #selector(addPerson)
         view.addSubview(addButton)
-
-        NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: 8),
-            addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-        ])
 
         removeButton.translatesAutoresizingMaskIntoConstraints = false
         removeButton.title = "Remove"
@@ -168,6 +151,17 @@ class TableViewCocoaBindingDemo: NSViewController {
         view.addSubview(removeButton)
 
         NSLayoutConstraint.activate([
+            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
+            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            nameField.widthAnchor.constraint(equalToConstant: 200),
+
+            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 8),
+            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            ageField.widthAnchor.constraint(equalToConstant: 200),
+
+            addButton.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: 8),
+            addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+
             removeButton.topAnchor.constraint(equalTo: addButton.topAnchor),
             removeButton.leftAnchor.constraint(equalTo: addButton.rightAnchor, constant: 8),
         ])

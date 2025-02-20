@@ -88,21 +88,9 @@ class TableViewDemo: NSViewController {
         nameField.placeholderString = "Enter name"
         view.addSubview(nameField)
 
-        NSLayoutConstraint.activate([
-            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
-            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            nameField.widthAnchor.constraint(equalToConstant: 200),
-        ])
-
         ageField.translatesAutoresizingMaskIntoConstraints = false
         ageField.placeholderString = "Age"
         view.addSubview(ageField)
-
-        NSLayoutConstraint.activate([
-            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 8),
-            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            ageField.widthAnchor.constraint(equalToConstant: 200),
-        ])
 
         addButton.translatesAutoresizingMaskIntoConstraints = false
         addButton.title = "Add"
@@ -111,6 +99,14 @@ class TableViewDemo: NSViewController {
         view.addSubview(addButton)
 
         NSLayoutConstraint.activate([
+            nameField.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
+            nameField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            nameField.widthAnchor.constraint(equalToConstant: 200),
+
+            ageField.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 8),
+            ageField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            ageField.widthAnchor.constraint(equalToConstant: 200),
+
             addButton.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: 8),
             addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
         ])

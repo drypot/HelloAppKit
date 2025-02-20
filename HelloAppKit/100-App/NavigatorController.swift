@@ -35,7 +35,7 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "ViewLayout", demos: [
             Demo(label: "StackView", controllerType: StackViewDemo.self),
         ]),
-        DemoSection(label: "Text", demos: [
+        DemoSection(label: "TextView", demos: [
             Demo(label: "TextView", controllerType: TextViewDemo.self),
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
@@ -46,7 +46,7 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "TableViewCocoaBinding", controllerType: TableViewCocoaBindingDemo.self),
         ]),
         DemoSection(label: "Document", demos: [
-            Demo(label: "-", controllerType: DocumentDemo.self),
+            Demo(label: "Document", controllerType: DocumentDemo.self),
         ]),
         DemoSection(label: "CocoaBinding", demos: [
             Demo(label: "CocoaBinding", controllerType: CocoaBindingDemo.self),
