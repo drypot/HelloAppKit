@@ -35,8 +35,10 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "ViewLayout", demos: [
             Demo(label: "Constrant", controllerType: ConstrantDemo.self),
             Demo(label: "StackView", controllerType: StackViewDemo.self),
+            Demo(label: "SplitView", controllerType: SplitViewDemo.self),
         ]),
-        DemoSection(label: "TextView", demos: [
+        DemoSection(label: "Text", demos: [
+            Demo(label: "ColorTable", controllerType: ColorTableDemo.self),
             Demo(label: "TextView", controllerType: TextViewDemo.self),
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
@@ -251,7 +253,7 @@ class NavigatorController: NSSplitViewController {
                 scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 scrollView.topAnchor.constraint(equalTo: view.topAnchor),
                 scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 240),
+                scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
             ])
         }
 
