@@ -33,6 +33,7 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
         ]),
         DemoSection(label: "ViewLayout", demos: [
+            Demo(label: "Constrant", controllerType: ConstrantDemo.self),
             Demo(label: "StackView", controllerType: StackViewDemo.self),
         ]),
         DemoSection(label: "TextView", demos: [
