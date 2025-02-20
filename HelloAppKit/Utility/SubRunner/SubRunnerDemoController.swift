@@ -10,31 +10,36 @@ import AppKit
 class SubRunnerDemo: NSViewController {
 
     var subRunnerTypes = [String: SubRunner.Type]()
-    
+
+    let stackView = NSStackView()
+
     override func loadView() {
         self.view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let stackView = NSStackView()
+        setupStackView()
+        setupStackItems()
+    }
+
+    private func setupStackView() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
         stackView.alignment = .leading
         view.addSubview(stackView)
-        
-        addStackItems(stackView)
 
         NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
+            stackView.widthAnchor.constraint(equalToConstant: 200),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+//            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-//            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-//            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
-//            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
+            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
 
-    private func addStackItems(_ stackView: NSStackView) {
-
+    private func setupStackItems() {
         var constraints: [NSLayoutConstraint] = []
 
         func addSubRunner(_ subRunnerType: SubRunner.Type) {

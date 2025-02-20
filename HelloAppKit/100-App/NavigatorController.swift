@@ -59,17 +59,17 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Gesture", demos: [
             Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),
         ]),
-        DemoSection(label: "Graphics", demos: [
-            Demo(label: "GraphicButton", controllerType: GraphicButtonDemo.self),
-            Demo(label: "DialClock", controllerType: DialClockController.self),
-            Demo(label: "PieClock", controllerType: PieClockController.self),
-            //            Demo(label: "DialClock", controllerType: AddStackDemo.self),
-            //            Demo(label: "GraphicButton", controllerType: EasyStackControllerDemo.self),
-            //            Demo(label: "PieClock", controllerType: EasyStackControllerDemo.self),
-        ]),
-        DemoSection(label: "Animation", demos: [
-            Demo(label: "Mastering macOS 11", controllerType: AnimationDemo.self),
-        ]),
+//        DemoSection(label: "Graphics", demos: [
+//            Demo(label: "GraphicButton", controllerType: GraphicButtonDemo.self),
+//            Demo(label: "DialClock", controllerType: DialClockController.self),
+//            Demo(label: "PieClock", controllerType: PieClockController.self),
+//            //            Demo(label: "DialClock", controllerType: AddStackDemo.self),
+//            //            Demo(label: "GraphicButton", controllerType: EasyStackControllerDemo.self),
+//            //            Demo(label: "PieClock", controllerType: EasyStackControllerDemo.self),
+//        ]),
+//        DemoSection(label: "Animation", demos: [
+//            Demo(label: "Mastering macOS 11", controllerType: AnimationDemo.self),
+//        ]),
         DemoSection(label: "NotificationCenter", demos: [
             Demo(label: "NotificationCenter", controllerType: NotificationCenterDemo.self),
         ]),

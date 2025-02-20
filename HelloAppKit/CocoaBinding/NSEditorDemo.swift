@@ -14,7 +14,7 @@ import Cocoa
 class NSEditorDemo: NSViewController {
 
     let editorController = EditorController()
-    let stackView = NSStackView()
+
     let textField = NSTextField()
     let doNothingButton = NSButton()
     let saveButton = NSButton()
@@ -23,37 +23,34 @@ class NSEditorDemo: NSViewController {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        setupStackView()
-        setupStackItems()
-    }
-
-    private func setupStackView() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.alignment = .leading
-        view.addSubview(stackView)
-
-        NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-        ])
-    }
-
-    private func setupStackItems() {
+        textField.translatesAutoresizingMaskIntoConstraints = false
         textField.bind(.value, to: editorController, withKeyPath: "text", options: nil)
-        stackView.addArrangedSubview(textField)
+        view.addSubview(textField)
 
         doNothingButton.title = "DoNothing"
-        stackView.addArrangedSubview(doNothingButton)
+        doNothingButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(doNothingButton)
 
         saveButton.title = "Save"
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
         saveButton.target = self
         saveButton.action = #selector(saveDocument)
-        stackView.addArrangedSubview(saveButton)
+        view.addSubview(saveButton)
+
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            textField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
+
+            doNothingButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
+            doNothingButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 8),
+
+            saveButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
+            saveButton.topAnchor.constraint(equalTo: doNothingButton.bottomAnchor, constant: 8),
+        ])
     }
 
     @objc func saveDocument() {

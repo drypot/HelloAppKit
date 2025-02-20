@@ -13,8 +13,6 @@ extension Notification.Name {
 
 class NotificationCenterDemo: NSViewController {
 
-    let stackView = NSStackView()
-
     deinit {
         removeObserver()
     }
@@ -25,33 +23,17 @@ class NotificationCenterDemo: NSViewController {
 
         setupNotification()
 
-        setupStackView()
-        setupStackItems()
-    }
-
-    private func setupStackView() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.alignment = .leading
-        view.addSubview(stackView)
+        let button1 = NSButton(title: "Send Notification", target: self, action: #selector(postNotification))
+        button1.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button1)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-        ])
-    }
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-    func setupStackItems() {
-        let button1 = NSButton(
-            title: "Send Notification",
-            target: self,
-            action: #selector(postNotification)
-        )
-        stackView.addArrangedSubview(button1)
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+        ])
     }
 
     private func setupNotification() {

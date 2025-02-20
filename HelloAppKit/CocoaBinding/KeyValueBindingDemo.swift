@@ -11,8 +11,6 @@ class KeyValueBindingDemo: NSViewController {
 
     @objc dynamic var sliderValue = 50.0
 
-    let stackView = NSStackView()
-
     let label = NSTextField(labelWithString: "Key Value Binding")
     let slider = NSSlider(value: 50.0, minValue: 0.0, maxValue: 100.0, target: nil, action: nil)
     let textField = NSTextField(string: "50.0")
@@ -21,36 +19,34 @@ class KeyValueBindingDemo: NSViewController {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        setupStackView()
-        setupStackItems()
-    }
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.sizeToFit()
+        view.addSubview(label)
 
-    private func setupStackView() {
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.bind(.value, to: self, withKeyPath: #keyPath(sliderValue), options: nil)
+        view.addSubview(slider)
 
-        view.addSubview(stackView)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isEditable = true
+        textField.bind(.value, to: self, withKeyPath: #keyPath(sliderValue), options: nil)
+        view.addSubview(textField)
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+
+            slider.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            slider.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+            slider.widthAnchor.constraint(equalToConstant: 200),
+
+            textField.leadingAnchor.constraint(equalTo: label.leadingAnchor),
+            textField.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 8),
+            textField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
         ])
-    }
-
-    func setupStackItems() {
-        stackView.addArrangedSubview(label)
-
-        // Bind the slider's value to `sliderValue`
-        slider.bind(.value, to: self, withKeyPath: #keyPath(sliderValue), options: nil)
-        stackView.addArrangedSubview(slider)
-
-        // Bind the text field's value to `sliderValue`
-        textField.bind(.value, to: self, withKeyPath: #keyPath(sliderValue), options: nil)
-        stackView.addArrangedSubview(textField)
     }
 
 }
