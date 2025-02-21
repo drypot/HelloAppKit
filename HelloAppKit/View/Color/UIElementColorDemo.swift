@@ -1,5 +1,5 @@
 //
-//  ColorTableDemo.swift
+//  UIElementColorDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 2/20/25.
@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class ColorTableDemo: NSViewController {
+class UIElementColorDemo: NSViewController {
 
     let scrollView = NSScrollView()
     let list = NSView()
@@ -28,7 +28,7 @@ class ColorTableDemo: NSViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.documentView = list
         scrollView.hasVerticalScroller = true
-//        scrollView.borderType = .noBorder
+        scrollView.drawsBackground = false;
 
         view.addSubview(scrollView)
 
@@ -37,9 +37,6 @@ class ColorTableDemo: NSViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-//            scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-//            scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
     }
 
@@ -57,30 +54,50 @@ class ColorTableDemo: NSViewController {
         addColorLabel("placeholderTextColor", .placeholderTextColor)
         addColorLabel("selectedTextColor", .selectedTextColor)
         addColorLabel("keyboardFocusIndicatorColor", .keyboardFocusIndicatorColor)
+        addColorLabel("textColor / textBackgroundColor", .textColor, .textBackgroundColor)
+        addColorLabel("selectedTextColor / selectedTextBackgroundColor", .selectedTextColor, .selectedTextBackgroundColor)
+        addColorLabel("unemphasizedSelectedTextColor / unemphasizedSelectedTextBackgroundColor", .unemphasizedSelectedTextColor, .unemphasizedSelectedTextBackgroundColor)
 
-        addSectionLabel("Text Background Colors")
-        addColorLabel("textBackgroundColor", .textColor, .textBackgroundColor)
-        addColorLabel("selectedTextBackgroundColor", .selectedTextColor, .selectedTextBackgroundColor)
-        addColorLabel("unemphasizedSelectedTextBackgroundColor", .unemphasizedSelectedTextColor, .unemphasizedSelectedTextBackgroundColor)
+        // [accentColor brightnessComponent] < 0.5) ? [NSColor whiteColor] : [NSColor blackColor]
 
         addSectionLabel("Content Colors")
         addColorLabel("linkColor", .linkColor)
         addColorLabel("separatorColor", .separatorColor)
-        addColorLabel("selectedContentBackgroundColor", .labelColor, .selectedContentBackgroundColor)
-        addColorLabel("unemphasizedSelectedTextBackgroundColor", .labelColor, .unemphasizedSelectedTextBackgroundColor)
+        addColorLabel("selectedControlTextColor / selectedContentBackgroundColor", .selectedControlTextColor, .selectedContentBackgroundColor)
+        addColorLabel("alternateSelectedControlTextColor / selectedContentBackgroundColor", .alternateSelectedControlTextColor, .selectedContentBackgroundColor)
+        addColorLabel("secondaryLabelColor / unemphasizedSelectedContentBackgroundColor", .secondaryLabelColor, .unemphasizedSelectedContentBackgroundColor)
+
+        addSectionLabel("Menu Colors")
+        addColorLabel("selectedMenuItemTextColor", .selectedMenuItemTextColor)
 
         addSectionLabel("Table Colors")
-        addColorLabel("selectedControlColor", .selectedControlColor)
-        addColorLabel("selectedControlTextColor", .selectedControlTextColor)
-        addColorLabel("", .quaternaryLabelColor)
+        addColorLabel("labelColor / gridColor", .labelColor, .gridColor)
+        addColorLabel("headerTextColor", .headerTextColor)
+        addColorLabel("labelColor / alternatingContentBackgroundColors[0]", .labelColor, .alternatingContentBackgroundColors[0])
+        addColorLabel("labelColor / alternatingContentBackgroundColors[1]", .labelColor, .alternatingContentBackgroundColors[1])
+
+        addSectionLabel("Control Colors")
+        addColorLabel("controlTextColor / controlColor", .controlTextColor, .controlColor)
+        addColorLabel("disabledControlTextColor / controlColor", .disabledControlTextColor, .controlColor)
+        addColorLabel("controlTextColor / controlAccentColor", .controlTextColor, .controlAccentColor)
+        addColorLabel("alternateSelectedControlTextColor / controlAccentColor", .alternateSelectedControlTextColor, .controlAccentColor)
+        addColorLabel("controlTextColor / controlBackgroundColor", .controlTextColor, .controlBackgroundColor)
+        addColorLabel("selectedControlTextColor / selectedControlColor", .selectedControlTextColor, .selectedControlColor)
+        addColorLabel("alternateSelectedControlTextColor / selectedControlColor", .alternateSelectedControlTextColor, .selectedControlColor)
+        addColorLabel("scrubberTexturedBackground", .controlTextColor, .scrubberTexturedBackground)
+
+        addSectionLabel("Window Colors")
+        addColorLabel("windowBackgroundColor", .textColor, .windowBackgroundColor)
+        addColorLabel("windowFrameTextColor", .windowFrameTextColor)
+        addColorLabel("underPageBackgroundColor", .textColor, .underPageBackgroundColor)
+
+        addSectionLabel("Highlights and Shadows")
+        addColorLabel("findHighlightColor", .findHighlightColor)
+        addColorLabel("highlightColor", .highlightColor)
+        addColorLabel("shadowColor", .shadowColor)
 
         constrainsts.append(contentsOf: [
-            //            list.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            //            list.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-//            list.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            list.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            list.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            list.bottomAnchor.constraint(equalTo: lastItem!.bottomAnchor, constant: -20),
+            list.bottomAnchor.constraint(equalTo: lastItem!.bottomAnchor, constant: 20),
         ])
     }
 
@@ -88,7 +105,7 @@ class ColorTableDemo: NSViewController {
         let text = NSTextField(labelWithString: title)
         text.translatesAutoresizingMaskIntoConstraints = false
         text.font = NSFont.systemFont(ofSize: 18, weight: .medium)
-        text.textColor = NSColor.tertiaryLabelColor
+        text.textColor = NSColor.labelColor
         list.addSubview(text)
 
         constrainsts.append(contentsOf: [

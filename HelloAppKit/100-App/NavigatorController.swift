@@ -37,8 +37,12 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "StackView", controllerType: StackViewDemo.self),
             Demo(label: "SplitView", controllerType: SplitViewDemo.self),
         ]),
+        DemoSection(label: "Color", demos: [
+            Demo(label: "StandardColor", controllerType: StandardColorDemo.self),
+            Demo(label: "UIElementColor", controllerType: UIElementColorDemo.self),
+        ]),
         DemoSection(label: "Text", demos: [
-            Demo(label: "ColorTable", controllerType: ColorTableDemo.self),
+            Demo(label: "UIElementColor", controllerType: UIElementColorDemo.self),
             Demo(label: "TextView", controllerType: TextViewDemo.self),
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
