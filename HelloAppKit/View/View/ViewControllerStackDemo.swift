@@ -29,13 +29,13 @@ class ViewControllerStackDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            childView1.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             childView1.topAnchor.constraint(equalTo: view.topAnchor),
+            childView1.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             childView1.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             childView1.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
 
-            childView2.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             childView2.topAnchor.constraint(equalTo: view.topAnchor),
+            childView2.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             childView2.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             childView2.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
         ])

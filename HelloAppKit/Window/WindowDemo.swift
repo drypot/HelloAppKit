@@ -28,11 +28,11 @@ class WindowDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
 
-            button2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             button2.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 8),
+            button2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         ])
     }
 
@@ -71,8 +71,8 @@ class WindowDemo: NSViewController {
             contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 
             closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             closeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),

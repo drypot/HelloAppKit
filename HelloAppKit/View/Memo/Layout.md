@@ -17,9 +17,9 @@ macOS 10.7 (2011)
 레이아웃 제약을 수학적 관계로 정의 (제약 기반)
 
     [NSLayoutConstraint activateConstraints:@[
+        [subview.topAnchor constraintEqualToAnchor:parentView.topAnchor constant:20]
         [subview.leadingAnchor constraintEqualToAnchor:parentView.leadingAnchor constant:10],
         [subview.trailingAnchor constraintEqualToAnchor:parentView.trailingAnchor constant:-10],
-        [subview.topAnchor constraintEqualToAnchor:parentView.topAnchor constant:20]
     ]];
 
 ### StackView

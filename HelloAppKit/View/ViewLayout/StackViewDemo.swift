@@ -29,9 +29,9 @@ class StackViewDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
+            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }

@@ -21,9 +21,9 @@ class CustomViewDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
+            customView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             customView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             customView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            customView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             customView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }

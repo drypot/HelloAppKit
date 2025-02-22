@@ -41,15 +41,15 @@ class NSEditorDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             textField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
 
-            doNothingButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
             doNothingButton.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 8),
+            doNothingButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
 
-            saveButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
             saveButton.topAnchor.constraint(equalTo: doNothingButton.bottomAnchor, constant: 8),
+            saveButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor),
         ])
     }
 

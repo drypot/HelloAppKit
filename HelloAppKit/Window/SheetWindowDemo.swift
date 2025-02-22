@@ -23,8 +23,8 @@ class SheetWindowDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         ])
     }
 
@@ -77,8 +77,8 @@ class SheetWindowDemo: NSViewController {
                 contentView.widthAnchor.constraint(equalToConstant: 400),
                 contentView.heightAnchor.constraint(equalToConstant: 200),
 
-                textField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
                 textField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
+                textField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 
                 okButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
                 okButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),

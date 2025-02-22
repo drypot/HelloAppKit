@@ -29,14 +29,14 @@ class ConstrantDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
 
-            button2.leadingAnchor.constraint(equalTo: button1.leadingAnchor),
             button2.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 8),
+            button2.leadingAnchor.constraint(equalTo: button1.leadingAnchor),
 
-            button3.leadingAnchor.constraint(equalTo: button2.leadingAnchor),
             button3.topAnchor.constraint(equalTo: button2.bottomAnchor, constant: 8),
+            button3.leadingAnchor.constraint(equalTo: button2.leadingAnchor),
         ])
     }
 

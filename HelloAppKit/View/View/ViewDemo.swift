@@ -23,9 +23,9 @@ class ViewDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
+            childView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             childView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             childView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            childView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             childView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }

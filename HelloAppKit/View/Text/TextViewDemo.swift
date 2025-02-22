@@ -27,13 +27,14 @@ class TextViewDemo: NSViewController {
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
+            textView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             textView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             textView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            textView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             textView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),

@@ -23,8 +23,8 @@ class SplitViewControllerDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         ])
     }
 
@@ -88,8 +88,8 @@ class SplitViewControllerDemo: NSViewController {
             view.addSubview(label)
 
             NSLayoutConstraint.activate([
-                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 label.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             ])
         }
     }
@@ -106,8 +106,8 @@ class SplitViewControllerDemo: NSViewController {
             view.addSubview(label)
 
             NSLayoutConstraint.activate([
-                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 label.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             ])
         }
     }

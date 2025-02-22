@@ -69,22 +69,22 @@ class CocoaBindingDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            nameField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             nameField.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            nameField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             nameField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
 
-            nameLabel.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
             nameLabel.topAnchor.constraint(equalTo: nameField.bottomAnchor, constant: 8),
+            nameLabel.leadingAnchor.constraint(equalTo: nameField.leadingAnchor),
 
-            ageField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             ageField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
+            ageField.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             ageField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
 
-            ageLabel.leadingAnchor.constraint(equalTo: ageField.leadingAnchor),
             ageLabel.topAnchor.constraint(equalTo: ageField.bottomAnchor, constant: 8),
+            ageLabel.leadingAnchor.constraint(equalTo: ageField.leadingAnchor),
 
-            resetButton.leadingAnchor.constraint(equalTo: ageLabel.leadingAnchor),
             resetButton.topAnchor.constraint(equalTo: ageLabel.bottomAnchor, constant: 8),
+            resetButton.leadingAnchor.constraint(equalTo: ageLabel.leadingAnchor),
         ])
     }
 

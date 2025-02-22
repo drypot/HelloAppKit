@@ -32,9 +32,9 @@ class ColorLabelListController: NSViewController {
         view.addSubview(scrollView)
 
         constrainsts.append(contentsOf: [
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
@@ -50,14 +50,14 @@ class ColorLabelListController: NSViewController {
         setupLabels()
 
         constrainsts.append(contentsOf: [
+            documentView.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
             documentView.leadingAnchor.constraint(equalTo: scrollView.contentView.leadingAnchor),
             documentView.trailingAnchor.constraint(equalTo: scrollView.contentView.trailingAnchor),
-            documentView.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
             documentView.bottomAnchor.constraint(equalTo: list.bottomAnchor, constant: 20),
 
+            list.topAnchor.constraint(equalTo: documentView.topAnchor, constant: 20),
             list.leadingAnchor.constraint(equalTo: documentView.leadingAnchor, constant: 20),
             list.trailingAnchor.constraint(equalTo: documentView.trailingAnchor, constant: -20),
-            list.topAnchor.constraint(equalTo: documentView.topAnchor, constant: 20),
             list.bottomAnchor.constraint(equalTo: lastItem!.bottomAnchor),
         ])
     }
@@ -82,13 +82,13 @@ class ColorLabelListController: NSViewController {
         ])
 
         if let lastItem {
-            constrainsts.append(contentsOf: [
-                text.topAnchor.constraint(equalTo: lastItem.bottomAnchor, constant: 20),
-            ])
+            constrainsts.append(
+                text.topAnchor.constraint(equalTo: lastItem.bottomAnchor, constant: 20)
+            )
         } else {
-            constrainsts.append(contentsOf: [
-                text.topAnchor.constraint(equalTo: list.topAnchor),
-            ])
+            constrainsts.append(
+                text.topAnchor.constraint(equalTo: list.topAnchor)
+            )
         }
         lastItem = text
     }
@@ -114,13 +114,13 @@ class ColorLabelListController: NSViewController {
         view.addSubview(text)
 
         constrainsts.append(contentsOf: [
+            view.topAnchor.constraint(equalTo: lastItem!.bottomAnchor, constant: 8),
             view.leadingAnchor.constraint(equalTo: list.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: list.trailingAnchor),
-            view.topAnchor.constraint(equalTo: lastItem!.bottomAnchor, constant: 8),
 
+            text.topAnchor.constraint(equalTo: view.topAnchor, constant: 4),
             text.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             text.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            text.topAnchor.constraint(equalTo: view.topAnchor, constant: 4),
             text.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -4),
         ])
         lastItem = view

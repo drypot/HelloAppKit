@@ -172,9 +172,9 @@ class NavigatorController: NSSplitViewController {
             view.addSubview(scrollView)
 
             NSLayoutConstraint.activate([
+                scrollView.topAnchor.constraint(equalTo: view.topAnchor),
                 scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                scrollView.topAnchor.constraint(equalTo: view.topAnchor),
                 scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 160),
             ])
@@ -255,9 +255,9 @@ class NavigatorController: NSSplitViewController {
             view.addSubview(scrollView)
 
             NSLayoutConstraint.activate([
+                scrollView.topAnchor.constraint(equalTo: view.topAnchor),
                 scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                scrollView.topAnchor.constraint(equalTo: view.topAnchor),
                 scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
             ])
@@ -340,9 +340,9 @@ class NavigatorController: NSSplitViewController {
             view.subviews = [subview]
 
             NSLayoutConstraint.activate([
+                subview.topAnchor.constraint(equalTo: view.topAnchor),
                 subview.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 subview.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-                subview.topAnchor.constraint(equalTo: view.topAnchor),
                 subview.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             ])
         }

@@ -43,15 +43,15 @@ class TargetActionDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             label.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
 
-            slider.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             slider.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8),
+            slider.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             slider.widthAnchor.constraint(equalToConstant: 200),
 
-            textField.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             textField.topAnchor.constraint(equalTo: slider.bottomAnchor, constant: 8),
+            textField.leadingAnchor.constraint(equalTo: label.leadingAnchor),
             textField.widthAnchor.constraint(greaterThanOrEqualToConstant: 200),
         ])
     }

@@ -23,9 +23,9 @@ class GestureRecognizerDemo: NSViewController {
         childView.addGestureRecognizer(clickGestureRecognizer)
 
         NSLayoutConstraint.activate([
+            childView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             childView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             childView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            childView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             childView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             childView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             childView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),

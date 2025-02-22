@@ -41,9 +41,9 @@ class SplitViewDemo: NSViewController, NSSplitViewDelegate {
         splitView.addArrangedSubview(rightPane)
 
         NSLayoutConstraint.activate([
+            splitView.topAnchor.constraint(equalTo: view.topAnchor),
             splitView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             splitView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            splitView.topAnchor.constraint(equalTo: view.topAnchor),
             splitView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }

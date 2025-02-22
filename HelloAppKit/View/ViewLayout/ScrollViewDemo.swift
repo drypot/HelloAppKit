@@ -30,9 +30,9 @@ class ScrollViewDemo: NSViewController {
         view.addSubview(scrollView)
 
         constrainsts.append(contentsOf: [
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
@@ -65,9 +65,9 @@ class ScrollViewDemo: NSViewController {
         }
 
         constrainsts.append(contentsOf: [
+            documentView.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
             documentView.leadingAnchor.constraint(equalTo: scrollView.contentView.leadingAnchor),
             documentView.trailingAnchor.constraint(equalTo: scrollView.contentView.trailingAnchor),
-            documentView.topAnchor.constraint(equalTo: scrollView.contentView.topAnchor),
             documentView.bottomAnchor.constraint(equalTo: lastItem!.bottomAnchor, constant: 20),
         ])
     }

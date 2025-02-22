@@ -31,8 +31,8 @@ class NotificationCenterDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            button1.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         ])
     }
 
