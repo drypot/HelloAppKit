@@ -51,7 +51,6 @@ class TableViewDemo: NSViewController {
 
     private func setupScrollView() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.documentView = tableView
         scrollView.hasVerticalScroller = true
 
         view.addSubview(scrollView)
@@ -65,6 +64,8 @@ class TableViewDemo: NSViewController {
     }
 
     private func setupTable() {
+        scrollView.documentView = tableView
+
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.usesAutomaticRowHeights = true
         tableView.selectionHighlightStyle = .regular
@@ -94,7 +95,7 @@ class TableViewDemo: NSViewController {
         view.addSubview(deleteButton)
 
         NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
+            addButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 20),
             addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
 
             deleteButton.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 8),
@@ -165,7 +166,6 @@ extension TableViewDemo: NSTableViewDelegate {
             textField.isBordered = false
             textField.drawsBackground = false
             textField.delegate = self
-//            textField.tag = row
 
             cell.addSubview(textField)
             cell.textField = textField
@@ -247,7 +247,7 @@ extension TableViewDemo: NSTextFieldDelegate {
                 nextRow += 1
                 nextColumn = 0
                 if nextRow == items.count {
-                    nextRow = 0
+                    addRow()
                 }
             }
         case .backtab:
