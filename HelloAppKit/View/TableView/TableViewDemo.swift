@@ -27,7 +27,6 @@ class TableViewDemo: NSViewController {
 
     let scrollView = NSScrollView()
     let tableView = NSTableView()
-    let addButton = NSButton()
 
     var items = [Person]()
 
@@ -60,8 +59,8 @@ class TableViewDemo: NSViewController {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            scrollView.widthAnchor.constraint(equalToConstant: 400),
-            scrollView.heightAnchor.constraint(equalToConstant: 200),
+            scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
         ])
     }
 
@@ -85,26 +84,37 @@ class TableViewDemo: NSViewController {
     }
 
     private func setupFields() {
+        let addButton = NSButton(title: "Add Row", target: self, action: #selector(addRow))
         addButton.translatesAutoresizingMaskIntoConstraints = false
-        addButton.title = "Add New"
-        addButton.target = self
-        addButton.action = #selector(addItem)
         view.addSubview(addButton)
+
+        let deleteButton = NSButton(title: "Delete Row", target: self, action: #selector(deleteRow))
+        deleteButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(deleteButton)
 
         NSLayoutConstraint.activate([
             addButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 8),
-            addButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+
+            deleteButton.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 8),
+            deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         ])
     }
 
-    @objc func addItem() {
+    @objc func addRow(_ sender: Any) {
         let person = Person(name: "New", age: 20)
         items.append(person)
         tableView.reloadData()
-
         printItems()
     }
 
+    @objc func deleteRow(_ sender: Any) {
+        let selectedRow = tableView.selectedRow
+        guard selectedRow >= 0 else { return }
+        items.remove(at: selectedRow) // Remove item from data source
+        tableView.removeRows(at: IndexSet(integer: selectedRow), withAnimation: .effectFade)
+        printItems()
+    }
 }
 
 extension TableViewDemo: NSTableViewDataSource {
@@ -172,7 +182,10 @@ extension TableViewDemo: NSTextFieldDelegate {
 
         let row = tableView.row(for: textField)
         let column = tableView.column(for: textField)
-        guard row >= 0, column >= 0 else { return }
+
+        // 마지막 row 가 편집중인 상태에서 삭제될 수 있다.
+        // 해서 row 의 items.count 범위를 확인해야 한다.
+        guard 0..<items.count ~= row, column >= 0 else { return }
 
         let columnID = tableView.tableColumns[column].identifier
 
@@ -232,7 +245,6 @@ extension TableViewDemo: NSTextFieldDelegate {
             self.tableView.selectRowIndexes(IndexSet(integer: nextRow), byExtendingSelection: false)
             self.tableView.editColumn(nextColumn, row: nextRow, with: nil, select: true)
         }
-
     }
 
     func printItems() {
