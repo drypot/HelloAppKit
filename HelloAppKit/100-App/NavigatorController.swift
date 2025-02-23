@@ -185,16 +185,14 @@ class NavigatorController: NSSplitViewController {
         }
 
         func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-            guard let tableColumn else { return nil }
-            let id = tableColumn.identifier
+            let id = tableColumn!.identifier
+            let cell: NSTableCellView
 
-            let cell = {
-                if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
-                    return cachedCell
-                }
-
-                let newCell = NSTableCellView()
-                newCell.identifier = id
+            if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+                cell = cachedCell
+            } else {
+                cell = NSTableCellView()
+                cell.identifier = id
 
                 let textField = NSTextField()
                 textField.translatesAutoresizingMaskIntoConstraints = false
@@ -202,17 +200,15 @@ class NavigatorController: NSSplitViewController {
                 textField.isBordered = false
                 textField.backgroundColor = .clear
 
-                newCell.addSubview(textField)
-                newCell.textField = textField
+                cell.addSubview(textField)
+                cell.textField = textField
 
                 NSLayoutConstraint.activate([
-                    textField.leadingAnchor.constraint(equalTo: newCell.leadingAnchor),
-                    textField.trailingAnchor.constraint(equalTo: newCell.trailingAnchor),
-                    textField.centerYAnchor.constraint(equalTo: newCell.centerYAnchor),
+                    textField.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+                    textField.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+                    textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
                 ])
-
-                return newCell
-            }()
+            }
 
             cell.textField!.stringValue = sections[row].label
 
@@ -276,19 +272,14 @@ class NavigatorController: NSSplitViewController {
         }
 
         func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-            guard let tableColumn else { return nil }
-            let id = tableColumn.identifier
+            let id = tableColumn!.identifier
+            let cell: NSTableCellView
 
-            guard let section else { return nil }
-            let demo = section.demos[row]
-
-            let cell = {
-                if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
-                    return cachedCell
-                }
-
-                let newCell = NSTableCellView()
-                newCell.identifier = id
+            if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+                cell = cachedCell
+            } else {
+                cell = NSTableCellView()
+                cell.identifier = id
 
                 let textField = NSTextField()
                 textField.translatesAutoresizingMaskIntoConstraints = false
@@ -296,18 +287,21 @@ class NavigatorController: NSSplitViewController {
                 textField.isBordered = false
                 textField.backgroundColor = .clear
 
-                newCell.addSubview(textField)
-                newCell.textField = textField
+                cell.addSubview(textField)
+                cell.textField = textField
 
                 NSLayoutConstraint.activate([
-                    textField.leadingAnchor.constraint(equalTo: newCell.leadingAnchor),
-                    textField.trailingAnchor.constraint(equalTo: newCell.trailingAnchor),
-                    textField.centerYAnchor.constraint(equalTo: newCell.centerYAnchor),
+                    textField.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+                    textField.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+                    textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
                 ])
+            }
 
-                return newCell
-            }()
+            guard let section else {
+                return cell
+            }
 
+            let demo = section.demos[row]
             cell.textField!.stringValue = demo.label
 
             return cell

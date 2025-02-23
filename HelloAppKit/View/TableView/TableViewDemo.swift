@@ -140,16 +140,14 @@ extension TableViewDemo: NSTableViewDataSource {
 extension TableViewDemo: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let tableColumn else { return nil }
-        let id = tableColumn.identifier
+        let id = tableColumn!.identifier
+        let cell: NSTableCellView
 
-        let cell = {
-            if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
-                return cachedCell
-            }
-
-            let newCell = NSTableCellView()
-            newCell.identifier = id
+        if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+            cell = cachedCell
+        } else {
+            cell = NSTableCellView()
+            cell.identifier = id
 
             let textField = NSTextField()
             textField.translatesAutoresizingMaskIntoConstraints = false
@@ -157,17 +155,15 @@ extension TableViewDemo: NSTableViewDelegate {
             textField.isBordered = false
             textField.backgroundColor = .clear // 이거 안 하면 행이 선택되었을 때 배경색이 바뀌지 않는다;
 
-            newCell.addSubview(textField)
-            newCell.textField = textField
+            cell.addSubview(textField)
+            cell.textField = textField
 
             NSLayoutConstraint.activate([
-                textField.leadingAnchor.constraint(equalTo: newCell.leadingAnchor),
-                textField.trailingAnchor.constraint(equalTo: newCell.trailingAnchor),
-                textField.centerYAnchor.constraint(equalTo: newCell.centerYAnchor),
+                textField.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
+                textField.trailingAnchor.constraint(equalTo: cell.trailingAnchor),
+                textField.centerYAnchor.constraint(equalTo: cell.centerYAnchor),
             ])
-
-            return newCell
-        }()
+        }
 
         let person = people[row]
 

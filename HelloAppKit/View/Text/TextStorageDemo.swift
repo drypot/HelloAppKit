@@ -35,7 +35,7 @@ class TextStorageDemo: NSViewController {
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            //            textView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+//            textView.topAnchor.constraint(equalTo: scrollView.topAnchor),
 //            textView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
 //            textView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
 //            textView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
