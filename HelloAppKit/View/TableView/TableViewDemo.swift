@@ -60,7 +60,7 @@ class TableViewDemo: NSViewController {
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
+//            scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
         ])
     }
 
@@ -68,6 +68,7 @@ class TableViewDemo: NSViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.usesAutomaticRowHeights = true
         tableView.selectionHighlightStyle = .regular
+        tableView.allowsMultipleSelection = true
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -88,7 +89,7 @@ class TableViewDemo: NSViewController {
         addButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addButton)
 
-        let deleteButton = NSButton(title: "Delete Row", target: self, action: #selector(deleteRow))
+        let deleteButton = NSButton(title: "Delete Row", target: self, action: #selector(deleteSelectedRows))
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(deleteButton)
 
@@ -98,21 +99,42 @@ class TableViewDemo: NSViewController {
 
             deleteButton.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 8),
             deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
 
-    @objc func addRow(_ sender: Any) {
+    override func keyDown(with event: NSEvent) {
+
+        // specialKey 는 macOS 13, 2022 이상에서만 지원한다고 한다.
+        // 구 버전을 지원하려면 keyCode 를 써야하는데 버추얼키 정의 테이블이 없어서 숫자를 외워야 한다.
+
+        switch event.specialKey {
+        case .delete:
+            deleteSelectedRows()
+        default:
+            super.keyDown(with: event)
+        }
+    }
+
+    @objc func addRow() {
         let person = Person(name: "New", age: 20)
         items.append(person)
         tableView.reloadData()
         printItems()
     }
 
-    @objc func deleteRow(_ sender: Any) {
-        let selectedRow = tableView.selectedRow
-        guard selectedRow >= 0 else { return }
-        items.remove(at: selectedRow) // Remove item from data source
-        tableView.removeRows(at: IndexSet(integer: selectedRow), withAnimation: .effectFade)
+    @objc func deleteSelectedRows() {
+        let selectedRows = tableView.selectedRowIndexes
+        guard !selectedRows.isEmpty else { return }
+
+        let sortedIndexes = selectedRows.sorted(by: >)
+
+        for index in sortedIndexes {
+            items.remove(at: index)
+        }
+
+        tableView.removeRows(at: selectedRows, withAnimation: .effectFade)
+
         printItems()
     }
 }
@@ -241,9 +263,9 @@ extension TableViewDemo: NSTextFieldDelegate {
             return
         }
 
-        DispatchQueue.main.async {
-            self.tableView.selectRowIndexes(IndexSet(integer: nextRow), byExtendingSelection: false)
-            self.tableView.editColumn(nextColumn, row: nextRow, with: nil, select: true)
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.selectRowIndexes(IndexSet(integer: nextRow), byExtendingSelection: false)
+            self?.tableView.editColumn(nextColumn, row: nextRow, with: nil, select: true)
         }
     }
 
