@@ -31,19 +31,19 @@ class TextDocument: NSDocument {
         window.title = "Text Document"
         window.center()
 
-        // window.contentViewController 를 세팅하면
-        // window.contentView 는 contentViewController.view 로 자동 설정된다고 한다.
-
-        viewController = TextDocumentViewController()
-        viewController.representedObject = self
-
-        window.contentViewController = viewController
+        let windowController = NSWindowController(window: window)
+        self.addWindowController(windowController)  // Document -> WindowController
 
         // windowController.contentViewController 대신
         // window.contentViewController 를 설정하면 된다는 것 같다.
 
-        let windowController = NSWindowController(window: window)
-        self.addWindowController(windowController)
+        // window.contentViewController 를 세팅하면
+        // window.contentView 는 contentViewController.view 로 자동 설정된다고 한다.
+
+        viewController = TextDocumentViewController()
+        viewController.representedObject = self  // ViewController -> Document
+
+        window.contentViewController = viewController  // Window -> ViewController
     }
 
     override func data(ofType typeName: String) throws -> Data {
