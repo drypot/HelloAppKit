@@ -7,17 +7,6 @@
 
 import AppKit
 
-// The Cocoa document architecture uses the Objective-C runtime
-
-// Plain Text 용 Info.plist 세팅,
-//
-// Name: Plain Text Doucment      // Save As dialog 의 팝업 메뉴에 사용된다.
-// Identifier: public.plain-text
-// Class: $(PRODUCT_MODULE_NAME).TextDocument
-//
-// 나머지는 적당히
-// Class 프리픽스로 $(PRODUCT_MODULE_NAME) 안 달아주니 클래스를 찾지 못한다.
-
 class TextDocument: NSDocument {
 
 //    nonisolated(unsafe) var content: String = ""
