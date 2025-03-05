@@ -65,7 +65,7 @@ class CompositeViewDemo: NSViewController {
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-
+        
         @objc func handleClick(_ sender: NSClickGestureRecognizer) {
             let locationInView = sender.location(in: self)
             print("clicked at: \(locationInView)")

@@ -28,12 +28,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             defer: false
         )
 
+        let autosaveName = "MainWindowFrame"
+
         window.title = "AppKit Demo"
         window.contentViewController = NavigatorController()
-        window.setFrameAutosaveName("MainWindowFrame")
-        window.layoutIfNeeded()
+        if !window.setFrameUsingName(autosaveName) {
+            window.center()
+        }
+        window.setFrameAutosaveName(autosaveName)
+//        window.layoutIfNeeded()
         window.makeKeyAndOrderFront(nil)
-    }
+  }
 
     func applicationWillTerminate(_ aNotification: Notification) {
     }
