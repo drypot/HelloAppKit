@@ -35,7 +35,7 @@ class WindowControllerDemo: NSViewController {
 
     class CustomWindowController: NSWindowController, NSWindowDelegate {
 
-        convenience init() {
+        init() {
             // window 는 windowController 가 retain 하므로 따로 retain 하지 않아도 된다.
             let window = NSWindow(
                 contentRect: .zero,
@@ -44,13 +44,17 @@ class WindowControllerDemo: NSViewController {
                 defer: false
             )
 
-            self.init(window: window)
+            super.init(window: window)
 
             window.title = "WindowController Demo"
             window.contentViewController = NSViewController()
             window.delegate = self
         }
-
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
         // NSWindowDelegate methods
 
         func windowWillClose(_ notification: Notification) {

@@ -53,7 +53,7 @@ class ToolbarDemo: NSViewController {
 }
 
 class ToolbarDemoWindowController: NSWindowController {
-    convenience init() {
+    init() {
         // window 는 windowController 가 retain 하므로 따로 retain 하지 않아도 된다.
         let window = NSWindow(
             contentRect: .zero,
@@ -66,10 +66,14 @@ class ToolbarDemoWindowController: NSWindowController {
             defer: false
         )
 
-        self.init(window: window)
+        super.init(window: window)
 
         window.title = "Toolbar Demo"
         window.contentViewController = ToolbarDemoViewController()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

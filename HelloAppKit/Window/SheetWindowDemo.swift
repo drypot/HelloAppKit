@@ -52,39 +52,40 @@ class SheetWindowDemo: NSViewController {
 
             self.isReleasedWhenClosed = false
 
-            let contentView = NSView()
-            contentView.translatesAutoresizingMaskIntoConstraints = false
+            let view = NSView()
+            view.translatesAutoresizingMaskIntoConstraints = false
 
-            self.contentView = contentView
+            self.contentView = view
 
             let textField = NSTextField(labelWithString: "Sheet Window Demo")
             textField.translatesAutoresizingMaskIntoConstraints = false
-//            textField.font = NSFont.systemFont(ofSize: 24.0)
-            textField.sizeToFit()
-            contentView.addSubview(textField)
+            textField.font = .systemFont(ofSize: 18, weight: .medium)
+//            textField.sizeToFit()
+            view.addSubview(textField)
 
             let cancelButton = NSButton(title: "Cancel", target: self, action: #selector(cancelAction))
             cancelButton.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(cancelButton)
+            cancelButton.controlSize = .large
+            view.addSubview(cancelButton)
 
             let okButton = NSButton(title: "OK", target: self, action: #selector(okAction))
             okButton.translatesAutoresizingMaskIntoConstraints = false
-            okButton.bezelStyle = .rounded
+            okButton.controlSize = .large
             okButton.keyEquivalent = "\r"
-            contentView.addSubview(okButton)
+            view.addSubview(okButton)
 
             NSLayoutConstraint.activate([
-                contentView.widthAnchor.constraint(equalToConstant: 400),
-                contentView.heightAnchor.constraint(equalToConstant: 200),
+                view.widthAnchor.constraint(equalToConstant: 400),
+                view.heightAnchor.constraint(equalToConstant: 200),
 
-                textField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
-                textField.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
+                textField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-                okButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-                okButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+                cancelButton.trailingAnchor.constraint(equalTo: okButton.leadingAnchor, constant: -10),
+                cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
 
-                cancelButton.trailingAnchor.constraint(equalTo: okButton.leadingAnchor, constant: -8),
-                cancelButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+                okButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 40),
+                okButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
             ])
         }
 
