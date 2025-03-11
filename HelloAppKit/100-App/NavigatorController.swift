@@ -26,6 +26,7 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "WindowController", controllerType: WindowControllerDemo.self),
             Demo(label: "SplitView/Toolbar", controllerType: ToolbarDemo.self),
             Demo(label: "SheetWindow", controllerType: SheetWindowDemo.self),
+            Demo(label: "PresentAsSheet", controllerType: PresentAsSheetDemo.self),
         ]),
         DemoSection(label: "View", demos: [
             Demo(label: "View", controllerType: ViewDemo.self),
@@ -38,6 +39,9 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "StackView", controllerType: StackViewDemo.self),
             Demo(label: "ScrollView", controllerType: ScrollViewDemo.self),
             Demo(label: "SplitView", controllerType: SplitViewDemo.self),
+        ]),
+        DemoSection(label: "Controls", demos: [
+            Demo(label: "Button", controllerType: ButtonDemo.self),
         ]),
         DemoSection(label: "Color", demos: [
             Demo(label: "StandardColor", controllerType: StandardColorDemo.self),
