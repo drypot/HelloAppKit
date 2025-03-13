@@ -44,8 +44,8 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "Button", controllerType: ButtonDemo.self),
         ]),
         DemoSection(label: "Color", demos: [
+            Demo(label: "UIColor", controllerType: UIElementColorDemo.self),
             Demo(label: "StandardColor", controllerType: StandardColorDemo.self),
-            Demo(label: "UIElementColor", controllerType: UIElementColorDemo.self),
         ]),
         DemoSection(label: "Text", demos: [
             Demo(label: "UIElementColor", controllerType: UIElementColorDemo.self),

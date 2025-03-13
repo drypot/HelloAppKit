@@ -11,57 +11,54 @@ class UIElementColorDemo: ColorLabelListController {
 
     override func setupLabels() {
         addSectionLabel("Label Colors")
-        addColorLabel("labelColor", .labelColor)
-        addColorLabel("secondaryLabelColor", .secondaryLabelColor)
-        addColorLabel("tertiaryLabelColor", .tertiaryLabelColor)
-        addColorLabel("quaternaryLabelColor", .quaternaryLabelColor)
+        addColorLabel("labelColor / clear", .labelColor, .clear)
+        addColorLabel("labelColor / windowBackgroundColor", .labelColor, .windowBackgroundColor)
+        addColorLabel("labelColor / textBackgroundColor", .labelColor, .textBackgroundColor)
+        addColorLabel("secondaryLabelColor / textBackgroundColor", .secondaryLabelColor, .textBackgroundColor)
+        addColorLabel("tertiaryLabelColor / textBackgroundColor", .tertiaryLabelColor, .textBackgroundColor)
+        addColorLabel("quaternaryLabelColor / textBackgroundColor", .quaternaryLabelColor, .textBackgroundColor)
+        addColorLabel("windowFrameTextColor / clear", .windowFrameTextColor, .clear)
 
         addSectionLabel("Text Colors")
-        addColorLabel("textColor", .textColor)
-        addColorLabel("placeholderTextColor", .placeholderTextColor)
-        addColorLabel("selectedTextColor", .selectedTextColor)
-        addColorLabel("keyboardFocusIndicatorColor", .keyboardFocusIndicatorColor)
         addColorLabel("textColor / textBackgroundColor", .textColor, .textBackgroundColor)
         addColorLabel("selectedTextColor / selectedTextBackgroundColor", .selectedTextColor, .selectedTextBackgroundColor)
         addColorLabel("unemphasizedSelectedTextColor / unemphasizedSelectedTextBackgroundColor", .unemphasizedSelectedTextColor, .unemphasizedSelectedTextBackgroundColor)
-
-        // [accentColor brightnessComponent] < 0.5) ? [NSColor whiteColor] : [NSColor blackColor]
-
-        addSectionLabel("Content Colors")
-        addColorLabel("linkColor", .linkColor)
-        addColorLabel("separatorColor", .separatorColor)
-        addColorLabel("selectedControlTextColor / selectedContentBackgroundColor", .selectedControlTextColor, .selectedContentBackgroundColor)
-        addColorLabel("alternateSelectedControlTextColor / selectedContentBackgroundColor", .alternateSelectedControlTextColor, .selectedContentBackgroundColor)
-        addColorLabel("secondaryLabelColor / unemphasizedSelectedContentBackgroundColor", .secondaryLabelColor, .unemphasizedSelectedContentBackgroundColor)
-
-        addSectionLabel("Menu Colors")
-        addColorLabel("selectedMenuItemTextColor", .selectedMenuItemTextColor)
+        addColorLabel("linkColor / textBackgroundColor", .linkColor, .textBackgroundColor)
 
         addSectionLabel("Table Colors")
-        addColorLabel("labelColor / gridColor", .labelColor, .gridColor)
-        addColorLabel("headerTextColor", .headerTextColor)
+        addColorLabel("headerTextColor / controlBackgroundColor", .headerTextColor, .controlBackgroundColor)
+        addColorLabel("gridColor / controlBackgroundColor", .labelColor, .controlBackgroundColor)
         addColorLabel("labelColor / alternatingContentBackgroundColors[0]", .labelColor, .alternatingContentBackgroundColors[0])
         addColorLabel("labelColor / alternatingContentBackgroundColors[1]", .labelColor, .alternatingContentBackgroundColors[1])
 
+        addSectionLabel("Content Colors")
+        addColorLabel("alternateSelectedControlTextColor / selectedContentBackgroundColor", .alternateSelectedControlTextColor, .selectedContentBackgroundColor)
+        addColorLabel("unemphasizedSelectedTextColor / unemphasizedSelectedContentBackgroundColor", .unemphasizedSelectedTextColor, .unemphasizedSelectedContentBackgroundColor)
+
         addSectionLabel("Control Colors")
+        addColorLabel("controlAccentColor / controlColor", .controlAccentColor, .controlColor)
         addColorLabel("controlTextColor / controlColor", .controlTextColor, .controlColor)
-        addColorLabel("disabledControlTextColor / controlColor", .disabledControlTextColor, .controlColor)
-        addColorLabel("controlTextColor / controlAccentColor", .controlTextColor, .controlAccentColor)
-        addColorLabel("alternateSelectedControlTextColor / controlAccentColor", .alternateSelectedControlTextColor, .controlAccentColor)
         addColorLabel("controlTextColor / controlBackgroundColor", .controlTextColor, .controlBackgroundColor)
+        addColorLabel("disabledControlTextColor / controlColor", .disabledControlTextColor, .controlColor)
+        addColorLabel("placeholderTextColor / controlColor", .placeholderTextColor, .controlColor)
+        addColorLabel("keyboardFocusIndicatorColor / controlColor", .keyboardFocusIndicatorColor, .controlColor)
         addColorLabel("selectedControlTextColor / selectedControlColor", .selectedControlTextColor, .selectedControlColor)
-        addColorLabel("alternateSelectedControlTextColor / selectedControlColor", .alternateSelectedControlTextColor, .selectedControlColor)
-        addColorLabel("scrubberTexturedBackground", .controlTextColor, .scrubberTexturedBackground)
+        addColorLabel("separatorColor / controlColor", .separatorColor, .textBackgroundColor)
+        // addColorLabel("scrubberTexturedBackground", .controlTextColor, .scrubberTexturedBackground)
+
+        // [accentColor brightnessComponent] < 0.5) ? [NSColor whiteColor] : [NSColor blackColor]
+
+        addSectionLabel("Menu Colors")
+        addColorLabel("selectedMenuItemTextColor / selectedContentBackgroundColor", .selectedMenuItemTextColor, .selectedContentBackgroundColor)
 
         addSectionLabel("Window Colors")
-        addColorLabel("windowBackgroundColor", .textColor, .windowBackgroundColor)
-        addColorLabel("windowFrameTextColor", .windowFrameTextColor)
-        addColorLabel("underPageBackgroundColor", .textColor, .underPageBackgroundColor)
+        addColorLabel("windowFrameTextColor / windowBackgroundColor", .windowFrameTextColor, .windowBackgroundColor)
+        addColorLabel("windowFrameTextColor / underPageBackgroundColor", .windowFrameTextColor, .underPageBackgroundColor)
 
         addSectionLabel("Highlights and Shadows")
-        addColorLabel("findHighlightColor", .findHighlightColor)
-        addColorLabel("highlightColor", .highlightColor)
-        addColorLabel("shadowColor", .shadowColor)
+        addColorLabel("textColor / findHighlightColor", .textColor, .findHighlightColor)
+        addColorLabel("textColor / highlightColor", .textColor, .highlightColor)
+        addColorLabel("shadowColor / textBackgroundColor", .shadowColor, .textBackgroundColor)
     }
 
 }
