@@ -1,5 +1,5 @@
 //
-//  UIElementColorDemo.swift
+//  UIColorDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 2/20/25.
@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class UIElementColorDemo: ColorLabelListController {
+class UIColorDemo: ColorLabelListController {
 
     override func setupLabels() {
         addSectionLabel("Label Colors")

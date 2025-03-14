@@ -44,11 +44,11 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "Button", controllerType: ButtonDemo.self),
         ]),
         DemoSection(label: "Color", demos: [
-            Demo(label: "UIColor", controllerType: UIElementColorDemo.self),
-            Demo(label: "StandardColor", controllerType: StandardColorDemo.self),
+            Demo(label: "UIColor", controllerType: UIColorDemo.self),
+            Demo(label: "SystemColor", controllerType: SystemColorDemo.self),
         ]),
         DemoSection(label: "Text", demos: [
-            Demo(label: "UIElementColor", controllerType: UIElementColorDemo.self),
+            Demo(label: "UIElementColor", controllerType: UIColorDemo.self),
             Demo(label: "TextView", controllerType: TextViewDemo.self),
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
