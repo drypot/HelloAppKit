@@ -1,5 +1,5 @@
 //
-//  VisualEffectDemo.swift
+//  MaterialDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 3/15/25.
@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class VisualEffectDemo: NSViewController {
+class MaterialDemo: NSViewController {
 
     var window: NSWindow?
 

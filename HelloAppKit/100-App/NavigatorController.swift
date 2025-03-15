@@ -27,6 +27,22 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "SheetWindow", controllerType: SheetWindowDemo.self),
             Demo(label: "PresentAsSheet", controllerType: PresentAsSheetDemo.self),
         ]),
+        DemoSection(label: "Color", demos: [
+            Demo(label: "UIColor", controllerType: UIColorDemo.self),
+            Demo(label: "SystemColor", controllerType: SystemColorDemo.self),
+        ]),
+        DemoSection(label: "Material", demos: [
+            Demo(label: "Material", controllerType: MaterialDemo.self),
+        ]),
+        DemoSection(label: "Controls", demos: [
+            Demo(label: "Button", controllerType: ButtonDemo.self),
+        ]),
+        DemoSection(label: "Text", demos: [
+            Demo(label: "TextView", controllerType: TextViewDemo.self),
+            Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
+            //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
+            Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
+        ]),
         DemoSection(label: "View", demos: [
             Demo(label: "View", controllerType: ViewDemo.self),
             Demo(label: "CustomView", controllerType: CustomViewDemo.self),
@@ -39,26 +55,9 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "ScrollView", controllerType: ScrollViewDemo.self),
             Demo(label: "SplitView", controllerType: SplitViewDemo.self),
         ]),
-        DemoSection(label: "Controls", demos: [
-            Demo(label: "Button", controllerType: ButtonDemo.self),
-        ]),
-        DemoSection(label: "Color", demos: [
-            Demo(label: "UIColor", controllerType: UIColorDemo.self),
-            Demo(label: "SystemColor", controllerType: SystemColorDemo.self),
-        ]),
-        DemoSection(label: "Text", demos: [
-            Demo(label: "UIElementColor", controllerType: UIColorDemo.self),
-            Demo(label: "TextView", controllerType: TextViewDemo.self),
-            Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
-            //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
-            Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
-        ]),
         DemoSection(label: "Table", demos: [
             Demo(label: "TableView", controllerType: TableViewDemo.self),
             Demo(label: "TableViewCocoaBinding", controllerType: TableViewCocoaBindingDemo.self),
-        ]),
-        DemoSection(label: "VisualEffect", demos: [
-            Demo(label: "VisualEffect", controllerType: VisualEffectDemo.self),
         ]),
         DemoSection(label: "Document", demos: [
             Demo(label: "Document", controllerType: DocumentDemo.self),
