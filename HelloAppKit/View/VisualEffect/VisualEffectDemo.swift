@@ -15,7 +15,7 @@ class VisualEffectDemo: NSViewController {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let button1 = NSButton(title: "Open window", target: self, action: #selector(openWindow))
+        let button1 = NSButton(title: "Open translucent window", target: self, action: #selector(openWindow))
         button1.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button1)
 
@@ -54,7 +54,7 @@ class VisualEffectDemo: NSViewController {
 
         guard let window else { fatalError() }
 
-        window.title = "Window Demo"
+        window.title = "Demo"
         window.isReleasedWhenClosed = false // 윈도우 닫았다가 다시 Open 할 때 크래쉬를 방지.
 //        window.isOpaque = false
 //        window.backgroundColor = .clear

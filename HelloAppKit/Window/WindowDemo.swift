@@ -10,7 +10,8 @@ import AppKit
 class WindowDemo: NSViewController {
 
     var window: NSWindow?
-    var windowAtAbsoluteCenter: NSWindow?
+    var window2: NSWindow?
+    var windowController: NSWindowController?
 
     override func loadView() {
         view = NSView()
@@ -20,9 +21,13 @@ class WindowDemo: NSViewController {
         button1.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button1)
 
-        let button2 = NSButton(title: "Open window at absolute center", target: self, action: #selector(openWindowAtAbsoluteCenter))
+        let button2 = NSButton(title: "Open window with ViewController", target: self, action: #selector(openWindow2))
         button2.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button2)
+
+        let button3 = NSButton(title: "Open window with WindowController", target: self, action: #selector(openWindow3))
+        button3.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button3)
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
@@ -33,6 +38,9 @@ class WindowDemo: NSViewController {
 
             button2.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 8),
             button2.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+
+            button3.topAnchor.constraint(equalTo: button2.bottomAnchor, constant: 8),
+            button3.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         ])
     }
 
@@ -46,49 +54,27 @@ class WindowDemo: NSViewController {
             )
         }
 
-        guard let window else { fatalError() }
+        let window = self.window!
 
-        window.title = "Window Demo"
+        window.title = "Demo"
         window.isReleasedWhenClosed = false // 윈도우 닫았다가 다시 Open 할 때 크래쉬를 방지.
 
-        let contentView = NSView()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-
-        window.contentView = contentView
-
-        let label = NSTextField(labelWithString: "Window close demo")
-        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = NSFont.systemFont(ofSize: 24.0)
-        label.sizeToFit()
-        contentView.addSubview(label)
-        
-        let closeButton = NSButton(title: "Close", target: self, action: #selector(closeAction))
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.keyEquivalent = "\r"
-        contentView.addSubview(closeButton)
+        let view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        window.contentView = view
 
         NSLayoutConstraint.activate([
-            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-
-            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-
-            closeButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            closeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
         ])
 
         window.center()
         window.makeKeyAndOrderFront(nil)
     }
 
-    @objc func closeAction(_ sender: NSButton) {
-        window!.close()
-    }
-
-    @objc func openWindowAtAbsoluteCenter() {
-        if windowAtAbsoluteCenter == nil {
-            windowAtAbsoluteCenter = NSWindow(
+    @objc func openWindow2() {
+        if window == nil {
+            window = NSWindow(
                 contentRect: .zero,
                 styleMask: [.titled, .closable, .resizable, .miniaturizable],
                 backing: .buffered,
@@ -96,28 +82,77 @@ class WindowDemo: NSViewController {
             )
         }
 
-        let window = windowAtAbsoluteCenter!
-        
-        window.title = "Window at Absolute Center"
-        window.isReleasedWhenClosed = false // 이거 안 하고 윈도우 닫았다가 다시 Open 버튼 누르면 크래쉬난다.
-        window.contentViewController = NSViewController()
-        moveWindowToAbsoluteCenter(window)
+        let window = self.window!
 
+        window.title = "Demo2"
+        window.isReleasedWhenClosed = false // 윈도우 닫았다가 다시 Open 할 때 크래쉬를 방지.
+
+        window.contentViewController = ViewController()
+        window.center()
         window.makeKeyAndOrderFront(nil)
     }
 
-    private func moveWindowToAbsoluteCenter(_ window: NSWindow) {
-        guard let screen = window.screen ?? NSScreen.main else { return }
+    class ViewController: NSViewController {
+        override func loadView() {
+            view = NSView()
+            view.translatesAutoresizingMaskIntoConstraints = false
 
-        let screenRect = screen.visibleFrame
-        let windowSize = window.frame.size
+            let child = NSView()
+            child.translatesAutoresizingMaskIntoConstraints = false
+            child.wantsLayer = true
+            child.layer?.backgroundColor = NSColor.systemTeal.cgColor
+            view.addSubview(child)
 
-        let x = (screenRect.width - windowSize.width) / 2 + screenRect.origin.x
-        let y = (screenRect.height - windowSize.height) / 2 + screenRect.origin.y
+            NSLayoutConstraint.activate([
+                view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+                view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-        window.setFrameOrigin(NSPoint(x: x, y: y))
+                child.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+                child.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+                child.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                child.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            ])
+        }
     }
+
+    @objc func openWindow3() {
+        if windowController == nil {
+            windowController = WindowController()
+            windowController!.window!.center()
+        }
+
+        let windowController = self.windowController!
+
+        windowController.showWindow(nil)
+    }
+
+    class WindowController: NSWindowController, NSWindowDelegate {
+
+        init() {
+            // window 는 windowController 가 retain 하므로 따로 retain 하지 않아도 된다.
+            let window = NSWindow(
+                contentRect: .zero,
+                styleMask: [.titled, .closable, .resizable, .miniaturizable],
+                backing: .buffered,
+                defer: false
+            )
+
+            super.init(window: window)
+
+            window.title = "Demo3"
+            window.contentViewController = NSViewController()
+            window.delegate = self
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        // NSWindowDelegate methods
+
+        func windowWillClose(_ notification: Notification) {
+            print("window will close")
+        }
+    }
+
 }
-
-
-
