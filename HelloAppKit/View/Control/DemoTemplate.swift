@@ -72,6 +72,3 @@ class DemoTemplate: NSViewController {
     }
 
 }
-
-
-
