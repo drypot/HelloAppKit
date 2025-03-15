@@ -42,6 +42,7 @@ class NavigatorController: NSSplitViewController {
         ]),
         DemoSection(label: "Controls", demos: [
             Demo(label: "Button", controllerType: ButtonDemo.self),
+            Demo(label: "DemoTemplate", controllerType: DemoTemplate.self),
         ]),
         DemoSection(label: "Color", demos: [
             Demo(label: "UIColor", controllerType: UIColorDemo.self),
@@ -57,6 +58,9 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Table", demos: [
             Demo(label: "TableView", controllerType: TableViewDemo.self),
             Demo(label: "TableViewCocoaBinding", controllerType: TableViewCocoaBindingDemo.self),
+        ]),
+        DemoSection(label: "VisualEffect", demos: [
+            Demo(label: "VisualEffect", controllerType: VisualEffectDemo.self),
         ]),
         DemoSection(label: "Document", demos: [
             Demo(label: "Document", controllerType: DocumentDemo.self),

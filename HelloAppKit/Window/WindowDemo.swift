@@ -46,7 +46,7 @@ class WindowDemo: NSViewController {
             )
         }
 
-        let window = window!
+        guard let window else { fatalError() }
 
         window.title = "Window Demo"
         window.isReleasedWhenClosed = false // 윈도우 닫았다가 다시 Open 할 때 크래쉬를 방지.
@@ -56,7 +56,7 @@ class WindowDemo: NSViewController {
 
         window.contentView = contentView
 
-        let label = NSTextField(labelWithString: "Hello!")
+        let label = NSTextField(labelWithString: "Window close demo")
         label.translatesAutoresizingMaskIntoConstraints = false
 //        label.font = NSFont.systemFont(ofSize: 24.0)
         label.sizeToFit()
@@ -71,10 +71,10 @@ class WindowDemo: NSViewController {
             contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            label.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
 
-            closeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            closeButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             closeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
         ])
 
