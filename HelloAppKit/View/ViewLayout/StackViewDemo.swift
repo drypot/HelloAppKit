@@ -9,17 +9,13 @@ import AppKit
 
 class StackViewDemo: NSViewController {
 
-    let stackView = NSStackView()
-
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        setupStackView()
-        setupStackItems()
-    }
+        // Setup StackView
 
-    private func setupStackView() {
+        let stackView = NSStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
         stackView.alignment = .leading
@@ -34,21 +30,23 @@ class StackViewDemo: NSViewController {
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
-    }
 
-    func setupStackItems() {
-        let button1 = NSButton(title: "Button 1", target: self, action: #selector(buttonAction))
-        stackView.addArrangedSubview(button1)
+        // Setup StackItems
 
-        let button2 = NSButton(title: "Button 2", target: self, action: #selector(buttonAction))
-        stackView.addArrangedSubview(button2)
+        do {
+            let text = NSTextField(labelWithString: "Text 1")
+            stackView.addArrangedSubview(text)
+        }
 
-        let button3 = NSButton(title: "Button 3", target: self, action: #selector(buttonAction))
-        stackView.addArrangedSubview(button3)
-    }
+        do {
+            let text = NSTextField(labelWithString: "Text 2")
+            stackView.addArrangedSubview(text)
+        }
 
-    @objc func buttonAction(_ sender: NSButton) {
-        print("button clicked")
+        do {
+            let text = NSTextField(labelWithString: "Text 3")
+            stackView.addArrangedSubview(text)
+        }
     }
 
 }
