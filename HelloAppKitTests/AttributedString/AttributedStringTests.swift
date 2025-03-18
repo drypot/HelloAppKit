@@ -8,6 +8,9 @@
 import AppKit
 import Testing
 
+// AttributedString
+// https://developer.apple.com/documentation/foundation/attributedstring
+
 // AttributedString: Making Text More Beautiful Than Ever
 // https://fatbobman.com/en/posts/attributedstring/
 
@@ -37,7 +40,7 @@ struct AttributedStringTests {
         #expect(string.foregroundColor == .systemTeal)
     }
 
-    @Test func testAttrToRange() throws {
+    @Test func testRangeOf() throws {
         var string = AttributedString("Thank you! please visit our website.")
 
         #expect(string.runs.count == 1)
@@ -49,7 +52,7 @@ struct AttributedStringTests {
         #expect(string.runs.count == 3)
     }
 
-    @Test func testManualRange() throws {
+    @Test func testCharactersIndex() throws {
         var string = AttributedString("Thank you! please visit our website.")
 
         #expect(string.runs.count == 1)
@@ -100,12 +103,12 @@ struct AttributedStringTests {
             string[range].link = URL(string: "https://google.com")
         }
 
-        let firstRun = string.runs.first { run in
+        let run = string.runs.first { run in
             return run.link != nil
         }!
-        let firstString = String(string.characters[firstRun.range])
+        let runString = String(string.characters[run.range])
 
-        #expect(firstString == "website")
+        #expect(runString == "website")
     }
 
     @Test func testRunWithKeyPath() throws {
@@ -115,15 +118,14 @@ struct AttributedStringTests {
             string[range].link = URL(string: "https://google.com")
         }
 
-        // 어트리뷰트가 복잡하면
-        // runs 에 KeyPath 를 줘서 해당 Key 만으로 run 셋을 만들 수도 있다.
+        // KeyPath 로 해당 Key 만의 run 셋을 만들 수 있다.
 
         let runs = string.runs[\.link]
-        let (firstLink, firstRange) = runs.first { link, range in link != nil }!
-        let firstString = String(string.characters[firstRange])
+        let (runLink, runRange) = runs.first { link, range in link != nil }!
+        let runString = String(string.characters[runRange])
 
-        #expect(firstLink!.absoluteString == "https://google.com")
-        #expect(firstString == "website")
+        #expect(runLink!.absoluteString == "https://google.com")
+        #expect(runString == "website")
     }
 
     @Test func testExplicitAttributeScope() throws {
@@ -153,9 +155,9 @@ struct AttributedStringTests {
 
         #expect(string.runs.count == 3)
 
-        let firstString = String(string.characters)
+        let result = String(string.characters)
 
-        #expect(firstString == "Thank you! please visit our instagram.")
+        #expect(result == "Thank you! please visit our instagram.")
     }
 
     @Test func testCustomAttribute() throws {
@@ -180,11 +182,11 @@ struct AttributedStringTests {
         #expect(string.runs.count == 3)
 
         let runs = string.runs[CustomAttribute.self]
-        let (firstAttr, firstRange) = runs.first { customAttr, range in customAttr != nil }!
-        let firstString = String(string.characters[firstRange])
+        let (runAttr, runRange) = runs.first { customAttr, range in customAttr != nil }!
+        let runString = String(string.characters[runRange])
 
-        #expect(firstAttr == .extreme)
-        #expect(firstString == "website")
+        #expect(runAttr == .extreme)
+        #expect(runString == "website")
     }
 
 }
