@@ -13,7 +13,7 @@ class CustomViewDemo: NSViewController {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let customView = CustomView(frame: .zero, color: .green)
+        let customView = CustomView(color: .green)
         customView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(customView)
 
@@ -33,9 +33,9 @@ class CustomView: NSView {
 
     var color: NSColor
 
-    init(frame frameRect: NSRect, color: NSColor) {
+    init(color: NSColor) {
         self.color = color
-        super.init(frame: frameRect)
+        super.init(frame: .zero)
     }
         
     required init?(coder: NSCoder) {
