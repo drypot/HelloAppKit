@@ -40,7 +40,9 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Text", demos: [
             Demo(label: "TextField", controllerType: TextFieldDemo.self),
             Demo(label: "TextView", controllerType: TextViewDemo.self),
+            Demo(label: "TextView2", controllerType: TextViewDemo2.self),
             Demo(label: "TextKit2", controllerType: TextKit2Demo.self),
+            Demo(label: "Symbol", controllerType: SymbolDemo.self),
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
             Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
