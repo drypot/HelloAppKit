@@ -62,6 +62,7 @@ class CustomView: NSView {
 
         print("frame: \(frame)")
         print("bounds: \(bounds)")
+        print("dirtyRect: \(dirtyRect)")
         print("")
     }
     

@@ -7,6 +7,13 @@
 
 import Cocoa
 
+// Text Display
+// https://developer.apple.com/documentation/appkit/text-display
+
+// NSTextField
+// https://developer.apple.com/documentation/appkit/nstextfield
+// Text the user can select or edit to send an action message to a target when the user presses the Return key.
+
 class TextFieldDemo: NSViewController {
 
     override func loadView() {
@@ -41,34 +48,20 @@ class TextFieldDemo: NSViewController {
 
         do {
             var string = AttributedString("Attributed string")
-            var container = AttributeContainer()
-            container[AttributeScopes.AppKitAttributes.ForegroundColorAttribute.self] = .systemRed
-            string.mergeAttributes(container, mergePolicy: .keepNew)
-
-            let text = NSTextField()
-            text.attributedStringValue = NSAttributedString(string)
-            text.font = .systemFont(ofSize: 24)
-            text.isEditable = false
-            stackView.addArrangedSubview(text)
-        }
-
-        do {
-            var string = AttributedString("Attributed string")
-            string[AttributeScopes.AppKitAttributes.ForegroundColorAttribute.self] = .systemBlue
-
-            let text = NSTextField()
-            text.attributedStringValue = NSAttributedString(string)
-            text.font = .systemFont(ofSize: 24)
-            text.isEditable = false
-            stackView.addArrangedSubview(text)
-        }
-
-        do {
-            var string = AttributedString("Attributed string")
             string.foregroundColor = .systemTeal
 
-            let text = NSTextField()
-            text.attributedStringValue = NSAttributedString(string)
+            let text = NSTextField(labelWithAttributedString: NSAttributedString(string))
+            text.font = .systemFont(ofSize: 24)
+            text.isEditable = false
+            stackView.addArrangedSubview(text)
+        }
+
+        do {
+            var string = AttributedString("Attributed string")
+            string.foregroundColor = .systemBlue
+//            string.font = .systemFont(ofSize: 24)  // Conformance of 'NSFont' to 'Sendable' warning
+
+            let text = NSTextField(labelWithAttributedString: NSAttributedString(string))
             text.font = .systemFont(ofSize: 24)
             text.isEditable = false
             stackView.addArrangedSubview(text)
@@ -77,7 +70,7 @@ class TextFieldDemo: NSViewController {
         do {
             var string = AttributedString("Attributed string")
             let range = string.range(of: "Attributed")!
-            string[range].foregroundColor = .systemTeal
+            string[range].foregroundColor = .systemBrown
 
             let text = NSTextField()
             text.attributedStringValue = NSAttributedString(string)
@@ -93,36 +86,6 @@ class TextFieldDemo: NSViewController {
 
             let text = NSTextField()
             text.attributedStringValue = NSAttributedString(attributedString)
-            text.font = .systemFont(ofSize: 24)
-            text.isEditable = false
-            stackView.addArrangedSubview(text)
-        }
-
-        do {
-            var string = AttributedString("Attributed string")
-
-            var container = AttributeContainer()
-            container.appKit.foregroundColor = .systemTeal
-            string.mergeAttributes(container)
-
-            let text = NSTextField()
-            text.attributedStringValue = NSAttributedString(string)
-            text.font = .systemFont(ofSize: 24)
-            text.isEditable = false
-            stackView.addArrangedSubview(text)
-        }
-
-        do {
-            var string = AttributedString("Colorize punctuation!!!")
-            let characterView = string.characters
-
-            for i in characterView.indices where characterView[i].isPunctuation {
-                let next = characterView.index(after: i)
-                string[i..<next].foregroundColor = .systemBlue
-            }
-
-            let text = NSTextField()
-            text.attributedStringValue = NSAttributedString(string)
             text.font = .systemFont(ofSize: 24)
             text.isEditable = false
             stackView.addArrangedSubview(text)

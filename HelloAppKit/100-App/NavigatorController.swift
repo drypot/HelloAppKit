@@ -36,11 +36,12 @@ class NavigatorController: NSSplitViewController {
         ]),
         DemoSection(label: "Controls", demos: [
             Demo(label: "Button", controllerType: ButtonDemo.self),
+            Demo(label: "ButtonBar", controllerType: ButtonBarDemo.self),
         ]),
         DemoSection(label: "Text", demos: [
             Demo(label: "TextField", controllerType: TextFieldDemo.self),
             Demo(label: "TextView", controllerType: TextViewDemo.self),
-            Demo(label: "TextView2", controllerType: TextViewDemo2.self),
+            Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
             Demo(label: "TextKit2", controllerType: TextKit2Demo.self),
             Demo(label: "Symbol", controllerType: SymbolDemo.self),
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
