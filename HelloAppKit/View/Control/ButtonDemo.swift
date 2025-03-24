@@ -9,17 +9,11 @@ import Cocoa
 
 class ButtonDemo: NSViewController {
 
-    let stackView = NSStackView()
-    
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        setupStackView()
-        setupStackItems()
-    }
-
-    private func setupStackView() {
+        let stackView = NSStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.orientation = .vertical
         stackView.alignment = .leading
@@ -35,9 +29,7 @@ class ButtonDemo: NSViewController {
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
-    }
 
-    func setupStackItems() {
         do {
             let button = NSButton(title: "Default", target: self, action: #selector(buttonAction))
             stackView.addArrangedSubview(button)
