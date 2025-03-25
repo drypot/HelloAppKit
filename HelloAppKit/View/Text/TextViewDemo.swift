@@ -29,7 +29,14 @@ class TextViewDemo: NSViewController {
         textView.autoresizingMask = [.width, .height]
         textView.font = .systemFont(ofSize: 24.0)
 
-        textView.string = "NSTextView Demo"
+        if let url = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
+            do {
+                try textView.textStorage?.read(from: url, documentAttributes: nil, error: ())
+            } catch {
+                // Could not read menu content.
+            }
+        }
+//        textView.string = "NSTextView Demo"
 
         scrollView.documentView = textView
 

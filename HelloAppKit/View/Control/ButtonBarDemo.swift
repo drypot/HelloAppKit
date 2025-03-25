@@ -30,7 +30,6 @@ class ButtonBarDemo: NSViewController {
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
             buttonBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-//            buttonBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             buttonBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
 
             content.topAnchor.constraint(equalTo: buttonBar.bottomAnchor, constant: 20),
