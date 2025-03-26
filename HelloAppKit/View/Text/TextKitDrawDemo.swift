@@ -21,10 +21,6 @@ class TextKitDrawDemo: NSViewController {
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
         stringDraw.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stringDraw)
@@ -92,10 +88,12 @@ class TextKitDrawDemo: NSViewController {
             textContainer = NSTextContainer(size: frameRect.size)
             textContainer.lineFragmentPadding = 5.0
 
-            super.init(frame: frameRect)
-
             layoutManager.addTextContainer(textContainer)
             textStorage.addLayoutManager(layoutManager)
+
+            super.init(frame: frameRect)
+
+            autoresizesSubviews = true
         }
 
         required init?(coder: NSCoder) {
@@ -118,7 +116,13 @@ class TextKitDrawDemo: NSViewController {
         func updateTextContainerSize() {
             textContainer.size = bounds.size
             setNeedsDisplay(bounds)
-            print ("textContainer.size: \(bounds.size)")
+            print ("textContainer size updated: \(bounds.size)")
+            print ("frame size updated: \(frame.size)")
+        }
+
+        override func resizeSubviews(withOldSize oldSize: NSSize) {
+            super.resizeSubviews(withOldSize: oldSize)
+            print("뷰 크기 변경됨: 이전 크기 \(oldSize), 새로운 크기 \(self.frame.size)")
         }
     }
 

@@ -26,10 +26,6 @@ class TextKitToggleWrapDemo: NSViewController {
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
         let buttonBar = NSStackView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false
@@ -51,13 +47,6 @@ class TextKitToggleWrapDemo: NSViewController {
 
         // NSTextStorage
         textStorage = NSTextStorage()
-        if let url = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
-            do {
-                try textStorage.read(from: url, documentAttributes: nil, error: ())
-            } catch {
-                // Could not read menu content.
-            }
-        }
 
         // NSLayoutManager
         layoutManager = NSLayoutManager()
@@ -94,6 +83,18 @@ class TextKitToggleWrapDemo: NSViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if let url = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
+            do {
+                try textStorage.read(from: url, documentAttributes: nil, error: ())
+            } catch {
+                // Could not read menu content.
+            }
+        }
     }
 
     @objc func wrapAction(_ sender: NSButton) {
