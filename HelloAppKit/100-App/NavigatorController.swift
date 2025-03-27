@@ -57,6 +57,8 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
         ]),
         DemoSection(label: "ViewLayout", demos: [
+            Demo(label: "AutoResizing", controllerType: AutoResizingDemo.self),
+            Demo(label: "AutoLayout", controllerType: AutoLayoutDemo.self),
             Demo(label: "Constrant", controllerType: ConstrantDemo.self),
             Demo(label: "StackView", controllerType: StackViewDemo.self),
             Demo(label: "ScrollView", controllerType: ScrollViewDemo.self),
