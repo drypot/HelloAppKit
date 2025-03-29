@@ -33,7 +33,12 @@ class AutoLayoutDemo: NSViewController {
         ])
     }
 
-    
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        print("---")
+        print("viewDidLayout: \(view.frame.size)")
+    }
+
     class SizeLogger: NSView {
 
         override init(frame frameRect: NSRect) {
@@ -46,14 +51,14 @@ class AutoLayoutDemo: NSViewController {
             fatalError("init(coder:) has not been implemented")
         }
 
-        override func resize(withOldSuperviewSize oldSize: NSSize) {
-            super.resize(withOldSuperviewSize: oldSize)
-            print("resize: \(frame.size)")
-        }
-
         override func resizeSubviews(withOldSize oldSize: NSSize) {
             super.resizeSubviews(withOldSize: oldSize)
             print("resizeSubviews: \(frame.size)")
+        }
+
+        override func resize(withOldSuperviewSize oldSize: NSSize) {
+            super.resize(withOldSuperviewSize: oldSize)
+            print("resize: \(frame.size)")
         }
 
         override func layout() {

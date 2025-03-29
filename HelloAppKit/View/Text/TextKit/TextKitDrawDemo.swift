@@ -44,11 +44,6 @@ class TextKitDrawDemo: NSViewController {
         ])
     }
 
-    override func viewDidLayout() {
-        super.viewDidLayout()
-        layoutManagerDraw.updateTextContainerSize()
-    }
-
     class StringDraw: NSView {
         override func draw(_ dirtyRect: NSRect) {
             super.draw(dirtyRect)
@@ -92,8 +87,6 @@ class TextKitDrawDemo: NSViewController {
             textStorage.addLayoutManager(layoutManager)
 
             super.init(frame: frameRect)
-
-            autoresizesSubviews = true
         }
 
         required init?(coder: NSCoder) {
@@ -113,16 +106,10 @@ class TextKitDrawDemo: NSViewController {
             layoutManager.drawGlyphs(forGlyphRange: textRange, at: textOrigin)
         }
 
-        func updateTextContainerSize() {
+        override func layout() {
+            super.layout()
             textContainer.size = bounds.size
-            setNeedsDisplay(bounds)
-            print ("textContainer size updated: \(bounds.size)")
-            print ("frame size updated: \(frame.size)")
-        }
-
-        override func resizeSubviews(withOldSize oldSize: NSSize) {
-            super.resizeSubviews(withOldSize: oldSize)
-            print("뷰 크기 변경됨: 이전 크기 \(oldSize), 새로운 크기 \(self.frame.size)")
+//            setNeedsDisplay(bounds)
         }
     }
 
