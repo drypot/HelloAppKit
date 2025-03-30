@@ -37,6 +37,7 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Controls", demos: [
             Demo(label: "Button", controllerType: ButtonDemo.self),
             Demo(label: "ButtonBar", controllerType: ButtonBarDemo.self),
+            Demo(label: "PopOver", controllerType: PopOverDemo.self),
         ]),
         DemoSection(label: "Text", demos: [
             Demo(label: "TextField", controllerType: TextFieldDemo.self),
@@ -44,6 +45,7 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "TextKit", controllerType: TextKitDemo.self),
             Demo(label: "TextKit ToggleWrap", controllerType: TextKitToggleWrapDemo.self),
             Demo(label: "TextKit Draw", controllerType: TextKitDrawDemo.self),
+            Demo(label: "TextKit LineCount", controllerType: TextKitLineCountDemo.self),
             Demo(label: "TextKit2", controllerType: TextKit2Demo.self),
             Demo(label: "Symbol", controllerType: SymbolDemo.self),
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
