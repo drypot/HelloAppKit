@@ -2,7 +2,7 @@
 //  TextKit2Demo.swift
 //  HelloAppKit
 //
-//  Created by Kyuhyun Park on 9/21/24.
+//  Created by Kyuhyun Park on 3/31/25.
 //
 
 import Cocoa
@@ -10,115 +10,71 @@ import Cocoa
 // TextKit
 // https://developer.apple.com/documentation/appkit/textkit
 
+// Meet TextKit 2
+// https://developer.apple.com/videos/play/wwdc2021/10061/
+
 class TextKit2Demo: NSViewController {
-    //
 
-    //
-    //    override func loadView() {
-    //
-    //
-    //        // Create the core text components
-    //
-    //        // Connect the components
-    //        textContentStorage.addTextLayoutManager(textLayoutManager)
-    //        textLayoutManager.textContainer = textContainer
-    //
-    //        // Create and configure the viewport layout controller
-    //        viewportLayoutController = NSTextViewportLayoutController(textLayoutManager: textLayoutManager)
-    //        viewportLayoutController.delegate = self
-    //
-    //        // Create a text view
-    //        textView = NSView(frame: view.bounds)
-    //        textView.autoresizingMask = [.width, .height]
-    //        view.addSubview(textView)
-    //
-    //        // Set the viewport for the controller
-    //        let viewportRect = CGRect(origin: .zero, size: textView.bounds.size)
-    //        viewportLayoutController.viewport = viewportRect
-    //
-    //        // Add some sample text
-    //        let attributedString = NSAttributedString(
-    //            string: "This is a sample text using NSTextViewportLayoutController for layout management in AppKit.",
-    //            attributes: [.font: NSFont.systemFont(ofSize: 16)]
-    //        )
-    //        textContentStorage.attributedString = attributedString
-    //
-    //        // Initial layout
-    //        updateViewport()
-    //    }
-    //
-    //    private func updateViewport() {
-    //        // Update the viewport based on current view bounds
-    //        let viewportRect = CGRect(origin: .zero, size: textView.bounds.size)
-    //        viewportLayoutController.viewport = viewportRect
-    //
-    //        // Ensure layout is complete
-    //        viewportLayoutController.layoutViewport()
-    //    }
-    //
-    //    override func viewDidLayout() {
-    //        super.viewDidLayout()
-    //        updateViewport()
-    //    }
-    //}
-    //
-    //// MARK: - NSTextViewportLayoutControllerDelegate
-    //extension TextKit2Demo: NSTextViewportLayoutControllerDelegate {
-    //    func viewportBoundsDidChange(for textViewportLayoutController: NSTextViewportLayoutController) {
-    //        // Handle viewport bounds changes
-    //        textViewportLayoutController.layoutViewport()
-    //
-    //        // Request redisplay of text view
-    //        textView.needsDisplay = true
-    //    }
-    //
-    //    func textViewportLayoutController(_ textViewportLayoutController: NSTextViewportLayoutController, configureRenderingSurfaceFor textLayoutFragment: NSTextLayoutFragment) {
-    //        // Create or reuse a view for the text layout fragment
-    //        var fragmentView = textLayoutFragment.renderingSurfaceProvider as? NSTextField
-    //
-    //        if fragmentView == nil {
-    //            fragmentView = NSTextField(frame: textLayoutFragment.layoutFragmentFrame)
-    //            fragmentView?.isEditable = false
-    //            fragmentView?.isBordered = false
-    //            fragmentView?.drawsBackground = false
-    //            fragmentView?.attributedStringValue = textLayoutFragment.attributedString!
-    //            textView.addSubview(fragmentView!)
-    //
-    //            // Set the rendering surface provider
-    //            textLayoutFragment.renderingSurfaceProvider = fragmentView
-    //        } else {
-    //            // Update existing view
-    //            fragmentView?.frame = textLayoutFragment.layoutFragmentFrame
-    //            fragmentView?.attributedStringValue = textLayoutFragment.attributedString!
-    //        }
-    //    }
-    //
-    //    func textViewportLayoutController(_ textViewportLayoutController: NSTextViewportLayoutController, removeRenderingSurfaceFor textLayoutFragment: NSTextLayoutFragment) {
-    //        // Remove the view associated with this fragment
-    //        if let fragmentView = textLayoutFragment.renderingSurfaceProvider as? NSView {
-    //            fragmentView.removeFromSuperview()
-    //            textLayoutFragment.renderingSurfaceProvider = nil
-    //        }
-    //    }
-    //}
-    //
-    //// Implementation of a custom NSTextViewportLayoutControllerViewProvider
-    //class TextViewportProvider: NSObject, NSTextViewportLayoutControllerViewProvider {
-    //    weak var view: NSView?
-    //
-    //    init(view: NSView) {
-    //        self.view = view
-    //        super.init()
-    //    }
-    //
-    //    func viewForTextLayoutFragment(_ textLayoutFragment: NSTextLayoutFragment) -> NSView? {
-    //        let textView = NSTextField(frame: textLayoutFragment.layoutFragmentFrame)
-    //        textView.isEditable = false
-    //        textView.isBordered = false
-    //        textView.drawsBackground = false
-    //        textView.attributedStringValue = textLayoutFragment.attributedString!
-    //        return textView
-    //    }
-    //}
+    private var contentStorage: NSTextContentStorage!
+    private var layoutManager: NSTextLayoutManager!
+    private var textContainer: NSTextContainer!
+    private var textView: NSTextView!
 
+    override func loadView() {
+        view = NSView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        let scrollView = NSScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = true
+        view.addSubview(scrollView)
+
+        contentStorage = NSTextContentStorage()
+
+        textContainer = NSTextContainer()
+
+        layoutManager = NSTextLayoutManager()
+        layoutManager.textContainer = textContainer
+        contentStorage.addTextLayoutManager(layoutManager)
+
+        textView = NSTextView(frame: .zero, textContainer: textContainer)
+        textView.isEditable = true
+        textView.isRichText = false
+        textView.font = .monospacedSystemFont(ofSize: 14, weight: .regular)
+
+        // maxSize 설정하고, isVerticallyResizable = true 해야 세로스크롤 할 수 있었다.
+        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        textView.isVerticallyResizable = true
+        textView.isHorizontallyResizable = false  // wrap 하려면 false
+        textView.textContainer?.widthTracksTextView = true  // wrap 하려면 true
+        textView.autoresizingMask = [.width, .height]
+
+        scrollView.documentView = textView
+
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+        ])
+    }
+
+//    override func viewDidLayout() {
+//        print("\(textContainer.size)")
+//    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
+            do {
+                try contentStorage.textStorage?.read(from: docURL, documentAttributes: nil, error: ())
+            } catch {
+                // Could not read menu content.
+            }
+        }
+    }
 }

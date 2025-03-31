@@ -33,29 +33,25 @@ class TextKitDemo: NSViewController {
         scrollView.hasHorizontalScroller = true
         view.addSubview(scrollView)
 
-        // NSTextStorage
         textStorage = NSTextStorage()
 
-        // NSLayoutManager
-        layoutManager = NSLayoutManager()
-        textStorage.addLayoutManager(layoutManager)
-
-        // NSTextContainer
         // size 를 지정해야 컨텐츠가 보인다.
         textContainer = NSTextContainer(size: CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude))
-        textContainer.widthTracksTextView = true  // no wrap 하려면 false 로 한다.
-        layoutManager.addTextContainer(textContainer)
 
-        // NSTextView 생성 및 설정
+        layoutManager = NSLayoutManager()
+        layoutManager.addTextContainer(textContainer)
+        textStorage.addLayoutManager(layoutManager)
+
         textView = NSTextView(frame: .zero, textContainer: textContainer)
-        // maxSize 설정을 해야 세로스크롤 할 수 있었다.
-        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
 
         textView.isEditable = true
+        // maxSize 설정하고, isVerticallyResizable = true 해야 세로스크롤 할 수 있었다.
+        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
         textView.isVerticallyResizable = true
-        textView.isHorizontallyResizable = false  // no wrap 하려면 true 로 한다.
+        textView.isHorizontallyResizable = false  // wrap 하려면 false
+        textView.textContainer?.widthTracksTextView = true // wrap 하려면 true
         textView.autoresizingMask = [.width, .height]
-        //        textView.font = .systemFont(ofSize: 24.0)   // rtf 문서의 폰트를 살리려면 comment out
+
 
         scrollView.documentView = textView
 
@@ -72,10 +68,9 @@ class TextKitDemo: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let url = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
+        if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
             do {
-                try textStorage.read(from: url, documentAttributes: nil, error: ())
+                try textStorage.read(from: docURL, documentAttributes: nil, error: ())
             } catch {
                 // Could not read menu content.
             }

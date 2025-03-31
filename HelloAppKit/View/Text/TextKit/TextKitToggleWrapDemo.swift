@@ -32,12 +32,14 @@ class TextKitToggleWrapDemo: NSViewController {
         buttonBar.orientation = .horizontal
         view.addSubview(buttonBar)
 
-        let wrapButton = NSButton(title: "Wrap", target: self, action: #selector(wrapAction))
-        wrapButton.setButtonType(.pushOnPushOff)
-        wrapButton.controlSize = .large
-        wrapButton.bezelStyle = .toolbar
-        wrapButton.state = .on
-        buttonBar.addArrangedSubview(wrapButton)
+        do {
+            let button = NSButton(title: "Wrap", target: self, action: #selector(wrapAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            button.setButtonType(.pushOnPushOff)
+            button.state = .on
+            buttonBar.addArrangedSubview(button)
+        }
 
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +57,6 @@ class TextKitToggleWrapDemo: NSViewController {
         // NSTextContainer
         // height 를 지정해야 컨텐츠가 보인다.
         textContainer = NSTextContainer(size: CGSize(width: 0, height: CGFloat.greatestFiniteMagnitude))
-        textContainer.widthTracksTextView = true  // wrap 하려면 true
         layoutManager.addTextContainer(textContainer)
 
         // NSTextView 생성 및 설정
@@ -66,8 +67,8 @@ class TextKitToggleWrapDemo: NSViewController {
         textView.isEditable = true
         textView.isVerticallyResizable = true  // 텍스트가 늘어나면 자동으로 길어진다.
         textView.isHorizontallyResizable = false  // wrap 하려면 false
+        textView.textContainer?.widthTracksTextView = true // wrap 하려면 true
         textView.autoresizingMask = [.width, .height]
-//        textView.font = .systemFont(ofSize: 24.0)   // rtf 문서의 폰트를 살리려면 comment out
 
         scrollView.documentView = textView
 

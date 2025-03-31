@@ -1,15 +1,16 @@
 //
-//  TextViewDemo.swift
+//  TextKitLineCountDemo.swift
 //  HelloAppKit
 //
-//  Created by Kyuhyun Park on 9/21/24.
+//  Created by Kyuhyun Park on 3/29/25.
 //
 
 import AppKit
 
-class TextViewDemo: NSViewController {
+class TextKitLineCountDemo: NSViewController {
 
     private let textView = NSTextView()
+    private var previousFrameSize = NSSize.zero
 
     override func loadView() {
         view = NSView()
@@ -21,12 +22,13 @@ class TextViewDemo: NSViewController {
         scrollView.hasHorizontalScroller = false
         view.addSubview(scrollView)
 
-//      NSTextView 자체는 Auto Layout을 사용하기보다는
-//      autoresizingMask로 크기를 따라가도록 구성하는 것이 일반적이라고 한다.
+//        AutoresizingMask 써야 textView Size 를 쉽게 자동세팅할 수 있다.
+//        textView.translatesAutoresizingMaskIntoConstraints = false
 
         textView.isVerticallyResizable = true
         textView.isHorizontallyResizable = false
         textView.autoresizingMask = [.width, .height]
+//        textView.font = .systemFont(ofSize: 24.0)
 
         scrollView.documentView = textView
 
@@ -51,6 +53,29 @@ class TextViewDemo: NSViewController {
                 // Could not read menu content.
             }
         }
+//        textView.string = "NSTextView Demo"
+    }
+
+    override func viewDidLayout() {
+        guard previousFrameSize != view.frame.size else { return }
+        previousFrameSize = view.frame.size
+        
+        let layoutManager = textView.layoutManager!
+        let numberOfGlyphs = layoutManager.numberOfGlyphs
+
+        var lineFragmentCount = 0
+        var index = 0
+
+        while (index < numberOfGlyphs) {
+            var effectiveRange = NSRange()
+            layoutManager.lineFragmentRect(
+                forGlyphAt: index,
+                effectiveRange: &effectiveRange
+            )
+            index = NSMaxRange(effectiveRange)
+            lineFragmentCount += 1
+        }
+        print("lineFragment count: \(lineFragmentCount)")
     }
 
 }

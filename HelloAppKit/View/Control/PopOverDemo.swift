@@ -23,7 +23,7 @@ class PopOverDemo: NSViewController {
         displayLabel.font = .preferredFont(forTextStyle: .title1)
         view.addSubview(displayLabel)
 
-        let clickGesture = NSClickGestureRecognizer(target: self, action: #selector(handleViewClick))
+        let clickGesture = NSClickGestureRecognizer(target: self, action: #selector(clickAction))
         displayLabel.addGestureRecognizer(clickGesture)
 
         NSLayoutConstraint.activate([
@@ -36,7 +36,7 @@ class PopOverDemo: NSViewController {
 
     }
 
-    @objc func handleViewClick(_ sender: NSClickGestureRecognizer) {
+    @objc func clickAction(_ sender: NSClickGestureRecognizer) {
         guard let viewToAttach = displayLabel else { return }
 
 //        if let presented = self.presentedViewControllers, !presented.isEmpty {
