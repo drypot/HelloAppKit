@@ -24,18 +24,42 @@ class TextKit2Demo: NSViewController {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
+        let buttonBar = NSStackView()
+        buttonBar.translatesAutoresizingMaskIntoConstraints = false
+        buttonBar.orientation = .horizontal
+        view.addSubview(buttonBar)
+
+        do {
+            let button = NSButton(title: "Clear", target: self, action: #selector(clearAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            buttonBar.addArrangedSubview(button)
+        }
+        do {
+            let button = NSButton(title: "Add Text", target: self, action: #selector(addTextAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            buttonBar.addArrangedSubview(button)
+        }
+        do {
+            let button = NSButton(title: "Load Sample", target: self, action: #selector(loadSampleAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            buttonBar.addArrangedSubview(button)
+        }
+
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = true
         view.addSubview(scrollView)
 
-        contentStorage = NSTextContentStorage()
-
         textContainer = NSTextContainer()
 
         layoutManager = NSTextLayoutManager()
         layoutManager.textContainer = textContainer
+
+        contentStorage = NSTextContentStorage()
         contentStorage.addTextLayoutManager(layoutManager)
 
         textView = NSTextView(frame: .zero, textContainer: textContainer)
@@ -55,20 +79,31 @@ class TextKit2Demo: NSViewController {
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+
+            buttonBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            buttonBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+
+            scrollView.topAnchor.constraint(equalTo: buttonBar.bottomAnchor, constant: 20),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
 
-//    override func viewDidLayout() {
-//        print("\(textContainer.size)")
-//    }
+    @objc func clearAction(_ sender: NSButton) {
+        contentStorage.textStorage?.setAttributedString(NSAttributedString(string: ""))
+    }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @objc func addTextAction(_ sender: NSButton) {
+        let titleFont = NSFont.systemFont(ofSize: 24, weight: .bold)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: titleFont
+        ]
+        let attributedString = NSAttributedString(string: "Hello!\n", attributes: attributes)
+        contentStorage.textStorage?.append(attributedString)
+    }
+
+    @objc func loadSampleAction(_ sender: NSButton) {
         if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
             do {
                 try contentStorage.textStorage?.read(from: docURL, documentAttributes: nil, error: ())
@@ -77,4 +112,5 @@ class TextKit2Demo: NSViewController {
             }
         }
     }
+
 }

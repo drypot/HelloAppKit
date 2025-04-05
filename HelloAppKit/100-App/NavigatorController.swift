@@ -47,7 +47,6 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "TextKit Draw", controllerType: TextKitDrawDemo.self),
             Demo(label: "TextKit LineCount", controllerType: TextKitLineCountDemo.self),
             Demo(label: "TextKit2", controllerType: TextKit2Demo.self),
-            Demo(label: "TextKit2 Comment", controllerType: TextKit2CommentDemo.self),
             Demo(label: "Symbol", controllerType: SymbolDemo.self),
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
