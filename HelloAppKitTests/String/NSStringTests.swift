@@ -46,7 +46,7 @@ struct NSStringTests {
             index = NSMaxRange(lineRange)
         }
 
-        #expect(logger.log() == [
+        #expect(logger.result() == [
             "line 1\n",
             "line 2\r",
             "line 3\r\n",
@@ -56,11 +56,11 @@ struct NSStringTests {
 
     @Test func testLineRangeForInMiddle() throws {
         let text = "line 1\nline 2\rline 3\r\nline 4" as NSString
-        let length = text.length
+        //let length = text.length
 
         // location 을 라인 중간에 줘도 리턴되는 lineRange 가 라인 처음부터 계산된다.
 
-        var index = 3
+        let index = 3
         let firstCharacterRange = NSRange(location: index, length: 0)
         let lineRange = text.lineRange(for: firstCharacterRange)
         let subString = String(text.substring(with: lineRange))

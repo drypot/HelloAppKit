@@ -42,7 +42,7 @@ struct KeyValueObservingTests {
         // Cleanup
         observation.invalidate()
 
-        #expect(logger.log() == [
+        #expect(logger.result() == [
             "changed from 1000.0 to 1500.0",
             "changed from 1500.0 to 1200.0",
         ])
