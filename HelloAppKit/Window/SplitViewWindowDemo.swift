@@ -1,5 +1,5 @@
 //
-//  ToolbarDemo.swift
+//  SplitViewWindowDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 3/9/25.
@@ -18,7 +18,7 @@ import Cocoa
 // macOS full height sidebar window
 // https://medium.com/@bancarel.paul/macos-full-height-sidebar-window-62a214309a80
 
-class ToolbarDemo: NSViewController {
+class SplitViewWindowDemo: NSViewController {
 
     var windowController: ToolbarDemoWindowController?
 
@@ -68,7 +68,7 @@ class ToolbarDemoWindowController: NSWindowController {
 
         super.init(window: window)
 
-        window.title = "Toolbar Demo"
+        window.title = "SplitViewWindow Demo"
         window.contentViewController = ToolbarDemoViewController()
     }
     
