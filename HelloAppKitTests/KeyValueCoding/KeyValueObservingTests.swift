@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HelloAppKit
 import Testing
 
 // https://developer.apple.com/documentation/foundation/nskeyvalueobservedchange
@@ -31,7 +32,7 @@ struct KeyValueObservingTests {
 
         let observation = account.observe(\.balance, options: [.old, .new]) { account, change in
             if let oldValue = change.oldValue, let newValue = change.newValue {
-                logger.append("changed from \(oldValue) to \(newValue)")
+                logger.log("changed from \(oldValue) to \(newValue)")
             }
         }
 

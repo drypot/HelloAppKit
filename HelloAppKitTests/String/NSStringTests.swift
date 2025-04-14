@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HelloAppKit
 import Testing
 
 struct NSStringTests {
@@ -42,7 +43,7 @@ struct NSStringTests {
             let firstCharacterRange = NSRange(location: index, length: 0)
             let lineRange = text.lineRange(for: firstCharacterRange)
             let subString = String(text.substring(with: lineRange))
-            logger.append(subString)
+            logger.log(subString)
             index = NSMaxRange(lineRange)
         }
 
