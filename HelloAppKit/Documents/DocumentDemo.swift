@@ -57,9 +57,9 @@ class DocumentDemo: NSViewController {
         document.makeWindowControllers()
         document.showWindows()
 
-        //let sampleString = "In an age of endless noise and fleeting moments, the rarest treasures are found in the quiet places where we reconnect with ourselves."
-        let sampleString = ""
-        document.setContent(sampleString)
+        let sampleString = "In an age of endless noise and fleeting moments, the rarest treasures are found in the quiet places where we reconnect with ourselves."
+//        let sampleString = ""
+        document.setText(sampleString)
     }
 
 }
