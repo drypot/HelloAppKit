@@ -1,5 +1,5 @@
 //
-//  SplitViewWindowDemo.swift
+//  SplitWindowDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 3/9/25.
@@ -18,9 +18,9 @@ import Cocoa
 // macOS full height sidebar window
 // https://medium.com/@bancarel.paul/macos-full-height-sidebar-window-62a214309a80
 
-class SplitViewWindowDemo: NSViewController {
+class SplitWindowDemo: NSViewController {
 
-    var windowController: ToolbarDemoWindowController?
+    var windowController: SplitWindowWindowController?
 
     override func loadView() {
         view = NSView()
@@ -41,18 +41,18 @@ class SplitViewWindowDemo: NSViewController {
 
     @objc func openWindow() {
         if windowController == nil {
-            windowController = ToolbarDemoWindowController()
+            windowController = SplitWindowWindowController()
+            windowController?.window?.center()
         }
-        guard let windowController else {
-            fatalError()
+        if let windowController {
+            windowController.showWindow(nil)
         }
-        windowController.window?.center()
-        windowController.showWindow(nil)
     }
 
 }
 
-class ToolbarDemoWindowController: NSWindowController {
+class SplitWindowWindowController: NSWindowController {
+
     init() {
         // window 는 windowController 가 retain 하므로 따로 retain 하지 않아도 된다.
         let window = NSWindow(
@@ -69,15 +69,17 @@ class ToolbarDemoWindowController: NSWindowController {
         super.init(window: window)
 
         window.title = "SplitViewWindow Demo"
-        window.contentViewController = ToolbarDemoViewController()
+        window.minSize = NSSize(width: 600, height: 400)
+        window.contentViewController = SplitWindowViewController()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }
 
-class ToolbarDemoViewController: NSSplitViewController {
+class SplitWindowViewController: NSSplitViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,36 +92,28 @@ class ToolbarDemoViewController: NSSplitViewController {
     }
 
     func setupSplitView() {
-        let sidebarVC = SidebarViewController()
+        let sidebarVC = SidebarController()
         let sidebarItem = NSSplitViewItem(sidebarWithViewController: sidebarVC)
-        // sidebarItem.allowsFullHeightLayout = true // true 가 기본 값이다.
         sidebarItem.canCollapse = true
         sidebarItem.minimumThickness = 200
         sidebarItem.maximumThickness = 250
         addSplitViewItem(sidebarItem)
 
-        let mainVC = MainViewController()
+        let mainVC = MainController()
         let mainItem = NSSplitViewItem(contentListWithViewController: mainVC)
         mainItem.minimumThickness = 400
         addSplitViewItem(mainItem)
 
-        let inspectorVC = InspectorViewController()
+        let inspectorVC = InspectorController()
         let inspectorItem = NSSplitViewItem(inspectorWithViewController: inspectorVC)
         inspectorItem.canCollapse = true
         inspectorItem.minimumThickness = 200
         inspectorItem.maximumThickness = 250
         addSplitViewItem(inspectorItem)
-
-        NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 900),
-            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-        ])
     }
 
     func setupToolbar() {
-        guard let window = self.view.window else {
-            fatalError()
-        }
+        guard let window = self.view.window else { fatalError() }
 
         let toolbar = NSToolbar(identifier: "DemoToolbar")
         toolbar.delegate = self
@@ -135,6 +129,57 @@ class ToolbarDemoViewController: NSSplitViewController {
         }
     }
 
+    class MainController: NSViewController {
+        override func loadView() {
+            view = NSView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.wantsLayer = true
+            view.layer?.backgroundColor = NSColor.white.cgColor
+
+            let label = NSTextField(labelWithString: "Main")
+            label.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(label)
+
+            NSLayoutConstraint.activate([
+                //  view.topAnchor 대신 view.safeAreaLayoutGuide.topAnchor 써야 label 이 천정에 붙지 않는다.
+                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            ])
+        }
+    }
+
+    class SidebarController: NSViewController {
+        override func loadView() {
+            view = NSView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+
+            let label = NSTextField(labelWithString: "SideBar")
+            label.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(label)
+
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            ])
+        }
+    }
+
+    class InspectorController: NSViewController {
+        override func loadView() {
+            view = NSView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+
+            let label = NSTextField(labelWithString: "Inspector")
+            label.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(label)
+
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            ])
+        }
+    }
+
 }
 
 extension NSToolbarItem.Identifier {
@@ -142,22 +187,11 @@ extension NSToolbarItem.Identifier {
     static let toolbarDemoTitle = NSToolbarItem.Identifier("ToolbarDemo")
 }
 
-extension ToolbarDemoViewController: NSToolbarDelegate {
+extension SplitWindowViewController: NSToolbarDelegate {
 
     func toolbar(_ toolbar: NSToolbar,
                  itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
                  willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-
-        // 기본 NSToolbarItem 들은 설정 안 해도 그냥 동작한다;
-
-//        if itemIdentifier == .toggleSidebar {
-//            let item = NSToolbarItem(itemIdentifier: .toggleSidebar)
-//            item.label = "Sidebar"
-//            item.image = NSImage(systemSymbolName: "sidebar.left", accessibilityDescription: "Toggle Sidebar")
-//            item.target = self
-//            item.action = #selector(toggleSidebar(_:))
-//            return item
-//        }
 
 //        if itemIdentifier == .showFonts {
 //            let item = NSToolbarItem(itemIdentifier: .showFonts)
@@ -166,7 +200,7 @@ extension ToolbarDemoViewController: NSToolbarDelegate {
 //            return item
 //        }
 
-        if  itemIdentifier == NSToolbarItem.Identifier.toolbarSearchItem {
+        if  itemIdentifier == .toolbarSearchItem {
             //  `NSSearchToolbarItem` is macOS 11 and higher only
             let searchItem = NSSearchToolbarItem(itemIdentifier: itemIdentifier)
             searchItem.resignsFirstResponderWithCancel = true
@@ -174,15 +208,6 @@ extension ToolbarDemoViewController: NSToolbarDelegate {
             searchItem.toolTip = "Search"
             return searchItem
         }
-
-//        if itemIdentifier == .toggleInspector {
-//            let item = NSToolbarItem(itemIdentifier: .toggleInspector)
-//            item.label = "Inspector"
-//            item.image = NSImage(systemSymbolName: "sidebar.right", accessibilityDescription: "Toggle Inspector")
-//            item.target = self
-//            item.action = #selector(toggleInspector(_:))
-//            return item
-//        }
 
         return nil
     }
@@ -213,65 +238,5 @@ extension ToolbarDemoViewController: NSToolbarDelegate {
 
 }
 
-extension ToolbarDemoViewController: NSSearchFieldDelegate{
-    
-}
-
-extension ToolbarDemoViewController {
-
-    class MainViewController: NSViewController {
-        override func loadView() {
-            view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.wantsLayer = true
-            view.layer?.backgroundColor = NSColor.white.cgColor
-
-            let label = NSTextField(labelWithString: "Main")
-            label.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(label)
-
-            NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            ])
-        }
-    }
-
-    class SidebarViewController: NSViewController {
-        override func loadView() {
-            view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.wantsLayer = true
-            view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
-
-            let label = NSTextField(labelWithString: "SideBar")
-            label.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(label)
-
-            NSLayoutConstraint.activate([
-                //  view.topAnchor 대신 view.safeAreaLayoutGuide.topAnchor 써야 서브뷰들이 사이드바 천정에 닿지 않는다.
-                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            ])
-        }
-    }
-
-    class InspectorViewController: NSViewController {
-        override func loadView() {
-            view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            view.wantsLayer = true
-            view.layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
-
-            let label = NSTextField(labelWithString: "Inspector")
-            label.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(label)
-
-            NSLayoutConstraint.activate([
-                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-                label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            ])
-        }
-    }
-
+extension SplitWindowViewController: NSSearchFieldDelegate {
 }

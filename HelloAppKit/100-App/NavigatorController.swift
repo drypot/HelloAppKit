@@ -23,7 +23,7 @@ class NavigatorController: NSSplitViewController {
     static let sections = [
         DemoSection(label: "Window", demos: [
             Demo(label: "Window", controllerType: WindowDemo.self),
-            Demo(label: "SplitViewWindow", controllerType: SplitViewWindowDemo.self),
+            Demo(label: "SplitWindow", controllerType: SplitWindowDemo.self),
             Demo(label: "SheetWindow", controllerType: SheetWindowDemo.self),
             Demo(label: "PresentAsSheet", controllerType: PresentAsSheetDemo.self),
         ]),

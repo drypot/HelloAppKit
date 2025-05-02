@@ -67,9 +67,7 @@ class TextDocument: NSDocument {
     // MARK: - Reading and Writing
 
     override func data(ofType typeName: String) throws -> Data {
-        Swift.print("writing")
         return model.text.data(using: .utf8)!
-
 //        throw NSError(domain: NSOSStatusErrorDomain, code: unimpErr, userInfo: nil)
     }
 
