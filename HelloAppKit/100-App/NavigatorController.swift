@@ -38,8 +38,10 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "Constrant", controllerType: ConstrantDemo.self),
             Demo(label: "StackView", controllerType: StackViewDemo.self),
             Demo(label: "ScrollView", controllerType: ScrollViewDemo.self),
+        ]),
+        DemoSection(label: "SplitView", demos: [
             Demo(label: "SplitView", controllerType: SplitViewDemo.self),
-            Demo(label: "SplitViewController", controllerType: SplitViewControllerDemo.self),
+            Demo(label: "SplitViewSimple", controllerType: SplitViewSimpleDemo.self),
         ]),
         DemoSection(label: "Color", demos: [
             Demo(label: "UIColor", controllerType: UIColorDemo.self),

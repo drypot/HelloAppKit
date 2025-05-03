@@ -1,5 +1,5 @@
 //
-//  SplitViewDemo.swift
+//  SplitViewSimpleDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 2/20/25.
@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class SplitViewDemo: NSViewController, NSSplitViewDelegate {
+class SplitViewSimpleDemo: NSViewController, NSSplitViewDelegate {
 
     let splitView = NSSplitView()
 
