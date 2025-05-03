@@ -23,9 +23,23 @@ class NavigatorController: NSSplitViewController {
     static let sections = [
         DemoSection(label: "Window", demos: [
             Demo(label: "Window", controllerType: WindowDemo.self),
-            Demo(label: "SplitWindow", controllerType: SplitWindowDemo.self),
             Demo(label: "SheetWindow", controllerType: SheetWindowDemo.self),
             Demo(label: "PresentAsSheet", controllerType: PresentAsSheetDemo.self),
+        ]),
+        DemoSection(label: "View", demos: [
+            Demo(label: "View", controllerType: ViewDemo.self),
+            Demo(label: "CustomView", controllerType: CustomViewDemo.self),
+            Demo(label: "CompositeView", controllerType: CompositeViewDemo.self),
+            Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
+        ]),
+        DemoSection(label: "ViewLayout", demos: [
+            Demo(label: "AutoResizing", controllerType: AutoResizingDemo.self),
+            Demo(label: "AutoLayout", controllerType: AutoLayoutDemo.self),
+            Demo(label: "Constrant", controllerType: ConstrantDemo.self),
+            Demo(label: "StackView", controllerType: StackViewDemo.self),
+            Demo(label: "ScrollView", controllerType: ScrollViewDemo.self),
+            Demo(label: "SplitView", controllerType: SplitViewDemo.self),
+            Demo(label: "SplitViewController", controllerType: SplitViewControllerDemo.self),
         ]),
         DemoSection(label: "Color", demos: [
             Demo(label: "UIColor", controllerType: UIColorDemo.self),
@@ -51,20 +65,6 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
             Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
-        ]),
-        DemoSection(label: "View", demos: [
-            Demo(label: "View", controllerType: ViewDemo.self),
-            Demo(label: "CustomView", controllerType: CustomViewDemo.self),
-            Demo(label: "CompositeView", controllerType: CompositeViewDemo.self),
-            Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
-        ]),
-        DemoSection(label: "ViewLayout", demos: [
-            Demo(label: "AutoResizing", controllerType: AutoResizingDemo.self),
-            Demo(label: "AutoLayout", controllerType: AutoLayoutDemo.self),
-            Demo(label: "Constrant", controllerType: ConstrantDemo.self),
-            Demo(label: "StackView", controllerType: StackViewDemo.self),
-            Demo(label: "ScrollView", controllerType: ScrollViewDemo.self),
-            Demo(label: "SplitView", controllerType: SplitViewDemo.self),
         ]),
         DemoSection(label: "Table", demos: [
             Demo(label: "TableView", controllerType: TableViewDemo.self),

@@ -1,5 +1,5 @@
 //
-//  SplitWindowDemo.swift
+//  SplitViewControllerDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 3/9/25.
@@ -18,15 +18,15 @@ import Cocoa
 // macOS full height sidebar window
 // https://medium.com/@bancarel.paul/macos-full-height-sidebar-window-62a214309a80
 
-class SplitWindowDemo: NSViewController {
+class SplitViewControllerDemo: NSViewController {
 
-    var windowController: SplitWindowWindowController?
+    var windowController: SplitViewControllerDemoWindowController?
 
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let button1 = NSButton(title: "Open window", target: self, action: #selector(openWindow))
+        let button1 = NSButton(title: "NSSplitViewController Demo", target: self, action: #selector(openWindow))
         button1.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(button1)
 
@@ -41,7 +41,7 @@ class SplitWindowDemo: NSViewController {
 
     @objc func openWindow() {
         if windowController == nil {
-            windowController = SplitWindowWindowController()
+            windowController = SplitViewControllerDemoWindowController()
             windowController?.window?.center()
         }
         if let windowController {
@@ -51,7 +51,7 @@ class SplitWindowDemo: NSViewController {
 
 }
 
-class SplitWindowWindowController: NSWindowController {
+class SplitViewControllerDemoWindowController: NSWindowController {
 
     init() {
         // window 는 windowController 가 retain 하므로 따로 retain 하지 않아도 된다.
@@ -70,7 +70,7 @@ class SplitWindowWindowController: NSWindowController {
 
         window.title = "SplitViewWindow Demo"
         window.minSize = NSSize(width: 600, height: 400)
-        window.contentViewController = SplitWindowViewController()
+        window.contentViewController = SplitViewControllerDemoViewController()
     }
     
     required init?(coder: NSCoder) {
@@ -79,7 +79,7 @@ class SplitWindowWindowController: NSWindowController {
 
 }
 
-class SplitWindowViewController: NSSplitViewController {
+class SplitViewControllerDemoViewController: NSSplitViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -187,7 +187,7 @@ extension NSToolbarItem.Identifier {
     static let toolbarDemoTitle = NSToolbarItem.Identifier("ToolbarDemo")
 }
 
-extension SplitWindowViewController: NSToolbarDelegate {
+extension SplitViewControllerDemoViewController: NSToolbarDelegate {
 
     func toolbar(_ toolbar: NSToolbar,
                  itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier,
@@ -238,5 +238,5 @@ extension SplitWindowViewController: NSToolbarDelegate {
 
 }
 
-extension SplitWindowViewController: NSSearchFieldDelegate {
+extension SplitViewControllerDemoViewController: NSSearchFieldDelegate {
 }
