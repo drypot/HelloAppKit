@@ -177,13 +177,13 @@ extension TableViewDemo: NSTableViewDelegate {
             ])
         }
 
-        let person = items[row]
+        let item = items[row]
 
         switch id.rawValue {
         case "name":
-            cell.textField?.stringValue = person.name
+            cell.textField?.stringValue = item.name
         case "age":
-            cell.textField?.stringValue = "\(person.age)"
+            cell.textField?.stringValue = "\(item.age)"
         default:
             break
         }
