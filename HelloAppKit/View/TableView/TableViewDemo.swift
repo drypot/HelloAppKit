@@ -25,10 +25,10 @@ class TableViewDemo: NSViewController {
         }
     }
 
+    var items = [Person]()
+
     let scrollView = NSScrollView()
     let tableView = NSTableView()
-
-    var items = [Person]()
 
     override func loadView() {
         view = NSView()
@@ -37,10 +37,10 @@ class TableViewDemo: NSViewController {
         setupScrollView()
         setupTable()
         setupFields()
-        loadData()
+        updateItems()
     }
 
-    private func loadData() {
+    private func updateItems() {
         items = [
             Person(name: "Alice", age: 25),
             Person(name: "Bob", age: 30),
@@ -57,9 +57,10 @@ class TableViewDemo: NSViewController {
 
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+//            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-//            scrollView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200),
+//            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
 
@@ -152,11 +153,10 @@ extension TableViewDemo: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let id = tableColumn!.identifier
-        let cell: NSTableCellView
+        var cell: NSTableCellView!
 
-        if let cachedCell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
-            cell = cachedCell
-        } else {
+        cell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView
+        if cell == nil {
             cell = NSTableCellView()
             cell.identifier = id
 
