@@ -9,18 +9,20 @@ import AppKit
 
 class AutoResizingDemo: NSViewController {
 
+    var logger: SizeLogger?
+
     override func loadView() {
         view = NSView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
-        let logger = SizeLogger(frame: .zero)
-        logger.autoresizingMask = [.width, .height]
+        logger = SizeLogger(frame: .zero)
+        logger!.autoresizingMask = [.width, .height]
 
         // resize 는 그냥 호출되는데
         // resizeSubviews 호출되는 거 구경하려면 먼가 넣어둬야 한다.
-        logger.addSubview(NSView())
+        logger!.addSubview(NSView())
 
-        view.addSubview(logger)
+        view.addSubview(logger!)
     }
 
     override func viewDidLayout() {

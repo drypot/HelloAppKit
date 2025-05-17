@@ -49,7 +49,7 @@ class CocoaBindingDemo: NSViewController {
         view.addSubview(ageField)
 
         let ageLabel = NSTextField()
-                ageLabel.translatesAutoresizingMaskIntoConstraints = false
+        ageLabel.translatesAutoresizingMaskIntoConstraints = false
         ageLabel.isBezeled = false
         ageLabel.isEditable = false
         ageLabel.isSelectable = false

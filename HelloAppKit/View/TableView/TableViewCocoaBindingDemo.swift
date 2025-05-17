@@ -183,10 +183,11 @@ extension TableViewCocoaBindingDemo: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let id = tableColumn!.identifier
-        var cell: NSTableCellView!
+        var cell: NSTableCellView
 
-        cell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView
-        if cell == nil {
+        if let cached = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+            cell = cached
+        } else {
             cell = NSTableCellView()
             cell.identifier = id
 
@@ -201,7 +202,7 @@ extension TableViewCocoaBindingDemo: NSTableViewDelegate {
 
             // NSTableView 에 NSArrayController 연결하는 거 이틀 삽질했는데
             // 아래 바인딩 코드가 핵심이었다.
-            textField.bind(.value, to: cell!, withKeyPath: "objectValue.\(id.rawValue)", options: nil)
+            textField.bind(.value, to: cell, withKeyPath: "objectValue.\(id.rawValue)", options: nil)
 
             NSLayoutConstraint.activate([
                 textField.leadingAnchor.constraint(equalTo: cell.leadingAnchor),
