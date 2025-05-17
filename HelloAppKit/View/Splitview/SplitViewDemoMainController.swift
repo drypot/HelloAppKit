@@ -11,7 +11,6 @@ class SplitViewDemoMainController: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.white.cgColor
 

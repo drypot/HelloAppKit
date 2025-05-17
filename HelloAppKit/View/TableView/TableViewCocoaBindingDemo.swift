@@ -60,7 +60,6 @@ class TableViewCocoaBindingDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         setupScrollView()
         setupTable()

@@ -11,7 +11,6 @@ class PresentAsSheetDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let button1 = NSButton(title: "Open sheet", target: self, action: #selector(openSheet))
         button1.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +33,6 @@ class PresentAsSheetDemo: NSViewController {
     class SheetViewController: NSViewController {
         override func loadView() {
             view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
 
             let helloLabel = NSTextField(labelWithString: "Hello")
             helloLabel.translatesAutoresizingMaskIntoConstraints = false

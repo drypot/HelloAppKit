@@ -24,7 +24,6 @@ class CocoaBindingDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         objectController.bind(.content, to: self, withKeyPath: "person", options: nil)
 

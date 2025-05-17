@@ -32,7 +32,6 @@ class TableViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         setupScrollView()
         setupTable()

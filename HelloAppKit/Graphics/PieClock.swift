@@ -145,7 +145,6 @@ class PieClockController: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let clock = PieClock()
         clock.translatesAutoresizingMaskIntoConstraints = false

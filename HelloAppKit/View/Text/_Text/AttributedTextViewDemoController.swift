@@ -13,7 +13,6 @@ class AttributedTextViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let stackView = NSStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false

@@ -16,7 +16,6 @@ class ColorLabelListController: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         setupScrollView()
         setupScrollContent()

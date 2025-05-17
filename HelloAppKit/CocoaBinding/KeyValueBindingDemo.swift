@@ -17,7 +17,6 @@ class KeyValueBindingDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         label.translatesAutoresizingMaskIntoConstraints = false
         label.sizeToFit()

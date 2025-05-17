@@ -11,7 +11,6 @@ class ConstrantDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let button1 = NSButton(title: "Button 1", target: self, action: #selector(buttonAction))
         button1.translatesAutoresizingMaskIntoConstraints = false

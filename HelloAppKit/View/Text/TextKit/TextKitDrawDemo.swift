@@ -20,7 +20,6 @@ class TextKitDrawDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         stringDraw.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stringDraw)

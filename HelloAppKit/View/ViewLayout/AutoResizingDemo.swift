@@ -13,7 +13,6 @@ class AutoResizingDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         logger = SizeLogger(frame: .zero)
         logger!.autoresizingMask = [.width, .height]

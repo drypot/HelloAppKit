@@ -15,7 +15,6 @@ class SubRunnerDemo: NSViewController {
 
     override func loadView() {
         self.view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         setupStackView()
         setupStackItems()

@@ -171,7 +171,6 @@ class NavigatorController: NSSplitViewController {
 
         override func loadView() {
             view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
 
             tableView.translatesAutoresizingMaskIntoConstraints = false
             tableView.headerView = nil // Hide the header if not needed
@@ -250,7 +249,6 @@ class NavigatorController: NSSplitViewController {
 
         override func loadView() {
             view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
 
             tableView.translatesAutoresizingMaskIntoConstraints = false
             tableView.headerView = nil // Hide the header if not needed
@@ -343,12 +341,12 @@ class NavigatorController: NSSplitViewController {
 
         override func loadView() {
             view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
         }
 
         func use(controller: NSViewController) {
             self.controller = controller
             let subview = controller.view
+            subview.translatesAutoresizingMaskIntoConstraints = false
             view.subviews = [subview]
 
             NSLayoutConstraint.activate([

@@ -17,7 +17,6 @@ class ScrollViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         // setup ScrollView
 

@@ -11,7 +11,6 @@ class CompositeViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let childView = CompositeView()
         childView.translatesAutoresizingMaskIntoConstraints = false

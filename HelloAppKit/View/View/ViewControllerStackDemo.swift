@@ -11,7 +11,6 @@ class ViewControllerStackDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let controller1 = Controller1()
         let controller2 = Controller2()

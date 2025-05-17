@@ -11,7 +11,6 @@ class CustomViewDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let customView = CustomView(frame: .zero, color: .green)
         customView.translatesAutoresizingMaskIntoConstraints = false

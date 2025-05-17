@@ -13,7 +13,6 @@ class SplitViewSimpleDemo: NSViewController, NSSplitViewDelegate {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         setupSplitView()
 

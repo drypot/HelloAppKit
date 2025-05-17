@@ -18,7 +18,6 @@ class TextFieldDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         // Setup StackView
 

@@ -19,7 +19,6 @@ class NotificationCenterDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         setupNotification()
 

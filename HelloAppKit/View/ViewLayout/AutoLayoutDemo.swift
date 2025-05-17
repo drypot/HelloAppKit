@@ -11,7 +11,6 @@ class AutoLayoutDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let logger = SizeLogger()
         logger.translatesAutoresizingMaskIntoConstraints = false

@@ -11,7 +11,6 @@ class SplitViewDemoInspectorController: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let label = NSTextField(labelWithString: "Inspector")
         label.translatesAutoresizingMaskIntoConstraints = false

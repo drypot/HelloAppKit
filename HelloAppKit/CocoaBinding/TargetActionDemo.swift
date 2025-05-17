@@ -15,7 +15,6 @@ class TargetActionDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         // target: The object that should respond to the event.
         // action: The method (selector) that gets called on the target when the event occurs.

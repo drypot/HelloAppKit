@@ -11,7 +11,6 @@ class SplitViewDemoSidebarController: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let label = NSTextField(labelWithString: "SideBar")
         label.translatesAutoresizingMaskIntoConstraints = false

@@ -13,7 +13,6 @@ class PopOverDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         displayLabel = NSTextField(labelWithString: "Click here")
         displayLabel.translatesAutoresizingMaskIntoConstraints = false

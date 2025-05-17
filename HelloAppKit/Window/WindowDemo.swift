@@ -15,7 +15,6 @@ class WindowDemo: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let button1 = NSButton(title: "Open window", target: self, action: #selector(openWindow))
         button1.translatesAutoresizingMaskIntoConstraints = false
@@ -60,12 +59,17 @@ class WindowDemo: NSViewController {
         window.isReleasedWhenClosed = false // 윈도우 닫았다가 다시 Open 할 때 크래쉬를 방지.
 
         let view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         window.contentView = view
+
+        let label = NSTextField(labelWithString: "Window Demo")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(label)
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
 
         window.center()
@@ -95,7 +99,6 @@ class WindowDemo: NSViewController {
     class ViewController: NSViewController {
         override func loadView() {
             view = NSView()
-            view.translatesAutoresizingMaskIntoConstraints = false
 
             let child = NSView()
             child.translatesAutoresizingMaskIntoConstraints = false

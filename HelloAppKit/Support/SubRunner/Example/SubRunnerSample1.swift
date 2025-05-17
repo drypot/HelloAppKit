@@ -14,7 +14,6 @@ class SubRunnerSample1Controller: NSViewController {
 
     override func loadView() {
         view = NSView()
-        view.translatesAutoresizingMaskIntoConstraints = false
 
         let childView = NSView()
         childView.translatesAutoresizingMaskIntoConstraints = false
