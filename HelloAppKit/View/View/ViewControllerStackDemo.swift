@@ -15,14 +15,14 @@ class ViewControllerStackDemo: NSViewController {
         let controller1 = Controller1()
         let controller2 = Controller2()
 
-        addChild(controller1)
-        addChild(controller2)
-
         let childView1 = controller1.view
         let childView2 = controller2.view
 
         view.addSubview(childView1)
         view.addSubview(childView2)
+
+        addChild(controller1)
+        addChild(controller2)
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
