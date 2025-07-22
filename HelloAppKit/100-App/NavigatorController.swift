@@ -52,7 +52,7 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
         ]),
         DemoSection(label: "TextKit 1", demos: [
-            Demo(label: "NSString Draw", controllerType: NSStringDrawDemo.self),
+            Demo(label: "Text Draw", controllerType: TextDrawDemo.self),
             Demo(label: "TextKit", controllerType: TextKitDemo.self),
             Demo(label: "TextKit ToggleWrap", controllerType: TextKitToggleWrapDemo.self),
             Demo(label: "TextKit LineCount", controllerType: TextKitLineCountDemo.self),
