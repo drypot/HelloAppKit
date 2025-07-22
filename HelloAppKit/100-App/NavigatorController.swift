@@ -32,12 +32,38 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "CompositeView", controllerType: CompositeViewDemo.self),
             Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
         ]),
-        DemoSection(label: "ViewLayout", demos: [
+        DemoSection(label: "Layout", demos: [
             Demo(label: "AutoResizing", controllerType: AutoResizingDemo.self),
             Demo(label: "AutoLayout", controllerType: AutoLayoutDemo.self),
             Demo(label: "Constrant", controllerType: ConstrantDemo.self),
             Demo(label: "StackView", controllerType: StackViewDemo.self),
             Demo(label: "ScrollView", controllerType: ScrollViewDemo.self),
+        ]),
+        DemoSection(label: "Controls", demos: [
+            Demo(label: "TextField", controllerType: TextFieldDemo.self),
+            Demo(label: "Button", controllerType: ButtonDemo.self),
+            Demo(label: "ButtonBar", controllerType: ButtonBarDemo.self),
+            Demo(label: "PopOver", controllerType: PopOverDemo.self),
+        ]),
+        DemoSection(label: "TextView", demos: [
+            Demo(label: "TextView", controllerType: TextViewDemo.self),
+            Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
+            Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
+        ]),
+        DemoSection(label: "TextKit 1", demos: [
+            Demo(label: "TextKit", controllerType: TextKitDemo.self),
+            Demo(label: "TextKit ToggleWrap", controllerType: TextKitToggleWrapDemo.self),
+            Demo(label: "TextKit Draw", controllerType: TextKitDrawDemo.self),
+            Demo(label: "TextKit LineCount", controllerType: TextKitLineCountDemo.self),
+            Demo(label: "Symbol", controllerType: SymbolDemo.self),
+            //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
+        ]),
+        DemoSection(label: "TextKit 2", demos: [
+            Demo(label: "TextKit2", controllerType: TextKit2Demo.self),
+        ]),
+        DemoSection(label: "Table", demos: [
+            Demo(label: "TableView", controllerType: TableViewDemo.self),
+            Demo(label: "TableViewCocoaBinding", controllerType: TableViewCocoaBindingDemo.self),
         ]),
         DemoSection(label: "SplitView", demos: [
             Demo(label: "SplitView", controllerType: SplitViewDemo.self),
@@ -50,40 +76,14 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Material", demos: [
             Demo(label: "Material", controllerType: MaterialDemo.self),
         ]),
-        DemoSection(label: "Controls", demos: [
-            Demo(label: "Button", controllerType: ButtonDemo.self),
-            Demo(label: "ButtonBar", controllerType: ButtonBarDemo.self),
-            Demo(label: "PopOver", controllerType: PopOverDemo.self),
-        ]),
-        DemoSection(label: "Text", demos: [
-            Demo(label: "TextField", controllerType: TextFieldDemo.self),
-            Demo(label: "TextView", controllerType: TextViewDemo.self),
-            Demo(label: "TextKit", controllerType: TextKitDemo.self),
-            Demo(label: "TextKit ToggleWrap", controllerType: TextKitToggleWrapDemo.self),
-            Demo(label: "TextKit Draw", controllerType: TextKitDrawDemo.self),
-            Demo(label: "TextKit LineCount", controllerType: TextKitLineCountDemo.self),
-            Demo(label: "TextKit2", controllerType: TextKit2Demo.self),
-            Demo(label: "Symbol", controllerType: SymbolDemo.self),
-            Demo(label: "AttributedTextView", controllerType: AttributedTextViewDemo.self),
-            //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
-            Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
-        ]),
-        DemoSection(label: "Table", demos: [
-            Demo(label: "TableView", controllerType: TableViewDemo.self),
-            Demo(label: "TableViewCocoaBinding", controllerType: TableViewCocoaBindingDemo.self),
-        ]),
-        DemoSection(label: "Document", demos: [
-            Demo(label: "Document", controllerType: DocumentDemo.self),
+        DemoSection(label: "Gesture", demos: [
+            Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),
         ]),
         DemoSection(label: "CocoaBinding", demos: [
             Demo(label: "CocoaBinding", controllerType: CocoaBindingDemo.self),
             Demo(label: "TargetAction", controllerType: TargetActionDemo.self),
             Demo(label: "KeyValueBinding", controllerType: KeyValueBindingDemo.self),
             Demo(label: "NSEditor", controllerType: NSEditorDemo.self),
-        ]),
-
-        DemoSection(label: "Gesture", demos: [
-            Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),
         ]),
 //        DemoSection(label: "Graphics", demos: [
 //            Demo(label: "GraphicButton", controllerType: GraphicButtonDemo.self),
@@ -96,6 +96,9 @@ class NavigatorController: NSSplitViewController {
 //        DemoSection(label: "Animation", demos: [
 //            Demo(label: "Mastering macOS 11", controllerType: AnimationDemo.self),
 //        ]),
+        DemoSection(label: "Document", demos: [
+            Demo(label: "Document", controllerType: DocumentDemo.self),
+        ]),
         DemoSection(label: "NotificationCenter", demos: [
             Demo(label: "NotificationCenter", controllerType: NotificationCenterDemo.self),
         ]),
