@@ -55,7 +55,6 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "TextKit ToggleWrap", controllerType: TextKitToggleWrapDemo.self),
             Demo(label: "TextKit Draw", controllerType: TextKitDrawDemo.self),
             Demo(label: "TextKit LineCount", controllerType: TextKitLineCountDemo.self),
-            Demo(label: "Symbol", controllerType: SymbolDemo.self),
             //Demo(label: "TextStorage", controllerType: TextStorageDemo.self),
         ]),
         DemoSection(label: "TextKit 2", demos: [
@@ -76,6 +75,10 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Material", demos: [
             Demo(label: "Material", controllerType: MaterialDemo.self),
         ]),
+        DemoSection(label: "Symbol", demos: [
+            Demo(label: "Symbol", controllerType: SymbolDemo.self),
+        ]),
+
         DemoSection(label: "Gesture", demos: [
             Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),
         ]),
