@@ -15,14 +15,10 @@ import AppKit
 
 class TextKitDrawDemo: NSViewController {
 
-    private let stringDraw = StringDraw()
     private let layoutManagerDraw = LayoutManagerDraw()
 
     override func loadView() {
         view = NSView()
-
-        stringDraw.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(stringDraw)
 
         layoutManagerDraw.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(layoutManagerDraw)
@@ -31,36 +27,11 @@ class TextKitDrawDemo: NSViewController {
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            stringDraw.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stringDraw.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stringDraw.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stringDraw.heightAnchor.constraint(equalToConstant: 80),
-
-            layoutManagerDraw.topAnchor.constraint(equalTo: stringDraw.bottomAnchor, constant: 20),
+            layoutManagerDraw.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             layoutManagerDraw.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             layoutManagerDraw.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             layoutManagerDraw.heightAnchor.constraint(equalToConstant: 80),
         ])
-    }
-
-    class StringDraw: NSView {
-        override func draw(_ dirtyRect: NSRect) {
-            super.draw(dirtyRect)
-
-            let text = "NSString.draw(at:withAttributes:)" as NSString
-            let attributes: [NSAttributedString.Key: Any] = [
-                .font: NSFont.systemFont(ofSize: 24),
-                .foregroundColor: NSColor.black
-            ]
-
-            let textSize = text.size(withAttributes: attributes)
-            let textOrigin = NSPoint(
-                x: (bounds.width - textSize.width) / 2,
-                y: (bounds.height - textSize.height) / 2
-            )
-
-            text.draw(at: textOrigin, withAttributes: attributes)
-        }
     }
 
     class LayoutManagerDraw: NSView {
