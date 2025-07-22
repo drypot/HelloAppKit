@@ -10,7 +10,8 @@ import Cocoa
 class SplitViewDemoInspectorController: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let label = NSTextField(labelWithString: "Inspector")
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -21,5 +22,5 @@ class SplitViewDemoInspectorController: NSViewController {
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         ])
     }
-    
+
 }

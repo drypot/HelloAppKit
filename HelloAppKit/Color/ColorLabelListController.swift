@@ -15,7 +15,8 @@ class ColorLabelListController: NSViewController {
     var constrainsts = [NSLayoutConstraint]()
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         setupScrollView()
         setupScrollContent()

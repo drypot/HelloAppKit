@@ -16,7 +16,8 @@ import Cocoa
 class ScrollViewDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         // setup ScrollView
 

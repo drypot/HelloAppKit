@@ -14,7 +14,8 @@ class TargetActionDemo: NSViewController {
     let textField = NSTextField(string: "50.0")
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         // target: The object that should respond to the event.
         // action: The method (selector) that gets called on the target when the event occurs.

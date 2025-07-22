@@ -17,7 +17,8 @@ class CustomTextViewDemo: NSViewController {
     var customTextStorage: CustomTextStorage?
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let stackView = NSStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -40,10 +41,10 @@ class CustomTextViewDemo: NSViewController {
     func addStackItems(_ stackView: NSStackView) {
         let container = NSTextContainer()
         container.widthTracksTextView = true
-        
+
         let layoutManager = NSLayoutManager()
         layoutManager.addTextContainer(container)
-        
+
         let customTextStorage = CustomTextStorage()
         self.customTextStorage = customTextStorage
         let attrString = NSAttributedString(
@@ -52,16 +53,16 @@ class CustomTextViewDemo: NSViewController {
         )
         customTextStorage.append(attrString)
         customTextStorage.addLayoutManager(layoutManager)
-        
+
         let textView = NSTextView(frame: .zero, textContainer: container)
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.font = NSFont.systemFont(ofSize: 24)
         textView.delegate = self
         stackView.addArrangedSubview(textView)
     }
-        
+
 }
 
 extension CustomTextViewDemo: NSTextViewDelegate {
-    
+
 }

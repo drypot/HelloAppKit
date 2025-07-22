@@ -12,7 +12,8 @@ class SheetWindowDemo: NSViewController {
     var sheetWindow = SheetWindow()
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let button1 = NSButton(title: "Open sheet", target: self, action: #selector(openSheet))
         button1.translatesAutoresizingMaskIntoConstraints = false

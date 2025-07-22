@@ -10,7 +10,8 @@ import Cocoa
 class CompositeViewDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let childView = CompositeView()
         childView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,7 +65,7 @@ class CompositeViewDemo: NSViewController {
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-        
+
         @objc func handleClick(_ sender: NSClickGestureRecognizer) {
             let locationInView = sender.location(in: self)
             print("clicked at: \(locationInView)")

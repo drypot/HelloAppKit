@@ -15,12 +15,12 @@ class GraphicButton: NSButton {
     var normalButtonColor: NSColor = .white
     var highlightedButtonColor: NSColor = .gray
     var roundIcon: Bool = true
-    
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         self.isBordered = false
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -28,34 +28,34 @@ class GraphicButton: NSButton {
     var fillColor: NSColor {
         return isHighlighted ? highlightedButtonColor : normalButtonColor
     }
-    
+
     var standardLineWidth: CGFloat {
         return min(bounds.width, bounds.height) * 0.05
     }
-    
+
     var insetRect: CGRect {
         let delta = standardLineWidth * 0.5
         return bounds.insetBy(dx: delta, dy: delta)
     }
-    
+
     var iconRect: CGRect {
         let delta = min(bounds.width, bounds.height) * 0.15
         return insetRect.insetBy(dx: delta, dy: delta)
     }
-    
+
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        
+
         let circlePath = NSBezierPath(ovalIn: insetRect)
         fillColor.setFill()
         circlePath.fill()
-        
+
         circlePath.lineWidth = standardLineWidth
         borderColor.setStroke()
         circlePath.stroke()
-                
+
         let iconPath = NSBezierPath()
-        
+
         if roundIcon == true {
             iconPath.appendOval(in: iconRect)
         } else {
@@ -67,18 +67,19 @@ class GraphicButton: NSButton {
             )
             iconPath.close()
         }
-        
+
         iconPath.lineWidth = standardLineWidth
         borderColor.setStroke()
         iconPath.stroke()
     }
-    
+
 }
 
 class GraphicButtonDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let stackView = NSStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false

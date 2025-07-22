@@ -10,7 +10,8 @@ import Cocoa
 class PresentAsSheetDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let button1 = NSButton(title: "Open sheet", target: self, action: #selector(openSheet))
         button1.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +33,8 @@ class PresentAsSheetDemo: NSViewController {
 
     class SheetViewController: NSViewController {
         override func loadView() {
-            view = NSView()
+            let view = NSView()
+            self.view = view
 
             let helloLabel = NSTextField(labelWithString: "Hello")
             helloLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -51,7 +53,7 @@ class PresentAsSheetDemo: NSViewController {
 
                 helloLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 helloLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                
+
                 closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 closeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             ])

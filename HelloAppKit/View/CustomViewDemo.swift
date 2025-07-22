@@ -10,7 +10,8 @@ import AppKit
 class CustomViewDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let customView = CustomView(frame: .zero, color: .green)
         customView.translatesAutoresizingMaskIntoConstraints = false

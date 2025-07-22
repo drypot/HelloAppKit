@@ -10,7 +10,8 @@ import AppKit
 class ViewControllerStackDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let controller1 = Controller1()
         let controller2 = Controller2()
@@ -42,7 +43,8 @@ class ViewControllerStackDemo: NSViewController {
 
     class Controller1: NSViewController {
         override func loadView() {
-            view = NSView()
+            let view = NSView()
+        self.view = view
             view.translatesAutoresizingMaskIntoConstraints = false
             view.wantsLayer = true
             view.layer?.backgroundColor = NSColor.red.cgColor
@@ -51,7 +53,9 @@ class ViewControllerStackDemo: NSViewController {
 
     class Controller2: NSViewController {
         override func loadView() {
-            view = NSView()
+            let view = NSView()
+            self.view = view
+            
             view.translatesAutoresizingMaskIntoConstraints = false
             view.wantsLayer = true
             view.layer?.backgroundColor = NSColor.blue.cgColor

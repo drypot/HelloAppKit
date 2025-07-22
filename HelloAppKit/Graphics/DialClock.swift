@@ -14,18 +14,18 @@ class DialClock: NSView {
     var outlineColor: NSColor = .orange
     var innerColor: NSColor = .white
     var lineColor: NSColor = .gray
-    
+
     var timeHours: CGFloat = 8.0
     var timeMinutes: CGFloat = 42.0
 
     var radius: CGFloat {
         return min(bounds.width, bounds.height) * 0.4
     }
-    
+
     var radiusHours: CGFloat {
         return bounds.width * 0.2
     }
-    
+
     var radiusMinutes: CGFloat {
         return bounds.width * 0.3
     }
@@ -36,12 +36,12 @@ class DialClock: NSView {
 
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        
+
         NSColor.white.setFill()
         bounds.fill()
-        
+
         // 외곽선 배경
-        
+
         let path = NSBezierPath()
         path.appendArc(
             withCenter: center,
@@ -57,14 +57,14 @@ class DialClock: NSView {
             clockwise: true
         )
         path.close()
-                
+
         innerColor.setFill()
         path.fill()
-        
+
         // 분
-        
+
         let pathMinutes = NSBezierPath()
-        
+
         let arcSweepMinutes = CGFloat(timeMinutes) / 60.0 * 180.0
         pathMinutes.appendArc(
             withCenter: center,
@@ -73,7 +73,7 @@ class DialClock: NSView {
             endAngle: 180.0 - arcSweepMinutes,
             clockwise: true
         )
-        
+
         pathMinutes.lineCapStyle = .round
         let dashes: [CGFloat] = [10, 5]
         pathMinutes.setLineDash(dashes, count: 2, phase: 0)
@@ -81,11 +81,11 @@ class DialClock: NSView {
         lineColor.setStroke()
         pathMinutes.lineWidth = 4
         pathMinutes.stroke()
-        
+
         // 시
-        
+
         let pathHours = NSBezierPath()
-        
+
         let arcSweepHours = CGFloat(timeHours) / 12.0 * 180.0
         pathHours.appendArc(
             withCenter: center,
@@ -94,25 +94,26 @@ class DialClock: NSView {
             endAngle: 180.0 - arcSweepHours,
             clockwise: true
         )
-        
+
         lineColor.setStroke()
         pathHours.lineWidth = 5
         pathHours.stroke()
-        
+
         // 외곽선
-        
+
         outlineColor.setStroke()
         path.lineWidth = 4
         path.lineJoinStyle = .round
-        path.stroke()        
+        path.stroke()
     }
-    
+
 }
 
 class DialClockController: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let clock = DialClock()
         clock.translatesAutoresizingMaskIntoConstraints = false

@@ -16,7 +16,8 @@ class KeyValueBindingDemo: NSViewController {
     let textField = NSTextField(string: "50.0")
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         label.translatesAutoresizingMaskIntoConstraints = false
         label.sizeToFit()

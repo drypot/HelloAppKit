@@ -13,7 +13,8 @@ class TextKitLineCountDemo: NSViewController {
     private var previousFrameSize = NSSize.zero
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +59,7 @@ class TextKitLineCountDemo: NSViewController {
     override func viewDidLayout() {
         guard previousFrameSize != view.frame.size else { return }
         previousFrameSize = view.frame.size
-        
+
         let layoutManager = textView.layoutManager!
         let numberOfGlyphs = layoutManager.numberOfGlyphs
 

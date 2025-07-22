@@ -10,7 +10,8 @@ import AppKit
 class GestureRecognizerDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let childView = NSView()
         childView.translatesAutoresizingMaskIntoConstraints = false

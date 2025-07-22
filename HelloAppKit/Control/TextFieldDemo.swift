@@ -17,7 +17,8 @@ import Cocoa
 class TextFieldDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         // Setup StackView
 

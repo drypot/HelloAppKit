@@ -5,6 +5,7 @@
 //  Created by Kyuhyun Park on 12/27/24.
 //
 
+
 import AppKit
 
 @MainActor
@@ -176,7 +177,8 @@ class NavigatorController: NSSplitViewController {
         let tableView: NSTableView = NSTableView()
 
         override func loadView() {
-            view = NSView()
+            let view = NSView()
+            self.view = view
 
             tableView.translatesAutoresizingMaskIntoConstraints = false
             tableView.headerView = nil // Hide the header if not needed
@@ -254,7 +256,8 @@ class NavigatorController: NSSplitViewController {
         let tableView: NSTableView = NSTableView()
 
         override func loadView() {
-            view = NSView()
+            let view = NSView()
+            self.view = view
 
             tableView.translatesAutoresizingMaskIntoConstraints = false
             tableView.headerView = nil // Hide the header if not needed
@@ -346,7 +349,8 @@ class NavigatorController: NSSplitViewController {
         var controller: NSViewController!
 
         override func loadView() {
-            view = NSView()
+            let view = NSView()
+            self.view = view
         }
 
         func use(controller: NSViewController) {

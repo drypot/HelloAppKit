@@ -10,7 +10,8 @@ import Cocoa
 class SplitViewDemoMainController: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.white.cgColor
 

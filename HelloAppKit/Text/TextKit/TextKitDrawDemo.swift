@@ -15,26 +15,27 @@ import AppKit
 
 class TextKitDrawDemo: NSViewController {
 
-    private let layoutManagerDraw = LayoutManagerDraw()
+    private let demoView = DemoView()
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
-        layoutManagerDraw.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(layoutManagerDraw)
+        demoView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(demoView)
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
 
-            layoutManagerDraw.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            layoutManagerDraw.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            layoutManagerDraw.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            layoutManagerDraw.heightAnchor.constraint(equalToConstant: 80),
+            demoView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            demoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            demoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            demoView.heightAnchor.constraint(equalToConstant: 80),
         ])
     }
 
-    class LayoutManagerDraw: NSView {
+    class DemoView: NSView {
 
         private var textStorage = NSTextStorage()
         private var layoutManager = NSLayoutManager()

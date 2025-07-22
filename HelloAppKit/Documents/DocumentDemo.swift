@@ -11,7 +11,8 @@ import UniformTypeIdentifiers
 class DocumentDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let button1 = NSButton(title: "New TextDocument", target: self, action: #selector(button1Action))
         button1.translatesAutoresizingMaskIntoConstraints = false

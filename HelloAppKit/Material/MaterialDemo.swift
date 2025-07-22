@@ -12,7 +12,8 @@ class MaterialDemo: NSViewController {
     var window: NSWindow?
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let button1 = NSButton(title: "Open translucent window", target: self, action: #selector(openWindow))
         button1.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +66,9 @@ class MaterialDemo: NSViewController {
 
     class ViewController: NSViewController {
         override func loadView() {
-            view = NSView()
+            let view = NSView()
+            self.view = view
+
             view.wantsLayer = true
 
             let effectView = NSVisualEffectView()

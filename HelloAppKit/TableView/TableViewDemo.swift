@@ -31,7 +31,8 @@ class TableViewDemo: NSViewController {
     let tableView = NSTableView()
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         setupScrollView()
         setupTable()

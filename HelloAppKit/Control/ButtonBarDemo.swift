@@ -10,7 +10,8 @@ import Cocoa
 class ButtonBarDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let buttonBar = NSStackView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false

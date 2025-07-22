@@ -23,7 +23,8 @@ class SplitViewDemo: NSViewController {
     var windowController: SplitViewDemoWindowController?
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let button1 = NSButton(title: "Open SplitView Window", target: self, action: #selector(openWindow))
         button1.translatesAutoresizingMaskIntoConstraints = false

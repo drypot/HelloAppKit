@@ -23,7 +23,8 @@ class CocoaBindingDemo: NSViewController {
     var objectController = NSObjectController()
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         objectController.bind(.content, to: self, withKeyPath: "person", options: nil)
 

@@ -12,7 +12,8 @@ class SplitViewSimpleDemo: NSViewController, NSSplitViewDelegate {
     let splitView = NSSplitView()
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         setupSplitView()
 

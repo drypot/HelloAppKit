@@ -10,7 +10,8 @@ import Cocoa
 class SymbolDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
         view.wantsLayer = true
         view.layer?.backgroundColor = NSColor.white.cgColor
 

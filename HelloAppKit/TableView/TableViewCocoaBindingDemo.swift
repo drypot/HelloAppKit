@@ -59,7 +59,8 @@ class TableViewCocoaBindingDemo: NSViewController {
     }
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         setupScrollView()
         setupTable()

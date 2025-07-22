@@ -151,7 +151,8 @@ class TextDocumentViewController: NSViewController, NSTextViewDelegate {
     }
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false

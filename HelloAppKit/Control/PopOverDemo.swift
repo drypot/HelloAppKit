@@ -12,7 +12,8 @@ class PopOverDemo: NSViewController {
     var displayLabel: NSTextField!
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         displayLabel = NSTextField(labelWithString: "Click here")
         displayLabel.translatesAutoresizingMaskIntoConstraints = false

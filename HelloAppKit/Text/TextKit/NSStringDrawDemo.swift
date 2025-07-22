@@ -23,7 +23,8 @@ class NSStringDrawDemo: NSViewController {
     private let demoView = DemoView()
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         demoView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(demoView)

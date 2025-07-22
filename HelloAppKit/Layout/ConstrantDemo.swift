@@ -10,7 +10,8 @@ import Cocoa
 class ConstrantDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let button1 = NSButton(title: "Button 1", target: self, action: #selector(buttonAction))
         button1.translatesAutoresizingMaskIntoConstraints = false

@@ -20,7 +20,8 @@ class NSEditorDemo: NSViewController {
     let saveButton = NSButton()
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.bind(.value, to: editorController, withKeyPath: "text", options: nil)

@@ -21,7 +21,8 @@ class TextKit2Demo: NSViewController {
     private var textView: NSTextView!
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let buttonBar = NSStackView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false

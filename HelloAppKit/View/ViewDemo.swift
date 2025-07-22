@@ -10,7 +10,8 @@ import AppKit
 class ViewDemo: NSViewController {
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let child = NSView()
         child.translatesAutoresizingMaskIntoConstraints = false

@@ -14,7 +14,8 @@ class WindowDemo: NSViewController {
     var windowController: NSWindowController?
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         let button1 = NSButton(title: "Open window", target: self, action: #selector(openWindow))
         button1.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +99,8 @@ class WindowDemo: NSViewController {
 
     class ViewController: NSViewController {
         override func loadView() {
-            view = NSView()
+            let view = NSView()
+            self.view = view
 
             let child = NSView()
             child.translatesAutoresizingMaskIntoConstraints = false

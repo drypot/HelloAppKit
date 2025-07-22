@@ -18,7 +18,8 @@ class NotificationCenterDemo: NSViewController {
     }
 
     override func loadView() {
-        view = NSView()
+        let view = NSView()
+        self.view = view
 
         setupNotification()
 
