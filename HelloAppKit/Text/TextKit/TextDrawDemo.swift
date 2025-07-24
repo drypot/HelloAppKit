@@ -33,19 +33,11 @@ class TextDrawDemo: NSViewController {
             stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
 
-        let stringDrawDemo = StringDrawDemo()
-        stackView.addArrangedSubview(stringDrawDemo)
-
-        let layoutManagerDemo = LayoutManagerDemo()
-        stackView.addArrangedSubview(layoutManagerDemo)
+        stackView.addArrangedSubview(StringDrawDemo())
+        stackView.addArrangedSubview(LayoutManagerDemo())
     }
 
     class StringDrawDemo: NSView {
-        let text = "StringDrawDemo"
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont.preferredFont(forTextStyle: .title1),
-            .foregroundColor: NSColor.black
-        ]
 
         override init(frame frameRect: NSRect) {
             super.init(frame: frameRect)
@@ -64,7 +56,11 @@ class TextDrawDemo: NSViewController {
         override func draw(_ dirtyRect: NSRect) {
             super.draw(dirtyRect)
 
-            print("\(type(of: self)) bounds: \(bounds)")
+            let text = "StringDrawDemo"
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: NSFont.preferredFont(forTextStyle: .title1),
+                .foregroundColor: NSColor.black
+            ]
 
             let textSize = text.size(withAttributes: attributes)
             let textOrigin = NSPoint(
@@ -81,22 +77,12 @@ class TextDrawDemo: NSViewController {
     }
 
     class LayoutManagerDemo: NSView {
-        let text = "LayoutManagerDemo"
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: NSFont.preferredFont(forTextStyle: .title1),
-            .foregroundColor: NSColor.black
-        ]
-
         private var textStorage = NSTextStorage()
         private var layoutManager = NSLayoutManager()
         private var textContainer = NSTextContainer(size: .zero)
 
         override init(frame frameRect: NSRect) {
-            let attrString = NSAttributedString( string: text, attributes: attributes )
-
-            textStorage.setAttributedString(attrString)
-
-            textContainer.lineFragmentPadding = 5.0
+            textContainer.lineFragmentPadding = 0 // 좌우 패딩 삭제
 
             textStorage.addLayoutManager(layoutManager)
             layoutManager.addTextContainer(textContainer)
@@ -120,25 +106,60 @@ class TextDrawDemo: NSViewController {
             textContainer.size = bounds.size
         }
 
+//        override var isFlipped: Bool { true }
+
         override func draw(_ dirtyRect: NSRect) {
             super.draw(dirtyRect)
 
-            print("\(type(of: self)) bounds: \(bounds)")
+            let text = "LayoutManagerDemo"
+
+//            let font = NSFont.systemFont(ofSize: 16)
+            let font = NSFont.preferredFont(forTextStyle: .title1)
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: font,
+                .foregroundColor: NSColor.black
+            ]
+
+            textStorage.setAttributedString(NSAttributedString(string: text, attributes: attributes))
+
 
             let glyphRange = layoutManager.glyphRange(for: textContainer)
+
             let usedRect = layoutManager.usedRect(for: textContainer)
+            print(usedRect)
+            print(usedRect.origin)
+
             let textOrigin = NSPoint(
                 x: 0,
-                y: bounds.height - usedRect.height
+                y: 0
             )
-//            let textSize = text.size(withAttributes: attributes)
-//            let textOrigin = NSPoint(
-//                x: 0,
-//                y: bounds.height - textSize.height
-//            )
 
-            // drawGlyphs at 의 기분 위치는 line fragment origin 이다.
+
             layoutManager.drawGlyphs(forGlyphRange: glyphRange, at: textOrigin)
+
+            let boundingRect = layoutManager.boundingRect(
+                forGlyphRange: glyphRange,
+                in: textContainer
+            )
+
+            print(boundingRect)
+            //
+
+            NSColor.black.setStroke()
+
+            let startPoint = NSPoint(x: 0, y: usedRect.height)
+            let endPoint = NSPoint(x: 50, y: usedRect.height)
+
+            // 선 색상 설정
+            NSColor.black.setStroke()
+
+            // 선 경로 설정
+            let path = NSBezierPath()
+            path.move(to: startPoint)
+            path.line(to: endPoint)
+            path.lineWidth = 2  // 선 두께 설정
+
+            path.stroke()
         }
     }
 
