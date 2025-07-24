@@ -113,52 +113,51 @@ class TextDrawDemo: NSViewController {
 
             let text = "LayoutManagerDemo"
 
-//            let font = NSFont.systemFont(ofSize: 16)
-            let font = NSFont.preferredFont(forTextStyle: .title1)
+//            let font = NSFont.preferredFont(forTextStyle: .title1)
+            let font = NSFont.systemFont(ofSize: 36)
+
+//            let paragraphStyle = NSMutableParagraphStyle()
+//            let lineHeight: CGFloat = font.pointSize * 1.0
+//            paragraphStyle.minimumLineHeight = lineHeight
+//            paragraphStyle.maximumLineHeight = lineHeight
+
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: font,
+//                .paragraphStyle: paragraphStyle,
                 .foregroundColor: NSColor.black
             ]
+            let attrString = NSAttributedString(string: text, attributes: attributes)
 
-            textStorage.setAttributedString(NSAttributedString(string: text, attributes: attributes))
-
+            textStorage.setAttributedString(attrString)
 
             let glyphRange = layoutManager.glyphRange(for: textContainer)
 
+            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+            print(boundingRect)
+
             let usedRect = layoutManager.usedRect(for: textContainer)
             print(usedRect)
-            print(usedRect.origin)
 
             let textOrigin = NSPoint(
                 x: 0,
-                y: 0
+                y: bounds.height - usedRect.height
             )
-
 
             layoutManager.drawGlyphs(forGlyphRange: glyphRange, at: textOrigin)
 
-            let boundingRect = layoutManager.boundingRect(
-                forGlyphRange: glyphRange,
-                in: textContainer
-            )
-
-            print(boundingRect)
             //
 
-            NSColor.black.setStroke()
+//            let path = NSBezierPath()
+//            path.move(to: NSPoint(x: 0, y: usedRect.height))
+//            path.line(to: NSPoint(x: 50, y: usedRect.height))
 
-            let startPoint = NSPoint(x: 0, y: usedRect.height)
-            let endPoint = NSPoint(x: 50, y: usedRect.height)
-
-            // 선 색상 설정
-            NSColor.black.setStroke()
-
-            // 선 경로 설정
             let path = NSBezierPath()
-            path.move(to: startPoint)
-            path.line(to: endPoint)
-            path.lineWidth = 2  // 선 두께 설정
+            path.appendRect(usedRect.offsetBy(dx: 0, dy: bounds.height - usedRect.height))
+//            path.appendRect(usedRect)
 
+            NSColor.black.setStroke()
+
+            path.lineWidth = 1
             path.stroke()
         }
     }
