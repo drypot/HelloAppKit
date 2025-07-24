@@ -1,5 +1,5 @@
 //
-//  TextKitLineCountDemo.swift
+//  TextViewLineCountDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 3/29/25.
@@ -7,7 +7,7 @@
 
 import AppKit
 
-class TextKitLineCountDemo: NSViewController {
+class TextViewLineCountDemo: NSViewController {
 
     private let textView = NSTextView()
     private var previousFrameSize = NSSize.zero

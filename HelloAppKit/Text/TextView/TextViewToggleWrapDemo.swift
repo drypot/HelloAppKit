@@ -1,5 +1,5 @@
 //
-//  TextKitToggleWrapDemo.swift
+//  TextViewToggleWrapDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 3/21/25.
@@ -13,14 +13,19 @@ import AppKit
 // Putting an NSTextView Object in an NSScrollView
 // https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/TextUILayer/Tasks/TextInScrollView.html#//apple_ref/doc/uid/20000938
 
-class TextKitToggleWrapDemo: NSViewController {
+class TextViewToggleWrapDemo: NSViewController {
 
     // textStorage 외에는 로컬 변수에 잠시 담아 써도 되는데
     // 이런 저런 메서드에서 사용할 상황을 대비해 인스턴스 변수로 뽑아놨다.
 
-    private var textStorage: NSTextStorage!
-    private var layoutManager: NSLayoutManager!
-    private var textContainer: NSTextContainer!
+    private var textStorage = NSTextStorage()
+    private var layoutManager = NSLayoutManager()
+    private var textContainer = NSTextContainer(
+        size: CGSize(
+            width: 0,
+            height: CGFloat.greatestFiniteMagnitude
+        )
+    )
     private var textView: NSTextView!
 
     override func loadView() {
@@ -47,19 +52,9 @@ class TextKitToggleWrapDemo: NSViewController {
         scrollView.hasHorizontalScroller = false  // wrap 하려면 false
         view.addSubview(scrollView)
 
-        // NSTextStorage
-        textStorage = NSTextStorage()
-
-        // NSLayoutManager
-        layoutManager = NSLayoutManager()
+        layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
 
-        // NSTextContainer
-        // height 를 지정해야 컨텐츠가 보인다.
-        textContainer = NSTextContainer(size: CGSize(width: 0, height: CGFloat.greatestFiniteMagnitude))
-        layoutManager.addTextContainer(textContainer)
-
-        // NSTextView 생성 및 설정
         textView = NSTextView(frame: .zero, textContainer: textContainer)
         // max height 를 설정해야 세로스크롤 할 수 있었다.
         textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
