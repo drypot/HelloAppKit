@@ -112,18 +112,10 @@ class TextDrawDemo: NSViewController {
             super.draw(dirtyRect)
 
             let text = "LayoutManagerDemo"
-
-//            let font = NSFont.preferredFont(forTextStyle: .title1)
-            let font = NSFont.systemFont(ofSize: 36)
-
-//            let paragraphStyle = NSMutableParagraphStyle()
-//            let lineHeight: CGFloat = font.pointSize * 1.0
-//            paragraphStyle.minimumLineHeight = lineHeight
-//            paragraphStyle.maximumLineHeight = lineHeight
-
+//            let font = NSFont.preferredFont(forTextStyle: .title3)
+            let font = NSFont.systemFont(ofSize: 30)
             let attributes: [NSAttributedString.Key: Any] = [
                 .font: font,
-//                .paragraphStyle: paragraphStyle,
                 .foregroundColor: NSColor.black
             ]
             let attrString = NSAttributedString(string: text, attributes: attributes)
@@ -132,30 +124,36 @@ class TextDrawDemo: NSViewController {
 
             let glyphRange = layoutManager.glyphRange(for: textContainer)
 
-            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
-            print(boundingRect)
+//            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+//            print(boundingRect)
 
             let usedRect = layoutManager.usedRect(for: textContainer)
             print(usedRect)
 
             let textOrigin = NSPoint(
                 x: 0,
-                y: bounds.height - usedRect.height
+                y: bounds.height - font.ascender - usedRect.height
+                // 왜 usedRect.height 까지 빼야하는지 모르겠다;
+                // 하다 보니 그냥 이렇게 하면 대강 맞는다;
+                // 담에 다시 보자;
             )
 
             layoutManager.drawGlyphs(forGlyphRange: glyphRange, at: textOrigin)
 
             //
 
+            NSColor.black.setStroke()
+
 //            let path = NSBezierPath()
 //            path.move(to: NSPoint(x: 0, y: usedRect.height))
 //            path.line(to: NSPoint(x: 50, y: usedRect.height))
 
-            let path = NSBezierPath()
-            path.appendRect(usedRect.offsetBy(dx: 0, dy: bounds.height - usedRect.height))
-//            path.appendRect(usedRect)
-
-            NSColor.black.setStroke()
+            let path = NSBezierPath(
+                rect: NSRect(
+                    origin: NSPoint(x: 0, y: bounds.height - usedRect.height),
+                    size: usedRect.size
+                )
+            )
 
             path.lineWidth = 1
             path.stroke()
