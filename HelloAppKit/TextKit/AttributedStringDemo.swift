@@ -73,9 +73,6 @@ class AttributedStringDemo: NSViewController {
         let textView = NSTextView()
         textView.textStorage?.setAttributedString(str1)
         stackView.addArrangedSubview(textView)
-
-//        NSLayoutConstraint.activate([
-//            textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400)
-//        ])
     }
+    
 }
