@@ -10,16 +10,16 @@ import Cocoa
 // TextKit
 // https://developer.apple.com/documentation/appkit/textkit
 
-// Meet TextKit 2
-// https://developer.apple.com/videos/play/wwdc2021/10061/
-
-class TextKit2TextViewDemo: NSViewController {
+class TextKit1TextViewDemo: NSViewController {
 
     private var textView: NSTextView?
 
-    private weak var contentStorage: NSTextContentStorage?
+//    private weak var contentStorage: NSTextContentStorage? // TK2
     private weak var textStorage: NSTextStorage?
-    private weak var layoutManager: NSTextLayoutManager?
+
+//    private weak var layoutManager: NSTextLayoutManager?  // TK2
+    private weak var layoutManager: NSLayoutManager?
+
     private weak var container: NSTextContainer?
 
     override func loadView() {
@@ -33,13 +33,6 @@ class TextKit2TextViewDemo: NSViewController {
 
         setupButtonBar()
         setupTextView()
-
-        self.layoutManager = textView!.textLayoutManager
-
-        self.contentStorage = layoutManager!.textContentManager as? NSTextContentStorage
-        self.textStorage = contentStorage!.textStorage
-
-        self.container = layoutManager!.textContainer
     }
 
     func setupButtonBar() {
@@ -48,6 +41,12 @@ class TextKit2TextViewDemo: NSViewController {
         buttonBar.orientation = .horizontal
         view.addSubview(buttonBar)
 
+        do {
+            let button = NSButton(title: "Load Sample", target: self, action: #selector(loadSampleAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            buttonBar.addArrangedSubview(button)
+        }
         do {
             let button = NSButton(title: "Set text", target: self, action: #selector(setTextAction))
             button.controlSize = .large
@@ -61,19 +60,19 @@ class TextKit2TextViewDemo: NSViewController {
             buttonBar.addArrangedSubview(button)
         }
         do {
-            let button = NSButton(title: "Load Sample", target: self, action: #selector(loadSampleAction))
-            button.controlSize = .large
-            button.bezelStyle = .toolbar
-            buttonBar.addArrangedSubview(button)
-        }
-        do {
             let button = NSButton(title: "Clear", target: self, action: #selector(clearAction))
             button.controlSize = .large
             button.bezelStyle = .toolbar
             buttonBar.addArrangedSubview(button)
         }
         do {
-            let button = NSButton(title: "Dump elements", target: self, action: #selector(dumpElementsAction))
+            let button = NSButton(title: "Line fragments", target: self, action: #selector(lineFragmentsAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            buttonBar.addArrangedSubview(button)
+        }
+        do {
+            let button = NSButton(title: "Wrap", target: self, action: #selector(wrapAction))
             button.controlSize = .large
             button.bezelStyle = .toolbar
             buttonBar.addArrangedSubview(button)
@@ -87,6 +86,8 @@ class TextKit2TextViewDemo: NSViewController {
 
     func setupTextView() {
         let textView = NSTextView(frame: .zero)
+        self.textView = textView
+
         textView.isEditable = true
         textView.isRichText = false
         textView.font = .monospacedSystemFont(ofSize: 18, weight: .regular)
@@ -97,7 +98,15 @@ class TextKit2TextViewDemo: NSViewController {
         textView.textContainer?.widthTracksTextView = true  // wrap 하려면 true
         textView.autoresizingMask = [.width, .height]
 
-        self.textView = textView
+        self.layoutManager = textView.layoutManager
+//        self.layoutManager = textView.textLayoutManager  // TK2
+
+        self.textStorage = textView.textStorage
+//        self.contentStorage = layoutManager!.textContentManager as? NSTextContentStorage // TK2
+//        self.textStorage = contentStorage!.textStorage
+
+        self.container = textView.textContainer
+//        self.container = layoutManager!.textContainer // TK2
 
         let lastSubview = view.subviews.last!
 
@@ -116,8 +125,19 @@ class TextKit2TextViewDemo: NSViewController {
         ])
     }
 
+    @objc func loadSampleAction(_ sender: NSButton) {
+        if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
+            do {
+                textStorage!.setAttributedString(NSAttributedString(string: ""))
+                try textStorage!.read(from: docURL, documentAttributes: nil, error: ())
+            } catch {
+                print("read error")
+            }
+        }
+    }
+
     @objc func setTextAction(_ sender: NSButton) {
-        let text = "Hello, TextKit 2!\nparagraph1.\nparagraph2.\nparagraph3.\n"
+        let text = "Hello, TextKit 1!\nparagraph1.\nparagraph2.\nparagraph3.\n"
         let attributes: [NSAttributedString.Key: Any] = [
             .font: NSFont.preferredFont(forTextStyle: .title1),
         ]
@@ -134,30 +154,52 @@ class TextKit2TextViewDemo: NSViewController {
         textStorage!.append(attrString)
     }
 
-    @objc func loadSampleAction(_ sender: NSButton) {
-        if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
-            do {
-                textStorage!.setAttributedString(NSAttributedString(string: ""))
-                try textStorage!.read(from: docURL, documentAttributes: nil, error: ())
-            } catch {
-                print("read error")
-            }
-        }
-    }
-
     @objc func clearAction(_ sender: NSButton) {
         textStorage!.setAttributedString(NSAttributedString(string: ""))
     }
 
-    @objc func dumpElementsAction(_ sender: NSButton) {
-        let documentRange = contentStorage!.documentRange
-        let textElements = contentStorage!.textElements(for: documentRange)
+    @objc func lineFragmentsAction(_ sender: NSButton) {
+        let layoutManager = self.layoutManager!
+        let numberOfGlyphs = layoutManager.numberOfGlyphs
 
-        for element in textElements {
-            if let paragraph = element as? NSTextParagraph {
-                print("Paragraph: \(paragraph.attributedString.string)")
-            }
+        print("Glyphs count: \(numberOfGlyphs)")
+
+        var lineFragmentCount = 0
+        var index = 0
+
+        while (index < numberOfGlyphs) {
+            var effectiveRange = NSRange()
+            let rect = layoutManager.lineFragmentRect(
+                forGlyphAt: index,
+                effectiveRange: &effectiveRange
+            )
+            print("rect: \(rect)")
+            index = NSMaxRange(effectiveRange)
+            lineFragmentCount += 1
         }
+        print("Line fragments count: \(lineFragmentCount)")
     }
+
+    @objc func wrapAction(_ sender: NSButton) {
+        let scrollView = textView!.enclosingScrollView!
+        let textView = self.textView!
+        let container = self.container!
+        if container.widthTracksTextView {
+            container.widthTracksTextView = false
+            container.size = CGSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+            textView.isHorizontallyResizable = true
+            textView.autoresizingMask = [.height]
+            scrollView.hasHorizontalScroller = true
+        } else {
+            container.widthTracksTextView = true
+            container.size = CGSize(width: 0, height: CGFloat.greatestFiniteMagnitude)
+            textView.isHorizontallyResizable = false
+            textView.autoresizingMask = [.width, .height]
+            textView.frame.size.width = scrollView.contentSize.width
+            scrollView.hasHorizontalScroller = false
+        }
+        textView.needsDisplay = true
+    }
+
 
 }

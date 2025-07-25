@@ -46,20 +46,12 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "ButtonBar", controllerType: ButtonBarDemo.self),
             Demo(label: "PopOver", controllerType: PopOverDemo.self),
         ]),
-        DemoSection(label: "TextView", demos: [
-            Demo(label: "TextView", controllerType: TextViewDemo.self),
-            Demo(label: "TextView 2", controllerType: TextViewDemo2.self),
-            Demo(label: "TextView Line Count", controllerType: TextViewLineCountDemo.self),
-            Demo(label: "TextView Toggle Wrap", controllerType: TextViewToggleWrapDemo.self),
-            Demo(label: "Attributed TextView", controllerType: AttributedTextViewDemo.self),
-            Demo(label: "CustomTextView", controllerType: CustomTextViewDemo.self),
-        ]),
         DemoSection(label: "TextKit", demos: [
             Demo(label: "TextKit2 TextView", controllerType: TextKit2TextViewDemo.self),
-            Demo(label: "TextKit2", controllerType: TextKit2Demo.self),
             Demo(label: "TextKit1 TextView", controllerType: TextKit1TextViewDemo.self),
-            Demo(label: "String Draw", controllerType: StringDrawDemo.self),
-            Demo(label: "TextKit Draw", controllerType: TextKitDemo.self),
+            Demo(label: "TextKit1 Draw", controllerType: TextKit1DrawDemo.self),
+            Demo(label: "Attributed String Draw", controllerType: AttributedStringDrawDemo.self),
+            Demo(label: "Attributed String", controllerType: AttributedStringDemo.self),
         ]),
         DemoSection(label: "Table", demos: [
             Demo(label: "TableView", controllerType: TableViewDemo.self),

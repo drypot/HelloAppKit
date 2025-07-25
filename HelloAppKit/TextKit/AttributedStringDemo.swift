@@ -1,5 +1,5 @@
 //
-//  AttributedTextViewDemo.swift
+//  AttributedStringDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 9/21/24.
@@ -9,7 +9,7 @@ import AppKit
 
 // Mastering macOS programming-Packt Publishing (2017), 209p
 
-class AttributedTextViewDemo: NSViewController {
+class AttributedStringDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
@@ -74,8 +74,8 @@ class AttributedTextViewDemo: NSViewController {
         textView.textStorage?.setAttributedString(str1)
         stackView.addArrangedSubview(textView)
 
-        NSLayoutConstraint.activate([
-            textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400)
-        ])
+//        NSLayoutConstraint.activate([
+//            textView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400)
+//        ])
     }
 }

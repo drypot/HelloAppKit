@@ -10,13 +10,18 @@ import Cocoa
 // TextKit
 // https://developer.apple.com/documentation/appkit/textkit
 
-class TextKit1TextViewDemo: NSViewController {
+// Meet TextKit 2
+// https://developer.apple.com/videos/play/wwdc2021/10061/
+
+class TextKit2TextViewDemo: NSViewController {
 
     private var textView: NSTextView?
 
+    private weak var contentStorage: NSTextContentStorage?
     private weak var textStorage: NSTextStorage?
-//    private weak var layoutManager: NSTextLayoutManager?  // TextKit 2
-    private weak var layoutManager: NSLayoutManager?
+
+    private weak var layoutManager: NSTextLayoutManager?
+
     private weak var container: NSTextContainer?
 
     override func loadView() {
@@ -30,16 +35,6 @@ class TextKit1TextViewDemo: NSViewController {
 
         setupButtonBar()
         setupTextView()
-
-//        self.layoutManager = textView!.textLayoutManager
-        self.layoutManager = textView!.layoutManager
-
-//        self.contentStorage = layoutManager!.textContentManager as? NSTextContentStorage
-//        self.textStorage = contentStorage!.textStorage
-        self.textStorage = textView!.textStorage
-        
-//        self.container = layoutManager!.textContainer
-        self.container = layoutManager!.textContainers.first!
     }
 
     func setupButtonBar() {
@@ -49,6 +44,12 @@ class TextKit1TextViewDemo: NSViewController {
         view.addSubview(buttonBar)
 
         do {
+            let button = NSButton(title: "Load Sample", target: self, action: #selector(loadSampleAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            buttonBar.addArrangedSubview(button)
+        }
+        do {
             let button = NSButton(title: "Set text", target: self, action: #selector(setTextAction))
             button.controlSize = .large
             button.bezelStyle = .toolbar
@@ -56,12 +57,6 @@ class TextKit1TextViewDemo: NSViewController {
         }
         do {
             let button = NSButton(title: "Add text", target: self, action: #selector(addTextAction))
-            button.controlSize = .large
-            button.bezelStyle = .toolbar
-            buttonBar.addArrangedSubview(button)
-        }
-        do {
-            let button = NSButton(title: "Load Sample", target: self, action: #selector(loadSampleAction))
             button.controlSize = .large
             button.bezelStyle = .toolbar
             buttonBar.addArrangedSubview(button)
@@ -87,6 +82,8 @@ class TextKit1TextViewDemo: NSViewController {
 
     func setupTextView() {
         let textView = NSTextView(frame: .zero)
+        self.textView = textView
+
         textView.isEditable = true
         textView.isRichText = false
         textView.font = .monospacedSystemFont(ofSize: 18, weight: .regular)
@@ -97,7 +94,12 @@ class TextKit1TextViewDemo: NSViewController {
         textView.textContainer?.widthTracksTextView = true  // wrap 하려면 true
         textView.autoresizingMask = [.width, .height]
 
-        self.textView = textView
+        self.layoutManager = textView.textLayoutManager
+
+        self.contentStorage = layoutManager!.textContentManager as? NSTextContentStorage
+        self.textStorage = contentStorage!.textStorage
+
+        self.container = layoutManager!.textContainer
 
         let lastSubview = view.subviews.last!
 
@@ -116,8 +118,19 @@ class TextKit1TextViewDemo: NSViewController {
         ])
     }
 
+    @objc func loadSampleAction(_ sender: NSButton) {
+        if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
+            do {
+                textStorage!.setAttributedString(NSAttributedString(string: ""))
+                try textStorage!.read(from: docURL, documentAttributes: nil, error: ())
+            } catch {
+                print("read error")
+            }
+        }
+    }
+
     @objc func setTextAction(_ sender: NSButton) {
-        let text = "Hello, TextKit 1!\nparagraph1.\nparagraph2.\nparagraph3.\n"
+        let text = "Hello, TextKit 2!\nparagraph1.\nparagraph2.\nparagraph3.\n"
         let attributes: [NSAttributedString.Key: Any] = [
             .font: NSFont.preferredFont(forTextStyle: .title1),
         ]
@@ -134,30 +147,19 @@ class TextKit1TextViewDemo: NSViewController {
         textStorage!.append(attrString)
     }
 
-    @objc func loadSampleAction(_ sender: NSButton) {
-        if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
-            do {
-                textStorage!.setAttributedString(NSAttributedString(string: ""))
-                try textStorage!.read(from: docURL, documentAttributes: nil, error: ())
-            } catch {
-                print("read error")
-            }
-        }
-    }
-
     @objc func clearAction(_ sender: NSButton) {
         textStorage!.setAttributedString(NSAttributedString(string: ""))
     }
 
     @objc func dumpElementsAction(_ sender: NSButton) {
-//        let documentRange = contentStorage!.documentRange
-//        let textElements = contentStorage!.textElements(for: documentRange)
-//
-//        for element in textElements {
-//            if let paragraph = element as? NSTextParagraph {
-//                print("Paragraph: \(paragraph.attributedString.string)")
-//            }
-//        }
+        let documentRange = contentStorage!.documentRange
+        let textElements = contentStorage!.textElements(for: documentRange)
+
+        for element in textElements {
+            if let paragraph = element as? NSTextParagraph {
+                print("Paragraph: \(paragraph.attributedString.string)")
+            }
+        }
     }
 
 }
