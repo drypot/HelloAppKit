@@ -10,16 +10,13 @@ import Cocoa
 // TextKit
 // https://developer.apple.com/documentation/appkit/textkit
 
-// Meet TextKit 2
-// https://developer.apple.com/videos/play/wwdc2021/10061/
-
-class TextKit2TextViewDemo: NSViewController {
+class TextKit1TextViewDemo: NSViewController {
 
     private var textView: NSTextView?
 
-    private weak var contentStorage: NSTextContentStorage?
     private weak var textStorage: NSTextStorage?
-    private weak var layoutManager: NSTextLayoutManager?
+//    private weak var layoutManager: NSTextLayoutManager?  // TextKit 2
+    private weak var layoutManager: NSLayoutManager?
     private weak var container: NSTextContainer?
 
     override func loadView() {
@@ -34,12 +31,15 @@ class TextKit2TextViewDemo: NSViewController {
         setupButtonBar()
         setupTextView()
 
-        self.layoutManager = textView!.textLayoutManager
+//        self.layoutManager = textView!.textLayoutManager
+        self.layoutManager = textView!.layoutManager
 
-        self.contentStorage = layoutManager!.textContentManager as? NSTextContentStorage
-        self.textStorage = contentStorage!.textStorage
-
-        self.container = layoutManager!.textContainer
+//        self.contentStorage = layoutManager!.textContentManager as? NSTextContentStorage
+//        self.textStorage = contentStorage!.textStorage
+        self.textStorage = textView!.textStorage
+        
+//        self.container = layoutManager!.textContainer
+        self.container = layoutManager!.textContainers.first!
     }
 
     func setupButtonBar() {
@@ -117,7 +117,7 @@ class TextKit2TextViewDemo: NSViewController {
     }
 
     @objc func setTextAction(_ sender: NSButton) {
-        let text = "Hello, TextKit 2!\nparagraph1.\nparagraph2.\nparagraph3.\n"
+        let text = "Hello, TextKit 1!\nparagraph1.\nparagraph2.\nparagraph3.\n"
         let attributes: [NSAttributedString.Key: Any] = [
             .font: NSFont.preferredFont(forTextStyle: .title1),
         ]
@@ -150,14 +150,14 @@ class TextKit2TextViewDemo: NSViewController {
     }
 
     @objc func dumpElementsAction(_ sender: NSButton) {
-        let documentRange = contentStorage!.documentRange
-        let textElements = contentStorage!.textElements(for: documentRange)
-
-        for element in textElements {
-            if let paragraph = element as? NSTextParagraph {
-                print("Paragraph: \(paragraph.attributedString.string)")
-            }
-        }
+//        let documentRange = contentStorage!.documentRange
+//        let textElements = contentStorage!.textElements(for: documentRange)
+//
+//        for element in textElements {
+//            if let paragraph = element as? NSTextParagraph {
+//                print("Paragraph: \(paragraph.attributedString.string)")
+//            }
+//        }
     }
 
 }

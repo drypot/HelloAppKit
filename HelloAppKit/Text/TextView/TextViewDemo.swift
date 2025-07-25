@@ -21,8 +21,6 @@ class TextViewDemo: NSViewController {
         scrollView.hasHorizontalScroller = false
         view.addSubview(scrollView)
 
-//      NSTextView 자체는 Auto Layout을 사용하기보다는
-//      autoresizingMask로 크기를 따라가도록 구성하는 것이 일반적이라고 한다.
 
         textView.isVerticallyResizable = true
         textView.isHorizontallyResizable = false
