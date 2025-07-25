@@ -30,7 +30,7 @@ class TextKit2Demo: NSViewController {
         view.addSubview(buttonBar)
 
         do {
-            let button = NSButton(title: "Clear", target: self, action: #selector(clearAction))
+            let button = NSButton(title: "Load Sample", target: self, action: #selector(loadSampleAction))
             button.controlSize = .large
             button.bezelStyle = .toolbar
             buttonBar.addArrangedSubview(button)
@@ -42,7 +42,13 @@ class TextKit2Demo: NSViewController {
             buttonBar.addArrangedSubview(button)
         }
         do {
-            let button = NSButton(title: "Load Sample", target: self, action: #selector(loadSampleAction))
+            let button = NSButton(title: "Clear", target: self, action: #selector(clearAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            buttonBar.addArrangedSubview(button)
+        }
+        do {
+            let button = NSButton(title: "Dump Elements", target: self, action: #selector(dumpElementsAction))
             button.controlSize = .large
             button.bezelStyle = .toolbar
             buttonBar.addArrangedSubview(button)
@@ -85,8 +91,14 @@ class TextKit2Demo: NSViewController {
         ])
     }
 
-    @objc func clearAction(_ sender: NSButton) {
-        contentStorage.textStorage?.setAttributedString(NSAttributedString(string: ""))
+    @objc func loadSampleAction(_ sender: NSButton) {
+        if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
+            do {
+                try contentStorage.textStorage?.read(from: docURL, documentAttributes: nil, error: ())
+            } catch {
+                // Could not read menu content.
+            }
+        }
     }
 
     @objc func addTextAction(_ sender: NSButton) {
@@ -98,14 +110,18 @@ class TextKit2Demo: NSViewController {
         contentStorage.textStorage?.append(attributedString)
     }
 
-    @objc func loadSampleAction(_ sender: NSButton) {
-        if let docURL = Bundle.main.url(forResource: "menu", withExtension: "rtf") {
-            do {
-                try contentStorage.textStorage?.read(from: docURL, documentAttributes: nil, error: ())
-            } catch {
-                // Could not read menu content.
-            }
-        }
+    @objc func clearAction(_ sender: NSButton) {
+        contentStorage.textStorage?.setAttributedString(NSAttributedString(string: ""))
     }
+
+    @objc func dumpElementsAction(_ sender: NSButton) {
+        fatalError()
+//        let elements = contentStorage.textElements(for: .)
+//        for element in elements {
+//            print(element) // NSTextParagraph
+//        }
+//        contentStorage.textStorage?.setAttributedString(NSAttributedString(string: ""))
+    }
+
 
 }
