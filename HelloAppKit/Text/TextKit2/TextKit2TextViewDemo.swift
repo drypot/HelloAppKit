@@ -15,13 +15,23 @@ import Cocoa
 
 class TextKit2TextViewDemo: NSViewController {
 
-    private var textView = NSTextView(frame: .zero)
+    private var textView: NSTextView?
     private var contentStorage: NSTextContentStorage?
 
     override func loadView() {
         let view = NSView()
         self.view = view
 
+        NSLayoutConstraint.activate([
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+        ])
+
+        setupButtonBar()
+        setupTextView()
+    }
+
+    func setupButtonBar() {
         let buttonBar = NSStackView()
         buttonBar.translatesAutoresizingMaskIntoConstraints = false
         buttonBar.orientation = .horizontal
@@ -58,6 +68,14 @@ class TextKit2TextViewDemo: NSViewController {
             buttonBar.addArrangedSubview(button)
         }
 
+        NSLayoutConstraint.activate([
+            buttonBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            buttonBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        ])
+    }
+
+    func setupTextView() {
+        let textView = NSTextView(frame: .zero)
         textView.isEditable = true
         textView.isRichText = false
         textView.font = .monospacedSystemFont(ofSize: 18, weight: .regular)
@@ -69,6 +87,9 @@ class TextKit2TextViewDemo: NSViewController {
         textView.textContainer?.widthTracksTextView = true  // wrap 하려면 true
         textView.autoresizingMask = [.width, .height]
 
+        self.textView = textView
+        self.contentStorage = textView.textLayoutManager?.textContentManager as? NSTextContentStorage
+
         let lastSubview = view.subviews.last!
 
         let scrollView = NSScrollView()
@@ -78,15 +99,7 @@ class TextKit2TextViewDemo: NSViewController {
         scrollView.documentView = textView
         view.addSubview(scrollView)
 
-        contentStorage = textView.textLayoutManager?.textContentManager as? NSTextContentStorage
-
         NSLayoutConstraint.activate([
-            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-
-            buttonBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            buttonBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-
             scrollView.topAnchor.constraint(equalTo: lastSubview.bottomAnchor, constant: 20),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
