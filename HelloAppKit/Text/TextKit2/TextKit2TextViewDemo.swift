@@ -13,7 +13,7 @@ import Cocoa
 // Meet TextKit 2
 // https://developer.apple.com/videos/play/wwdc2021/10061/
 
-class TextKit2Demo: NSViewController {
+class TextKit2TextViewDemo: NSViewController {
 
     private var contentStorage = NSTextContentStorage()
     private var layoutManager = NSTextLayoutManager()
@@ -54,8 +54,8 @@ class TextKit2Demo: NSViewController {
         scrollView.hasHorizontalScroller = true
         view.addSubview(scrollView)
 
-        contentStorage.addTextLayoutManager(layoutManager)
         layoutManager.textContainer = textContainer
+        contentStorage.addTextLayoutManager(layoutManager)
 
         textView = NSTextView(frame: .zero, textContainer: textContainer)
         textView.isEditable = true
