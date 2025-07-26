@@ -42,8 +42,8 @@ class AttributedStringDemo: NSViewController {
         let font = NSFont.preferredFont(forTextStyle: .title1)
 
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.3
-//        paragraphStyle.lineSpacing = 8
+//        paragraphStyle.lineHeightMultiple = 1.3
+        paragraphStyle.lineSpacing = font.pointSize * 0.7
 
         do {
             let attrs: [NSAttributedString.Key: Any] = [
