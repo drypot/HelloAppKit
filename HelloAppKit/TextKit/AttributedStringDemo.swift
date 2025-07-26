@@ -35,44 +35,97 @@ class AttributedStringDemo: NSViewController {
     }
 
     func addStackItems(_ stackView: NSStackView) {
-        let str1 = NSMutableAttributedString(string: "Hello attributions!\n")
-        str1.addAttribute(.foregroundColor, value: NSColor.brown, range: NSRange(location: 6, length: 12))
-
-        let attributes: [NSAttributedString.Key: Any] = [
-            .foregroundColor: NSColor.darkGray,
-            .backgroundColor: NSColor.init(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0),
-            .font: NSFont(name: "Courier", size: 18.0)! /* Optional 들은 꼭 벗겨서 넣어야 한다 */
-        ]
-        let str2 = NSMutableAttributedString(string: "Great to be here\n", attributes: attributes)
-        str1.append(str2)
-
-        let linkAttributes: [NSAttributedString.Key: Any] = [.link: "http://www.grimshaw.de"]
-        let str3 = NSMutableAttributedString(string: "Click me\n", attributes: linkAttributes)
-        str1.append(str3)
-
-        let emphasisTextAttributes: [NSAttributedString.Key: Any] = [
-            .underlineStyle: NSUnderlineStyle.single.rawValue,
-            .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle,
-            .foregroundColor: NSColor.black,
-            .strokeWidth : 2.0
-        ]
-        let str4 = NSMutableAttributedString(string: "Great to be here\n")
-        str4.addAttributes(emphasisTextAttributes, range: NSRange(location: 9, length: 2))
-        str1.append(str4)
-
-        let str5 = NSMutableAttributedString(string: "Great to be here\n")
-        let myShadow = NSShadow()
-        myShadow.shadowBlurRadius = 1
-        myShadow.shadowOffset = CGSize(width: 8, height: -8)
-        myShadow.shadowColor = NSColor.init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
-        str5.addAttribute(.shadow, value: myShadow, range: NSRange(location: 0, length: 8))
-        str1.append(str5)
-
-        str1.addAttribute(.font, value: NSFont.systemFont(ofSize: 32), range: NSRange(location: 0, length: str1.length))
-
         let textView = NSTextView()
-        textView.textStorage?.setAttributedString(str1)
+        let storage = textView.textStorage!
         stackView.addArrangedSubview(textView)
+
+        let font = NSFont.preferredFont(forTextStyle: .title1)
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.5
+
+        do {
+            let attrs: [NSAttributedString.Key: Any] = [
+                .font: font,
+                .paragraphStyle: paragraphStyle,
+                .foregroundColor: NSColor.textColor
+            ]
+            let str = NSMutableAttributedString(
+                string: "Hello attributions!\n",
+                attributes: attrs
+            )
+            str.addAttribute(
+                .foregroundColor,
+                value: NSColor.brown,
+                range: NSRange(location: 6, length: 12)
+            )
+            storage.append(str)
+        }
+        do {
+            let attrs: [NSAttributedString.Key: Any] = [
+                .font: font,
+                .paragraphStyle: paragraphStyle,
+                .foregroundColor: NSColor.darkGray,
+                .backgroundColor: NSColor.init(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0),
+            ]
+            let str = NSMutableAttributedString(
+                string: "Great to be here\n",
+                attributes: attrs
+            )
+            storage.append(str)
+        }
+        do {
+            let attrs: [NSAttributedString.Key: Any] = [
+                .font: font,
+                .paragraphStyle: paragraphStyle,
+                .link: "https://www.apple.com",
+            ]
+            let str = NSMutableAttributedString(
+                string: "https://www.apple.com\n",
+                attributes: attrs
+            )
+            storage.append(str)
+        }
+        do {
+            let attrs: [NSAttributedString.Key: Any] = [
+                .font: font,
+                .paragraphStyle: paragraphStyle,
+                .foregroundColor: NSColor.black,
+            ]
+            let str = NSMutableAttributedString(
+                string: "Great to be here\n",
+                attributes: attrs
+            )
+            let emphasisAttrs: [NSAttributedString.Key: Any] = [
+                .underlineStyle: NSUnderlineStyle.single.rawValue,
+                .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle,
+                .strokeWidth : 2.0,
+            ]
+            str.addAttributes(emphasisAttrs, range: NSRange(location: 9, length: 2))
+            storage.append(str)
+        }
+        do {
+            let attrs: [NSAttributedString.Key: Any] = [
+                .font: font,
+                .paragraphStyle: paragraphStyle,
+                .foregroundColor: NSColor.black,
+            ]
+            let str = NSMutableAttributedString(
+                string: "Great to be here\n",
+                attributes: attrs
+            )
+
+            let myShadow = NSShadow()
+            myShadow.shadowBlurRadius = 1
+            myShadow.shadowOffset = CGSize(width: 8, height: -8)
+            myShadow.shadowColor = NSColor.init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
+            str.addAttribute(
+                .shadow,
+                value: myShadow,
+                range: NSRange(location: 0, length: 8)
+            )
+            storage.append(str)
+        }
     }
     
 }
