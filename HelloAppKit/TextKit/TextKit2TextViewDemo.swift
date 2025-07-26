@@ -68,7 +68,13 @@ class TextKit2TextViewDemo: NSViewController {
             buttonBar.addArrangedSubview(button)
         }
         do {
-            let button = NSButton(title: "Dump elements", target: self, action: #selector(dumpElementsAction))
+            let button = NSButton(title: "Elements", target: self, action: #selector(elementsAction))
+            button.controlSize = .large
+            button.bezelStyle = .toolbar
+            buttonBar.addArrangedSubview(button)
+        }
+        do {
+            let button = NSButton(title: "Selection", target: self, action: #selector(selectionAction))
             button.controlSize = .large
             button.bezelStyle = .toolbar
             buttonBar.addArrangedSubview(button)
@@ -131,10 +137,10 @@ class TextKit2TextViewDemo: NSViewController {
 
     @objc func setTextAction(_ sender: NSButton) {
         let text = "Hello, TextKit 2!\nparagraph1.\nparagraph2.\nparagraph3.\n"
-        let attributes: [NSAttributedString.Key: Any] = [
+        let attrs: [NSAttributedString.Key: Any] = [
             .font: NSFont.preferredFont(forTextStyle: .title1),
         ]
-        let attrString = NSAttributedString(string: text, attributes: attributes)
+        let attrString = NSAttributedString(string: text, attributes: attrs)
         textStorage!.setAttributedString(attrString)
     }
 
@@ -151,7 +157,7 @@ class TextKit2TextViewDemo: NSViewController {
         textStorage!.setAttributedString(NSAttributedString(string: ""))
     }
 
-    @objc func dumpElementsAction(_ sender: NSButton) {
+    @objc func elementsAction(_ sender: NSButton) {
         let documentRange = contentStorage!.documentRange
         let textElements = contentStorage!.textElements(for: documentRange)
 
@@ -160,6 +166,15 @@ class TextKit2TextViewDemo: NSViewController {
                 print("Paragraph: \(paragraph.attributedString.string)")
             }
         }
+    }
+
+    @objc func selectionAction(_ sender: NSButton) {
+        let text = "Selection Demo, word1, word2, word3."
+        let attrs: [NSAttributedString.Key: Any] = [
+            .font: NSFont.preferredFont(forTextStyle: .title1),
+        ]
+        let attrString = NSAttributedString(string: text, attributes: attrs)
+        textStorage!.setAttributedString(attrString)
     }
 
 }
