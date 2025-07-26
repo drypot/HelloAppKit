@@ -73,12 +73,6 @@ class TextKit2TextViewDemo: NSViewController {
             button.bezelStyle = .toolbar
             buttonBar.addArrangedSubview(button)
         }
-        do {
-            let button = NSButton(title: "Selection", target: self, action: #selector(selectionAction))
-            button.controlSize = .large
-            button.bezelStyle = .toolbar
-            buttonBar.addArrangedSubview(button)
-        }
 
         NSLayoutConstraint.activate([
             buttonBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
@@ -168,13 +162,22 @@ class TextKit2TextViewDemo: NSViewController {
         }
     }
 
-    @objc func selectionAction(_ sender: NSButton) {
-        let text = "Selection Demo, word1, word2, word3."
-        let attrs: [NSAttributedString.Key: Any] = [
-            .font: NSFont.preferredFont(forTextStyle: .title1),
-        ]
-        let attrString = NSAttributedString(string: text, attributes: attrs)
-        textStorage!.setAttributedString(attrString)
-    }
+//    @objc func selectAction(_ sender: NSButton) {
+//        let text = "word1, word2, word3."
+//        let attrs: [NSAttributedString.Key: Any] = [
+//            .font: NSFont.preferredFont(forTextStyle: .title1),
+//        ]
+//        let attrString = NSAttributedString(string: text, attributes: attrs)
+//        textStorage!.setAttributedString(attrString)
+//
+//        let documentStartLocation = contentStorage!.documentRange.location
+//        let word1Start = contentStorage!.location(documentStartLocation, offsetBy: 7)!
+//        let word2End = contentStorage!.location(word1Start, offsetBy: 5)!
+//        let textRange = NSTextRange(location: word1Start, end: word2End)!
+//        let textSelection = NSTextSelection(range: textRange, affinity: .downstream, granularity: .character)
+//        layoutManager!.textSelections = [textSelection]
+//        layoutManager!.invalidateLayout(for: textRange)
+//        textView!.needsDisplay = true
+//    }
 
 }
