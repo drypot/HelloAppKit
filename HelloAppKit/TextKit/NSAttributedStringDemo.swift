@@ -47,87 +47,79 @@ class NSAttributedStringDemo: NSViewController {
 //        paragraphStyle.lineSpacing = font.pointSize * 0.7
 
         do {
-            let attrs: [NSAttributedString.Key: Any] = [
-                .font: font,
-                .paragraphStyle: paragraphStyle,
-                .foregroundColor: NSColor.textColor,
-            ]
-            let attrStr = NSMutableAttributedString(
-                string: "Hello attributions!\n",
-                attributes: attrs
+            let attStr = NSMutableAttributedString(
+                string: "Hello Attributions!\n",
+                attributes: [
+                    .font: font,
+                    .paragraphStyle: paragraphStyle,
+                    .foregroundColor: NSColor.darkGray,
+                    .backgroundColor: NSColor.init(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0),
+                ]
             )
-            attrStr.addAttribute(
-                .foregroundColor,
-                value: NSColor.brown,
-                range: NSRange(location: 6, length: 12)
-            )
-            storage.append(attrStr)
+            storage.append(attStr)
         }
         do {
-            let attrs: [NSAttributedString.Key: Any] = [
-                .font: font,
-                .paragraphStyle: paragraphStyle,
-                .foregroundColor: NSColor.darkGray,
-                .backgroundColor: NSColor.init(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0),
-            ]
-            let attrStr = NSMutableAttributedString(
-                string: "Great to be here\n",
-                attributes: attrs
+            let attStr = NSMutableAttributedString(
+                string: "Hello Attributions! addAttribute.\n",
+                attributes: [
+                    .font: font,
+                    .paragraphStyle: paragraphStyle,
+                    .foregroundColor: NSColor.textColor,
+                ]
             )
-            storage.append(attrStr)
+            let range = (attStr.string as NSString).range(of: "Attributions!")
+            attStr.addAttribute(.foregroundColor, value: NSColor.blue, range: range)
+            storage.append(attStr)
         }
         do {
-            let attrs: [NSAttributedString.Key: Any] = [
-                .font: font,
-                .paragraphStyle: paragraphStyle,
-                .link: "https://www.apple.com",
-            ]
-            let attrStr = NSMutableAttributedString(
-                string: "https://www.apple.com\n",
-                attributes: attrs
+            let attStr = NSMutableAttributedString(
+                string: "Hello Attributions! addAttributes.\n",
+                attributes: [
+                    .font: font,
+                    .paragraphStyle: paragraphStyle,
+                    .foregroundColor: NSColor.black,
+                ]
             )
-            storage.append(attrStr)
+            let range = (attStr.string as NSString).range(of: "Attributions!")
+            attStr.addAttributes(
+                [
+                    .underlineStyle: NSUnderlineStyle.single.rawValue,
+                    .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle,
+                    .strokeWidth: 2.0,
+                ],
+                range: range
+            )
+            storage.append(attStr)
         }
         do {
-            let attrs: [NSAttributedString.Key: Any] = [
-                .font: font,
-                .paragraphStyle: paragraphStyle,
-                .foregroundColor: NSColor.black,
-            ]
-            let attrStr = NSMutableAttributedString(
-                string: "Great to be here\n",
-                attributes: attrs
+            let attStr = NSMutableAttributedString(
+                string: "Hello Attributions! NSShadow.\n",
+                attributes: [
+                    .font: font,
+                    .paragraphStyle: paragraphStyle,
+                    .foregroundColor: NSColor.black,
+                ]
             )
-            let emphasisAttrs: [NSAttributedString.Key: Any] = [
-                .underlineStyle: NSUnderlineStyle.single.rawValue,
-                .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle,
-                .strokeWidth : 2.0,
-            ]
-            attrStr.addAttributes(emphasisAttrs, range: NSRange(location: 9, length: 2))
-            storage.append(attrStr)
-        }
-        do {
-            let attrs: [NSAttributedString.Key: Any] = [
-                .font: font,
-                .paragraphStyle: paragraphStyle,
-                .foregroundColor: NSColor.black,
-            ]
-            let attrStr = NSMutableAttributedString(
-                string: "Great to be here\n",
-                attributes: attrs
-            )
-
             let myShadow = NSShadow()
             myShadow.shadowBlurRadius = 1
             myShadow.shadowOffset = CGSize(width: 8, height: -8)
             myShadow.shadowColor = NSColor.init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
-            attrStr.addAttribute(
-                .shadow,
-                value: myShadow,
-                range: NSRange(location: 0, length: 8)
-            )
-            storage.append(attrStr)
+            let range = (attStr.string as NSString).range(of: "Attributions!")
+            attStr.addAttribute(.shadow, value: myShadow, range: range)
+            storage.append(attStr)
         }
+        do {
+            let attStr = NSMutableAttributedString(
+                string: "https://www.apple.com\n",
+                attributes: [
+                    .font: font,
+                    .paragraphStyle: paragraphStyle,
+                    .link: "https://www.apple.com",
+                ]
+            )
+            storage.append(attStr)
+        }
+
     }
     
 }
