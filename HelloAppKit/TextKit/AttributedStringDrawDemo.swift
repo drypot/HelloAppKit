@@ -56,12 +56,12 @@ class AttributedStringDrawDemo: NSViewController {
             super.draw(dirtyRect)
 
             let text = "Hello"
-            let attributes: [NSAttributedString.Key: Any] = [
+            let attrs: [NSAttributedString.Key: Any] = [
                 .font: NSFont.preferredFont(forTextStyle: .title1),
                 .foregroundColor: NSColor.black
             ]
 
-            let textSize = text.size(withAttributes: attributes)
+            let textSize = text.size(withAttributes: attrs)
             let textOrigin = NSPoint(
                 x: 0,
                 y: bounds.height - textSize.height
@@ -71,7 +71,7 @@ class AttributedStringDrawDemo: NSViewController {
 //                y: (bounds.height - textSize.height) / 2
 //            )
 
-            text.draw(at: textOrigin, withAttributes: attributes)
+            text.draw(at: textOrigin, withAttributes: attrs)
         }
     }
 

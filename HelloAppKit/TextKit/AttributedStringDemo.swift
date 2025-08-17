@@ -37,19 +37,20 @@ class AttributedStringDemo: NSViewController {
     func addStackItems(_ stackView: NSStackView) {
         let textView = NSTextView()
         let storage = textView.textStorage!
+
         stackView.addArrangedSubview(textView)
 
         let font = NSFont.preferredFont(forTextStyle: .title1)
 
         let paragraphStyle = NSMutableParagraphStyle()
-//        paragraphStyle.lineHeightMultiple = 1.3
-        paragraphStyle.lineSpacing = font.pointSize * 0.7
+        paragraphStyle.lineHeightMultiple = 1.3
+//        paragraphStyle.lineSpacing = font.pointSize * 0.7
 
         do {
             let attrs: [NSAttributedString.Key: Any] = [
                 .font: font,
                 .paragraphStyle: paragraphStyle,
-                .foregroundColor: NSColor.textColor
+                .foregroundColor: NSColor.textColor,
             ]
             let str = NSMutableAttributedString(
                 string: "Hello attributions!\n",
