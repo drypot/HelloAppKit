@@ -50,8 +50,8 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "TextKit2 TextView", controllerType: TextKit2TextViewDemo.self),
             Demo(label: "TextKit1 TextView", controllerType: TextKit1TextViewDemo.self),
             Demo(label: "TextKit1 Draw", controllerType: TextKit1DrawDemo.self),
-            Demo(label: "Attributed String", controllerType: AttributedStringDemo.self),
-            Demo(label: "Attributed String Draw", controllerType: AttributedStringDrawDemo.self),
+            Demo(label: "NSAttributed String", controllerType: NSAttributedStringDemo.self),
+            Demo(label: "NSAttributed String Draw", controllerType: NSAttributedStringDrawDemo.self),
         ]),
         DemoSection(label: "Table", demos: [
             Demo(label: "TableView", controllerType: TableViewDemo.self),

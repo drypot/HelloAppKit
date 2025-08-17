@@ -1,5 +1,5 @@
 //
-//  AttributedStringDemo.swift
+//  NSAttributedStringDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 9/21/24.
@@ -9,7 +9,7 @@ import AppKit
 
 // Mastering macOS programming-Packt Publishing (2017), 209p
 
-class AttributedStringDemo: NSViewController {
+class NSAttributedStringDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
@@ -52,16 +52,16 @@ class AttributedStringDemo: NSViewController {
                 .paragraphStyle: paragraphStyle,
                 .foregroundColor: NSColor.textColor,
             ]
-            let str = NSMutableAttributedString(
+            let attrStr = NSMutableAttributedString(
                 string: "Hello attributions!\n",
                 attributes: attrs
             )
-            str.addAttribute(
+            attrStr.addAttribute(
                 .foregroundColor,
                 value: NSColor.brown,
                 range: NSRange(location: 6, length: 12)
             )
-            storage.append(str)
+            storage.append(attrStr)
         }
         do {
             let attrs: [NSAttributedString.Key: Any] = [
@@ -70,11 +70,11 @@ class AttributedStringDemo: NSViewController {
                 .foregroundColor: NSColor.darkGray,
                 .backgroundColor: NSColor.init(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0),
             ]
-            let str = NSMutableAttributedString(
+            let attrStr = NSMutableAttributedString(
                 string: "Great to be here\n",
                 attributes: attrs
             )
-            storage.append(str)
+            storage.append(attrStr)
         }
         do {
             let attrs: [NSAttributedString.Key: Any] = [
@@ -82,11 +82,11 @@ class AttributedStringDemo: NSViewController {
                 .paragraphStyle: paragraphStyle,
                 .link: "https://www.apple.com",
             ]
-            let str = NSMutableAttributedString(
+            let attrStr = NSMutableAttributedString(
                 string: "https://www.apple.com\n",
                 attributes: attrs
             )
-            storage.append(str)
+            storage.append(attrStr)
         }
         do {
             let attrs: [NSAttributedString.Key: Any] = [
@@ -94,7 +94,7 @@ class AttributedStringDemo: NSViewController {
                 .paragraphStyle: paragraphStyle,
                 .foregroundColor: NSColor.black,
             ]
-            let str = NSMutableAttributedString(
+            let attrStr = NSMutableAttributedString(
                 string: "Great to be here\n",
                 attributes: attrs
             )
@@ -103,8 +103,8 @@ class AttributedStringDemo: NSViewController {
                 .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle,
                 .strokeWidth : 2.0,
             ]
-            str.addAttributes(emphasisAttrs, range: NSRange(location: 9, length: 2))
-            storage.append(str)
+            attrStr.addAttributes(emphasisAttrs, range: NSRange(location: 9, length: 2))
+            storage.append(attrStr)
         }
         do {
             let attrs: [NSAttributedString.Key: Any] = [
@@ -112,7 +112,7 @@ class AttributedStringDemo: NSViewController {
                 .paragraphStyle: paragraphStyle,
                 .foregroundColor: NSColor.black,
             ]
-            let str = NSMutableAttributedString(
+            let attrStr = NSMutableAttributedString(
                 string: "Great to be here\n",
                 attributes: attrs
             )
@@ -121,12 +121,12 @@ class AttributedStringDemo: NSViewController {
             myShadow.shadowBlurRadius = 1
             myShadow.shadowOffset = CGSize(width: 8, height: -8)
             myShadow.shadowColor = NSColor.init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
-            str.addAttribute(
+            attrStr.addAttribute(
                 .shadow,
                 value: myShadow,
                 range: NSRange(location: 0, length: 8)
             )
-            storage.append(str)
+            storage.append(attrStr)
         }
     }
     

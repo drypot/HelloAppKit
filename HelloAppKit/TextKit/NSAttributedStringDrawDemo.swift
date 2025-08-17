@@ -1,5 +1,5 @@
 //
-//  AttributedStringDrawDemo.swift
+//  NSAttributedStringDrawDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 3/26/25.
@@ -11,7 +11,7 @@ import AppKit
 // Cocoa Text Architecture Guide / Text System Organization
 // https://developer.apple.com/library/archive/documentation/TextFonts/Conceptual/CocoaTextArchitecture/TextSystemArchitecture/ArchitectureOverview.html#//apple_ref/doc/uid/TP40009459-CH7-CJBJHGAG
 
-class AttributedStringDrawDemo: NSViewController {
+class NSAttributedStringDrawDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
