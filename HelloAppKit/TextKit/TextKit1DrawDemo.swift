@@ -17,38 +17,26 @@ class TextKit1DrawDemo: NSViewController {
         let view = NSView()
         self.view = view
 
-        let stackView = NSStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.alignment = .leading
-        view.addSubview(stackView)
+        let customTextView = CustomTextView()
+        customTextView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(customTextView)
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
-
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            customTextView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            customTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            customTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            customTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
-
-        stackView.addArrangedSubview(CustomTextView())
     }
 
     class CustomTextView: NSView {
-        private var textStorage = NSTextStorage()
-        private var layoutManager = NSLayoutManager()
-        private var textContainer = NSTextContainer(size: .zero)
 
         override init(frame frameRect: NSRect) {
-            textContainer.lineFragmentPadding = 0 // 좌우 패딩 삭제
-
-            textStorage.addLayoutManager(layoutManager)
-            layoutManager.addTextContainer(textContainer)
-
             super.init(frame: frameRect)
 
+            // 화면 확인을 위해 바닥에 흰색을 깐다.
             wantsLayer = true
             layer?.backgroundColor = NSColor.textBackgroundColor.cgColor
         }
@@ -57,37 +45,37 @@ class TextKit1DrawDemo: NSViewController {
             fatalError("init(coder:) has not been implemented")
         }
 
-        override var intrinsicContentSize: NSSize {
-            return NSSize(width: 400, height: 120)
-        }
-
-        override func layout() {
-            super.layout()
-            textContainer.size = bounds.size
-        }
-
-//        override var isFlipped: Bool { true }
+        // override var isFlipped: Bool { true }
 
         override func draw(_ dirtyRect: NSRect) {
             super.draw(dirtyRect)
 
-            let text = "Hello"
-            let font = NSFont.preferredFont(forTextStyle: .title1)
-            let attributes: [NSAttributedString.Key: Any] = [
-                .font: font,
-                .foregroundColor: NSColor.black
-            ]
-            let attrString = NSAttributedString(string: text, attributes: attributes)
+            let textStorage = NSTextStorage()
+            let layoutManager = NSLayoutManager()
+            let textContainer = NSTextContainer(size: .zero)
 
-            textStorage.setAttributedString(attrString)
+            textStorage.addLayoutManager(layoutManager)
+            layoutManager.addTextContainer(textContainer)
+
+            let font = NSFont.preferredFont(forTextStyle: .title1)
+
+            let attStr = NSAttributedString(
+                string: "Hello",
+                attributes: [
+                    .font: font,
+                    .foregroundColor: NSColor.black
+                ]
+            )
+
+            textStorage.setAttributedString(attStr)
 
             let glyphRange = layoutManager.glyphRange(for: textContainer)
 
-//            let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
-//            print(boundingRect)
+            // let boundingRect = layoutManager.boundingRect(forGlyphRange: glyphRange, in: textContainer)
+            // print(boundingRect)
 
             let usedRect = layoutManager.usedRect(for: textContainer)
-            print(usedRect)
+            // print(usedRect)
 
             let textOrigin = NSPoint(
                 x: 0,
@@ -103,9 +91,9 @@ class TextKit1DrawDemo: NSViewController {
 
             NSColor.black.setStroke()
 
-//            let path = NSBezierPath()
-//            path.move(to: NSPoint(x: 0, y: usedRect.height))
-//            path.line(to: NSPoint(x: 50, y: usedRect.height))
+            // let path = NSBezierPath()
+            // path.move(to: NSPoint(x: 0, y: usedRect.height))
+            // path.line(to: NSPoint(x: 50, y: usedRect.height))
 
             let path = NSBezierPath(
                 rect: NSRect(
@@ -113,7 +101,6 @@ class TextKit1DrawDemo: NSViewController {
                     size: usedRect.size
                 )
             )
-
             path.lineWidth = 1
             path.stroke()
         }
