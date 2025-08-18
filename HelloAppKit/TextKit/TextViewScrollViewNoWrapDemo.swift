@@ -1,5 +1,5 @@
 //
-//  TextViewDemo.swift
+//  TextViewScrollViewNoWrapDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 8/18/25.
@@ -7,19 +7,24 @@
 
 import AppKit
 
-class TextViewDemo: NSViewController {
+class TextViewScrollViewNoWrapDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
         self.view = view
 
-        let attrString = makeSampleAttrString("TextView Demo")
+        let attrString = makeSampleAttrString("TextView ScrollView NoWrap Demo")
         let textView = prepareTextView(attrString)
-        view.addSubview(textView)
+        let scrollView = prepareScrollView(textView)
+        view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
 
@@ -36,9 +41,9 @@ class TextViewDemo: NSViewController {
         textView.isRichText = false
         textView.importsGraphics = false
 
-        // 고정 표시하려면 컨트롤 사이즈가 변하지 않게 해야 할 것 같다.
-        textView.isVerticallyResizable = false // **
-        textView.isHorizontallyResizable = false // **
+        // 사용자 입력에 따라 컨트롤이 계속 커지게 만들려면 true.
+        textView.isVerticallyResizable = true
+        textView.isHorizontallyResizable = true // **
         textView.maxSize = NSSize(
             width: CGFloat.greatestFiniteMagnitude,
             height: CGFloat.greatestFiniteMagnitude
@@ -57,4 +62,12 @@ class TextViewDemo: NSViewController {
         return textView
     }
 
+    func prepareScrollView(_ textView: NSTextView) -> NSScrollView {
+        let scrollView = NSScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.documentView = textView
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = true // **
+        return scrollView
+    }
 }

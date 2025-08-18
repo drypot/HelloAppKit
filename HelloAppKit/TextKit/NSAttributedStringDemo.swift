@@ -7,47 +7,37 @@
 
 import AppKit
 
-// Mastering macOS programming-Packt Publishing (2017), 209p
-
 class NSAttributedStringDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
         self.view = view
 
-        let stackView = NSStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.orientation = .vertical
-        stackView.distribution = .fillEqually
-        stackView.alignment = .leading
-        view.addSubview(stackView)
-
-        addStackItems(stackView)
+        let attrString = makeAttrString()
+        let textView = prepareTextView(attrString)
+        let scrollView = prepareScrollView(textView)
+        view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            stackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
-            stackView.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            view.heightAnchor.constraint(greaterThanOrEqualToConstant: 400),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
 
-    func addStackItems(_ stackView: NSStackView) {
-        let textView = NSTextView()
-        let storage = textView.textStorage!
-
-        stackView.addArrangedSubview(textView)
+    func makeAttrString() -> NSAttributedString {
+        let result = NSMutableAttributedString()
 
         let font = NSFont.preferredFont(forTextStyle: .title1)
 
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.3
-//        paragraphStyle.lineSpacing = font.pointSize * 0.7
+        paragraphStyle.lineHeightMultiple = 1.7
 
         do {
-            let attStr = NSMutableAttributedString(
+            let attrString = NSMutableAttributedString(
                 string: "Hello Attributions!\n",
                 attributes: [
                     .font: font,
@@ -56,10 +46,10 @@ class NSAttributedStringDemo: NSViewController {
                     .backgroundColor: NSColor.init(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0),
                 ]
             )
-            storage.append(attStr)
+            result.append(attrString)
         }
         do {
-            let attStr = NSMutableAttributedString(
+            let attrString = NSMutableAttributedString(
                 string: "Hello Attributions! addAttribute.\n",
                 attributes: [
                     .font: font,
@@ -67,12 +57,15 @@ class NSAttributedStringDemo: NSViewController {
                     .foregroundColor: NSColor.textColor,
                 ]
             )
-            let range = (attStr.string as NSString).range(of: "Attributions!")
-            attStr.addAttribute(.foregroundColor, value: NSColor.blue, range: range)
-            storage.append(attStr)
+            attrString.addAttribute(
+                .foregroundColor,
+                value: NSColor.blue,
+                range: (attrString.string as NSString).range(of: "Attributions!")
+            )
+            result.append(attrString)
         }
         do {
-            let attStr = NSMutableAttributedString(
+            let attrString = NSMutableAttributedString(
                 string: "Hello Attributions! addAttributes.\n",
                 attributes: [
                     .font: font,
@@ -80,19 +73,18 @@ class NSAttributedStringDemo: NSViewController {
                     .foregroundColor: NSColor.black,
                 ]
             )
-            let range = (attStr.string as NSString).range(of: "Attributions!")
-            attStr.addAttributes(
+            attrString.addAttributes(
                 [
                     .underlineStyle: NSUnderlineStyle.single.rawValue,
                     .textEffect: NSAttributedString.TextEffectStyle.letterpressStyle,
                     .strokeWidth: 2.0,
                 ],
-                range: range
+                range: (attrString.string as NSString).range(of: "Attributions!")
             )
-            storage.append(attStr)
+            result.append(attrString)
         }
         do {
-            let attStr = NSMutableAttributedString(
+            let attrString = NSMutableAttributedString(
                 string: "Hello Attributions! NSShadow.\n",
                 attributes: [
                     .font: font,
@@ -104,12 +96,15 @@ class NSAttributedStringDemo: NSViewController {
             myShadow.shadowBlurRadius = 1
             myShadow.shadowOffset = CGSize(width: 8, height: -8)
             myShadow.shadowColor = NSColor.init(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
-            let range = (attStr.string as NSString).range(of: "Attributions!")
-            attStr.addAttribute(.shadow, value: myShadow, range: range)
-            storage.append(attStr)
+            attrString.addAttribute(
+                .shadow,
+                value: myShadow,
+                range: (attrString.string as NSString).range(of: "Attributions!")
+            )
+            result.append(attrString)
         }
         do {
-            let attStr = NSMutableAttributedString(
+            let attrString = NSMutableAttributedString(
                 string: "https://www.apple.com\n",
                 attributes: [
                     .font: font,
@@ -117,9 +112,53 @@ class NSAttributedStringDemo: NSViewController {
                     .link: "https://www.apple.com",
                 ]
             )
-            storage.append(attStr)
+            result.append(attrString)
         }
 
+        return result
     }
-    
+
+    func prepareTextView(_ attrString: NSAttributedString) -> NSTextView {
+        let textView = NSTextView()
+        let textContainer = textView.textContainer!
+
+        textView.autoresizingMask = [.width, .height] // 필수다.
+        textView.textContainerInset = NSSize(width: 8, height: 8) // 패딩
+
+        textView.isEditable = true
+        textView.isSelectable = true
+
+        textView.isRichText = false
+        textView.importsGraphics = false
+
+        // 사용자 입력에 따라 컨트롤이 계속 커지게 만들려면 true.
+        textView.isVerticallyResizable = true
+        textView.isHorizontallyResizable = false // **
+        textView.maxSize = NSSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude
+        )
+
+        // Wrap 모드면 true
+        textContainer.widthTracksTextView = true // **
+        textContainer.size = NSSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude
+        )
+
+        textView.typingAttributes = attrString.attributes(at: 0, effectiveRange: nil)
+        textView.textContentStorage!.textStorage!.append(attrString)
+
+        return textView
+    }
+
+    func prepareScrollView(_ textView: NSTextView) -> NSScrollView {
+        let scrollView = NSScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.documentView = textView
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = false // **
+        return scrollView
+    }
+
 }

@@ -1,23 +1,24 @@
 //
-//  AttributedStringDemo.swift
+//  TextViewTextKit1Demo.swift
 //  HelloAppKit
 //
-//  Created by Kyuhyun Park on 8/17/25.
+//  Created by Kyuhyun Park on 3/31/25.
 //
 
-import AppKit
+import Cocoa
 
-// Mastering macOS programming-Packt Publishing (2017), 209p
+// TextKit
+// https://developer.apple.com/documentation/appkit/textkit
 
-class AttributedStringDemo: NSViewController {
+class TextViewTextKit1Demo: NSViewController {
 
     override func loadView() {
         let view = NSView()
         self.view = view
 
-        let attrString = makeAttrString()
+        let attrString = makeSampleAttrString("TextView TextKit1 Demo")
         let textView = prepareTextView(attrString)
-        let scrollView = prepareScrollableTextView(textView)
+        let scrollView = prepareScrollView(textView)
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
@@ -30,39 +31,15 @@ class AttributedStringDemo: NSViewController {
         ])
     }
 
-    func makeAttrString() -> AttributedString {
-        let font = NSFont.preferredFont(forTextStyle: .title1)
+    func prepareTextView(_ attrString: NSAttributedString) -> NSTextView {
+        let textStorage = NSTextStorage()
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: .zero)
 
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.7
+        textStorage.addLayoutManager(layoutManager)
+        layoutManager.addTextContainer(textContainer)
 
-        var attrString = AttributedString("Hello, AppKit + AttributedString!")
-
-        attrString.foregroundColor = .systemBlue
-
-        // Conformance of 'NSFont' to 'Sendable' is unavailable 오류가 난다.
-        // AttributedString.font 는 SwiftUI.Font 를 받는다고 한다.
-        // NSFont 를 바로 넣으려면 문제가 생긴다.
-        //
-        // attrStr.font = font
-        //
-        // 다음과 같이 해야 한다는데 AppKit 에서는 걍 NSAttributedString 쓰는 게 낫겠다.
-
-        attrString.mergeAttributes(AttributeContainer([.font: font]))
-
-        // 부분 스타일링
-        if let range = attrString.range(of: "AttributedString!") {
-            attrString[range].foregroundColor = .systemRed
-            attrString[range].underlineStyle = .single
-        }
-
-        return attrString
-    }
-
-    func prepareTextView(_ attStr: AttributedString) -> NSTextView {
-        let textView = NSTextView()
-        let textContainer = textView.textContainer!
-        let textStorage = textView.textStorage!
+        let textView = NSTextView(frame: .zero, textContainer: textContainer)
 
         textView.autoresizingMask = [.width, .height] // 필수다.
         textView.textContainerInset = NSSize(width: 8, height: 8) // 패딩
@@ -76,8 +53,6 @@ class AttributedStringDemo: NSViewController {
         // 사용자 입력에 따라 컨트롤이 계속 커지게 만들려면 true.
         textView.isVerticallyResizable = true
         textView.isHorizontallyResizable = false // **
-
-        // 컨트롤 크기 제한을 없앤다. default: (0.0, 10000000.0)
         textView.maxSize = NSSize(
             width: CGFloat.greatestFiniteMagnitude,
             height: CGFloat.greatestFiniteMagnitude
@@ -85,21 +60,23 @@ class AttributedStringDemo: NSViewController {
 
         // Wrap 모드면 true
         textContainer.widthTracksTextView = true // **
+        textContainer.size = NSSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude
+        )
 
-        textStorage.append(NSAttributedString(attStr))
+        textView.typingAttributes = attrString.attributes(at: 0, effectiveRange: nil)
+        textStorage.append(attrString)
 
         return textView
     }
 
-    func prepareScrollableTextView(_ textView: NSTextView) -> NSScrollView {
+    func prepareScrollView(_ textView: NSTextView) -> NSScrollView {
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.documentView = textView
-
-        // 스크롤 붙이려면 true.
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = false // **
-
         return scrollView
     }
 

@@ -1,5 +1,5 @@
 //
-//  ScrollViewTextViewDemo.swift
+//  TextViewScrollViewDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 8/18/25.
@@ -7,17 +7,16 @@
 
 import AppKit
 
-class ScrollViewTextViewDemo: NSViewController {
+class TextViewScrollViewDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
         self.view = view
 
-        let scrollView = prepareScrollableTextView()
+        let attrString = makeSampleAttrString("TextView ScrollView Demo")
+        let textView = prepareTextView(attrString)
+        let scrollView = prepareScrollView(textView)
         view.addSubview(scrollView)
-
-        let textView = scrollView.documentView as! NSTextView
-        setTextViewContent(textView, title: "ScrollView+TextView Demo")
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
@@ -29,21 +28,7 @@ class ScrollViewTextViewDemo: NSViewController {
         ])
     }
 
-    func prepareScrollableTextView() -> NSScrollView {
-        let textView = prepareTextView()
-
-        let scrollView = NSScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.documentView = textView
-
-        // 스크롤 붙이려면 true.
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = false // **
-
-        return scrollView
-    }
-
-    func prepareTextView() -> NSTextView {
+    func prepareTextView(_ attrString: NSAttributedString) -> NSTextView {
         let textView = NSTextView()
         let textContainer = textView.textContainer!
 
@@ -59,33 +44,30 @@ class ScrollViewTextViewDemo: NSViewController {
         // 사용자 입력에 따라 컨트롤이 계속 커지게 만들려면 true.
         textView.isVerticallyResizable = true
         textView.isHorizontallyResizable = false // **
+        textView.maxSize = NSSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude
+        )
 
         // Wrap 모드면 true
         textContainer.widthTracksTextView = true // **
+        textContainer.size = NSSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude
+        )
+
+        textView.typingAttributes = attrString.attributes(at: 0, effectiveRange: nil)
+        textView.textContentStorage!.textStorage!.append(attrString)
 
         return textView
     }
 
-    func setTextViewContent(_ textView: NSTextView, title: String) {
-        let font = NSFont.preferredFont(forTextStyle: .title1)
-
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineHeightMultiple = 1.3
-
-        textView.typingAttributes = [
-            .font: font,
-            .paragraphStyle: paragraphStyle,
-        ]
-
-        textView.string = title + "\n\n" + textSample
-
-        // let attStr = NSAttributedString(
-        //     string: textSample,
-        //     attributes: [
-        //         .font: font,
-        //         .paragraphStyle: paragraphStyle,
-        //     ]
-        // )
-        // textView.textStorage!.setAttributedString(attStr)
+    func prepareScrollView(_ textView: NSTextView) -> NSScrollView {
+        let scrollView = NSScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.documentView = textView
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = false // **
+        return scrollView
     }
 }
