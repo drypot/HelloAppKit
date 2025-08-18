@@ -48,8 +48,8 @@ class NavigatorController: NSSplitViewController {
         ]),
         DemoSection(label: "TextKit", demos: [
             Demo(label: "TextView", controllerType: TextViewDemo.self),
-            Demo(label: "ScrollView+TextView", controllerType: ScrollViewTextViewDemo.self),
-            Demo(label: "NoWarp", controllerType: ScrollViewTextViewNoWrapDemo.self),
+            Demo(label: "Scroll TextView", controllerType: ScrollViewTextViewDemo.self),
+            Demo(label: "Scroll TextView NoWarp", controllerType: ScrollViewTextViewNoWrapDemo.self),
             Demo(label: "ScrollableTextView", controllerType: ScrollableTextViewDemo.self),
             Demo(label: "TextKit1 Draw", controllerType: TextKit1DrawDemo.self),
             Demo(label: "TextKit1 TextView", controllerType: TextKit1TextViewDemo.self),

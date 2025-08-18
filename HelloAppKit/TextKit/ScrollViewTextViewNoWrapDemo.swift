@@ -1,5 +1,5 @@
 //
-//  ScrollViewTextViewDemo.swift
+//  ScrollViewTextViewNoWrapDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 8/18/25.
@@ -7,7 +7,7 @@
 
 import AppKit
 
-class ScrollViewTextViewDemo: NSViewController {
+class ScrollViewTextViewNoWrapDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
@@ -17,7 +17,7 @@ class ScrollViewTextViewDemo: NSViewController {
         view.addSubview(scrollView)
 
         let textView = scrollView.documentView as! NSTextView
-        setTextViewContent(textView, title: "ScrollView+TextView Demo")
+        setTextViewContent(textView, title: "ScrollView+TextView NoWrap Demo")
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
@@ -38,7 +38,7 @@ class ScrollViewTextViewDemo: NSViewController {
 
         // 스크롤 붙이려면 true.
         scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = false // **
+        scrollView.hasHorizontalScroller = true // **
 
         return scrollView
     }
@@ -56,12 +56,22 @@ class ScrollViewTextViewDemo: NSViewController {
         textView.isRichText = false
         textView.importsGraphics = false
 
+        // NoWrap 모드에서 커서가 오른쪽 벽 너머로 사라지는 현상을 해결하려면 maxSize 를 세팅한다.
+        textView.maxSize = NSSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude
+        )
+
         // 사용자 입력에 따라 컨트롤이 계속 커지게 만들려면 true.
         textView.isVerticallyResizable = true
-        textView.isHorizontallyResizable = false // **
+        textView.isHorizontallyResizable = true // **
 
-        // Wrap 모드면 true
-        textContainer.widthTracksTextView = true // **
+        // NoWrap 모드면 textContainer 사이즈를 무한대로 주고 widthTracking 을 끈다.
+        textContainer.widthTracksTextView = false // **
+        textContainer.size = NSSize(
+            width: CGFloat.greatestFiniteMagnitude,
+            height: CGFloat.greatestFiniteMagnitude
+        )
 
         return textView
     }

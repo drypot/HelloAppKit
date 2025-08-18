@@ -1,5 +1,5 @@
 //
-//  ScrollViewTextViewDemo.swift
+//  ScrollableTextViewDemo.swift
 //  HelloAppKit
 //
 //  Created by Kyuhyun Park on 8/18/25.
@@ -7,7 +7,7 @@
 
 import AppKit
 
-class ScrollViewTextViewDemo: NSViewController {
+class ScrollableTextViewDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
@@ -17,7 +17,7 @@ class ScrollViewTextViewDemo: NSViewController {
         view.addSubview(scrollView)
 
         let textView = scrollView.documentView as! NSTextView
-        setTextViewContent(textView, title: "ScrollView+TextView Demo")
+        setTextViewContent(textView, title: "NSTextView.scrollableTextView() Demo")
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
@@ -30,24 +30,24 @@ class ScrollViewTextViewDemo: NSViewController {
     }
 
     func prepareScrollableTextView() -> NSScrollView {
-        let textView = prepareTextView()
-
-        let scrollView = NSScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.documentView = textView
+        // let scrollView = NSTextView.scrollablePlainDocumentContentTextView()
+        let scrollView = NSTextView.scrollableTextView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false // 필수다.
 
         // 스크롤 붙이려면 true.
         scrollView.hasVerticalScroller = true
         scrollView.hasHorizontalScroller = false // **
 
+        let textView = scrollView.documentView as! NSTextView
+        prepareTextView(textView)
+
         return scrollView
     }
 
-    func prepareTextView() -> NSTextView {
-        let textView = NSTextView()
+    func prepareTextView(_ textView: NSTextView) {
         let textContainer = textView.textContainer!
 
-        textView.autoresizingMask = [.width, .height] // 필수다.
+        //textView.autoresizingMask = [.width, .height]  // 이미 세팅되어 있는 듯
         textView.textContainerInset = NSSize(width: 8, height: 8) // 패딩
 
         textView.isEditable = true
@@ -62,8 +62,6 @@ class ScrollViewTextViewDemo: NSViewController {
 
         // Wrap 모드면 true
         textContainer.widthTracksTextView = true // **
-
-        return textView
     }
 
     func setTextViewContent(_ textView: NSTextView, title: String) {
