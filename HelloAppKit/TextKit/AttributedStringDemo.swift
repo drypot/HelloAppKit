@@ -15,9 +15,9 @@ class AttributedStringDemo: NSViewController {
         let view = NSView()
         self.view = view
 
-        let attrString = makeAttrString()
-        let textView = prepareTextView(attrString)
-        let scrollView = prepareScrollableTextView(textView)
+        let attrString = NSAttributedString(makeAttrString())
+        let textView = TextViewFactory.makeTextView(attrString)
+        let scrollView = TextViewFactory.makeScrollView(textView)
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
@@ -57,50 +57,6 @@ class AttributedStringDemo: NSViewController {
         }
 
         return attrString
-    }
-
-    func prepareTextView(_ attStr: AttributedString) -> NSTextView {
-        let textView = NSTextView()
-        let textContainer = textView.textContainer!
-        let textStorage = textView.textStorage!
-
-        textView.autoresizingMask = [.width, .height] // 필수다.
-        textView.textContainerInset = NSSize(width: 8, height: 8) // 패딩
-
-        textView.isEditable = true
-        textView.isSelectable = true
-
-        textView.isRichText = false
-        textView.importsGraphics = false
-
-        // 사용자 입력에 따라 컨트롤이 계속 커지게 만들려면 true.
-        textView.isVerticallyResizable = true
-        textView.isHorizontallyResizable = false // **
-
-        // 컨트롤 크기 제한을 없앤다. default: (0.0, 10000000.0)
-        textView.maxSize = NSSize(
-            width: CGFloat.greatestFiniteMagnitude,
-            height: CGFloat.greatestFiniteMagnitude
-        )
-
-        // Wrap 모드면 true
-        textContainer.widthTracksTextView = true // **
-
-        textStorage.append(NSAttributedString(attStr))
-
-        return textView
-    }
-
-    func prepareScrollableTextView(_ textView: NSTextView) -> NSScrollView {
-        let scrollView = NSScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.documentView = textView
-
-        // 스크롤 붙이려면 true.
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = false // **
-
-        return scrollView
     }
 
 }

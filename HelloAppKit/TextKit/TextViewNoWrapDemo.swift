@@ -1,24 +1,22 @@
 //
-//  TextViewTextKit1Demo.swift
+//  TextViewNoWrapDemo.swift
 //  HelloAppKit
 //
-//  Created by Kyuhyun Park on 3/31/25.
+//  Created by Kyuhyun Park on 8/18/25.
 //
 
-import Cocoa
+import AppKit
 
-// TextKit
-// https://developer.apple.com/documentation/appkit/textkit
-
-class TextViewTextKit1Demo: NSViewController {
+class TextViewNoWrapDemo: NSViewController {
 
     override func loadView() {
         let view = NSView()
         self.view = view
 
-        let attrString = makeSampleAttrString("TextView TextKit1 Demo")
-        let textView = TextViewFactory.makeTextViewLegacy(with: attrString)
+        let attrString = makeSampleAttrString("TextView NoWrap Demo")
+        let textView = TextViewFactory.makeTextView(attrString)
         let scrollView = TextViewFactory.makeScrollView(textView)
+        TextViewFactory.configureForNoWrap(textView, scrollView)
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([

@@ -14,8 +14,8 @@ class NSAttributedStringDemo: NSViewController {
         self.view = view
 
         let attrString = makeAttrString()
-        let textView = prepareTextView(attrString)
-        let scrollView = prepareScrollView(textView)
+        let textView = TextViewFactory.makeTextView(attrString)
+        let scrollView = TextViewFactory.makeScrollView(textView)
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
@@ -116,49 +116,6 @@ class NSAttributedStringDemo: NSViewController {
         }
 
         return result
-    }
-
-    func prepareTextView(_ attrString: NSAttributedString) -> NSTextView {
-        let textView = NSTextView()
-        let textContainer = textView.textContainer!
-
-        textView.autoresizingMask = [.width, .height] // 필수다.
-        textView.textContainerInset = NSSize(width: 8, height: 8) // 패딩
-
-        textView.isEditable = true
-        textView.isSelectable = true
-
-        textView.isRichText = false
-        textView.importsGraphics = false
-
-        // 사용자 입력에 따라 컨트롤이 계속 커지게 만들려면 true.
-        textView.isVerticallyResizable = true
-        textView.isHorizontallyResizable = false // **
-        textView.maxSize = NSSize(
-            width: CGFloat.greatestFiniteMagnitude,
-            height: CGFloat.greatestFiniteMagnitude
-        )
-
-        // Wrap 모드면 true
-        textContainer.widthTracksTextView = true // **
-        textContainer.size = NSSize(
-            width: CGFloat.greatestFiniteMagnitude,
-            height: CGFloat.greatestFiniteMagnitude
-        )
-
-        textView.typingAttributes = attrString.attributes(at: 0, effectiveRange: nil)
-        textView.textContentStorage!.textStorage!.append(attrString)
-
-        return textView
-    }
-
-    func prepareScrollView(_ textView: NSTextView) -> NSScrollView {
-        let scrollView = NSScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.documentView = textView
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = false // **
-        return scrollView
     }
 
 }
