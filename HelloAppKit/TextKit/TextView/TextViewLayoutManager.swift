@@ -1,8 +1,8 @@
 //
-//  TextViewTextKit1Demo.swift
+//  TextViewDelegateDemo.swift
 //  HelloAppKit
 //
-//  Created by Kyuhyun Park on 3/31/25.
+//  Created by Kyuhyun Park on 8/20/25.
 //
 
 import Cocoa
@@ -10,16 +10,21 @@ import Cocoa
 // TextKit
 // https://developer.apple.com/documentation/appkit/textkit
 
-class TextViewTextKit1Demo: NSViewController {
+// Meet TextKit 2
+// https://developer.apple.com/videos/play/wwdc2021/10061/
+
+class TextViewDelegateDemo: NSViewController, NSTextLayoutManagerDelegate {
 
     override func loadView() {
         let view = NSView()
         self.view = view
 
-        let attrString = makeSampleAttrString("TextView TextKit1 Demo")
-        let textView = TextViewFactory.makeTextViewTK1(with: attrString)
+        let attrString = makeSampleAttrString("TextLayoutManagerDelegate Demo")
+        let textView = TextViewFactory.makeTextView(attrString)
         let scrollView = TextViewFactory.makeScrollView(textView)
         view.addSubview(scrollView)
+
+        textView.textLayoutManager!.delegate = self
 
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
@@ -30,5 +35,6 @@ class TextViewTextKit1Demo: NSViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
+
 
 }

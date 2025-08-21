@@ -34,14 +34,30 @@ let textSample: String = """
 func makeSampleAttrString(_ title: String) -> NSAttributedString {
     let font = NSFont.preferredFont(forTextStyle: .title1)
 
+    let lineHeightMultiple = 1.7
+
+    let fontHeight = font.ascender + abs(font.descender) // + font.leading
+    let lineHeight = fontHeight * lineHeightMultiple
+    let baselineOffset = (lineHeight - fontHeight) / 2
+
+    // lineSpacing 을 쓰면 Enter 후 빈줄에서 커서가 커지는 현상이 발생한다.
+    // 문자를 입력하면 다시 줄어든다.
+
+    // lineHeightMultiple 을 쓰면 커서가 위로 삐죽이 올라온다.
+
+    // minimumLineHeight 를 주고 baselineOffset 을 조절하는 것이 무난해 보인다.
+
     let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineHeightMultiple = 1.3
+    paragraphStyle.lineHeightMultiple = 1.0
+    paragraphStyle.minimumLineHeight = lineHeight
+    paragraphStyle.maximumLineHeight = lineHeight
 
     let attrString = NSAttributedString(
         string: title + "\n\n" + textSample,
         attributes: [
             .font: font,
             .paragraphStyle: paragraphStyle,
+            .baselineOffset: baselineOffset,
             .foregroundColor: NSColor.textColor,
             .backgroundColor: NSColor.textBackgroundColor,
         ]

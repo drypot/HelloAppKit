@@ -17,13 +17,12 @@ import Cocoa
 struct TextViewFactory {
 
     static func makeTextView(_ attrString: NSAttributedString) -> NSTextView {
-        let contentStorage = NSTextContentStorage()
-        let textStorage = contentStorage.textStorage!
         let layoutManager = NSTextLayoutManager()
         let textContainer = NSTextContainer()
-
-        contentStorage.addTextLayoutManager(layoutManager)
         layoutManager.textContainer = textContainer
+        let contentStorage = NSTextContentStorage()
+        contentStorage.addTextLayoutManager(layoutManager)
+        let textStorage = contentStorage.textStorage!
 
         let textView = NSTextView(frame: .zero, textContainer: textContainer)
 
@@ -57,10 +56,12 @@ struct TextViewFactory {
             textStorage.setAttributedString(attrString)
         }
 
+        // print(contentStorage.textStorage! === textView.textStorage) // true
+
         return textView
     }
 
-    static func makeTextViewLegacy(with attrString: NSAttributedString) -> NSTextView {
+    static func makeTextViewTK1(with attrString: NSAttributedString) -> NSTextView {
         let textStorage = NSTextStorage()
         let layoutManager = NSLayoutManager()
         let textContainer = NSTextContainer(size: .zero)
