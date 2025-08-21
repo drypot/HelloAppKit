@@ -13,8 +13,9 @@ class TextViewNoScrollerDemo: NSViewController {
         let view = NSView()
         self.view = view
 
-        let attrString = makeSampleAttrString("TextView NoScroller Demo")
-        let textView = TextViewFactory.makeTextView(attrString)
+        let textView = TextViewFactory.makeTextView()
+        textView.typingAttributes = makeSampleAttr()
+        textView.string = "TextView NoScroller Demo\n\n" + textSample
         TextViewFactory.configureForNoScroller(textView)
         view.addSubview(textView)
 

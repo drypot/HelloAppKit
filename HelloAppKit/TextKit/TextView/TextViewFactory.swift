@@ -16,13 +16,13 @@ import Cocoa
 @MainActor
 struct TextViewFactory {
 
-    static func makeTextView(_ attrString: NSAttributedString) -> NSTextView {
+    static func makeTextView() -> NSTextView {
         let layoutManager = NSTextLayoutManager()
         let textContainer = NSTextContainer()
         layoutManager.textContainer = textContainer
         let contentStorage = NSTextContentStorage()
         contentStorage.addTextLayoutManager(layoutManager)
-        let textStorage = contentStorage.textStorage!
+//        let textStorage = contentStorage.textStorage!
 
         let textView = NSTextView(frame: .zero, textContainer: textContainer)
 
@@ -50,18 +50,12 @@ struct TextViewFactory {
             height: CGFloat.greatestFiniteMagnitude
         )
 
-        textView.typingAttributes = attrString.attributes(at: 0, effectiveRange: nil)
-
-        contentStorage.performEditingTransaction {
-            textStorage.setAttributedString(attrString)
-        }
-
         // print(contentStorage.textStorage! === textView.textStorage) // true
 
         return textView
     }
 
-    static func makeTextViewTK1(with attrString: NSAttributedString) -> NSTextView {
+    static func makeTextViewTK1() -> NSTextView {
         let textStorage = NSTextStorage()
         let layoutManager = NSLayoutManager()
         let textContainer = NSTextContainer(size: .zero)
@@ -95,13 +89,10 @@ struct TextViewFactory {
             height: CGFloat.greatestFiniteMagnitude
         )
 
-        textView.typingAttributes = attrString.attributes(at: 0, effectiveRange: nil)
-        textStorage.setAttributedString(attrString)
-
         return textView
     }
 
-    static func makeScrollView(_ textView: NSTextView) -> NSScrollView {
+    static func makeScrollView(_ textView: NSView) -> NSScrollView {
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.documentView = textView

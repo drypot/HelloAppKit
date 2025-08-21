@@ -31,7 +31,16 @@ let textSample: String = """
     Adipiscing elit duis tristique sollicitudin nibh sit amet commodo.
     """
 
+@MainActor
 func makeSampleAttrString(_ title: String) -> NSAttributedString {
+    return NSAttributedString(
+        string: title + "\n\n" + textSample,
+        attributes: makeSampleAttr()
+    )
+}
+
+@MainActor
+func makeSampleAttr() -> [NSAttributedString.Key : Any] {
     let font = NSFont.preferredFont(forTextStyle: .title1)
 
     let lineHeightMultiple = 1.7
@@ -52,18 +61,15 @@ func makeSampleAttrString(_ title: String) -> NSAttributedString {
     paragraphStyle.minimumLineHeight = lineHeight
     paragraphStyle.maximumLineHeight = lineHeight
 
-    let attrString = NSAttributedString(
-        string: title + "\n\n" + textSample,
-        attributes: [
-            .font: font,
-            .paragraphStyle: paragraphStyle,
-            .baselineOffset: baselineOffset,
-            .foregroundColor: NSColor.textColor,
-            .backgroundColor: NSColor.textBackgroundColor,
-        ]
-    )
+    let attr: [NSAttributedString.Key : Any] = [
+        .font: font,
+        .paragraphStyle: paragraphStyle,
+        .baselineOffset: baselineOffset,
+        .foregroundColor: NSColor.textColor,
+        .backgroundColor: NSColor.textBackgroundColor,
+    ]
 
-    return attrString
+    return attr
 }
 
 // 번들 menu.rtf 파일 읽는 코드

@@ -16,8 +16,9 @@ class TextViewTextKit1Demo: NSViewController {
         let view = NSView()
         self.view = view
 
-        let attrString = makeSampleAttrString("TextView TextKit1 Demo")
-        let textView = TextViewFactory.makeTextViewTK1(with: attrString)
+        let textView = TextViewFactory.makeTextViewTK1()
+        textView.typingAttributes = makeSampleAttr()
+        textView.string = "TextView TextKit1 Demo\n\n" + textSample
         let scrollView = TextViewFactory.makeScrollView(textView)
         view.addSubview(scrollView)
 

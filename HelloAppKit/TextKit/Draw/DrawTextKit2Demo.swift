@@ -45,6 +45,7 @@ fileprivate class CustomTextView: NSView {
         textContainer.lineFragmentPadding = 0 // 좌우 패딩 제거
 
         let attrString = makeSampleAttrString("Draw TextKit2 Demo")
+        
         setText(attrString)
 
         wantsLayer = true

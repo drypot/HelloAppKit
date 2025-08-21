@@ -14,7 +14,8 @@ class NSAttributedStringDemo: NSViewController {
         self.view = view
 
         let attrString = makeAttrString()
-        let textView = TextViewFactory.makeTextView(attrString)
+        let textView = TextViewFactory.makeTextView()
+        textView.textStorage?.setAttributedString(attrString)
         let scrollView = TextViewFactory.makeScrollView(textView)
         view.addSubview(scrollView)
 

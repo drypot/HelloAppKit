@@ -19,8 +19,9 @@ class TextViewDelegateDemo: NSViewController, NSTextLayoutManagerDelegate {
         let view = NSView()
         self.view = view
 
-        let attrString = makeSampleAttrString("TextLayoutManagerDelegate Demo")
-        let textView = TextViewFactory.makeTextView(attrString)
+        let textView = TextViewFactory.makeTextView()
+        textView.typingAttributes = makeSampleAttr()
+        textView.string = "TextView Delegate Demo\n\n" + textSample
         let scrollView = TextViewFactory.makeScrollView(textView)
         view.addSubview(scrollView)
 
@@ -36,5 +37,6 @@ class TextViewDelegateDemo: NSViewController, NSTextLayoutManagerDelegate {
         ])
     }
 
+    // 추후에 ...
 
 }
