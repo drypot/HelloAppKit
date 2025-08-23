@@ -1,5 +1,5 @@
 //
-//  UTITests.swift
+//  UTTypeTests.swift
 //  HelloAppKitTests
 //
 //  Created by Kyuhyun Park on 1/5/25.
@@ -11,7 +11,7 @@ import Testing
 
 // https://developer.apple.com/documentation/uniformtypeidentifiers
 
-struct UTITests {
+struct UTTypeTests {
 
     @Test func test() throws {
         let text = UTType.plainText
