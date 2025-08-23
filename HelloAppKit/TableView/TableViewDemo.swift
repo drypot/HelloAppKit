@@ -32,8 +32,6 @@ class TableViewDemo: NSViewController {
         let view = NSView()
         self.view = view
 
-        setupItems()
-
         let tableView = makeTableView()
         self.tableView = tableView
 
@@ -49,19 +47,21 @@ class TableViewDemo: NSViewController {
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(deleteButton)
 
+        setupItems()
+
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             // scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            scrollView.widthAnchor.constraint(greaterThanOrEqualToConstant: 400),
             // scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            scrollView.widthAnchor.constraint(equalToConstant: 400),
+            scrollView.heightAnchor.constraint(equalToConstant: 300),
 
             addButton.topAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 20),
             addButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
 
             deleteButton.topAnchor.constraint(equalTo: addButton.bottomAnchor, constant: 8),
             deleteButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            deleteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
         ])
     }
 
@@ -71,6 +71,7 @@ class TableViewDemo: NSViewController {
             Person(name: "Bob", age: 30),
             Person(name: "Charlie", age: 22)
         ]
+        tableView?.reloadData()
     }
 
     private func makeTableView() -> NSTableView {
@@ -145,10 +146,11 @@ extension TableViewDemo: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let id = tableColumn!.identifier
-        var cell: NSTableCellView!
+        var cell: NSTableCellView
 
-        cell = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView
-        if cell == nil {
+        if let cached = tableView.makeView(withIdentifier: id, owner: self) as? NSTableCellView {
+            cell = cached
+        } else {
             cell = NSTableCellView()
             cell.identifier = id
 

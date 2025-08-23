@@ -18,6 +18,7 @@ import Cocoa
 //
 // 정확한 답변은 없었지만 일단 적어둔다.
 
+// 2025-02-09 아침 7시.
 // IB를 쓰지 않고 NSTableView를 Cocoa Binding으로 채우는 시나리오는 애플 공식 문서가 없다.
 // 인터넷에 다른 공개된 문서도 단서가 없다.
 // GPT 가 만들어준 코드는 동작을 하지 않는다.
@@ -26,11 +27,9 @@ import Cocoa
 // 해서 이 삽질은 그만 두기로 한다.
 // 애초에 내가 이걸 왜 시작했을까;
 // 밤새 해봤는데 그만 두기로 한다.
-//
-// 2025-02-09 아침 7시.
 
-// 다시 한번 도전해서 성공.
 // 2025-02-09 밤 11시.
+// 다시 한번 도전해서 성공.
 
 class TableViewCocoaBindingDemo: NSViewController {
 
@@ -62,8 +61,8 @@ class TableViewCocoaBindingDemo: NSViewController {
         let view = NSView()
         self.view = view
 
-        setupScrollView()
         setupTable()
+        setupScrollView()
         setupFields()
         loadSampleData()
     }
@@ -76,26 +75,11 @@ class TableViewCocoaBindingDemo: NSViewController {
         ]
     }
 
-    private func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.documentView = tableView
-        scrollView.hasVerticalScroller = true
-
-        view.addSubview(scrollView)
-
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            scrollView.widthAnchor.constraint(equalToConstant: 400),
-            scrollView.heightAnchor.constraint(equalToConstant: 200),
-        ])
-    }
-
     private func setupTable() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.usesAutomaticRowHeights = true
 
-//        tableView.dataSource = self
+        //        tableView.dataSource = self
         tableView.delegate = self
 
         let nameColumn = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("name"))
@@ -115,14 +99,29 @@ class TableViewCocoaBindingDemo: NSViewController {
         tableView.bind(.selectionIndexes, to: arrayController, withKeyPath: "selectionIndexes", options: nil)
         tableView.bind(.sortDescriptors, to: arrayController, withKeyPath: "sortDescriptors", options: nil)
 
-//        nameColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.name", options: nil)
-//        ageColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.age", options: nil)
+        //        nameColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.name", options: nil)
+        //        ageColumn.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.age", options: nil)
 
-//        for column in tableView.tableColumns {
-//            let keyPath = column.identifier.rawValue
-//            column.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.\(keyPath)", options: nil)
-//        }
+        //        for column in tableView.tableColumns {
+        //            let keyPath = column.identifier.rawValue
+        //            column.bind(.value, to: arrayController, withKeyPath: "arrangedObjects.\(keyPath)", options: nil)
+        //        }
 
+    }
+
+    private func setupScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.documentView = tableView
+        scrollView.hasVerticalScroller = true
+
+        view.addSubview(scrollView)
+
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            scrollView.widthAnchor.constraint(equalToConstant: 400),
+            scrollView.heightAnchor.constraint(equalToConstant: 300),
+        ])
     }
 
     private func setupFields() {
