@@ -33,11 +33,15 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "CompositeView", controllerType: CompositeViewDemo.self),
             Demo(label: "ViewControllerStack", controllerType: ViewControllerStackDemo.self),
         ]),
-        DemoSection(label: "Layout", demos: [
+        DemoSection(label: "AutoLayout", demos: [
             Demo(label: "AutoResizing", controllerType: AutoResizingDemo.self),
             Demo(label: "AutoLayout", controllerType: AutoLayoutDemo.self),
             Demo(label: "Constrant", controllerType: ConstrantDemo.self),
+        ]),
+        DemoSection(label: "StackView", demos: [
             Demo(label: "StackView", controllerType: StackViewDemo.self),
+        ]),
+        DemoSection(label: "ScrollView", demos: [
             Demo(label: "ScrollView", controllerType: ScrollViewDemo.self),
         ]),
         DemoSection(label: "Controls", demos: [
@@ -45,6 +49,16 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "Button", controllerType: ButtonDemo.self),
             Demo(label: "ButtonBar", controllerType: ButtonBarDemo.self),
             Demo(label: "PopOver", controllerType: PopOverDemo.self),
+        ]),
+        DemoSection(label: "Color", demos: [
+            Demo(label: "UIColor", controllerType: UIColorDemo.self),
+            Demo(label: "SystemColor", controllerType: SystemColorDemo.self),
+        ]),
+        DemoSection(label: "Material", demos: [
+            Demo(label: "Material", controllerType: MaterialDemo.self),
+        ]),
+        DemoSection(label: "Symbol", demos: [
+            Demo(label: "Symbol", controllerType: SymbolDemo.self),
         ]),
         DemoSection(label: "TextKit", demos: [
             Demo(label: "TextView TextKit2", controllerType: TextViewTextKit2Demo.self),
@@ -66,21 +80,10 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "SplitView", controllerType: SplitViewDemo.self),
             Demo(label: "SplitViewSimple", controllerType: SplitViewSimpleDemo.self),
         ]),
-        DemoSection(label: "Color", demos: [
-            Demo(label: "UIColor", controllerType: UIColorDemo.self),
-            Demo(label: "SystemColor", controllerType: SystemColorDemo.self),
-        ]),
-        DemoSection(label: "Material", demos: [
-            Demo(label: "Material", controllerType: MaterialDemo.self),
-        ]),
-        DemoSection(label: "Symbol", demos: [
-            Demo(label: "Symbol", controllerType: SymbolDemo.self),
-        ]),
-
         DemoSection(label: "Gesture", demos: [
             Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),
         ]),
-        DemoSection(label: "CocoaBinding", demos: [
+        DemoSection(label: "KeyValueCoding", demos: [
             Demo(label: "CocoaBinding", controllerType: CocoaBindingDemo.self),
             Demo(label: "TargetAction", controllerType: TargetActionDemo.self),
             Demo(label: "KeyValueBinding", controllerType: KeyValueBindingDemo.self),
