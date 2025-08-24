@@ -100,7 +100,7 @@ class NavigatorController: NSSplitViewController {
         DemoSection(label: "Document", demos: [
             Demo(label: "Document", controllerType: DocumentDemo.self),
         ]),
-        DemoSection(label: "NotificationCenter", demos: [
+        DemoSection(label: "Notification", demos: [
             Demo(label: "NotificationCenter", controllerType: NotificationCenterDemo.self),
         ]),
 //        DemoSection(label: "", demoList: [

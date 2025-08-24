@@ -37,7 +37,7 @@ class NotificationCenterDemo: NSViewController {
     }
 
     private func setupNotification() {
-        print("added observer:")
+        print("add observer:")
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(handleNotification(_:)),
@@ -47,8 +47,8 @@ class NotificationCenterDemo: NSViewController {
     }
 
     nonisolated private func removeObserver() {
+        print("remove observer:")
         NotificationCenter.default.removeObserver(self)
-        print("removed observer:")
     }
 
     @objc func postNotification(_ sender: NSButton) {
@@ -63,7 +63,7 @@ class NotificationCenterDemo: NSViewController {
     @objc func handleNotification(_ notification: Notification) {
         if  let userInfo = notification.userInfo,
             let message = userInfo["message"] as? String {
-            print("received notification: \(message)")
+            print("notification received: \(message)")
         }
     }
 
