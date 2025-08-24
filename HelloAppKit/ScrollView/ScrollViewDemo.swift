@@ -37,7 +37,6 @@ class ScrollViewDemo: NSViewController {
         ])
     }
 
-
 }
 
 fileprivate class CustomView: NSView {
