@@ -32,12 +32,7 @@ class CustomViewDemo: NSViewController {
 
         var color: NSColor
 
-        override init(frame frameRect: NSRect) {
-            self.color = .systemGray
-            super.init(frame: frameRect)
-        }
-
-        init(frame frameRect: NSRect, color: NSColor) {
+        init(frame frameRect: NSRect, color: NSColor = .systemGray) {
             self.color = color
             super.init(frame: frameRect)
         }
@@ -58,10 +53,10 @@ class CustomViewDemo: NSViewController {
 
             guard let context = NSGraphicsContext.current?.cgContext else { return }
 
-            // color.setFill()
+            // color.setFill() 도 가능.
             context.setFillColor(color.cgColor)
 
-            // self.bounds.fill()
+            // self.bounds.fill() 도 가능.
             context.fill(bounds)
 
             print("frame: \(frame)")
