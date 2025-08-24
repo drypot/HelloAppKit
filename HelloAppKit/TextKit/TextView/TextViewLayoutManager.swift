@@ -22,7 +22,7 @@ class TextViewDelegateDemo: NSViewController, NSTextLayoutManagerDelegate {
         let textView = TextViewFactory.makeTextView()
         textView.typingAttributes = makeSampleAttr()
         textView.string = "TextView Delegate Demo\n\n" + textSample
-        let scrollView = TextViewFactory.makeScrollView(textView)
+        let scrollView = TextViewFactory.makeScrollView(containing: textView)
         view.addSubview(scrollView)
 
         textView.textLayoutManager!.delegate = self

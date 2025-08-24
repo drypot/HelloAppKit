@@ -18,7 +18,7 @@ class AttributedStringDemo: NSViewController {
         let attrString = NSAttributedString(makeAttrString())
         let textView = TextViewFactory.makeTextView()
         textView.textStorage?.setAttributedString(attrString)
-        let scrollView = TextViewFactory.makeScrollView(textView)
+        let scrollView = TextViewFactory.makeScrollView(containing: textView)
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([

@@ -32,7 +32,7 @@ let textSample: String = """
     """
 
 @MainActor
-func makeSampleAttrString(_ title: String) -> NSAttributedString {
+func makeSampleAttrString(title: String) -> NSAttributedString {
     return NSAttributedString(
         string: title + "\n\n" + textSample,
         attributes: makeSampleAttr()

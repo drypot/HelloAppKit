@@ -29,7 +29,7 @@ class DrawAttrStringDemo: NSViewController {
 
 fileprivate class CustomTextView: NSView {
 
-    let attrString = makeSampleAttrString("Draw NSString Demox\n\n")
+    let attrString = makeSampleAttrString(title: "Draw NSString Demox\n\n")
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)

@@ -16,7 +16,7 @@ class TextViewNoWrapDemo: NSViewController {
         let textView = TextViewFactory.makeTextView()
         textView.typingAttributes = makeSampleAttr()
         textView.string = "TextView NoWrap Demo\n\n" + textSample
-        let scrollView = TextViewFactory.makeScrollView(textView)
+        let scrollView = TextViewFactory.makeScrollView(containing: textView)
         TextViewFactory.configureForNoWrap(textView, scrollView)
         view.addSubview(scrollView)
 

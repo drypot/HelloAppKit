@@ -22,7 +22,7 @@ class TextViewTextKit2Demo: NSViewController {
         let textView = TextViewFactory.makeTextView()
         textView.typingAttributes = makeSampleAttr()
         textView.string = "TextView TextKit2 Demo\n\n" + textSample
-        let scrollView = TextViewFactory.makeScrollView(textView)
+        let scrollView = TextViewFactory.makeScrollView(containing: textView)
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([

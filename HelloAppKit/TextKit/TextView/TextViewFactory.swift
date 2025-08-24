@@ -92,7 +92,7 @@ struct TextViewFactory {
         return textView
     }
 
-    static func makeScrollView(_ textView: NSView) -> NSScrollView {
+    static func makeScrollView(containing textView: NSView) -> NSScrollView {
         let scrollView = NSScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.documentView = textView

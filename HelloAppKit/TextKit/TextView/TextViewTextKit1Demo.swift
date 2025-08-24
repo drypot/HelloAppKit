@@ -19,7 +19,7 @@ class TextViewTextKit1Demo: NSViewController {
         let textView = TextViewFactory.makeTextViewTK1()
         textView.typingAttributes = makeSampleAttr()
         textView.string = "TextView TextKit1 Demo\n\n" + textSample
-        let scrollView = TextViewFactory.makeScrollView(textView)
+        let scrollView = TextViewFactory.makeScrollView(containing: textView)
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([

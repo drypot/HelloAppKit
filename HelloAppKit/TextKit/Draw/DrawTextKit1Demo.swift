@@ -45,7 +45,7 @@ fileprivate class CustomTextView: NSView {
         textStorage.addLayoutManager(layoutManager)
         layoutManager.addTextContainer(textContainer)
 
-        let attrString = makeSampleAttrString("Draw TextKit1 Demo")
+        let attrString = makeSampleAttrString(title: "Draw TextKit1 Demo")
         textStorage.setAttributedString(attrString)
 
         textContainer.lineFragmentPadding = 0 // 좌우 패딩 제거
