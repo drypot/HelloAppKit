@@ -13,7 +13,7 @@ class CustomViewDemo: NSViewController {
         let view = NSView()
         self.view = view
 
-        let customView = CustomView(frame: .zero, color: .green)
+        let customView = CustomView()
         customView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(customView)
 
@@ -30,10 +30,7 @@ class CustomViewDemo: NSViewController {
 
     class CustomView: NSView {
 
-        var color: NSColor
-
-        init(frame frameRect: NSRect, color: NSColor = .systemGray) {
-            self.color = color
+        override init(frame frameRect: NSRect) {
             super.init(frame: frameRect)
         }
 
@@ -54,10 +51,17 @@ class CustomViewDemo: NSViewController {
             guard let context = NSGraphicsContext.current?.cgContext else { return }
 
             // color.setFill() 도 가능.
-            context.setFillColor(color.cgColor)
+            context.setFillColor(NSColor.quaternarySystemFill.cgColor)
 
             // self.bounds.fill() 도 가능.
             context.fill(bounds)
+
+            context.setStrokeColor(NSColor.black.cgColor)
+
+            let path = NSBezierPath()
+            path.move(to: NSPoint(x: 0, y: 0))
+            path.line(to: NSPoint(x: bounds.width, y: bounds.height))
+            path.stroke()
 
             print("frame: \(frame)")
             print("bounds: \(bounds)")
