@@ -80,11 +80,10 @@ class NavigatorController: NSSplitViewController {
             Demo(label: "SplitView", controllerType: SplitViewDemo.self),
             Demo(label: "SplitViewSimple", controllerType: SplitViewSimpleDemo.self),
         ]),
-        DemoSection(label: "Mouse", demos: [
+        DemoSection(label: "Event", demos: [
             Demo(label: "Mouse", controllerType: MouseDemo.self),
-        ]),
-        DemoSection(label: "Gesture", demos: [
             Demo(label: "GestureRecognizer", controllerType: GestureRecognizerDemo.self),
+            Demo(label: "Keyboard", controllerType: KeyboardDemo.self),
         ]),
         DemoSection(label: "KeyValueCoding", demos: [
             Demo(label: "CocoaBinding", controllerType: CocoaBindingDemo.self),

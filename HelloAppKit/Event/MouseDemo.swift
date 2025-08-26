@@ -65,18 +65,25 @@ fileprivate class CustomView: NSView {
     }
 
     private func log(eventName: String, event: NSEvent) {
-        let p = convert(event.locationInWindow, from: nil) // 로컬 좌표
-        let mods = format(modifierFlags: event.modifierFlags)
-        let btn  = event.buttonNumber // 0=좌클릭, 1=우클릭 등
-        print("[\(eventName)] x=\(Int(p.x)) y=\(Int(p.y)) button=\(btn) mods=\(mods)")
+        let location = convert(event.locationInWindow, from: nil) // 로컬 좌표
+
+        let modifierFlags = event.modifierFlags
+        var modiArray = [String]()
+        if modifierFlags.contains(.control) { modiArray.append("Ctrl") }  // ⌃ : Up Arrowhead
+        if modifierFlags.contains(.option)  { modiArray.append("Opt") }   // ⌥ : Option
+        if modifierFlags.contains(.shift)   { modiArray.append("Shift") } // ⇧ : Upwards white arrow
+        if modifierFlags.contains(.command) { modiArray.append("Cmd") }   // ⌘ : Place of interest sign
+        let modiString = modiArray.joined(separator: " ")
+
+        print("""
+            ---
+            \(eventName), 
+            x: \(location.x), y: \(location.y), 
+            button: \(event.buttonNumber),
+            clickCount: \(event.clickCount)
+            modifiers: \(modiString)
+            """
+        )
     }
 
-    private func format(modifierFlags: NSEvent.ModifierFlags) -> String {
-        var s = ""
-        if modifierFlags.contains(.command) { s += "⌘" }
-        if modifierFlags.contains(.option)  { s += "⌥" }
-        if modifierFlags.contains(.control) { s += "⌃" }
-        if modifierFlags.contains(.shift)   { s += "⇧" }
-        return s.isEmpty ? "" : s
-    }
 }
